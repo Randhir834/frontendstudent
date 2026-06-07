@@ -35,7 +35,7 @@ interface Attempt {
 export default function StudentQuizDetailsPage() {
   const router = useRouter();
   const params = useParams();
-  const quizId = params.id as string;
+  const quizId = (params?.id as string) || '';
 
   const [quiz, setQuiz] = useState<Quiz | null>(null);
   const [attempts, setAttempts] = useState<Attempt[]>([]);
