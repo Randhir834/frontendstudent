@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
-import { ArrowRight, CheckCircle, BookOpen, Users, Trophy, Star, Menu, X, Zap, Sparkles, Rocket, Heart, GraduationCap, Award, Target, Lightbulb, Music, Palette, Globe, Clock, TrendingUp, Brain, Dumbbell, Calculator, Beaker, Gamepad2, Smile, PartyPopper, PlayCircle, Shield, Quote } from 'lucide-react';
+import { ArrowRight, CheckCircle, BookOpen, Users, Trophy, Star, Menu, X, Zap, Rocket, Heart, GraduationCap, Award, Target, Lightbulb, Globe, PlayCircle, Shield, Quote } from 'lucide-react';
 import { trialService } from '@/services/trialService';
 import CourseRecommendationSection from '@/components/CourseRecommendation/CourseRecommendationSection';
 
@@ -13,8 +13,6 @@ export default function Home() {
   const [error, setError] = useState('');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrollY, setScrollY] = useState(0);
-  const [activeTab, setActiveTab] = useState(0);
-  const [isVisible, setIsVisible] = useState<{ [key: string]: boolean }>({});
   const observerRef = useRef<IntersectionObserver | null>(null);
 
   useEffect(() => {
@@ -44,7 +42,7 @@ export default function Home() {
     };
   }, []);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
     setError('');
