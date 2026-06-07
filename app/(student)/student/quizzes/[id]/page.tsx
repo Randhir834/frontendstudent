@@ -69,9 +69,7 @@ export default function StudentQuizDetailsPage() {
 
       if (attemptsResponse.ok) {
         const attemptsData = await attemptsResponse.json();
-        const quizAttempts = attemptsData.attempts?.filter(
-          (a: Attempt) => a.quiz_id === parseInt(quizId)
-        ) || [];
+        const quizAttempts = attemptsData.attempts || [];
         setAttempts(quizAttempts);
       }
     } catch (err: any) {
