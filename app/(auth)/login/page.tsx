@@ -13,8 +13,14 @@ export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  const { login } = useAuth();
+  const { login, isAuthenticated } = useAuth();
   const router = useRouter();
+
+  // Redirect if already logged in
+  if (isAuthenticated) {
+    router.push('/dashboard');
+    return null;
+  }
 
   // Detect if the input is email or phone
   const isEmail = identifier.includes('@');
@@ -28,10 +34,47 @@ export default function LoginPage() {
 
     try {
       const data = await authService.login({ identifier, password, expectedRole: 'student' });
+      
+      if (!data.token || !data.user) {
+        throw new Error('Invalid response from server: missing token or user data');
+      }
+      
       login(data.user, data.token);
       router.push('/dashboard');
     } catch (err: unknown) {
-      const message = (err as { response?: { data?: { error?: string } } })?.response?.data?.error || 'Login failed';
+      // Handle different error types
+      let message = 'Login failed. Please try again.';
+      
+      if (err instanceof Error) {
+        // Network, timeout, or other errors
+        message = err.message;
+        
+        // Handle specific error types
+        if (err.message.includes('ECONNREFUSED') || err.message.includes('ENETUNREACH')) {
+          message = 'Cannot connect to server. Please check your connection and try again.';
+        } else if (err.message.includes('timeout')) {
+          message = 'Request timeout. Please try again.';
+        }
+      } else {
+        const error = err as { response?: { data?: { error?: string } }; message?: string; code?: string };
+        
+        // Structured API error response
+        if (error.response?.data?.error) {
+          message = error.response.data.error;
+        } else if (error.message) {
+          message = error.message;
+        } else if (error.code) {
+          // Axios error code
+          if (error.code === 'ECONNREFUSED' || error.code === 'ENETUNREACH') {
+            message = 'Cannot connect to server. Please check your connection.';
+          } else if (error.code === 'ENOTFOUND') {
+            message = 'Server not found. Please check the backend URL.';
+          } else {
+            message = `Connection error: ${error.code}`;
+          }
+        }
+      }
+      
       setError(message);
     } finally {
       setLoading(false);

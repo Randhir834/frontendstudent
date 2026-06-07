@@ -20,8 +20,14 @@ export default function RegisterPage() {
   const [location, setLocation] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  const { login } = useAuth();
+  const { login, isAuthenticated } = useAuth();
   const router = useRouter();
+
+  // Redirect if already logged in
+  if (isAuthenticated) {
+    router.push('/dashboard');
+    return null;
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -29,7 +35,7 @@ export default function RegisterPage() {
     setLoading(true);
 
     try {
-      await authService.register({
+      const data = await authService.register({
         name, email, password, role: 'student',
         date_of_birth: dateOfBirth,
         school,
@@ -38,9 +44,31 @@ export default function RegisterPage() {
         phone,
         location
       });
-      router.push('/login');
+      
+      // Auto-login after successful registration
+      if (data.token && data.user) {
+        login(data.user, data.token);
+        router.push('/dashboard');
+      } else {
+        // Fallback if response structure is different
+        router.push('/login');
+      }
     } catch (err: unknown) {
-      const message = (err as { response?: { data?: { error?: string } } })?.response?.data?.error || 'Registration failed';
+      // Handle both structured errors and network errors
+      let message = 'Registration failed';
+      
+      if (err instanceof Error) {
+        // Network or other errors
+        message = err.message;
+      } else {
+        const error = err as { response?: { data?: { error?: string } }; message?: string };
+        if (error.response?.data?.error) {
+          message = error.response.data.error;
+        } else if (error.message) {
+          message = error.message;
+        }
+      }
+      
       setError(message);
     } finally {
       setLoading(false);
