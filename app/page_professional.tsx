@@ -483,7 +483,7 @@ export default function Home() {
                   stat: "50+ Countries"
                 },
                 {
-                  icon: AwardIcon,
+                  icon: Award,
                   title: "Industry Recognition",
                   desc: "Our certifications are recognized by top universities and employers, giving you a competitive edge.",
                   stat: "Certified Courses"
