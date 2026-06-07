@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
-import { ArrowRight, CheckCircle, BookOpen, Users, Trophy, Star, Menu, X, Zap, Rocket, Heart, GraduationCap, Award, Target, Lightbulb, Globe, Clock, PlayCircle, Shield, Quote } from 'lucide-react';
+import { ArrowRight, CheckCircle, BookOpen, Users, Trophy, Star, Menu, X, Zap, Rocket, Heart, GraduationCap, Award, Target, Lightbulb, Globe, Clock, TrendingUp, PlayCircle, Shield, Quote } from 'lucide-react';
 import { trialService } from '@/services/trialService';
 import CourseRecommendationSection from '@/components/CourseRecommendation/CourseRecommendationSection';
 
