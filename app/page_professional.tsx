@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
-import { ArrowRight, CheckCircle, BookOpen, Users, Trophy, Star, Menu, X, Zap, Sparkles, Rocket, Heart, GraduationCap, Award, Target, Lightbulb, Music, Palette, Globe, Clock, TrendingUp, Brain, Dumbbell, Calculator, Beaker, Gamepad2, Smile, PartyPopper, PlayCircle, Shield } from 'lucide-react';
+import { ArrowRight, CheckCircle, BookOpen, Users, Trophy, Star, Menu, X, Zap, Sparkles, Rocket, Heart, GraduationCap, Award, Target, Lightbulb, Music, Palette, Globe, Clock, TrendingUp, Brain, Dumbbell, Calculator, Beaker, Gamepad2, Smile, PartyPopper, PlayCircle, Shield, Quote } from 'lucide-react';
 import { trialService } from '@/services/trialService';
 import CourseRecommendationSection from '@/components/CourseRecommendation/CourseRecommendationSection';
 
