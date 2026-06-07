@@ -32,7 +32,7 @@ interface Answer {
 export default function QuizAttemptPage() {
   const router = useRouter();
   const params = useParams();
-  const quizId = params.id as string;
+  const quizId = (params?.id as string) || '';
 
   const [quiz, setQuiz] = useState<Quiz | null>(null);
   const [questions, setQuestions] = useState<Question[]>([]);
