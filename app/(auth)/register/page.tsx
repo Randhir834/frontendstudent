@@ -20,7 +20,7 @@ export default function RegisterPage() {
   const [location, setLocation] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  const { login, isAuthenticated } = useAuth();
+  const { isAuthenticated } = useAuth();
   const router = useRouter();
 
   // Redirect if already logged in
@@ -35,7 +35,7 @@ export default function RegisterPage() {
     setLoading(true);
 
     try {
-      const data = await authService.register({
+      await authService.register({
         name, email, password, role: 'student',
         date_of_birth: dateOfBirth,
         school,
@@ -45,14 +45,8 @@ export default function RegisterPage() {
         location
       });
       
-      // Auto-login after successful registration
-      if (data.token && data.user) {
-        login(data.user, data.token);
-        router.push('/dashboard');
-      } else {
-        // Fallback if response structure is different
-        router.push('/login');
-      }
+      // Redirect to login page after successful registration
+      router.push('/login');
     } catch (err: unknown) {
       // Handle both structured errors and network errors
       let message = 'Registration failed';
@@ -107,7 +101,6 @@ export default function RegisterPage() {
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                placeholder="Enter your full name"
                 required
                 autoComplete="name"
                 className="w-full pl-9 sm:pl-11 pr-3 sm:pr-4 py-2.5 sm:py-3 rounded-lg sm:rounded-xl border border-border text-xs sm:text-sm text-text-primary placeholder:text-text-placeholder focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-all"
@@ -126,7 +119,6 @@ export default function RegisterPage() {
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="Enter your email"
                 required
                 autoComplete="email"
                 className="w-full pl-9 sm:pl-11 pr-3 sm:pr-4 py-2.5 sm:py-3 rounded-lg sm:rounded-xl border border-border text-xs sm:text-sm text-text-primary placeholder:text-text-placeholder focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-all"
@@ -145,7 +137,6 @@ export default function RegisterPage() {
                 type={showPassword ? 'text' : 'password'}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                placeholder="Create a strong password"
                 required
                 autoComplete="new-password"
                 minLength={8}
@@ -194,7 +185,6 @@ export default function RegisterPage() {
                 type="text"
                 value={school}
                 onChange={(e) => setSchool(e.target.value)}
-                placeholder="Enter your school name"
                 required
                 className="w-full pl-9 sm:pl-11 pr-3 sm:pr-4 py-2.5 sm:py-3 rounded-lg sm:rounded-xl border border-border text-xs sm:text-sm text-text-primary placeholder:text-text-placeholder focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-all"
               />
@@ -212,7 +202,6 @@ export default function RegisterPage() {
                 type="text"
                 value={grade}
                 onChange={(e) => setGrade(e.target.value)}
-                placeholder="Enter your grade"
                 required
                 className="w-full pl-9 sm:pl-11 pr-3 sm:pr-4 py-2.5 sm:py-3 rounded-lg sm:rounded-xl border border-border text-xs sm:text-sm text-text-primary placeholder:text-text-placeholder focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-all"
               />
@@ -230,7 +219,6 @@ export default function RegisterPage() {
                 type="text"
                 value={parentGuardianName}
                 onChange={(e) => setParentGuardianName(e.target.value)}
-                placeholder="Enter parent/guardian name"
                 required
                 className="w-full pl-9 sm:pl-11 pr-3 sm:pr-4 py-2.5 sm:py-3 rounded-lg sm:rounded-xl border border-border text-xs sm:text-sm text-text-primary placeholder:text-text-placeholder focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-all"
               />
@@ -248,7 +236,6 @@ export default function RegisterPage() {
                 type="tel"
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
-                placeholder="Enter your phone number"
                 required
                 className="w-full pl-9 sm:pl-11 pr-3 sm:pr-4 py-2.5 sm:py-3 rounded-lg sm:rounded-xl border border-border text-xs sm:text-sm text-text-primary placeholder:text-text-placeholder focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-all"
               />
@@ -266,7 +253,6 @@ export default function RegisterPage() {
                 type="text"
                 value={location}
                 onChange={(e) => setLocation(e.target.value)}
-                placeholder="Enter your location"
                 required
                 className="w-full pl-9 sm:pl-11 pr-3 sm:pr-4 py-2.5 sm:py-3 rounded-lg sm:rounded-xl border border-border text-xs sm:text-sm text-text-primary placeholder:text-text-placeholder focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-all"
               />

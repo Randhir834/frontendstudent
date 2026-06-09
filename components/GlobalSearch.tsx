@@ -42,7 +42,7 @@ export default function GlobalSearch({ initialQuery = '', className = '' }: Glob
   const [results, setResults] = useState<SearchResponse | null>(null);
   const searchRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
-  const debounceRef = useRef<NodeJS.Timeout | undefined>(undefined);
+  const debounceRef = useRef<NodeJS.Timeout | null>(null);
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -259,7 +259,6 @@ export default function GlobalSearch({ initialQuery = '', className = '' }: Glob
         <input
           ref={inputRef}
           type="text"
-          placeholder={getPlaceholder()}
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           onFocus={() => {
@@ -304,7 +303,7 @@ export default function GlobalSearch({ initialQuery = '', className = '' }: Glob
               <div>
                 <div className="px-4 py-2 bg-[#FAFAFA] border-b border-[#E0E0E0]">
                   <p className="text-xs font-semibold text-[#78909C] uppercase tracking-wide">
-                    Courses ({results.results.courses.length})
+                    Courses
                   </p>
                 </div>
                 {results.results.courses.map((item) => renderResultItem(item, 'course'))}
@@ -314,7 +313,7 @@ export default function GlobalSearch({ initialQuery = '', className = '' }: Glob
               <div>
                 <div className="px-4 py-2 bg-[#FAFAFA] border-b border-[#E0E0E0]">
                   <p className="text-xs font-semibold text-[#78909C] uppercase tracking-wide">
-                    Sections ({results.results.sections.length})
+                    Sections
                   </p>
                 </div>
                 {results.results.sections.map((item: any) => renderResultItem(item, 'section'))}
@@ -324,7 +323,7 @@ export default function GlobalSearch({ initialQuery = '', className = '' }: Glob
               <div>
                 <div className="px-4 py-2 bg-[#FAFAFA] border-b border-[#E0E0E0]">
                   <p className="text-xs font-semibold text-[#78909C] uppercase tracking-wide">
-                    Lessons ({results.results.lessons.length})
+                    Lessons
                   </p>
                 </div>
                 {results.results.lessons.map((item) => renderResultItem(item, 'lesson'))}
@@ -334,7 +333,7 @@ export default function GlobalSearch({ initialQuery = '', className = '' }: Glob
               <div>
                 <div className="px-4 py-2 bg-[#FAFAFA] border-b border-[#E0E0E0]">
                   <p className="text-xs font-semibold text-[#78909C] uppercase tracking-wide">
-                    Assignments ({results.results.assignments.length})
+                    Assignments
                   </p>
                 </div>
                 {results.results.assignments.map((item) => renderResultItem(item, 'assignment'))}
@@ -344,7 +343,7 @@ export default function GlobalSearch({ initialQuery = '', className = '' }: Glob
               <div>
                 <div className="px-4 py-2 bg-[#FAFAFA] border-b border-[#E0E0E0]">
                   <p className="text-xs font-semibold text-[#78909C] uppercase tracking-wide">
-                    Quizzes ({results.results.quizzes.length})
+                    Quizzes
                   </p>
                 </div>
                 {results.results.quizzes.map((item) => renderResultItem(item, 'quiz'))}
@@ -354,7 +353,7 @@ export default function GlobalSearch({ initialQuery = '', className = '' }: Glob
               <div>
                 <div className="px-4 py-2 bg-[#FAFAFA] border-b border-[#E0E0E0]">
                   <p className="text-xs font-semibold text-[#78909C] uppercase tracking-wide">
-                    Live Classes ({results.results.liveClasses.length})
+                    Live Classes
                   </p>
                 </div>
                 {results.results.liveClasses.map((item) => renderResultItem(item, 'live_class'))}
@@ -364,7 +363,7 @@ export default function GlobalSearch({ initialQuery = '', className = '' }: Glob
               <div>
                 <div className="px-4 py-2 bg-[#FAFAFA] border-b border-[#E0E0E0]">
                   <p className="text-xs font-semibold text-[#78909C] uppercase tracking-wide">
-                    Categories ({results.results.categories.length})
+                    Categories
                   </p>
                 </div>
                 {results.results.categories.map((item) => renderResultItem(item, 'category'))}

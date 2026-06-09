@@ -9,6 +9,7 @@ import {
 import { useRouter } from 'next/navigation';
 import { userService, UserProfile } from '@/services/userService';
 import { enrollmentService } from '@/services/enrollmentService';
+import { getAvatarUrl } from '@/utils/avatarUtils';
 
 interface StudentDashboardData {
   stats: {
@@ -204,10 +205,7 @@ export default function StudentProfilePage() {
               <div className="relative">
                 <div className="w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden border-4 border-[#F1F8E9]">
                   <img 
-                    src={user?.avatar_url 
-                      ? (user.avatar_url.startsWith('http') ? user.avatar_url : `http://localhost:5001${user.avatar_url}`)
-                      : `https://ui-avatars.com/api/?name=${encodeURIComponent(displayName)}&background=1E88FF&color=fff&size=256`
-                    } 
+                    src={getAvatarUrl(user?.avatar_url, displayName)} 
                     alt={displayName}
                     className="w-full h-full object-cover"
                   />
@@ -368,7 +366,6 @@ export default function StudentProfilePage() {
                         type="text"
                         value={formData.phone === 'N/A' ? '' : formData.phone}
                         onChange={(e) => setFormData({ ...formData, phone: e.target.value || 'N/A' })}
-                        placeholder="Enter phone number"
                         disabled={saving}
                         className="flex-1 px-3 py-1.5 text-sm rounded-lg border border-[#E0E0E0] text-[#1E3A5F] focus:ring-1 focus:ring-[#1E88E5]/20 focus:border-[#1E88E5] outline-none transition-all"
                       />
@@ -385,7 +382,6 @@ export default function StudentProfilePage() {
                         type="text"
                         value={formData.location === 'N/A' ? '' : formData.location}
                         onChange={(e) => setFormData({ ...formData, location: e.target.value || 'N/A' })}
-                        placeholder="Enter location"
                         disabled={saving}
                         className="flex-1 px-3 py-1.5 text-sm rounded-lg border border-[#E0E0E0] text-[#1E3A5F] focus:ring-1 focus:ring-[#1E88E5]/20 focus:border-[#1E88E5] outline-none transition-all"
                       />
@@ -402,7 +398,6 @@ export default function StudentProfilePage() {
                         type="text"
                         value={formData.school === 'N/A' ? '' : formData.school}
                         onChange={(e) => setFormData({ ...formData, school: e.target.value || 'N/A' })}
-                        placeholder="Enter school name"
                         disabled={saving}
                         className="flex-1 px-3 py-1.5 text-sm rounded-lg border border-[#E0E0E0] text-[#1E3A5F] focus:ring-1 focus:ring-[#1E88E5]/20 focus:border-[#1E88E5] outline-none transition-all"
                       />
@@ -419,7 +414,6 @@ export default function StudentProfilePage() {
                         type="text"
                         value={formData.grade === 'N/A' ? '' : formData.grade}
                         onChange={(e) => setFormData({ ...formData, grade: e.target.value || 'N/A' })}
-                        placeholder="Enter grade"
                         disabled={saving}
                         className="flex-1 px-3 py-1.5 text-sm rounded-lg border border-[#E0E0E0] text-[#1E3A5F] focus:ring-1 focus:ring-[#1E88E5]/20 focus:border-[#1E88E5] outline-none transition-all"
                       />
@@ -437,7 +431,6 @@ export default function StudentProfilePage() {
                 <h3 className="font-bold text-[#1E3A5F] mb-5">Account Settings</h3>
                 <div className="space-y-2 flex-1">
                   {[
-                    { label: 'Change Password', icon: Shield, path: '/student/profile/change-password' },
                     { label: 'Notification Preferences', icon: Bell },
                     { label: 'Privacy Settings', icon: Settings },
                   ].map((item, i) => (

@@ -2,23 +2,23 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import {
   Bell, Mail, Home, BookOpen, ClipboardList,
-  FileQuestion, BarChart3, Award, Compass,
+  FileQuestion, Award, Compass,
   HelpCircle, User, Loader2, Menu, X, LogOut, Calendar
 } from 'lucide-react';
 import { userService, UserProfile } from '@/services/userService';
 import GlobalSearch from '@/components/GlobalSearch';
+import { getAvatarUrlWithCacheBust } from '@/utils/avatarUtils';
 
-const menuItems = [
+  const menuItems = [
   { icon: Home, label: 'Dashboard', href: '/student' },
   { icon: Compass, label: 'Browse Courses', href: '/student/courses' },
   { icon: BookOpen, label: 'My Courses', href: '/student/my-courses' },
-  { icon: Calendar, label: 'Scheduled Classes', href: '/student/scheduled-classes' },
+  { icon: Calendar, label: 'Live Classes', href: '/student/live-classes' },
   { icon: ClipboardList, label: 'Assignments', href: '/student/assignments' },
   { icon: FileQuestion, label: 'Quizzes', href: '/student/quizzes' },
-  { icon: BarChart3, label: 'My Progress', href: '/student/progress' },
   { icon: Award, label: 'Certificates', href: '/student/certificates' },
   { icon: User, label: 'My Profile', href: '/student/profile' },
   { icon: HelpCircle, label: 'Help & Support', href: '/student/help' },
@@ -30,17 +30,35 @@ interface StudentDashboardLayoutProps {
 
 export default function StudentDashboardLayout({ children }: StudentDashboardLayoutProps) {
   const pathname = usePathname();
+  const router = useRouter();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [user, setUser] = useState<UserProfile | null>(null);
   const [userLoading, setUserLoading] = useState(true);
 
   useEffect(() => {
     const fetchUser = async () => {
+      // Check if token exists before fetching profile
+      const token = localStorage.getItem('token');
+      if (!token) {
+        console.warn('No authentication token found');
+        setUserLoading(false);
+        router.push('/login');
+        return;
+      }
+
       try {
         const profile = await userService.getProfile();
         setUser(profile);
-      } catch (err) {
+      } catch (err: any) {
         console.error('Failed to fetch profile:', err);
+        
+        // Handle authentication errors
+        if (err.response?.status === 401 || err.response?.status === 404) {
+          console.warn('Authentication failed, redirecting to login');
+          localStorage.removeItem('token');
+          localStorage.removeItem('user');
+          router.push('/login');
+        }
       } finally {
         setUserLoading(false);
       }
@@ -59,13 +77,11 @@ export default function StudentDashboardLayout({ children }: StudentDashboardLay
     return () => {
       window.removeEventListener('profilePhotoUpdated', handleProfilePhotoUpdate);
     };
-  }, []);
+  }, [router]);
 
 
   const displayName = user?.name || 'Student';
-  const avatarUrl = user?.avatar_url 
-    ? (user.avatar_url.startsWith('http') ? user.avatar_url : `http://localhost:5001${user.avatar_url}`) + `?t=${Date.now()}`
-    : `https://ui-avatars.com/api/?name=${encodeURIComponent(displayName)}&background=1B8A44&color=fff&size=128`;
+  const avatarUrl = getAvatarUrlWithCacheBust(user?.avatar_url, displayName);
 
   const handleLogout = () => {
     userService.logout();

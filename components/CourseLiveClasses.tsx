@@ -1,11 +1,10 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { Calendar, Clock, Users, Loader2, ExternalLink, AlertCircle } from 'lucide-react';
+import { Calendar, Clock, Users, Loader2, ExternalLink, AlertCircle, Video } from 'lucide-react';
 import Card, { CardHeader, CardTitle, CardContent } from '@/components/ui/Card';
 import Button from '@/components/ui/Button';
-import { liveClassService } from '@/services/liveClassService';
-import type { LiveClass } from '@/types';
+import { liveClassService, type LiveClass } from '@/services/liveClassService';
 
 interface CourseLiveClassesProps {
   courseId: number;
@@ -20,10 +19,10 @@ export default function CourseLiveClasses({ courseId }: CourseLiveClassesProps) 
     const fetchLiveClasses = async () => {
       try {
         setLoading(true);
-        const data = await liveClassService.getLiveClasses(courseId);
+        const data = await liveClassService.getLiveClassesByCourse(courseId);
         // Filter for upcoming classes only
         const upcomingClasses = (data.liveClasses || []).filter(
-          (lc: LiveClass) => new Date(lc.scheduled_at) > new Date()
+          (lc: LiveClass) => liveClassService.isUpcoming(lc.scheduled_at)
         );
         setLiveClasses(upcomingClasses);
         setError('');
@@ -38,18 +37,6 @@ export default function CourseLiveClasses({ courseId }: CourseLiveClassesProps) 
 
     fetchLiveClasses();
   }, [courseId]);
-
-  const formatDateTime = (dateString: string) => {
-    const date = new Date(dateString);
-    return date.toLocaleString('en-IN', {
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit',
-      hour12: true,
-    });
-  };
 
   const getTimeUntilClass = (scheduledAt: string) => {
     const now = new Date();
@@ -75,13 +62,6 @@ export default function CourseLiveClasses({ courseId }: CourseLiveClassesProps) 
     }
 
     return 'Starting now!';
-  };
-
-  const isStartingSoon = (scheduledAt: string) => {
-    const now = new Date();
-    const classTime = new Date(scheduledAt);
-    const diff = classTime.getTime() - now.getTime();
-    return diff > 0 && diff < 15 * 60 * 1000; // Within 15 minutes
   };
 
   if (loading) {
@@ -123,7 +103,7 @@ export default function CourseLiveClasses({ courseId }: CourseLiveClassesProps) 
         </CardHeader>
         <CardContent>
           <div className="text-center py-8">
-            <Calendar className="size-12 text-[#E0E0E0] mx-auto mb-3" />
+            <Video className="size-12 text-[#E0E0E0] mx-auto mb-3" />
             <p className="text-sm text-[#78909C]">No upcoming live classes scheduled</p>
             <p className="text-xs text-[#78909C] mt-1">Check back soon for new classes</p>
           </div>
@@ -139,69 +119,81 @@ export default function CourseLiveClasses({ courseId }: CourseLiveClassesProps) 
       </CardHeader>
       <CardContent>
         <div className="space-y-3">
-          {liveClasses.map((liveClass) => (
-            <div
-              key={liveClass.id}
-              className={`p-4 border rounded-lg transition-all ${
-                isStartingSoon(liveClass.scheduled_at)
-                  ? 'border-[#EC407A] bg-[#FEF2F2]'
-                  : 'border-[#E0E0E0] hover:border-[#1E88E5]/20'
-              }`}
-            >
-              <div className="flex items-start justify-between gap-4">
-                <div className="flex-1">
-                  <div className="flex items-center gap-2 mb-2">
-                    <h4 className="font-semibold text-[#1E3A5F]">{liveClass.title}</h4>
-                    {isStartingSoon(liveClass.scheduled_at) && (
-                      <span className="px-2 py-1 text-xs font-medium bg-[#EC407A] text-white rounded-full">
-                        Starting Soon
-                      </span>
+          {liveClasses.map((liveClass) => {
+            const isStartingSoon = liveClassService.isStartingSoon(liveClass.scheduled_at);
+            const isToday = liveClassService.isToday(liveClass.scheduled_at);
+
+            return (
+              <div
+                key={liveClass.id}
+                className={`p-4 border rounded-lg transition-all ${
+                  isStartingSoon
+                    ? 'border-red-500 bg-[#FEF2F2] shadow-lg'
+                    : isToday
+                    ? 'border-[#1E88E5] bg-[#EFF6FF]'
+                    : 'border-[#E0E0E0] hover:border-[#1E88E5]/20'
+                }`}
+              >
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex-1">
+                    <div className="flex items-center gap-2 mb-2">
+                      <h4 className="font-semibold text-[#1E3A5F]">{liveClass.title}</h4>
+                      {isStartingSoon && (
+                        <span className="px-2 py-0.5 text-xs font-bold bg-red-500 text-white rounded-full animate-pulse">
+                          Starting Soon!
+                        </span>
+                      )}
+                      {isToday && !isStartingSoon && (
+                        <span className="px-2 py-0.5 text-xs font-medium bg-[#1E88E5] text-white rounded-full">
+                          Today
+                        </span>
+                      )}
+                    </div>
+
+                    {liveClass.description && (
+                      <p className="text-sm text-[#78909C] mb-3 line-clamp-2">{liveClass.description}</p>
                     )}
-                  </div>
 
-                  {liveClass.description && (
-                    <p className="text-sm text-[#78909C] mb-3 line-clamp-2">{liveClass.description}</p>
-                  )}
-
-                  <div className="flex flex-wrap items-center gap-4 text-sm text-[#78909C]">
-                    <div className="flex items-center gap-1">
-                      <Calendar className="size-4" />
-                      <span>{formatDateTime(liveClass.scheduled_at)}</span>
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <Clock className="size-4" />
-                      <span>{liveClass.duration_minutes} minutes</span>
-                    </div>
-                    {liveClass.instructor_name && (
+                    <div className="flex flex-wrap items-center gap-4 text-sm text-[#78909C]">
                       <div className="flex items-center gap-1">
-                        <Users className="size-4" />
-                        <span>{liveClass.instructor_name}</span>
+                        <Calendar className="size-4" />
+                        <span>{liveClassService.formatDate(liveClass.scheduled_at)}</span>
                       </div>
-                    )}
+                      <div className="flex items-center gap-1">
+                        <Clock className="size-4" />
+                        <span>{liveClassService.formatTime(liveClass.scheduled_at)}</span>
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <Clock className="size-4" />
+                        <span>{liveClass.duration_minutes} minutes</span>
+                      </div>
+                      {liveClass.instructor_name && (
+                        <div className="flex items-center gap-1">
+                          <Users className="size-4" />
+                          <span>{liveClass.instructor_name}</span>
+                        </div>
+                      )}
+                    </div>
+
+                    <div className={`mt-3 text-sm font-medium ${isStartingSoon ? 'text-red-500' : 'text-[#1E88E5]'}`}>
+                      {getTimeUntilClass(liveClass.scheduled_at)}
+                    </div>
                   </div>
 
-                  <div className="mt-3 text-sm font-medium text-[#1E88E5]">
-                    {getTimeUntilClass(liveClass.scheduled_at)}
-                  </div>
-                </div>
-
-                <a
-                  href={liveClass.meet_link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex-shrink-0"
-                >
                   <Button
                     size="sm"
-                    className="flex items-center gap-2 bg-[#1E88E5] hover:bg-[#1E88E5]/90 text-white"
+                    onClick={() => window.open(liveClass.meet_link, '_blank')}
+                    className={`flex items-center gap-2 flex-shrink-0 ${
+                      isStartingSoon ? 'bg-red-500 hover:bg-red-600' : 'bg-[#1E88E5] hover:bg-[#1E88E5]/90'
+                    }`}
                   >
-                    <ExternalLink className="size-4" />
-                    Join Now
+                    <Video className="size-4" />
+                    Join Class
                   </Button>
-                </a>
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </CardContent>
     </Card>

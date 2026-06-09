@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { authService } from '@/services/authService';
 import { useAuth } from '@/hooks/useAuth';
@@ -17,15 +17,21 @@ export default function LoginPage() {
   const router = useRouter();
 
   // Redirect if already logged in
-  if (isAuthenticated) {
-    router.push('/dashboard');
-    return null;
-  }
+  useEffect(() => {
+    if (isAuthenticated) {
+      router.push('/dashboard');
+    }
+  }, [isAuthenticated, router]);
 
   // Detect if the input is email or phone
   const isEmail = identifier.includes('@');
   const inputType = isEmail ? 'email' : 'tel';
   const placeholder = 'Enter your email or phone number';
+
+  // Don't render the form if already authenticated (redirect in progress)
+  if (isAuthenticated) {
+    return null;
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -118,7 +124,6 @@ export default function LoginPage() {
               type={inputType}
               value={identifier}
               onChange={(e) => setIdentifier(e.target.value)}
-              placeholder={placeholder}
               required
               className="w-full pl-11 pr-4 py-3 rounded-xl border border-border text-sm text-text-primary placeholder:text-text-placeholder focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-all"
             />
@@ -136,7 +141,6 @@ export default function LoginPage() {
               type={showPassword ? 'text' : 'password'}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              placeholder="Enter your password"
               required
               className="w-full pl-11 pr-11 py-3 rounded-xl border border-border text-sm text-text-primary placeholder:text-text-placeholder focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-all"
             />

@@ -76,9 +76,9 @@ export default function CourseCard({
         </div>
 
       <CardContent className="p-3 sm:p-4 flex-1 flex flex-col">
-        <div className="space-y-1 sm:space-y-2 flex-1">
+        <div className="space-y-2 sm:space-y-3 flex-1">
           {/* Title and Level */}
-          <div className="space-y-1">
+          <div className="space-y-1 sm:space-y-2">
             <div className="flex items-start justify-between gap-2">
               <h3 className="font-semibold text-sm sm:text-base text-[#1E3A5F] line-clamp-2 group-hover:text-[#1E88E5] transition-colors leading-tight">
                 {course.title}
@@ -99,6 +99,36 @@ export default function CourseCard({
           <div className="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm text-[#78909C]">
             <Users className="size-3 sm:size-4 flex-shrink-0" />
             <span className="truncate">{instructorNames}</span>
+          </div>
+
+          {/* Course Stats */}
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-xs sm:text-sm text-[#64748B]">
+            <div className="flex items-center gap-3 sm:gap-4 flex-wrap">
+              <div className="flex items-center gap-1">
+                <Clock className="size-3 sm:size-4" />
+                <span className="whitespace-nowrap">{formatDuration(course.duration_value, course.duration_unit)}</span>
+              </div>
+              
+              {course.enrollment_count !== undefined && (
+                <div className="flex items-center gap-1">
+                  <Users className="size-3 sm:size-4" />
+                  <span>{course.enrollment_count}</span>
+                </div>
+              )}
+
+              {course.rating && (
+                <div className="flex items-center gap-1">
+                  <Star className="size-3 sm:size-4 fill-yellow-400 text-yellow-400" />
+                  <span>{course.rating.toFixed(1)}</span>
+                </div>
+              )}
+            </div>
+
+            {course.category_name && (
+              <span className="text-xs bg-[#F1F5F9] text-[#64748B] px-2 py-1 rounded self-start sm:self-auto">
+                {course.category_name}
+              </span>
+            )}
           </div>
 
           {/* Enrollment Status for Students */}

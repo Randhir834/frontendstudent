@@ -9,7 +9,7 @@ export interface DashboardStats {
   enrolledCourses: number;
   liveClasses: number;
   assignments: number;
-  achievements: number;
+  achievements: number; // Actually represents quizzes count
 }
 
 export interface CourseProgress {
@@ -59,20 +59,53 @@ export interface DashboardData {
 }
 
 export const dashboardService = {
-  // Get dashboard summary stats
+  // Get dashboard summary stats with better error handling
   getDashboardStats: async (): Promise<DashboardStats> => {
     try {
-      const [enrollments, liveClasses, mySubmissions] = await Promise.all([
+      const results = await Promise.allSettled([
         enrollmentService.getEnrollments(),
         liveClassService.getLiveClasses(),
-        assignmentService.getMySubmissions()
+        api.get('/assignments'), // Get all assignments assigned to student
+        api.get('/quizzes') // Get all quizzes assigned to student
       ]);
 
+      let enrollmentsCount = 0;
+      let liveClassesCount = 0;
+      let assignmentsCount = 0;
+      let quizzesCount = 0;
+
+      // Count active enrollments
+      if (results[0].status === 'fulfilled') {
+        const enrollments = results[0].value.enrollments || [];
+        enrollmentsCount = enrollments.filter((e: any) => e.status === 'active').length;
+      }
+
+      // Count active live classes (not completed)
+      if (results[1].status === 'fulfilled') {
+        const allClasses = results[1].value.liveClasses || [];
+        liveClassesCount = allClasses.filter((cls: any) => {
+          const now = new Date().getTime();
+          const startTime = new Date(cls.scheduled_at).getTime();
+          const endTime = startTime + (cls.duration_minutes * 60 * 1000);
+          return now <= endTime; // Count upcoming and ongoing classes
+        }).length;
+      }
+
+      // Count assignments assigned to student
+      if (results[2].status === 'fulfilled') {
+        assignmentsCount = results[2].value.data?.assignments?.length || 0;
+      }
+
+      // Count quizzes assigned to student
+      if (results[3].status === 'fulfilled') {
+        quizzesCount = results[3].value.data?.quizzes?.length || 0;
+      }
+
       return {
-        enrolledCourses: enrollments.enrollments?.length || 0,
-        liveClasses: liveClasses.liveClasses?.filter((cls: any) => cls.status === 'scheduled').length || 0,
-        assignments: mySubmissions.submissions?.length || 0,
-        achievements: 6 // This would come from an achievements API when implemented
+        enrolledCourses: enrollmentsCount,
+        liveClasses: liveClassesCount,
+        assignments: assignmentsCount,
+        achievements: quizzesCount // Using quizzes count instead of hardcoded achievements
       };
     } catch (error) {
       console.error('Error fetching dashboard stats:', error);
@@ -85,37 +118,32 @@ export const dashboardService = {
     }
   },
 
-  // Get courses with progress
+  // Get courses with progress with proper error handling
   getCoursesWithProgress: async (): Promise<CourseProgress[]> => {
     try {
       const enrollments = await enrollmentService.getEnrollments();
       
       if (!enrollments.enrollments) return [];
 
-      const coursesWithProgress = await Promise.all(
+      // Use Promise.allSettled to prevent one failure from breaking all
+      const results = await Promise.allSettled(
         enrollments.enrollments.map(async (enrollment: any) => {
-          try {
-            const progress = await progressService.getCourseProgress(enrollment.course_id);
-            return {
-              id: enrollment.course_id,
-              title: enrollment.course_title || 'Unknown Course',
-              thumbnail_url: enrollment.thumbnail_url,
-              progress: progress.data?.progress_percentage || 0,
-              totalLessons: progress.data?.total_lessons || 12,
-              completedLessons: progress.data?.completed_lessons || 0
-            };
-          } catch (error) {
-            return {
-              id: enrollment.course_id,
-              title: enrollment.course_title || 'Unknown Course',
-              thumbnail_url: enrollment.thumbnail_url,
-              progress: 0,
-              totalLessons: 12,
-              completedLessons: 0
-            };
-          }
+          const progress = await progressService.getCourseProgress(enrollment.course_id);
+          return {
+            id: enrollment.course_id,
+            title: enrollment.course_title || 'Unknown Course',
+            thumbnail_url: enrollment.thumbnail_url,
+            progress: enrollment.progress || 0, // Use enrollment.progress directly
+            totalLessons: progress.data?.total_lessons || 12,
+            completedLessons: progress.data?.completed_lessons || 0
+          };
         })
       );
+
+      // Filter fulfilled promises and ignore rejected ones
+      const coursesWithProgress = results
+        .filter((result): result is PromiseFulfilledResult<CourseProgress> => result.status === 'fulfilled')
+        .map(result => result.value);
 
       return coursesWithProgress;
     } catch (error) {
@@ -129,9 +157,9 @@ export const dashboardService = {
     try {
       const liveClasses = await liveClassService.getLiveClasses();
       
-      if (!liveClasses.liveClasses) return null;
+      if (!liveClasses.data) return null;
 
-      const scheduledClasses = liveClasses.liveClasses
+      const scheduledClasses = liveClasses.data
         .filter((cls: any) => cls.status === 'scheduled')
         .sort((a: any, b: any) => new Date(a.scheduled_at).getTime() - new Date(b.scheduled_at).getTime());
 
@@ -141,10 +169,10 @@ export const dashboardService = {
       return {
         id: nextClass.id,
         title: nextClass.title,
-        course_name: nextClass.course_title || 'Unknown Course',
+        course_name: nextClass.course?.title || 'Unknown Course',
         scheduled_at: nextClass.scheduled_at,
         meet_link: nextClass.meet_link,
-        instructor_name: nextClass.instructor_name || 'Instructor',
+        instructor_name: nextClass.instructor?.name || 'Instructor',
         duration_minutes: nextClass.duration_minutes || 60
       };
     } catch (error) {
@@ -158,9 +186,9 @@ export const dashboardService = {
     try {
       const notifications = await notificationService.getNotifications();
       
-      if (!notifications.notifications) return [];
+      if (!notifications.data) return [];
 
-      return notifications.notifications
+      return notifications.data
         .filter((notif: any) => notif.type === 'announcement')
         .map((notif: any) => ({
           id: notif.id,

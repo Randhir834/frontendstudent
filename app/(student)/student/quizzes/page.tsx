@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Card, { CardHeader, CardTitle, CardContent } from '@/components/ui/Card';
 import Button from '@/components/ui/Button';
-import { Play, Clock, Award, AlertCircle, CheckCircle, XCircle } from 'lucide-react';
+import { Play, Clock, Award, AlertCircle, CheckCircle, XCircle, FileQuestion } from 'lucide-react';
 
 interface Quiz {
   id: number;
@@ -35,7 +35,7 @@ export default function StudentQuizzesPage() {
   const fetchQuizzes = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/quizzes`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/quizzes`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -96,46 +96,46 @@ export default function StudentQuizzesPage() {
     <div className="p-3 sm:p-4 md:p-6 lg:p-8 space-y-4 sm:space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4">
         <div>
-          <h1 className="text-lg sm:text-xl md:text-2xl font-bold text-text-primary">
+          <h1 className="text-lg sm:text-xl md:text-2xl font-bold text-[#1E3A5F]">
             Quizzes / Tests
           </h1>
-          <p className="text-xs sm:text-sm text-text-muted mt-1">
+          <p className="text-xs sm:text-sm text-[#78909C] mt-1">
             Test your knowledge and track your performance
           </p>
         </div>
       </div>
 
       {/* Filter Tabs */}
-      <div className="flex gap-2 border-b border-gray-200">
+      <div className="flex gap-2 border-b border-[#E0E0E0]">
         <button
           onClick={() => setFilter('all')}
           className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors ${
             filter === 'all'
-              ? 'border-primary-500 text-primary-600'
-              : 'border-transparent text-text-muted hover:text-text-primary'
+              ? 'border-[#1E88E5] text-[#1E88E5]'
+              : 'border-transparent text-[#78909C] hover:text-[#1E3A5F]'
           }`}
         >
-          All ({quizzes.length})
+          All
         </button>
         <button
           onClick={() => setFilter('pending')}
           className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors ${
             filter === 'pending'
-              ? 'border-primary-500 text-primary-600'
-              : 'border-transparent text-text-muted hover:text-text-primary'
+              ? 'border-[#1E88E5] text-[#1E88E5]'
+              : 'border-transparent text-[#78909C] hover:text-[#1E3A5F]'
           }`}
         >
-          Pending ({quizzes.filter((q) => q.my_attempts === 0).length})
+          Pending
         </button>
         <button
           onClick={() => setFilter('completed')}
           className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors ${
             filter === 'completed'
-              ? 'border-primary-500 text-primary-600'
-              : 'border-transparent text-text-muted hover:text-text-primary'
+              ? 'border-[#1E88E5] text-[#1E88E5]'
+              : 'border-transparent text-[#78909C] hover:text-[#1E3A5F]'
           }`}
         >
-          Completed ({quizzes.filter((q) => q.my_attempts > 0).length})
+          Completed
         </button>
       </div>
 
@@ -143,7 +143,13 @@ export default function StudentQuizzesPage() {
       {filteredQuizzes.length === 0 ? (
         <Card>
           <CardContent className="text-center py-12">
-            <p className="text-text-muted">No quizzes found</p>
+            <FileQuestion className="size-16 text-[#E0E0E0] mx-auto mb-4" />
+            <p className="text-[#78909C] text-lg mb-2">No quizzes found</p>
+            <p className="text-sm text-[#B0BEC5]">
+              {filter === 'pending' && 'You have no pending quizzes'}
+              {filter === 'completed' && 'You haven\'t completed any quizzes yet'}
+              {filter === 'all' && 'No quizzes available at the moment'}
+            </p>
           </CardContent>
         </Card>
       ) : (
@@ -158,30 +164,30 @@ export default function StudentQuizzesPage() {
                 <CardContent className="p-4 sm:p-6">
                   <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4">
                     <div className="flex-1">
-                      <h3 className="text-lg font-semibold text-text-primary mb-1">
+                      <h3 className="text-lg font-semibold text-[#1E3A5F] mb-1">
                         {quiz.title}
                       </h3>
-                      <p className="text-sm text-text-muted mb-3">{quiz.description}</p>
+                      <p className="text-sm text-[#78909C] mb-3">{quiz.description}</p>
 
                       <div className="flex flex-wrap gap-2 text-xs mb-3">
-                        <span className="bg-gray-100 px-2 py-1 rounded">{quiz.course_title}</span>
-                        <span className="bg-blue-100 text-blue-700 px-2 py-1 rounded flex items-center gap-1">
+                        <span className="bg-[#F5F5F5] text-[#1E3A5F] px-2 py-1 rounded">{quiz.course_title}</span>
+                        <span className="bg-[#E3F2FD] text-[#1E88E5] px-2 py-1 rounded flex items-center gap-1">
                           <Clock className="w-3 h-3" />
                           {quiz.time_limit_minutes} min
                         </span>
-                        <span className="bg-purple-100 text-purple-700 px-2 py-1 rounded flex items-center gap-1">
+                        <span className="bg-[#F3E5F5] text-[#7B1FA2] px-2 py-1 rounded flex items-center gap-1">
                           <Award className="w-3 h-3" />
                           {quiz.total_marks} marks
                         </span>
-                        <span className="bg-green-100 text-green-700 px-2 py-1 rounded">
+                        <span className="bg-[#E8F5E9] text-[#2E7D32] px-2 py-1 rounded">
                           Pass: {quiz.passing_score}%
                         </span>
                         {quiz.deadline && (
                           <span
                             className={`px-2 py-1 rounded flex items-center gap-1 ${
                               deadlinePassed
-                                ? 'bg-red-100 text-red-700'
-                                : 'bg-orange-100 text-orange-700'
+                                ? 'bg-[#FFEBEE] text-[#C62828]'
+                                : 'bg-[#FFF3E0] text-[#F57C00]'
                             }`}
                           >
                             <AlertCircle className="w-3 h-3" />
@@ -192,15 +198,15 @@ export default function StudentQuizzesPage() {
 
                       <div className="flex flex-wrap gap-4 text-sm">
                         <div>
-                          <span className="text-text-muted">Attempts: </span>
-                          <span className="font-semibold text-text-primary">
+                          <span className="text-[#78909C]">Attempts: </span>
+                          <span className="font-semibold text-[#1E3A5F]">
                             {quiz.my_attempts}/{quiz.max_attempts}
                           </span>
                         </div>
                         {quiz.my_best_score !== null && (
                           <div>
-                            <span className="text-text-muted">Best Score: </span>
-                            <span className="font-semibold text-green-600">
+                            <span className="text-[#78909C]">Best Score: </span>
+                            <span className="font-semibold text-[#4CAF50]">
                               {quiz.my_best_score}/{quiz.total_marks}
                             </span>
                           </div>
@@ -210,19 +216,19 @@ export default function StudentQuizzesPage() {
                       {!canStart && (
                         <div className="mt-3">
                           {deadlinePassed && (
-                            <div className="flex items-center gap-2 text-red-600 text-sm">
+                            <div className="flex items-center gap-2 text-[#C62828] text-sm">
                               <XCircle className="w-4 h-4" />
                               <span>Deadline has passed</span>
                             </div>
                           )}
                           {attemptsRemaining === 0 && !deadlinePassed && (
-                            <div className="flex items-center gap-2 text-orange-600 text-sm">
+                            <div className="flex items-center gap-2 text-[#F57C00] text-sm">
                               <AlertCircle className="w-4 h-4" />
                               <span>Maximum attempts reached</span>
                             </div>
                           )}
                           {quiz.last_attempt_status === 'in_progress' && (
-                            <div className="flex items-center gap-2 text-blue-600 text-sm">
+                            <div className="flex items-center gap-2 text-[#1E88E5] text-sm">
                               <AlertCircle className="w-4 h-4" />
                               <span>You have an attempt in progress</span>
                             </div>

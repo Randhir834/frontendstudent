@@ -189,7 +189,6 @@ export default function QuestionnaireModal({ isOpen, onClose, onComplete }: Ques
                   value={contactInfo.parent_name}
                   onChange={(e) => setContactInfo({ ...contactInfo, parent_name: e.target.value })}
                   className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-primary-500 focus:outline-none transition-colors"
-                  placeholder="Enter your name"
                   required
                 />
               </div>
@@ -203,7 +202,6 @@ export default function QuestionnaireModal({ isOpen, onClose, onComplete }: Ques
                   value={contactInfo.parent_email}
                   onChange={(e) => setContactInfo({ ...contactInfo, parent_email: e.target.value })}
                   className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-primary-500 focus:outline-none transition-colors"
-                  placeholder="your.email@example.com"
                   required
                 />
               </div>
@@ -217,7 +215,6 @@ export default function QuestionnaireModal({ isOpen, onClose, onComplete }: Ques
                   value={contactInfo.parent_phone}
                   onChange={(e) => setContactInfo({ ...contactInfo, parent_phone: e.target.value })}
                   className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-primary-500 focus:outline-none transition-colors"
-                  placeholder="+91 XXXXX XXXXX"
                   required
                 />
               </div>
@@ -231,7 +228,6 @@ export default function QuestionnaireModal({ isOpen, onClose, onComplete }: Ques
                   value={contactInfo.child_name}
                   onChange={(e) => setContactInfo({ ...contactInfo, child_name: e.target.value })}
                   className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-primary-500 focus:outline-none transition-colors"
-                  placeholder="Enter child's name"
                 />
               </div>
             </div>
@@ -254,8 +250,7 @@ export default function QuestionnaireModal({ isOpen, onClose, onComplete }: Ques
                     max={currentQuestion.max}
                     value={responses[currentQuestion.id] || ''}
                     onChange={(e) => handleResponse(currentQuestion.id, parseInt(e.target.value))}
-                    className="w-full px-4 py-3 text-lg rounded-xl border-2 border-gray-200 focus:border-primary-500 focus:outline-none transition-colors"
-                    placeholder={`Enter age (${currentQuestion.min}-${currentQuestion.max})`}
+                    className="w-full px-4 py-3 text-lg rounded-xl border-2 border-gray-200 focus:border-primary-500 focus:outline-none transition-colors"-${currentQuestion.max})`}
                   />
                 </div>
               )}

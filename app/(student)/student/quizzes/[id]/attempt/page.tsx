@@ -80,7 +80,7 @@ export default function QuizAttemptPage() {
       const token = localStorage.getItem('token');
 
       // Fetch quiz details
-      const quizResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/quizzes/${quizId}`, {
+      const quizResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/quizzes/${quizId}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -93,7 +93,7 @@ export default function QuizAttemptPage() {
 
       // Start attempt
       const attemptResponse = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/quizzes/${quizId}/attempt`,
+        `${process.env.NEXT_PUBLIC_API_URL}/quizzes/${quizId}/attempt`,
         {
           method: 'POST',
           headers: {
@@ -142,7 +142,7 @@ export default function QuizAttemptPage() {
 
       // Get correct answer from backend
       const questionResponse = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/quizzes/${quizId}`,
+        `${process.env.NEXT_PUBLIC_API_URL}/quizzes/${quizId}`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -158,7 +158,7 @@ export default function QuizAttemptPage() {
       }
 
       // Submit answer
-      await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/quizzes/attempts/${attemptId}/answer`, {
+      await fetch(`${process.env.NEXT_PUBLIC_API_URL}/quizzes/attempts/${attemptId}/answer`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -193,7 +193,7 @@ export default function QuizAttemptPage() {
       const timeTaken = Math.floor((Date.now() - startTime) / 1000);
 
       const token = localStorage.getItem('token');
-      await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/quizzes/attempts/${attemptId}/complete`, {
+      await fetch(`${process.env.NEXT_PUBLIC_API_URL}/quizzes/attempts/${attemptId}/complete`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

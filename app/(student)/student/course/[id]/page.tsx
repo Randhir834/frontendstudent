@@ -5,10 +5,10 @@ import Link from 'next/link';
 import { Loader2, Users, BookOpen, CheckCircle2, CreditCard, Play, Clock, Star, Award, FileText, Video } from 'lucide-react';
 import Card, { CardHeader, CardTitle, CardContent } from '@/components/ui/Card';
 import Button from '@/components/ui/Button';
+import CourseLiveClasses from '@/components/CourseLiveClasses';
 import { courseService } from '@/services/courseService';
 import { enrollmentService } from '@/services/enrollmentService';
 import { paymentService } from '@/services/paymentService';
-import CourseLiveClasses from '@/components/CourseLiveClasses';
 import type { Course } from '@/types';
 
 export default function CourseDetailsPage({ params }: { params: Promise<{ id: string }> }) {

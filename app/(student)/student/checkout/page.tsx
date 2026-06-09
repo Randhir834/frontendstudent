@@ -19,10 +19,10 @@ export default function CheckoutPage() {
           <CardHeader><CardTitle>Payment Details</CardTitle></CardHeader>
           <CardContent>
             <form className="space-y-4">
-              <Input label="Card Number" id="card" placeholder="0000 0000 0000 0000" />
+              <Input label="Card Number" id="card" />
               <div className="grid grid-cols-2 gap-3 sm:gap-4">
-                <Input label="Expiry" id="expiry" placeholder="MM/YY" />
-                <Input label="CVC" id="cvc" placeholder="123" />
+                <Input label="Expiry" id="expiry" />
+                <Input label="CVC" id="cvc" />
               </div>
               <Button type="submit" className="w-full">Pay Now</Button>
             </form>

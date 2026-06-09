@@ -110,7 +110,6 @@ export default function CourseFilters({
         <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#78909C] size-4" />
         <Input
           type="text"
-          placeholder="Search courses..."
           value={localFilters.search || ''}
           onChange={(e) => handleSearchChange(e.target.value)}
           className="pl-10 pr-4 text-sm sm:text-base"

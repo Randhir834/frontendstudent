@@ -66,7 +66,7 @@ function SearchResultsContent() {
                 <section>
                   <h2 className="text-lg sm:text-xl font-semibold text-foreground mb-3 sm:mb-4 flex items-center gap-2">
                     <BookOpen className="h-4 w-4 sm:h-5 sm:w-5 text-primary" />
-                    Courses ({results.courses.length})
+                    Courses
                   </h2>
                   <div className="grid gap-3 sm:gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
                     {results.courses.map((course: any) => (
@@ -100,7 +100,7 @@ function SearchResultsContent() {
                 <section>
                   <h2 className="text-xl font-semibold text-foreground mb-4 flex items-center gap-2">
                     <FileText className="h-5 w-5 text-primary" />
-                    Lessons ({results.lessons.length})
+                    Lessons
                   </h2>
                   <div className="space-y-3">
                     {results.lessons.map((lesson: any) => (
@@ -125,7 +125,7 @@ function SearchResultsContent() {
                 <section>
                   <h2 className="text-xl font-semibold text-foreground mb-4 flex items-center gap-2">
                     <ClipboardList className="h-5 w-5 text-primary" />
-                    Assignments ({results.assignments.length})
+                    Assignments
                   </h2>
                   <div className="space-y-3">
                     {results.assignments.map((assignment: any) => (
@@ -151,7 +151,7 @@ function SearchResultsContent() {
                 <section>
                   <h2 className="text-xl font-semibold text-foreground mb-4 flex items-center gap-2">
                     <HelpCircle className="h-5 w-5 text-primary" />
-                    Quizzes ({results.quizzes.length})
+                    Quizzes
                   </h2>
                   <div className="space-y-3">
                     {results.quizzes.map((quiz: any) => (
@@ -177,7 +177,7 @@ function SearchResultsContent() {
                 <section>
                   <h2 className="text-xl font-semibold text-foreground mb-4 flex items-center gap-2">
                     <Video className="h-5 w-5 text-primary" />
-                    Live Classes ({results.liveClasses.length})
+                    Live Classes
                   </h2>
                   <div className="space-y-3">
                     {results.liveClasses.map((liveClass: any) => (
@@ -203,7 +203,7 @@ function SearchResultsContent() {
                 <section>
                   <h2 className="text-xl font-semibold text-foreground mb-4 flex items-center gap-2">
                     <FolderOpen className="h-5 w-5 text-primary" />
-                    Categories ({results.categories.length})
+                    Categories
                   </h2>
                   <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
                     {results.categories.map((category: any) => (

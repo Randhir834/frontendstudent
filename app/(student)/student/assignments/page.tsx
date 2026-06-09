@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Card, { CardHeader, CardTitle, CardContent } from '@/components/ui/Card';
 import Button from '@/components/ui/Button';
-import { FileText, Clock, AlertCircle, CheckCircle, Upload } from 'lucide-react';
+import { FileText, Clock, AlertCircle, CheckCircle, Upload, ClipboardList } from 'lucide-react';
 
 interface Assignment {
   id: number;
@@ -16,8 +16,12 @@ interface Assignment {
   my_submissions: number;
   my_score: number | null;
   my_status: string | null;
+  my_feedback: string | null;
+  graded_at: string | null;
+  submitted_at: string | null;
   assigned_at: string;
   allow_late_submission: boolean;
+  allow_resubmission: boolean;
 }
 
 export default function StudentAssignmentsPage() {
@@ -33,7 +37,7 @@ export default function StudentAssignmentsPage() {
   const fetchAssignments = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/assignments`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/assignments`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -85,42 +89,42 @@ export default function StudentAssignmentsPage() {
     <div className="p-3 sm:p-4 md:p-6 lg:p-8 space-y-4 sm:space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4">
         <div>
-          <h1 className="text-lg sm:text-xl md:text-2xl font-bold text-text-primary">Assignments</h1>
-          <p className="text-xs sm:text-sm text-text-muted mt-1">View and submit your assignments</p>
+          <h1 className="text-lg sm:text-xl md:text-2xl font-bold text-[#1E3A5F]">Assignments</h1>
+          <p className="text-xs sm:text-sm text-[#78909C] mt-1">View and submit your assignments</p>
         </div>
       </div>
 
       {/* Filter Tabs */}
-      <div className="flex gap-2 border-b border-gray-200">
+      <div className="flex gap-2 border-b border-[#E0E0E0]">
         <button
           onClick={() => setFilter('all')}
           className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors ${
             filter === 'all'
-              ? 'border-primary-500 text-primary-600'
-              : 'border-transparent text-text-muted hover:text-text-primary'
+              ? 'border-[#1E88E5] text-[#1E88E5]'
+              : 'border-transparent text-[#78909C] hover:text-[#1E3A5F]'
           }`}
         >
-          All ({assignments.length})
+          All
         </button>
         <button
           onClick={() => setFilter('pending')}
           className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors ${
             filter === 'pending'
-              ? 'border-primary-500 text-primary-600'
-              : 'border-transparent text-text-muted hover:text-text-primary'
+              ? 'border-[#1E88E5] text-[#1E88E5]'
+              : 'border-transparent text-[#78909C] hover:text-[#1E3A5F]'
           }`}
         >
-          Pending ({assignments.filter((a) => a.my_submissions === 0).length})
+          Pending
         </button>
         <button
           onClick={() => setFilter('submitted')}
           className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors ${
             filter === 'submitted'
-              ? 'border-primary-500 text-primary-600'
-              : 'border-transparent text-text-muted hover:text-text-primary'
+              ? 'border-[#1E88E5] text-[#1E88E5]'
+              : 'border-transparent text-[#78909C] hover:text-[#1E3A5F]'
           }`}
         >
-          Submitted ({assignments.filter((a) => a.my_submissions > 0).length})
+          Submitted
         </button>
       </div>
 
@@ -128,7 +132,13 @@ export default function StudentAssignmentsPage() {
       {filteredAssignments.length === 0 ? (
         <Card>
           <CardContent className="text-center py-12">
-            <p className="text-text-muted">No assignments found</p>
+            <ClipboardList className="size-16 text-[#E0E0E0] mx-auto mb-4" />
+            <p className="text-[#78909C] text-lg mb-2">No assignments found</p>
+            <p className="text-sm text-[#B0BEC5]">
+              {filter === 'pending' && 'You have no pending assignments'}
+              {filter === 'submitted' && 'You haven\'t submitted any assignments yet'}
+              {filter === 'all' && 'No assignments available at the moment'}
+            </p>
           </CardContent>
         </Card>
       ) : (
@@ -136,20 +146,22 @@ export default function StudentAssignmentsPage() {
           {filteredAssignments.map((assignment) => {
             const overdue = isOverdue(assignment.due_date);
             const canSubmit = !overdue || assignment.allow_late_submission;
+            const isGraded = assignment.my_score !== null && assignment.my_score !== undefined;
+            const canResubmit = canSubmit && assignment.allow_resubmission && !isGraded;
 
             return (
               <Card key={assignment.id}>
                 <CardContent className="p-4 sm:p-6">
                   <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4">
                     <div className="flex-1">
-                      <h3 className="text-lg font-semibold text-text-primary mb-1">
+                      <h3 className="text-lg font-semibold text-[#1E3A5F] mb-1">
                         {assignment.title}
                       </h3>
-                      <p className="text-sm text-text-muted mb-3">{assignment.description}</p>
+                      <p className="text-sm text-[#78909C] mb-3">{assignment.description}</p>
 
                       <div className="flex flex-wrap gap-2 text-xs mb-3">
-                        <span className="bg-gray-100 px-2 py-1 rounded">{assignment.course_title}</span>
-                        <span className="bg-purple-100 text-purple-700 px-2 py-1 rounded flex items-center gap-1">
+                        <span className="bg-[#F5F5F5] text-[#1E3A5F] px-2 py-1 rounded">{assignment.course_title}</span>
+                        <span className="bg-[#E3F2FD] text-[#1E88E5] px-2 py-1 rounded flex items-center gap-1">
                           <FileText className="w-3 h-3" />
                           {assignment.max_score} Points
                         </span>
@@ -157,8 +169,8 @@ export default function StudentAssignmentsPage() {
                           <span
                             className={`px-2 py-1 rounded flex items-center gap-1 ${
                               overdue
-                                ? 'bg-red-100 text-red-700'
-                                : 'bg-orange-100 text-orange-700'
+                                ? 'bg-[#FFEBEE] text-[#C62828]'
+                                : 'bg-[#FFF3E0] text-[#F57C00]'
                             }`}
                           >
                             <Clock className="w-3 h-3" />
@@ -169,35 +181,58 @@ export default function StudentAssignmentsPage() {
 
                       <div className="flex flex-wrap gap-4 text-sm">
                         <div>
-                          <span className="text-text-muted">Submissions: </span>
-                          <span className="font-semibold text-text-primary">
+                          <span className="text-[#78909C]">Submissions: </span>
+                          <span className="font-semibold text-[#1E3A5F]">
                             {assignment.my_submissions}
                           </span>
                         </div>
                         {assignment.my_score !== null && (
                           <div>
-                            <span className="text-text-muted">Score: </span>
-                            <span className="font-semibold text-green-600">
-                              {assignment.my_score}/{assignment.max_score}
+                            <span className="text-[#78909C]">Score: </span>
+                            <span className="font-semibold text-[#4CAF50]">
+                              {assignment.my_score}/{assignment.max_score} ({Math.round((assignment.my_score / assignment.max_score) * 100)}%)
                             </span>
                           </div>
                         )}
                         {assignment.my_status && (
                           <div>
-                            <span className="text-text-muted">Status: </span>
-                            <span className={`font-semibold ${
-                              assignment.my_status === 'graded' ? 'text-green-600' : 'text-blue-600'
+                            <span className="text-[#78909C]">Status: </span>
+                            <span className={`inline-flex items-center gap-1 px-2 py-1 rounded text-xs font-semibold ${
+                              assignment.my_status === 'graded' ? 'bg-[#E8F5E9] text-[#4CAF50]' : 'bg-[#E3F2FD] text-[#1E88E5]'
                             }`}>
-                              {assignment.my_status}
+                              {assignment.my_status === 'graded' && <CheckCircle className="w-3 h-3" />}
+                              {assignment.my_status.charAt(0).toUpperCase() + assignment.my_status.slice(1)}
+                            </span>
+                          </div>
+                        )}
+                        {assignment.graded_at && (
+                          <div>
+                            <span className="text-[#78909C]">Graded: </span>
+                            <span className="font-medium text-[#1E3A5F]">
+                              {formatDate(assignment.graded_at)}
                             </span>
                           </div>
                         )}
                       </div>
 
+                      {assignment.my_feedback && (
+                        <div className="mt-3 p-3 bg-[#E8F5E9] border border-[#4CAF50] rounded-lg">
+                          <div className="text-xs font-semibold text-[#2E7D32] mb-1">Instructor Feedback:</div>
+                          <p className="text-sm text-[#1E3A5F]">{assignment.my_feedback}</p>
+                        </div>
+                      )}
+
                       {overdue && !assignment.allow_late_submission && (
-                        <div className="mt-3 flex items-center gap-2 text-red-600 text-sm">
+                        <div className="mt-3 flex items-center gap-2 text-[#C62828] text-sm">
                           <AlertCircle className="w-4 h-4" />
                           <span>Deadline has passed. Late submissions not allowed.</span>
+                        </div>
+                      )}
+
+                      {isGraded && assignment.allow_resubmission && (
+                        <div className="mt-3 flex items-center gap-2 text-[#1E88E5] text-sm">
+                          <CheckCircle className="w-4 h-4" />
+                          <span>Assignment graded and locked. Resubmission not allowed.</span>
                         </div>
                       )}
                     </div>
@@ -215,12 +250,29 @@ export default function StudentAssignmentsPage() {
                           Submit
                         </Button>
                       )}
-                      {assignment.my_submissions > 0 && (
-                        <Button
+                      {!canSubmit && assignment.my_submissions === 0 && (
+                        <Button disabled title="Deadline has passed">
+                          <Upload className="w-4 h-4 mr-2" />
+                          Submit
+                        </Button>
+                      )}
+                      {canResubmit && (
+                        <Button 
+                          onClick={() => router.push(`/student/assignments/${assignment.id}/submit`)}
                           variant="outline"
-                          onClick={() => router.push(`/student/assignments/${assignment.id}/submissions`)}
                         >
-                          View Submissions
+                          <Upload className="w-4 h-4 mr-2" />
+                          Resubmit
+                        </Button>
+                      )}
+                      {assignment.my_submissions > 0 && assignment.allow_resubmission && !canResubmit && (
+                        <Button 
+                          disabled
+                          variant="outline"
+                          title={isGraded ? "Assignment graded and locked" : "Deadline has passed"}
+                        >
+                          <Upload className="w-4 h-4 mr-2" />
+                          Resubmit
                         </Button>
                       )}
                     </div>

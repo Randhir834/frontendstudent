@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { Calendar, Clock, ExternalLink, Loader2, AlertCircle } from 'lucide-react';
+import { Calendar, Clock, ExternalLink, Loader2, AlertCircle, PlayCircle } from 'lucide-react';
 import Card, { CardHeader, CardTitle, CardContent } from '@/components/ui/Card';
 import Button from '@/components/ui/Button';
 import { liveClassService } from '@/services/liveClassService';
@@ -14,25 +14,55 @@ export default function UpcomingLiveClasses() {
   const [error, setError] = useState('');
 
   useEffect(() => {
-    const fetchLiveClasses = async () => {
-      try {
-        setLoading(true);
-        const data = await liveClassService.getLiveClasses();
-        // Get only the next 3 upcoming classes
-        const upcoming = (data.liveClasses || []).slice(0, 3);
-        setClasses(upcoming);
-        setError('');
-      } catch (err) {
-        console.error('Failed to fetch live classes:', err);
-        setError('Failed to load live classes');
-        setClasses([]);
-      } finally {
-        setLoading(false);
-      }
-    };
-
     fetchLiveClasses();
+
+    // Auto-refresh every 30 seconds to update class statuses
+    const interval = setInterval(() => {
+      fetchLiveClasses();
+    }, 30000);
+
+    return () => clearInterval(interval);
   }, []);
+
+  const fetchLiveClasses = async () => {
+    try {
+      setLoading(true);
+      const data = await liveClassService.getLiveClasses();
+      const allClasses = data.liveClasses || [];
+      
+      // Filter classes that are not yet completed (upcoming or ongoing)
+      const activeClasses = allClasses.filter((liveClass: LiveClass) => 
+        !liveClassService.isCompleted(liveClass.scheduled_at, liveClass.duration_minutes)
+      );
+
+      // Sort: ongoing classes first, then by scheduled time
+      const sortedClasses = activeClasses.sort((a: LiveClass, b: LiveClass) => {
+        const aIsOngoing = liveClassService.isOngoing(a.scheduled_at, a.duration_minutes);
+        const bIsOngoing = liveClassService.isOngoing(b.scheduled_at, b.duration_minutes);
+
+        // Ongoing classes come first
+        if (aIsOngoing && !bIsOngoing) return -1;
+        if (!aIsOngoing && bIsOngoing) return 1;
+
+        // For same status, sort by scheduled time (earliest first)
+        return new Date(a.scheduled_at).getTime() - new Date(b.scheduled_at).getTime();
+      });
+
+      // Get only the top 3 classes
+      const topClasses = sortedClasses.slice(0, 3);
+      setClasses(topClasses);
+      setError('');
+    } catch (err: any) {
+      console.error('Failed to fetch live classes:', err);
+      // Only show error if it's a genuine error (not 404 or empty response)
+      if (err.response?.status && err.response.status !== 404) {
+        setError('Failed to load live classes');
+      }
+      setClasses([]);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const formatDateTime = (dateString: string) => {
     const date = new Date(dateString);
@@ -136,23 +166,34 @@ export default function UpcomingLiveClasses() {
       <CardContent>
         <div className="space-y-3">
           {classes.map((liveClass) => {
+            const isOngoing = liveClassService.isOngoing(liveClass.scheduled_at, liveClass.duration_minutes);
+            const isStartingSoon = liveClassService.isStartingSoon(liveClass.scheduled_at);
             const timeUntil = getTimeUntilClass(liveClass.scheduled_at);
-            const isStartingSoon = timeUntil && (timeUntil.includes('m') || timeUntil.includes('h'));
 
             return (
               <div
                 key={liveClass.id}
                 className={`p-4 border rounded-lg transition-all ${
-                  isStartingSoon
+                  isOngoing
+                    ? 'border-green-500 bg-gradient-to-r from-green-50 to-emerald-50 shadow-lg shadow-green-500/20'
+                    : isStartingSoon
                     ? 'border-[#1E88E5] bg-[#F1F8E9]'
                     : 'border-[#E0E0E0] hover:border-[#1E88E5]'
                 }`}
               >
                 <div className="flex items-start justify-between gap-3">
                   <div className="flex-1 min-w-0">
-                    <h4 className="font-medium text-[#1E3A5F] truncate">
-                      {liveClass.title}
-                    </h4>
+                    <div className="flex items-center gap-2 mb-1">
+                      <h4 className="font-medium text-[#1E3A5F] truncate">
+                        {liveClass.title}
+                      </h4>
+                      {isOngoing && (
+                        <span className="inline-flex items-center gap-1 px-2 py-0.5 text-xs font-bold rounded-full bg-green-500 text-white animate-pulse">
+                          <PlayCircle className="size-3" />
+                          LIVE NOW
+                        </span>
+                      )}
+                    </div>
                     <p className="text-xs text-[#78909C] mt-1">
                       {liveClass.course_title}
                     </p>
@@ -164,7 +205,7 @@ export default function UpcomingLiveClasses() {
                     </div>
                   </div>
                   <div className="flex flex-col items-end gap-2 flex-shrink-0">
-                    {timeUntil && (
+                    {!isOngoing && timeUntil && (
                       <span className={`text-xs font-medium px-2 py-1 rounded ${
                         isStartingSoon
                           ? 'bg-[#1E88E5] text-white'
@@ -177,13 +218,33 @@ export default function UpcomingLiveClasses() {
                       href={liveClass.meet_link}
                       target="_blank"
                       rel="noreferrer"
-                      className="inline-flex items-center gap-1 px-3 py-1.5 text-xs font-medium text-[#1E88E5] hover:text-[#1565C0] transition-colors"
+                      className={`inline-flex items-center gap-1 px-3 py-1.5 text-xs font-medium rounded transition-colors ${
+                        isOngoing
+                          ? 'bg-green-500 text-white hover:bg-green-600'
+                          : 'text-[#1E88E5] hover:text-[#1565C0] hover:bg-blue-50'
+                      }`}
                     >
-                      <ExternalLink className="size-3" />
-                      Join
+                      {isOngoing ? (
+                        <>
+                          <PlayCircle className="size-3" />
+                          Join Now
+                        </>
+                      ) : (
+                        <>
+                          <ExternalLink className="size-3" />
+                          Join
+                        </>
+                      )}
                     </a>
                   </div>
                 </div>
+                {isOngoing && (
+                  <div className="mt-3 pt-3 border-t border-green-200">
+                    <p className="text-xs text-green-700 font-medium">
+                      🔴 Class is in progress! Join now to participate.
+                    </p>
+                  </div>
+                )}
               </div>
             );
           })}

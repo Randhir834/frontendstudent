@@ -1,4 +1,9 @@
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5001';
+// Get the base URL without /api suffix for static file access
+const getBaseUrl = () => {
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5001/api';
+  // Remove /api suffix if present to get base URL for uploads
+  return apiUrl.replace(/\/api$/, '');
+};
 
 export function getAvatarUrl(avatarUrl: string | null | undefined, userName: string = 'User'): string {
   if (!avatarUrl) {
@@ -11,13 +16,15 @@ export function getAvatarUrl(avatarUrl: string | null | undefined, userName: str
     return avatarUrl;
   }
 
-  // If avatar_url starts with /uploads, prepend API_URL
+  const BASE_URL = getBaseUrl();
+
+  // If avatar_url starts with /uploads, prepend BASE_URL
   if (avatarUrl.startsWith('/uploads')) {
-    return `${API_URL}${avatarUrl}`;
+    return `${BASE_URL}${avatarUrl}`;
   }
 
-  // Otherwise, assume it's a relative path and prepend API_URL
-  return `${API_URL}${avatarUrl.startsWith('/') ? '' : '/'}${avatarUrl}`;
+  // Otherwise, assume it's a relative path and prepend BASE_URL
+  return `${BASE_URL}${avatarUrl.startsWith('/') ? '' : '/'}${avatarUrl}`;
 }
 
 // Add cache busting to force reload of updated images

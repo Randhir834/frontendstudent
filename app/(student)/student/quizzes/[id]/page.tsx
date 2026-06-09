@@ -50,7 +50,7 @@ export default function StudentQuizDetailsPage() {
       const token = localStorage.getItem('token');
 
       // Fetch quiz details
-      const quizResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/quizzes/${quizId}`, {
+      const quizResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/quizzes/${quizId}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -61,7 +61,7 @@ export default function StudentQuizDetailsPage() {
 
       // Fetch my attempts
       const attemptsResponse = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/quizzes/my-attempts/list`,
+        `${process.env.NEXT_PUBLIC_API_URL}/quizzes/my-attempts/list`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -271,7 +271,7 @@ export default function StudentQuizDetailsPage() {
       {attempts.length > 0 && (
         <Card>
           <CardHeader>
-            <CardTitle>My Attempts ({attempts.length})</CardTitle>
+            <CardTitle>My Attempts</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-3">
