@@ -46,7 +46,6 @@ export interface Course {
   total_lessons?: number;
   total_sections?: number;
   is_enrolled?: boolean;
-  progress?: number;
   created_at: string;
   updated_at: string;
 }
@@ -80,7 +79,6 @@ export interface Enrollment {
   user_id: number;
   course_id: number;
   status: 'active' | 'completed' | 'cancelled';
-  progress: number;
   enrolled_at: string;
   completed_at?: string;
   course_title?: string;

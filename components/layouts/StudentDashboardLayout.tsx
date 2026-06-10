@@ -4,9 +4,9 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import {
-  Bell, Mail, Home, BookOpen, ClipboardList,
+  Home, BookOpen, ClipboardList,
   FileQuestion, Award, Compass,
-  HelpCircle, User, Loader2, Menu, X, LogOut, Calendar
+  User, Loader2, Menu, X, LogOut, Calendar
 } from 'lucide-react';
 import { userService, UserProfile } from '@/services/userService';
 import GlobalSearch from '@/components/GlobalSearch';
@@ -21,7 +21,6 @@ import { getAvatarUrlWithCacheBust } from '@/utils/avatarUtils';
   { icon: FileQuestion, label: 'Quizzes', href: '/student/quizzes' },
   { icon: Award, label: 'Certificates', href: '/student/certificates' },
   { icon: User, label: 'My Profile', href: '/student/profile' },
-  { icon: HelpCircle, label: 'Help & Support', href: '/student/help' },
 ];
 
 interface StudentDashboardLayoutProps {

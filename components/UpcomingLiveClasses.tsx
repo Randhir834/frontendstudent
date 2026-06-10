@@ -54,9 +54,17 @@ export default function UpcomingLiveClasses() {
       setError('');
     } catch (err: any) {
       console.error('Failed to fetch live classes:', err);
-      // Only show error if it's a genuine error (not 404 or empty response)
-      if (err.response?.status && err.response.status !== 404) {
+      
+      // Don't show error for 404 (not found) - just show empty state
+      // Don't show error for 401 (unauthorized) - user may not be logged in
+      // Only show error for actual server errors (500+) or network errors
+      const status = err.response?.status;
+      if (!status || status >= 500) {
+        // Genuine server error or network error
         setError('Failed to load live classes');
+      } else {
+        // 404, 401, or other client errors - just show empty state
+        setError('');
       }
       setClasses([]);
     } finally {

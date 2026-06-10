@@ -278,7 +278,8 @@ export default function CourseFinderPage() {
                       max={currentQuestion.max}
                       value={responses[currentQuestion.id] || ''}
                       onChange={(e) => handleResponse(currentQuestion.id, parseInt(e.target.value))}
-                      className="w-full px-6 py-4 text-xl rounded-xl border-2 border-gray-200 focus:border-primary-500 focus:outline-none transition-colors"-${currentQuestion.max})`}
+                      className="w-full px-6 py-4 text-xl rounded-xl border-2 border-gray-200 focus:border-primary-500 focus:outline-none transition-colors"
+                      placeholder={`Enter a number (${currentQuestion.min || 0}-${currentQuestion.max || 'no limit'})`}
                     />
                   </div>
                 )}
