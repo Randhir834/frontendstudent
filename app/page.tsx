@@ -723,7 +723,7 @@ export default function Home() {
                           👨‍🏫
                         </div>
                         <div>
-                          <p className="font-bold text-dark-900">Mr. Johnson</p>
+                          <p className="font-bold text-dark-900">Mr. Rajesh Kumar</p>
                           <p className="text-sm text-green-600 font-semibold flex items-center gap-1">
                             <span className="w-2 h-2 bg-green-500 rounded-full"></span>
                             Online
@@ -899,7 +899,7 @@ export default function Home() {
             <div className="grid md:grid-cols-3 gap-8 mb-16">
               {[
                 {
-                  name: "Sarah Johnson",
+                  name: "Priya Sharma",
                   role: "High School Student", 
                   grade: "Grade 11",
                   content: "PlayFit made learning so much fun! The interactive lessons and live sessions helped me boost my grades from B to A+. I actually look forward to studying now!",
@@ -910,7 +910,7 @@ export default function Home() {
                   badge: "📈 Top Performer"
                 },
                 {
-                  name: "Michael Chen", 
+                  name: "Arjun Patel", 
                   role: "Middle School Student",
                   grade: "Grade 8",
                   content: "The progress tracking is amazing! I can see exactly what I need to work on. The teachers are super helpful and make everything easy to understand.",
@@ -921,7 +921,7 @@ export default function Home() {
                   badge: "🏆 Coding Champion"
                 },
                 {
-                  name: "Emily Rodriguez",
+                  name: "Ananya Reddy",
                   role: "High School Student", 
                   grade: "Grade 10", 
                   content: "I've tried other learning apps, but PlayFit is different! The courses are fun, the quizzes are challenging, and I love earning achievement badges!",
