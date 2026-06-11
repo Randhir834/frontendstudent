@@ -46,6 +46,7 @@ export interface Course {
   total_lessons?: number;
   total_sections?: number;
   is_enrolled?: boolean;
+  progress?: number;
   created_at: string;
   updated_at: string;
 }
