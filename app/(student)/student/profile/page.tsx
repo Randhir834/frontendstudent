@@ -431,8 +431,8 @@ export default function StudentProfilePage() {
                 <h3 className="font-bold text-[#1E3A5F] mb-5">Account Settings</h3>
                 <div className="space-y-2 flex-1">
                   {[
-                    { label: 'Notification Preferences', icon: Bell },
-                    { label: 'Privacy Settings', icon: Settings },
+                    { label: 'Notification Preferences', icon: Bell, path: undefined as string | undefined },
+                    { label: 'Privacy Settings', icon: Settings, path: undefined as string | undefined },
                   ].map((item, i) => (
                     <button
                       key={i}
