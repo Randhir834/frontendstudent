@@ -77,7 +77,7 @@ export default function Home() {
           <Link href="/" className="relative flex items-center justify-start shrink-0 transition-all duration-300 h-12 sm:h-14 md:h-16 w-auto hover:scale-105 group">
             <img
               src="/images/playfit-logo.jpg"
-              alt="PlayFit LMS"
+              alt="PlayFit"
               className="w-auto h-full object-contain max-w-full max-h-full transform group-hover:rotate-2 transition-transform"
             />
           </Link>
@@ -257,7 +257,7 @@ export default function Home() {
                     <div className="w-3 h-3 rounded-full bg-white/80"></div>
                     <div className="w-3 h-3 rounded-full bg-white/80"></div>
                   </div>
-                  <div className="text-white text-xs font-bold tracking-wider">PLAYFIT LMS</div>
+                  <div className="text-white text-xs font-bold tracking-wider">PLAYFIT</div>
                 </div>
                 
                 {/* Content area */}
@@ -803,7 +803,7 @@ export default function Home() {
               <Link href="/" className="relative flex items-center justify-center shrink-0 transition-all duration-300 h-12 w-auto hover:scale-105">
                 <img
                   src="/images/playfit-logo.jpg"
-                  alt="PlayFit LMS"
+                  alt="PlayFit"
                   className="w-full h-full object-contain max-w-full max-h-full"
                 />
               </Link>

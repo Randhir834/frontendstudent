@@ -57,7 +57,7 @@ export default function Home() {
           <Link href="/" className="relative flex items-center justify-start shrink-0 transition-all duration-300 h-12 sm:h-14 md:h-16 w-auto hover:scale-105 group">
             <img
               src="/images/playfit-logo.jpg"
-              alt="PlayFit LMS"
+              alt="PlayFit"
               className="w-auto h-full object-contain max-w-full max-h-full transform group-hover:rotate-2 transition-transform"
             />
           </Link>
@@ -1479,7 +1479,7 @@ export default function Home() {
               <Link href="/" className="flex items-center mb-4">
                 <img
                   src="/images/playfit-logo.jpg"
-                  alt="PlayFit LMS"
+                  alt="PlayFit"
                   className="h-12 w-auto object-contain"
                 />
               </Link>
@@ -1533,7 +1533,7 @@ export default function Home() {
           {/* Bottom Bar */}
           <div className="pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-gray-400 text-sm text-center md:text-left">
-              &copy; {new Date().getFullYear()} PlayFit LMS. All rights reserved.
+              &copy; {new Date().getFullYear()} PlayFit. All rights reserved.
             </p>
             <div className="flex gap-4">
               <a href="#" className="text-gray-400 hover:text-white transition-colors">
