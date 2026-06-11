@@ -250,7 +250,7 @@ export default function QuestionnaireModal({ isOpen, onClose, onComplete }: Ques
                     max={currentQuestion.max}
                     value={responses[currentQuestion.id] || ''}
                     onChange={(e) => handleResponse(currentQuestion.id, parseInt(e.target.value))}
-                    className="w-full px-4 py-3 text-lg rounded-xl border-2 border-gray-200 focus:border-primary-500 focus:outline-none transition-colors"-${currentQuestion.max})`}
+                    className="w-full px-4 py-3 text-lg rounded-xl border-2 border-gray-200 focus:border-primary-500 focus:outline-none transition-colors"
                   />
                 </div>
               )}
