@@ -1,8 +1,8 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { ArrowRight, CheckCircle, BookOpen, Users, Trophy, Star, Menu, X, Target, Clock, Shield, Rocket, Heart, GraduationCap, Brain, Puzzle, GamepadIcon as Gamepad2, UserCheck, Video, MessageCircle, Award, Sparkles, BarChart3, TrendingUp, Zap, PlayCircle, ChevronRight, Calendar, Mail, Phone, MapPin, Globe, CheckCircle2 } from 'lucide-react';
+import { ArrowRight, CheckCircle, BookOpen, Users, Trophy, Star, Menu, X, Target, Clock, Shield, Rocket, Heart, GraduationCap, Brain, Puzzle, GamepadIcon as Gamepad2, UserCheck, Video, MessageCircle, Award, Sparkles, BarChart3, TrendingUp, Zap, PlayCircle, ChevronRight, Calendar, Mail, Phone, MapPin, CheckCircle2 } from 'lucide-react';
 import { trialService } from '@/services/trialService';
 import CourseRecommendationSection from '@/components/CourseRecommendation/CourseRecommendationSection';
 
@@ -13,7 +13,6 @@ export default function Home() {
   const [error, setError] = useState('');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrollY, setScrollY] = useState(0);
-  const observerRef = useRef<IntersectionObserver | null>(null);
 
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY);
@@ -1470,169 +1469,93 @@ export default function Home() {
         </section>
       </main>
 
-      {/* 🔗 Enhanced Footer */}
-      <footer className="bg-gradient-to-br from-dark-900 via-dark-800 to-dark-900 text-gray-300 py-20 px-6 border-t-4 border-primary-600">
-        <div className="max-w-7xl mx-auto">
-          {/* Top Section */}
-          <div className="grid md:grid-cols-5 gap-12 mb-16">
-            <div className="md:col-span-2">
-              <Link href="/" className="relative flex items-center justify-start shrink-0 transition-all duration-300 h-14 w-auto hover:scale-105 mb-6">
+      {/* 🔗 Simple Footer */}
+      <footer className="bg-dark-900 text-gray-300 py-12 px-6 border-t border-gray-800">
+        <div className="max-w-6xl mx-auto">
+          {/* Main Footer Content */}
+          <div className="grid md:grid-cols-4 gap-8 mb-8">
+            {/* Logo & Description */}
+            <div className="md:col-span-1">
+              <Link href="/" className="flex items-center mb-4">
                 <img
                   src="/images/playfit-logo.jpg"
                   alt="PlayFit LMS"
-                  className="w-full h-full object-contain max-w-full max-h-full"
+                  className="h-12 w-auto object-contain"
                 />
               </Link>
-              <p className="text-gray-400 leading-relaxed mb-6 text-lg">
-                <span className="font-bold text-white">Where Kids Learn Through Play!</span> Empowering children aged 8-18 with interactive courses, live classes, and fun learning experiences that inspire creativity and growth.
+              <p className="text-gray-400 text-sm leading-relaxed">
+                Where kids learn through play! Empowering children aged 8-18 with interactive learning experiences.
               </p>
-              
-              {/* Newsletter Signup */}
-              <div className="bg-dark-800 rounded-2xl p-6 border-2 border-gray-700 mb-6">
-                <h4 className="text-white font-bold mb-3 flex items-center gap-2">
-                  <Mail className="w-5 h-5 text-primary-400" />
-                  Stay Updated
-                </h4>
-                <p className="text-sm text-gray-400 mb-4">Get learning tips and exclusive offers!</p>
-                <div className="flex gap-2">
-                  <input 
-                    type="email" 
-                    placeholder="Your email" 
-                    className="flex-1 px-4 py-3 rounded-xl bg-dark-700 border-2 border-gray-600 text-white placeholder:text-gray-500 focus:outline-none focus:border-primary-500 transition-all"
-                  />
-                  <button className="bg-gradient-to-r from-primary-600 to-secondary-600 hover:from-primary-700 hover:to-secondary-700 text-white px-6 py-3 rounded-xl font-bold transition-all shadow-lg hover:shadow-xl hover:scale-105">
-                    Subscribe
-                  </button>
-                </div>
-              </div>
-              
-              {/* Social Links */}
-              <div>
-                <p className="text-white font-bold mb-4">Follow Us</p>
-                <div className="flex gap-3">
-                  {[
-                    { name: 'Instagram', color: 'hover:bg-accent-pink', icon: 'M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z' },
-                    { name: 'Facebook', color: 'hover:bg-primary-600', icon: 'M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z' },
-                    { name: 'YouTube', color: 'hover:bg-red-600', icon: 'M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z' },
-                    { name: 'Twitter', color: 'hover:bg-blue-400', icon: 'M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z' }
-                  ].map((social, i) => (
-                    <a key={i} href="#" className={`w-12 h-12 bg-dark-700 ${social.color} rounded-xl flex items-center justify-center transition-all hover:scale-110 shadow-lg group`}>
-                      <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                        <path d={social.icon} />
-                      </svg>
-                    </a>
-                  ))}
-                </div>
-              </div>
             </div>
             
-            {/* Courses Section */}
+            {/* Quick Links */}
             <div>
-              <h4 className="text-white font-bold mb-6 text-lg flex items-center gap-2">
-                <BookOpen className="w-5 h-5 text-primary-400" />
-                Courses
-              </h4>
-              <ul className="space-y-3">
-                {['Mathematics', 'Science', 'Programming', 'Languages', 'Arts', 'Test Prep'].map((item, i) => (
-                  <li key={i}>
-                    <a href="#features" className="text-gray-400 hover:text-white transition-colors flex items-center gap-2 group">
-                      <ChevronRight className="w-4 h-4 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
-                      {item}
-                    </a>
-                  </li>
-                ))}
+              <h4 className="text-white font-semibold mb-4">Quick Links</h4>
+              <ul className="space-y-2">
+                <li><a href="#features" className="text-gray-400 hover:text-white transition-colors text-sm">Courses</a></li>
+                <li><a href="#why-choose" className="text-gray-400 hover:text-white transition-colors text-sm">About Us</a></li>
+                <li><a href="#testimonials" className="text-gray-400 hover:text-white transition-colors text-sm">Testimonials</a></li>
+                <li><a href="#trial" className="text-gray-400 hover:text-white transition-colors text-sm">Free Trial</a></li>
               </ul>
             </div>
             
-            {/* Company Section */}
+            {/* Support */}
             <div>
-              <h4 className="text-white font-bold mb-6 text-lg flex items-center gap-2">
-                <Globe className="w-5 h-5 text-secondary-400" />
-                Company
-              </h4>
-              <ul className="space-y-3">
-                {['About Us', 'Our Story', 'Careers', 'Press Kit', 'Blog', 'Contact'].map((item, i) => (
-                  <li key={i}>
-                    <a href="#" className="text-gray-400 hover:text-white transition-colors flex items-center gap-2 group">
-                      <ChevronRight className="w-4 h-4 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
-                      {item}
-                    </a>
-                  </li>
-                ))}
+              <h4 className="text-white font-semibold mb-4">Support</h4>
+              <ul className="space-y-2">
+                <li><a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">Help Center</a></li>
+                <li><a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">Contact Us</a></li>
+                <li><a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">Privacy Policy</a></li>
+                <li><a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">Terms of Service</a></li>
               </ul>
             </div>
             
-            {/* Support Section */}
+            {/* Contact Info */}
             <div>
-              <h4 className="text-white font-bold mb-6 text-lg flex items-center gap-2">
-                <Shield className="w-5 h-5 text-accent-yellow" />
-                Support
-              </h4>
+              <h4 className="text-white font-semibold mb-4">Contact</h4>
               <ul className="space-y-3">
-                {['Help Center', 'FAQs', 'Privacy Policy', 'Terms of Service', 'Safety & Security', 'Accessibility'].map((item, i) => (
-                  <li key={i}>
-                    <a href="#" className="text-gray-400 hover:text-white transition-colors flex items-center gap-2 group">
-                      <ChevronRight className="w-4 h-4 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
-                      {item}
-                    </a>
-                  </li>
-                ))}
+                <li className="flex items-start gap-2 text-sm">
+                  <MapPin className="w-4 h-4 text-primary-400 mt-0.5 flex-shrink-0" />
+                  <span className="text-gray-400">Kolkata, India</span>
+                </li>
+                <li className="flex items-start gap-2 text-sm">
+                  <Mail className="w-4 h-4 text-primary-400 mt-0.5 flex-shrink-0" />
+                  <a href="mailto:support@playfit.com" className="text-gray-400 hover:text-white transition-colors">support@playfit.com</a>
+                </li>
+                <li className="flex items-start gap-2 text-sm">
+                  <Phone className="w-4 h-4 text-primary-400 mt-0.5 flex-shrink-0" />
+                  <a href="tel:+911234567890" className="text-gray-400 hover:text-white transition-colors">+91 123 456 7890</a>
+                </li>
               </ul>
-            </div>
-          </div>
-
-          {/* Contact Info Bar */}
-          <div className="bg-dark-800 rounded-2xl p-8 border-2 border-gray-700 mb-12">
-            <div className="grid md:grid-cols-3 gap-6 text-center md:text-left">
-              <div className="flex items-center justify-center md:justify-start gap-3">
-                <div className="w-12 h-12 bg-gradient-to-br from-primary-500 to-primary-600 rounded-xl flex items-center justify-center shadow-lg">
-                  <Phone className="w-6 h-6 text-white" />
-                </div>
-                <div>
-                  <p className="text-sm text-gray-400">Call Us</p>
-                  <p className="text-white font-bold">+1 (800) 123-4567</p>
-                </div>
-              </div>
-              <div className="flex items-center justify-center md:justify-start gap-3">
-                <div className="w-12 h-12 bg-gradient-to-br from-secondary-500 to-secondary-600 rounded-xl flex items-center justify-center shadow-lg">
-                  <Mail className="w-6 h-6 text-white" />
-                </div>
-                <div>
-                  <p className="text-sm text-gray-400">Email Us</p>
-                  <p className="text-white font-bold">support@playfit.com</p>
-                </div>
-              </div>
-              <div className="flex items-center justify-center md:justify-start gap-3">
-                <div className="w-12 h-12 bg-gradient-to-br from-accent-purple to-accent-pink rounded-xl flex items-center justify-center shadow-lg">
-                  <MapPin className="w-6 h-6 text-white" />
-                </div>
-                <div>
-                  <p className="text-sm text-gray-400">Headquarters</p>
-                  <p className="text-white font-bold">San Francisco, CA</p>
-                </div>
-              </div>
             </div>
           </div>
 
           {/* Bottom Bar */}
-          <div className="pt-8 border-t-2 border-gray-800">
-            <div className="flex flex-col md:flex-row justify-between items-center gap-6">
-              <p className="text-gray-400 text-center md:text-left">
-                &copy; {new Date().getFullYear()} <span className="text-white font-bold">PlayFit LMS</span> - Where Kids Learn Through Play! Made with <Heart className="inline w-4 h-4 text-red-500 fill-red-500" /> for young learners worldwide.
-              </p>
-              <div className="flex flex-wrap items-center justify-center gap-6">
-                <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm font-semibold">Privacy</a>
-                <span className="text-gray-600">•</span>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm font-semibold">Terms</a>
-                <span className="text-gray-600">•</span>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm font-semibold">Cookies</a>
-                <span className="text-gray-600">•</span>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm font-semibold">Sitemap</a>
-              </div>
+          <div className="pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center gap-4">
+            <p className="text-gray-400 text-sm text-center md:text-left">
+              &copy; {new Date().getFullYear()} PlayFit LMS. All rights reserved.
+            </p>
+            <div className="flex gap-4">
+              <a href="#" className="text-gray-400 hover:text-white transition-colors">
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                </svg>
+              </a>
+              <a href="#" className="text-gray-400 hover:text-white transition-colors">
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                </svg>
+              </a>
+              <a href="#" className="text-gray-400 hover:text-white transition-colors">
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                </svg>
+              </a>
             </div>
           </div>
         </div>
       </footer>
+
     </div>
   );
 }
