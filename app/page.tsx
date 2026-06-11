@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
-import { ArrowRight, CheckCircle, BookOpen, Users, Trophy, Star, Menu, X, Quote, Zap, Target, Award, PlayCircle, Clock, TrendingUp, Shield, Lightbulb, Rocket, Heart, Globe, GraduationCap, Award as AwardIcon, Brain, Puzzle, GamepadIcon as Gamepad2, UserCheck } from 'lucide-react';
+import { ArrowRight, CheckCircle, BookOpen, Users, Trophy, Star, Menu, X, Target, Clock, Shield, Rocket, Heart, GraduationCap, Brain, Puzzle, GamepadIcon as Gamepad2, UserCheck, Video, MessageCircle, Award, Sparkles, BarChart3, TrendingUp, Zap, PlayCircle, ChevronRight, Calendar, Mail, Phone, MapPin, Globe, CheckCircle2 } from 'lucide-react';
 import { trialService } from '@/services/trialService';
 import CourseRecommendationSection from '@/components/CourseRecommendation/CourseRecommendationSection';
 
@@ -13,34 +13,14 @@ export default function Home() {
   const [error, setError] = useState('');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrollY, setScrollY] = useState(0);
-  const [activeTab, setActiveTab] = useState(0);
-  const [isVisible, setIsVisible] = useState<{ [key: string]: boolean }>({});
   const observerRef = useRef<IntersectionObserver | null>(null);
 
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY);
     window.addEventListener('scroll', handleScroll);
-    
-    // Intersection Observer for scroll animations
-    observerRef.current = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setIsVisible((prev) => ({ ...prev, [entry.target.id]: true }));
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-
-    // Observe all sections
-    document.querySelectorAll('[data-animate]').forEach((el) => {
-      observerRef.current?.observe(el);
-    });
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
-      observerRef.current?.disconnect();
     };
   }, []);
 
@@ -464,6 +444,396 @@ export default function Home() {
             </div>
           </div>
         </section>
+
+        {/* 🎓 How It Works - Step by Step Process */}
+        <section className="py-28 px-6 bg-gradient-to-b from-white via-blue-50/30 to-white relative overflow-hidden">
+          <div className="max-w-7xl mx-auto relative z-10">
+            <div className="text-center mb-20">
+              <div className="inline-flex items-center gap-2 bg-gradient-to-r from-primary-100 to-secondary-100 text-primary-900 px-5 py-2.5 rounded-full text-sm font-bold mb-6 shadow-lg border border-primary-200/50">
+                <Sparkles className="w-5 h-5 text-accent-yellow" />
+                Simple Process
+              </div>
+              <h2 className="text-4xl md:text-5xl font-black text-dark-900 mb-6 tracking-tight">
+                Your Child's Learning Journey
+                <span className="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-primary-600 to-secondary-600">
+                  In 4 Simple Steps
+                </span>
+              </h2>
+              <p className="text-dark-600 max-w-3xl mx-auto text-xl leading-relaxed font-medium">
+                From signup to success, we've made learning simple, fun, and effective for every child.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-4 gap-8">
+              {[
+                {
+                  step: "01",
+                  icon: Rocket,
+                  title: "Sign Up & Profile",
+                  desc: "Create your child's account in 2 minutes. Choose interests and learning goals.",
+                  color: "from-blue-400 to-blue-600",
+                  bgColor: "from-blue-50 to-blue-100"
+                },
+                {
+                  step: "02",
+                  icon: Target,
+                  title: "Personalized Path",
+                  desc: "AI recommends the perfect courses based on age, interests, and skill level.",
+                  color: "from-purple-400 to-purple-600",
+                  bgColor: "from-purple-50 to-purple-100"
+                },
+                {
+                  step: "03",
+                  icon: PlayCircle,
+                  title: "Interactive Learning",
+                  desc: "Engage with videos, quizzes, live classes, and hands-on projects.",
+                  color: "from-pink-400 to-pink-600",
+                  bgColor: "from-pink-50 to-pink-100"
+                },
+                {
+                  step: "04",
+                  icon: Trophy,
+                  title: "Track & Celebrate",
+                  desc: "Monitor progress, earn badges, and celebrate achievements together!",
+                  color: "from-green-400 to-green-600",
+                  bgColor: "from-green-50 to-green-100"
+                }
+              ].map((item, i) => (
+                <div key={i} className="group relative">
+                  {/* Connecting Line */}
+                  {i < 3 && (
+                    <div className="hidden md:block absolute top-24 left-[60%] w-[80%] h-1 bg-gradient-to-r from-primary-200 to-secondary-200 z-0"></div>
+                  )}
+                  
+                  <div className={`relative bg-gradient-to-br ${item.bgColor} rounded-[32px] p-8 hover:shadow-[0_20px_60px_-15px_rgba(0,0,0,0.15)] transition-all duration-500 hover:-translate-y-2 border-2 border-white z-10`}>
+                    {/* Step Number */}
+                    <div className="absolute -top-4 -right-4 w-16 h-16 bg-white rounded-full shadow-xl flex items-center justify-center border-4 border-white">
+                      <span className={`text-2xl font-black bg-gradient-to-br ${item.color} bg-clip-text text-transparent`}>
+                        {item.step}
+                      </span>
+                    </div>
+                    
+                    {/* Icon */}
+                    <div className={`w-20 h-20 bg-gradient-to-br ${item.color} rounded-2xl shadow-xl flex items-center justify-center text-white mb-6 group-hover:scale-110 group-hover:rotate-6 transition-all duration-500`}>
+                      <item.icon size={36} />
+                    </div>
+                    
+                    {/* Content */}
+                    <h3 className="text-2xl font-bold text-dark-900 mb-3">{item.title}</h3>
+                    <p className="text-dark-600 leading-relaxed font-medium">{item.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div className="text-center mt-16">
+              <a href="#trial" className="group inline-flex items-center gap-3 bg-gradient-to-r from-primary-600 to-secondary-600 hover:from-primary-700 hover:to-secondary-700 text-white px-10 py-5 rounded-full font-bold text-lg transition-all shadow-xl hover:shadow-2xl hover:-translate-y-1">
+                <Rocket className="w-6 h-6" />
+                Get Started Now
+                <ChevronRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
+              </a>
+            </div>
+          </div>
+        </section>
+
+        {/* 📊 Learning Analytics & Insights Section */}
+        <section className="py-28 px-6 bg-gradient-to-br from-purple-50 via-white to-pink-50/30 relative overflow-hidden">
+          <div className="max-w-7xl mx-auto relative z-10">
+            <div className="grid md:grid-cols-2 gap-16 items-center">
+              {/* Left - Visual Representation */}
+              <div className="relative">
+                <div className="absolute -inset-4 bg-gradient-to-br from-primary-200/30 via-purple-200/30 to-pink-200/30 rounded-[4rem] blur-3xl"></div>
+                
+                <div className="relative bg-white rounded-[3rem] p-8 shadow-2xl border-4 border-white/80">
+                  <h3 className="text-3xl font-black text-dark-900 mb-6">Real-Time Dashboard</h3>
+                  
+                  {/* Mock Dashboard Elements */}
+                  <div className="space-y-4">
+                    <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl p-6 border-2 border-blue-200">
+                      <div className="flex items-center justify-between mb-3">
+                        <div className="flex items-center gap-3">
+                          <div className="w-12 h-12 bg-gradient-to-br from-blue-400 to-blue-600 rounded-xl flex items-center justify-center">
+                            <BarChart3 className="w-6 h-6 text-white" />
+                          </div>
+                          <div>
+                            <p className="text-sm font-bold text-dark-600">Overall Progress</p>
+                            <p className="text-2xl font-black text-dark-900">87%</p>
+                          </div>
+                        </div>
+                        <TrendingUp className="w-8 h-8 text-green-500" />
+                      </div>
+                      <div className="h-3 bg-white/50 rounded-full overflow-hidden">
+                        <div className="h-full w-[87%] bg-gradient-to-r from-blue-500 to-blue-600 rounded-full"></div>
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-4">
+                      <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-2xl p-4 border-2 border-green-200">
+                        <Trophy className="w-8 h-8 text-green-600 mb-2" />
+                        <p className="text-3xl font-black text-dark-900">24</p>
+                        <p className="text-sm font-bold text-dark-600">Badges Earned</p>
+                      </div>
+                      <div className="bg-gradient-to-br from-purple-50 to-purple-100 rounded-2xl p-4 border-2 border-purple-200">
+                        <Star className="w-8 h-8 text-purple-600 mb-2 fill-purple-600" />
+                        <p className="text-3xl font-black text-dark-900">156</p>
+                        <p className="text-sm font-bold text-dark-600">Stars Collected</p>
+                      </div>
+                    </div>
+
+                    <div className="bg-gradient-to-br from-pink-50 to-pink-100 rounded-2xl p-4 border-2 border-pink-200">
+                      <div className="flex items-center gap-3 mb-2">
+                        <Calendar className="w-6 h-6 text-pink-600" />
+                        <p className="font-bold text-dark-900">Learning Streak</p>
+                      </div>
+                      <p className="text-3xl font-black text-dark-900">12 Days 🔥</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Right - Content */}
+              <div className="space-y-8">
+                <div>
+                  <div className="inline-flex items-center gap-2 bg-gradient-to-r from-purple-100 to-pink-100 text-purple-900 px-5 py-2.5 rounded-full text-sm font-bold mb-6 shadow-lg border border-purple-200/50">
+                    <BarChart3 className="w-5 h-5 text-purple-600" />
+                    Advanced Analytics
+                  </div>
+                  <h2 className="text-4xl md:text-5xl font-black text-dark-900 mb-6 leading-tight">
+                    Track Every
+                    <span className="block text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">
+                      Achievement & Milestone
+                    </span>
+                  </h2>
+                  <p className="text-dark-600 text-xl leading-relaxed font-medium">
+                    Our comprehensive dashboard gives parents and students real-time insights into learning progress, strengths, and areas for improvement.
+                  </p>
+                </div>
+
+                <div className="space-y-6">
+                  {[
+                    {
+                      icon: BarChart3,
+                      title: "Detailed Progress Reports",
+                      desc: "Weekly and monthly reports showing course completion, quiz scores, and time spent learning.",
+                      color: "from-blue-400 to-blue-600"
+                    },
+                    {
+                      icon: Trophy,
+                      title: "Achievement Tracking",
+                      desc: "Visual representation of badges, certificates, and milestones earned throughout the journey.",
+                      color: "from-green-400 to-green-600"
+                    },
+                    {
+                      icon: TrendingUp,
+                      title: "Skill Development Insights",
+                      desc: "Identify strengths and growth areas with AI-powered learning analytics and recommendations.",
+                      color: "from-purple-400 to-purple-600"
+                    }
+                  ].map((item, i) => (
+                    <div key={i} className="flex items-start gap-4 group">
+                      <div className={`w-14 h-14 bg-gradient-to-br ${item.color} rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg group-hover:scale-110 group-hover:rotate-6 transition-all duration-500`}>
+                        <item.icon className="text-white w-7 h-7" />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-dark-900 text-xl mb-2">{item.title}</h4>
+                        <p className="text-dark-600 font-medium leading-relaxed">{item.desc}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* 💬 Live Support & Community Section */}
+        <section className="py-28 px-6 bg-white relative overflow-hidden">
+          <div className="max-w-7xl mx-auto relative z-10">
+            <div className="grid md:grid-cols-2 gap-16 items-center">
+              {/* Left - Content */}
+              <div className="space-y-8">
+                <div>
+                  <div className="inline-flex items-center gap-2 bg-gradient-to-r from-teal-100 to-blue-100 text-teal-900 px-5 py-2.5 rounded-full text-sm font-bold mb-6 shadow-lg border border-teal-200/50">
+                    <MessageCircle className="w-5 h-5 text-teal-600" />
+                    24/7 Support
+                  </div>
+                  <h2 className="text-4xl md:text-5xl font-black text-dark-900 mb-6 leading-tight">
+                    Never Learn
+                    <span className="block text-transparent bg-clip-text bg-gradient-to-r from-teal-600 to-blue-600">
+                      Alone Again
+                    </span>
+                  </h2>
+                  <p className="text-dark-600 text-xl leading-relaxed font-medium">
+                    Get instant help from our expert mentors, connect with peers worldwide, and be part of a thriving learning community.
+                  </p>
+                </div>
+
+                <div className="space-y-6">
+                  {[
+                    {
+                      icon: MessageCircle,
+                      title: "24/7 Live Chat Support",
+                      desc: "Get instant answers to questions anytime, anywhere. Our support team is always ready to help.",
+                      stat: "< 2 min",
+                      statLabel: "Response Time"
+                    },
+                    {
+                      icon: Video,
+                      title: "One-on-One Mentoring",
+                      desc: "Schedule personalized sessions with certified mentors for focused guidance and support.",
+                      stat: "500+",
+                      statLabel: "Expert Mentors"
+                    },
+                    {
+                      icon: Users,
+                      title: "Student Community",
+                      desc: "Join study groups, participate in discussions, and collaborate with peers on projects.",
+                      stat: "10K+",
+                      statLabel: "Active Students"
+                    }
+                  ].map((item, i) => (
+                    <div key={i} className="group bg-gradient-to-br from-white to-teal-50/30 rounded-[2rem] p-6 border-2 border-teal-100 hover:border-teal-300 hover:shadow-xl transition-all duration-500">
+                      <div className="flex items-start gap-4">
+                        <div className="w-14 h-14 bg-gradient-to-br from-teal-400 to-blue-500 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg group-hover:scale-110 group-hover:rotate-6 transition-all duration-500">
+                          <item.icon className="text-white w-7 h-7" />
+                        </div>
+                        <div className="flex-1">
+                          <h4 className="font-bold text-dark-900 text-xl mb-2">{item.title}</h4>
+                          <p className="text-dark-600 font-medium leading-relaxed mb-3">{item.desc}</p>
+                          <div className="flex items-center gap-2">
+                            <span className="text-2xl font-black text-teal-600">{item.stat}</span>
+                            <span className="text-sm font-bold text-dark-500">{item.statLabel}</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Right - Visual */}
+              <div className="relative">
+                <div className="absolute -inset-4 bg-gradient-to-br from-teal-200/30 via-blue-200/30 to-teal-200/30 rounded-[4rem] blur-3xl"></div>
+                
+                <div className="relative bg-gradient-to-br from-white to-teal-50/50 rounded-[3rem] p-8 md:p-12 shadow-2xl border-4 border-white/80">
+                  <div className="space-y-6">
+                    {/* Chat Messages */}
+                    <div className="bg-white rounded-2xl p-6 shadow-lg border-2 border-teal-100">
+                      <div className="flex items-center gap-3 mb-4">
+                        <div className="w-12 h-12 bg-gradient-to-br from-teal-400 to-teal-600 rounded-full flex items-center justify-center text-white text-xl">
+                          👨‍🏫
+                        </div>
+                        <div>
+                          <p className="font-bold text-dark-900">Mr. Johnson</p>
+                          <p className="text-sm text-green-600 font-semibold flex items-center gap-1">
+                            <span className="w-2 h-2 bg-green-500 rounded-full"></span>
+                            Online
+                          </p>
+                        </div>
+                      </div>
+                      <div className="bg-teal-50 rounded-xl p-4 border border-teal-200">
+                        <p className="text-dark-700 font-medium">"Great question! Let me explain the concept with an example..."</p>
+                      </div>
+                    </div>
+
+                    {/* Community Stats */}
+                    <div className="grid grid-cols-2 gap-4">
+                      <div className="bg-gradient-to-br from-teal-50 to-teal-100 rounded-2xl p-4 border-2 border-teal-200 text-center">
+                        <p className="text-3xl font-black text-dark-900 mb-1">98%</p>
+                        <p className="text-sm font-bold text-dark-600">Satisfaction</p>
+                      </div>
+                      <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl p-4 border-2 border-blue-200 text-center">
+                        <p className="text-3xl font-black text-dark-900 mb-1">50K+</p>
+                        <p className="text-sm font-bold text-dark-600">Messages/Day</p>
+                      </div>
+                    </div>
+
+                    {/* Active Now */}
+                    <div className="bg-gradient-to-br from-white to-teal-50 rounded-2xl p-6 border-2 border-teal-200">
+                      <p className="font-bold text-dark-900 mb-4 flex items-center gap-2">
+                        <span className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></span>
+                        Active Students Now
+                      </p>
+                      <div className="flex -space-x-2">
+                        {['👧', '👦', '👩', '👨', '👶', '👴'].map((emoji, i) => (
+                          <div key={i} className="w-10 h-10 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full flex items-center justify-center text-lg border-3 border-white shadow-lg">
+                            {emoji}
+                          </div>
+                        ))}
+                        <div className="w-10 h-10 bg-gradient-to-br from-teal-500 to-teal-600 rounded-full flex items-center justify-center text-xs font-bold text-white border-3 border-white shadow-lg">
+                          +2.5K
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ✨ Premium Features Showcase */}
+        <section className="py-28 px-6 bg-gradient-to-b from-white via-yellow-50/30 to-white relative overflow-hidden">
+          <div className="max-w-7xl mx-auto relative z-10">
+            <div className="text-center mb-20">
+              <div className="inline-flex items-center gap-2 bg-gradient-to-r from-yellow-100 to-orange-100 text-yellow-900 px-5 py-2.5 rounded-full text-sm font-bold mb-6 shadow-lg border border-yellow-200/50">
+                <Sparkles className="w-5 h-5 text-yellow-600" />
+                Premium Experience
+              </div>
+              <h2 className="text-4xl md:text-5xl font-black text-dark-900 mb-6 tracking-tight">
+                Designed For
+                <span className="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-yellow-600 via-orange-600 to-red-600">
+                  Maximum Engagement
+                </span>
+              </h2>
+              <p className="text-dark-600 max-w-3xl mx-auto text-xl leading-relaxed font-medium">
+                Every feature is carefully crafted to keep children engaged, motivated, and excited about learning.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-8">
+              {[
+                {
+                  icon: Gamepad2,
+                  title: "Gamified Learning",
+                  features: ["Points & Rewards", "Level Progression", "Daily Challenges", "Leaderboards"],
+                  color: "from-purple-400 to-purple-600",
+                  bgColor: "from-purple-50 to-purple-100"
+                },
+                {
+                  icon: Video,
+                  title: "Interactive Content",
+                  features: ["HD Video Lessons", "Animated Explanations", "Interactive Simulations", "Virtual Labs"],
+                  color: "from-blue-400 to-blue-600",
+                  bgColor: "from-blue-50 to-blue-100"
+                },
+                {
+                  icon: Award,
+                  title: "Certifications",
+                  features: ["Digital Certificates", "Skill Badges", "Course Completion", "Portfolio Building"],
+                  color: "from-green-400 to-green-600",
+                  bgColor: "from-green-50 to-green-100"
+                }
+              ].map((item, i) => (
+                <div key={i} className={`group bg-gradient-to-br ${item.bgColor} rounded-[32px] p-8 border-2 border-white hover:shadow-[0_25px_60px_-15px_rgba(0,0,0,0.2)] transition-all duration-500 hover:-translate-y-3`}>
+                  <div className={`w-20 h-20 bg-gradient-to-br ${item.color} rounded-2xl shadow-xl flex items-center justify-center text-white mb-6 group-hover:scale-110 group-hover:rotate-6 transition-all duration-500`}>
+                    <item.icon size={36} />
+                  </div>
+                  <h3 className="text-2xl font-bold text-dark-900 mb-6">{item.title}</h3>
+                  <ul className="space-y-3">
+                    {item.features.map((feature, j) => (
+                      <li key={j} className="flex items-center gap-3 text-dark-700 font-medium">
+                        <CheckCircle2 className={`w-5 h-5 flex-shrink-0 bg-gradient-to-br ${item.color} bg-clip-text text-transparent`} />
+                        {feature}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* 🚀 Enhanced CTA Section */}
         <section className="py-24 px-6 bg-gradient-to-br from-primary-600 via-secondary-500 to-primary-600 relative overflow-hidden flex justify-center">
           {/* Background Elements */}
@@ -657,6 +1027,261 @@ export default function Home() {
         {/* Course Recommendation Section */}
         <CourseRecommendationSection />
 
+        {/* 🎯 Age-Specific Learning Paths Section */}
+        <section className="py-28 px-6 bg-gradient-to-b from-white via-green-50/30 to-white relative overflow-hidden">
+          <div className="max-w-7xl mx-auto relative z-10">
+            <div className="text-center mb-20">
+              <div className="inline-flex items-center gap-2 bg-gradient-to-r from-green-100 to-teal-100 text-green-900 px-5 py-2.5 rounded-full text-sm font-bold mb-6 shadow-lg border border-green-200/50">
+                <Target className="w-5 h-5 text-green-600" />
+                Age-Appropriate Content
+              </div>
+              <h2 className="text-4xl md:text-5xl font-black text-dark-900 mb-6 tracking-tight">
+                Perfect Content For
+                <span className="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-green-600 to-teal-600">
+                  Every Age Group
+                </span>
+              </h2>
+              <p className="text-dark-600 max-w-3xl mx-auto text-xl leading-relaxed font-medium">
+                Carefully curated learning paths designed specifically for different age groups and skill levels.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-8">
+              {[
+                {
+                  ageRange: "8-10 Years",
+                  emoji: "🧒",
+                  title: "Young Explorers",
+                  desc: "Foundation building with fun, interactive lessons that spark curiosity and creativity.",
+                  subjects: ["Basic Math", "Science Fun", "Creative Writing", "Art & Craft"],
+                  color: "from-blue-400 to-blue-600",
+                  bgColor: "bg-blue-50"
+                },
+                {
+                  ageRange: "11-14 Years",
+                  emoji: "👦",
+                  title: "Growing Learners",
+                  desc: "Comprehensive courses building critical thinking and problem-solving skills.",
+                  subjects: ["Advanced Math", "Coding Basics", "Sciences", "Languages"],
+                  color: "from-purple-400 to-purple-600",
+                  bgColor: "bg-purple-50"
+                },
+                {
+                  ageRange: "15-18 Years",
+                  emoji: "👨‍🎓",
+                  title: "Young Achievers",
+                  desc: "Advanced curriculum preparing for higher education and career readiness.",
+                  subjects: ["AP Courses", "Advanced Coding", "Test Prep", "College Prep"],
+                  color: "from-green-400 to-green-600",
+                  bgColor: "bg-green-50"
+                }
+              ].map((group, i) => (
+                <div key={i} className={`group ${group.bgColor} rounded-[32px] p-8 border-2 border-white hover:shadow-[0_25px_60px_-15px_rgba(0,0,0,0.2)] transition-all duration-500 hover:-translate-y-3`}>
+                  <div className="text-center mb-6">
+                    <div className="text-6xl mb-4">{group.emoji}</div>
+                    <div className={`inline-flex px-4 py-2 bg-gradient-to-r ${group.color} rounded-full text-white font-bold text-sm shadow-lg mb-3`}>
+                      {group.ageRange}
+                    </div>
+                    <h3 className="text-2xl font-bold text-dark-900 mb-3">{group.title}</h3>
+                    <p className="text-dark-600 font-medium leading-relaxed">{group.desc}</p>
+                  </div>
+
+                  <div className="space-y-3 pt-6 border-t-2 border-white">
+                    {group.subjects.map((subject, j) => (
+                      <div key={j} className="flex items-center gap-3 text-dark-700 font-semibold">
+                        <div className={`w-8 h-8 bg-gradient-to-br ${group.color} rounded-lg flex items-center justify-center flex-shrink-0 shadow-md`}>
+                          <CheckCircle2 className="w-5 h-5 text-white" />
+                        </div>
+                        {subject}
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="mt-8 pt-6 border-t-2 border-white text-center">
+                    <a href="#trial" className={`group inline-flex items-center gap-2 text-transparent bg-clip-text bg-gradient-to-r ${group.color} font-bold text-lg hover:gap-3 transition-all`}>
+                      Explore Courses
+                      <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                    </a>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ❓ FAQ Section */}
+        <section className="py-28 px-6 bg-white relative overflow-hidden">
+          <div className="max-w-4xl mx-auto relative z-10">
+            <div className="text-center mb-20">
+              <div className="inline-flex items-center gap-2 bg-gradient-to-r from-primary-100 to-secondary-100 text-primary-900 px-5 py-2.5 rounded-full text-sm font-bold mb-6 shadow-lg border border-primary-200/50">
+                <Zap className="w-5 h-5 text-primary-600" />
+                Common Questions
+              </div>
+              <h2 className="text-4xl md:text-5xl font-black text-dark-900 mb-6 tracking-tight">
+                Frequently Asked
+                <span className="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-primary-600 to-secondary-600">
+                  Questions
+                </span>
+              </h2>
+              <p className="text-dark-600 max-w-3xl mx-auto text-xl leading-relaxed font-medium">
+                Have questions? We've got answers! Find everything you need to know about PlayFit.
+              </p>
+            </div>
+
+            <div className="space-y-6">
+              {[
+                {
+                  question: "What age group is PlayFit designed for?",
+                  answer: "PlayFit is specifically designed for children aged 8-18 years. We offer age-appropriate content and learning paths tailored to different developmental stages."
+                },
+                {
+                  question: "How does the free trial work?",
+                  answer: "Sign up for a 7-day free trial with full access to all courses, live classes, and features. No credit card required! You can cancel anytime during the trial period."
+                },
+                {
+                  question: "Can my child learn at their own pace?",
+                  answer: "Absolutely! PlayFit is designed for self-paced learning. Students can watch lessons, complete assignments, and take quizzes whenever it's convenient for them."
+                },
+                {
+                  question: "Are the instructors certified?",
+                  answer: "Yes! All our instructors are certified educators with years of teaching experience. They undergo rigorous training to deliver engaging, effective online lessons."
+                },
+                {
+                  question: "What devices can we use to access PlayFit?",
+                  answer: "PlayFit works on any device with an internet connection - computers, tablets, and smartphones. Our platform is fully responsive and optimized for all screen sizes."
+                },
+                {
+                  question: "How do you track my child's progress?",
+                  answer: "Our comprehensive dashboard provides real-time insights into course completion, quiz scores, time spent learning, badges earned, and areas that need attention."
+                },
+                {
+                  question: "Is there a money-back guarantee?",
+                  answer: "Yes! We offer a 30-day money-back guarantee. If you're not completely satisfied with PlayFit, we'll refund your payment - no questions asked."
+                },
+                {
+                  question: "Can I get help if my child is stuck?",
+                  answer: "Of course! We offer 24/7 live chat support, one-on-one mentoring sessions, and access to a community of peers and experts ready to help."
+                }
+              ].map((faq, i) => (
+                <details key={i} className="group bg-white rounded-[2rem] p-8 border-2 border-gray-100 hover:border-primary-200 hover:shadow-xl transition-all duration-300">
+                  <summary className="flex items-start justify-between cursor-pointer list-none">
+                    <div className="flex items-start gap-4 flex-1">
+                      <div className="w-10 h-10 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg group-hover:scale-110 transition-transform">
+                        <span className="text-white font-black text-lg">{i + 1}</span>
+                      </div>
+                      <h3 className="text-xl font-bold text-dark-900 group-hover:text-primary-600 transition-colors flex-1">
+                        {faq.question}
+                      </h3>
+                    </div>
+                    <ChevronRight className="w-6 h-6 text-primary-600 flex-shrink-0 ml-4 group-open:rotate-90 transition-transform" />
+                  </summary>
+                  <div className="mt-6 ml-14 text-dark-600 text-lg leading-relaxed font-medium">
+                    {faq.answer}
+                  </div>
+                </details>
+              ))}
+            </div>
+
+            <div className="mt-16 text-center bg-gradient-to-br from-primary-50 to-secondary-50 rounded-[2rem] p-8 border-2 border-primary-200">
+              <h3 className="text-2xl font-bold text-dark-900 mb-4">Still have questions?</h3>
+              <p className="text-dark-600 font-medium mb-6">Our friendly support team is here to help you!</p>
+              <div className="flex flex-wrap items-center justify-center gap-4">
+                <a href="mailto:support@playfit.com" className="group inline-flex items-center gap-2 bg-white hover:bg-primary-50 text-primary-700 px-6 py-3 rounded-full font-bold transition-all shadow-lg hover:shadow-xl hover:-translate-y-1">
+                  <Mail className="w-5 h-5" />
+                  Email Us
+                </a>
+                <a href="tel:+1234567890" className="group inline-flex items-center gap-2 bg-gradient-to-r from-primary-600 to-secondary-600 hover:from-primary-700 hover:to-secondary-700 text-white px-6 py-3 rounded-full font-bold transition-all shadow-lg hover:shadow-xl hover:-translate-y-1">
+                  <Phone className="w-5 h-5" />
+                  Call Us
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* 🛡️ Trust & Guarantee Section */}
+        <section className="py-28 px-6 bg-gradient-to-br from-blue-50 via-white to-green-50/30 relative overflow-hidden">
+          <div className="max-w-7xl mx-auto relative z-10">
+            <div className="text-center mb-20">
+              <div className="inline-flex items-center gap-2 bg-gradient-to-r from-green-100 to-blue-100 text-green-900 px-5 py-2.5 rounded-full text-sm font-bold mb-6 shadow-lg border border-green-200/50">
+                <Shield className="w-5 h-5 text-green-600" />
+                Our Promise
+              </div>
+              <h2 className="text-4xl md:text-5xl font-black text-dark-900 mb-6 tracking-tight">
+                Learn With
+                <span className="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-green-600 to-blue-600">
+                  Complete Confidence
+                </span>
+              </h2>
+              <p className="text-dark-600 max-w-3xl mx-auto text-xl leading-relaxed font-medium">
+                Your child's success and your satisfaction are our top priorities. Here's our commitment to you.
+              </p>
+            </div>
+
+            {/* Main Guarantee Cards */}
+            <div className="grid md:grid-cols-3 gap-8 mb-16">
+              {[
+                {
+                  icon: Shield,
+                  title: "30-Day Money Back",
+                  desc: "Not satisfied? Get a full refund within 30 days, no questions asked.",
+                  highlight: "100% Risk-Free",
+                  color: "from-green-400 to-green-600",
+                  bgColor: "from-green-50 to-green-100"
+                },
+                {
+                  icon: Trophy,
+                  title: "Results Guarantee",
+                  desc: "See measurable improvement in your child's learning or your money back.",
+                  highlight: "Proven Results",
+                  color: "from-blue-400 to-blue-600",
+                  bgColor: "from-blue-50 to-blue-100"
+                },
+                {
+                  icon: Heart,
+                  title: "Lifetime Support",
+                  desc: "Continuous access to our support team, resources, and community.",
+                  highlight: "Always Here",
+                  color: "from-purple-400 to-purple-600",
+                  bgColor: "from-purple-50 to-purple-100"
+                }
+              ].map((item, i) => (
+                <div key={i} className={`group bg-gradient-to-br ${item.bgColor} rounded-[32px] p-8 border-2 border-white hover:shadow-[0_25px_60px_-15px_rgba(0,0,0,0.2)] transition-all duration-500 hover:-translate-y-3 text-center`}>
+                  <div className={`w-20 h-20 bg-gradient-to-br ${item.color} rounded-2xl shadow-xl flex items-center justify-center text-white mb-6 mx-auto group-hover:scale-110 group-hover:rotate-6 transition-all duration-500`}>
+                    <item.icon size={36} />
+                  </div>
+                  <div className={`inline-flex px-4 py-2 bg-gradient-to-r ${item.color} rounded-full text-white font-bold text-sm shadow-lg mb-4`}>
+                    {item.highlight}
+                  </div>
+                  <h3 className="text-2xl font-bold text-dark-900 mb-3">{item.title}</h3>
+                  <p className="text-dark-600 leading-relaxed font-medium">{item.desc}</p>
+                </div>
+              ))}
+            </div>
+
+            {/* Trust Badges */}
+            <div className="bg-white rounded-[3rem] p-12 shadow-2xl border-2 border-gray-100">
+              <h3 className="text-3xl font-black text-dark-900 mb-12 text-center">Trusted & Certified</h3>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-8 items-center justify-items-center">
+                {[
+                  { icon: Shield, label: "SSL Secured", sublabel: "Bank-level encryption" },
+                  { icon: Award, label: "Certified Teachers", sublabel: "100% qualified" },
+                  { icon: Users, label: "10K+ Families", sublabel: "Trust PlayFit" },
+                  { icon: Star, label: "4.9/5 Rating", sublabel: "2,500+ reviews" }
+                ].map((badge, i) => (
+                  <div key={i} className="group text-center">
+                    <div className="w-20 h-20 bg-gradient-to-br from-primary-400 to-secondary-500 rounded-2xl shadow-xl flex items-center justify-center text-white mb-4 mx-auto group-hover:scale-110 group-hover:rotate-6 transition-all duration-500">
+                      <badge.icon size={36} />
+                    </div>
+                    <p className="font-bold text-dark-900 text-lg">{badge.label}</p>
+                    <p className="text-sm text-dark-600 font-medium">{badge.sublabel}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* 📝 Enhanced Form Section - Split Layout */}
         <section id="trial" className="py-24 px-6 bg-gradient-to-br from-white via-primary-50/30 to-secondary-50/30 relative overflow-hidden flex justify-center">
           
@@ -846,66 +1471,166 @@ export default function Home() {
       </main>
 
       {/* 🔗 Enhanced Footer */}
-      <footer className="bg-dark-900 text-gray-300 py-16 px-6 border-t border-gray-800">
-        <div className="max-w-6xl mx-auto grid md:grid-cols-4 gap-12">
-          <div className="md:col-span-1">
-            <div className="flex items-center gap-2 mb-6">
-              <Link href="/" className="relative flex items-center justify-center shrink-0 transition-all duration-300 h-12 w-auto hover:scale-105">
+      <footer className="bg-gradient-to-br from-dark-900 via-dark-800 to-dark-900 text-gray-300 py-20 px-6 border-t-4 border-primary-600">
+        <div className="max-w-7xl mx-auto">
+          {/* Top Section */}
+          <div className="grid md:grid-cols-5 gap-12 mb-16">
+            <div className="md:col-span-2">
+              <Link href="/" className="relative flex items-center justify-start shrink-0 transition-all duration-300 h-14 w-auto hover:scale-105 mb-6">
                 <img
                   src="/images/playfit-logo.jpg"
                   alt="PlayFit LMS"
                   className="w-full h-full object-contain max-w-full max-h-full"
                 />
               </Link>
+              <p className="text-gray-400 leading-relaxed mb-6 text-lg">
+                <span className="font-bold text-white">Where Kids Learn Through Play!</span> Empowering children aged 8-18 with interactive courses, live classes, and fun learning experiences that inspire creativity and growth.
+              </p>
+              
+              {/* Newsletter Signup */}
+              <div className="bg-dark-800 rounded-2xl p-6 border-2 border-gray-700 mb-6">
+                <h4 className="text-white font-bold mb-3 flex items-center gap-2">
+                  <Mail className="w-5 h-5 text-primary-400" />
+                  Stay Updated
+                </h4>
+                <p className="text-sm text-gray-400 mb-4">Get learning tips and exclusive offers!</p>
+                <div className="flex gap-2">
+                  <input 
+                    type="email" 
+                    placeholder="Your email" 
+                    className="flex-1 px-4 py-3 rounded-xl bg-dark-700 border-2 border-gray-600 text-white placeholder:text-gray-500 focus:outline-none focus:border-primary-500 transition-all"
+                  />
+                  <button className="bg-gradient-to-r from-primary-600 to-secondary-600 hover:from-primary-700 hover:to-secondary-700 text-white px-6 py-3 rounded-xl font-bold transition-all shadow-lg hover:shadow-xl hover:scale-105">
+                    Subscribe
+                  </button>
+                </div>
+              </div>
+              
+              {/* Social Links */}
+              <div>
+                <p className="text-white font-bold mb-4">Follow Us</p>
+                <div className="flex gap-3">
+                  {[
+                    { name: 'Instagram', color: 'hover:bg-accent-pink', icon: 'M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z' },
+                    { name: 'Facebook', color: 'hover:bg-primary-600', icon: 'M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z' },
+                    { name: 'YouTube', color: 'hover:bg-red-600', icon: 'M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z' },
+                    { name: 'Twitter', color: 'hover:bg-blue-400', icon: 'M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z' }
+                  ].map((social, i) => (
+                    <a key={i} href="#" className={`w-12 h-12 bg-dark-700 ${social.color} rounded-xl flex items-center justify-center transition-all hover:scale-110 shadow-lg group`}>
+                      <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                        <path d={social.icon} />
+                      </svg>
+                    </a>
+                  ))}
+                </div>
+              </div>
             </div>
-            <p className="max-w-md text-gray-400 leading-relaxed mb-6">Where kids learn through play! Empowering children aged 8-18 with interactive courses and fun learning experiences.</p>
             
-            {/* Social Links */}
-            <div className="flex gap-4">
-              <a href="#" className="w-10 h-10 bg-gray-800 hover:bg-accent-pink rounded-full flex items-center justify-center transition-all hover:scale-110">
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-              </a>
-              <a href="#" className="w-10 h-10 bg-gray-800 hover:bg-primary-600 rounded-full flex items-center justify-center transition-all hover:scale-110">
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-              </a>
-              <a href="#" className="w-10 h-10 bg-gray-800 hover:bg-red-600 rounded-full flex items-center justify-center transition-all hover:scale-110">
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-              </a>
+            {/* Courses Section */}
+            <div>
+              <h4 className="text-white font-bold mb-6 text-lg flex items-center gap-2">
+                <BookOpen className="w-5 h-5 text-primary-400" />
+                Courses
+              </h4>
+              <ul className="space-y-3">
+                {['Mathematics', 'Science', 'Programming', 'Languages', 'Arts', 'Test Prep'].map((item, i) => (
+                  <li key={i}>
+                    <a href="#features" className="text-gray-400 hover:text-white transition-colors flex items-center gap-2 group">
+                      <ChevronRight className="w-4 h-4 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
+                      {item}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            
+            {/* Company Section */}
+            <div>
+              <h4 className="text-white font-bold mb-6 text-lg flex items-center gap-2">
+                <Globe className="w-5 h-5 text-secondary-400" />
+                Company
+              </h4>
+              <ul className="space-y-3">
+                {['About Us', 'Our Story', 'Careers', 'Press Kit', 'Blog', 'Contact'].map((item, i) => (
+                  <li key={i}>
+                    <a href="#" className="text-gray-400 hover:text-white transition-colors flex items-center gap-2 group">
+                      <ChevronRight className="w-4 h-4 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
+                      {item}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            
+            {/* Support Section */}
+            <div>
+              <h4 className="text-white font-bold mb-6 text-lg flex items-center gap-2">
+                <Shield className="w-5 h-5 text-accent-yellow" />
+                Support
+              </h4>
+              <ul className="space-y-3">
+                {['Help Center', 'FAQs', 'Privacy Policy', 'Terms of Service', 'Safety & Security', 'Accessibility'].map((item, i) => (
+                  <li key={i}>
+                    <a href="#" className="text-gray-400 hover:text-white transition-colors flex items-center gap-2 group">
+                      <ChevronRight className="w-4 h-4 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
+                      {item}
+                    </a>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
-          
-          {/* Learn Section */}
-          <div>
-            <h4 className="text-white font-semibold mb-6 text-lg">Learn</h4>
-            <ul className="space-y-3">
-              <li><a href="#features" className="text-gray-300 hover:text-white transition-colors flex items-center gap-2 group"><ArrowRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity" />Courses</a></li>
-              <li><a href="#features" className="text-gray-300 hover:text-white transition-colors flex items-center gap-2 group"><ArrowRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity" />Categories</a></li>
-              <li><a href="#features" className="text-gray-300 hover:text-white transition-colors flex items-center gap-2 group"><ArrowRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity" />Certifications</a></li>
-            </ul>
+
+          {/* Contact Info Bar */}
+          <div className="bg-dark-800 rounded-2xl p-8 border-2 border-gray-700 mb-12">
+            <div className="grid md:grid-cols-3 gap-6 text-center md:text-left">
+              <div className="flex items-center justify-center md:justify-start gap-3">
+                <div className="w-12 h-12 bg-gradient-to-br from-primary-500 to-primary-600 rounded-xl flex items-center justify-center shadow-lg">
+                  <Phone className="w-6 h-6 text-white" />
+                </div>
+                <div>
+                  <p className="text-sm text-gray-400">Call Us</p>
+                  <p className="text-white font-bold">+1 (800) 123-4567</p>
+                </div>
+              </div>
+              <div className="flex items-center justify-center md:justify-start gap-3">
+                <div className="w-12 h-12 bg-gradient-to-br from-secondary-500 to-secondary-600 rounded-xl flex items-center justify-center shadow-lg">
+                  <Mail className="w-6 h-6 text-white" />
+                </div>
+                <div>
+                  <p className="text-sm text-gray-400">Email Us</p>
+                  <p className="text-white font-bold">support@playfit.com</p>
+                </div>
+              </div>
+              <div className="flex items-center justify-center md:justify-start gap-3">
+                <div className="w-12 h-12 bg-gradient-to-br from-accent-purple to-accent-pink rounded-xl flex items-center justify-center shadow-lg">
+                  <MapPin className="w-6 h-6 text-white" />
+                </div>
+                <div>
+                  <p className="text-sm text-gray-400">Headquarters</p>
+                  <p className="text-white font-bold">San Francisco, CA</p>
+                </div>
+              </div>
+            </div>
           </div>
-          
-          {/* Company Section */}
-          <div>
-            <h4 className="text-white font-semibold mb-6 text-lg">Company</h4>
-            <ul className="space-y-3">
-              <li><a href="#" className="text-gray-300 hover:text-white transition-colors flex items-center gap-2 group"><ArrowRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity" />About</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-white transition-colors flex items-center gap-2 group"><ArrowRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity" />Contact</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-white transition-colors flex items-center gap-2 group"><ArrowRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity" />Careers</a></li>
-            </ul>
+
+          {/* Bottom Bar */}
+          <div className="pt-8 border-t-2 border-gray-800">
+            <div className="flex flex-col md:flex-row justify-between items-center gap-6">
+              <p className="text-gray-400 text-center md:text-left">
+                &copy; {new Date().getFullYear()} <span className="text-white font-bold">PlayFit LMS</span> - Where Kids Learn Through Play! Made with <Heart className="inline w-4 h-4 text-red-500 fill-red-500" /> for young learners worldwide.
+              </p>
+              <div className="flex flex-wrap items-center justify-center gap-6">
+                <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm font-semibold">Privacy</a>
+                <span className="text-gray-600">•</span>
+                <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm font-semibold">Terms</a>
+                <span className="text-gray-600">•</span>
+                <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm font-semibold">Cookies</a>
+                <span className="text-gray-600">•</span>
+                <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm font-semibold">Sitemap</a>
+              </div>
+            </div>
           </div>
-          
-          {/* Resources Section */}
-          <div>
-            <h4 className="text-white font-semibold mb-6 text-lg">Resources</h4>
-            <ul className="space-y-3">
-              <li><a href="#" className="text-gray-300 hover:text-white transition-colors flex items-center gap-2 group"><ArrowRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity" />Blog</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-white transition-colors flex items-center gap-2 group"><ArrowRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity" />FAQs</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-white transition-colors flex items-center gap-2 group"><ArrowRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity" />Help</a></li>
-            </ul>
-          </div>
-        </div>
-        <div className="max-w-6xl mx-auto mt-12 pt-8 border-t border-gray-800 text-center text-sm text-gray-400">
-          <p>&copy; {new Date().getFullYear()} PlayFit - Where Kids Learn Through Play! Made with ❤️ for young learners worldwide.</p>
         </div>
       </footer>
     </div>
