@@ -56,7 +56,13 @@ function SidebarLayoutContent({ children, items, title = 'PlayFit', searchPlaceh
       >
         <div className="flex items-center justify-between p-4 border-b border-border">
           {(!collapsed || !mobileOpen) && (
-            <h1 className={cn('text-lg font-bold text-primary-500', collapsed && 'hidden md:block')}>{title}</h1>
+            <div className="flex items-center gap-2 flex-1">
+              <img
+                src="/images/navbarlogo.png"
+                alt="PlayFit"
+                className="h-12 sm:h-14 md:h-16 lg:h-20 w-auto object-contain"
+              />
+            </div>
           )}
           <div className="flex items-center gap-2">
             {/* Desktop collapse toggle */}

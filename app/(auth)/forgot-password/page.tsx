@@ -45,8 +45,8 @@ export default function ForgotPasswordPage() {
       <h2 className="text-xl sm:text-2xl font-bold text-text-primary text-center mb-2">Forgot Password</h2>
       <p className="text-center text-xs sm:text-sm text-text-muted mb-6 sm:mb-8">
         {submitted
-          ? 'Check your inbox for the next steps.'
-          : 'Enter the email on your student account and we will help you reset it.'}
+          ? 'Check your inbox for the reset link.'
+          : 'Enter your email address and we will send you a password reset link.'}
       </p>
 
       {submitted ? (
@@ -54,9 +54,14 @@ export default function ForgotPasswordPage() {
           <div className="mx-auto w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-primary-100 flex items-center justify-center">
             <svg width="24" height="24" className="sm:w-7 sm:h-7" viewBox="0 0 24 24" fill="none" stroke="#1E88E5" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
           </div>
-          <p className="text-xs sm:text-sm text-text-secondary leading-relaxed">
-            If a student account exists for <span className="font-medium text-text-primary">{email}</span>, a reset link was generated. In development, check the API server console for the link.
-          </p>
+          <div className="space-y-2">
+            <p className="text-xs sm:text-sm text-text-secondary leading-relaxed">
+              If a student account exists for <span className="font-medium text-text-primary">{email}</span>, we've sent a password reset link to your email.
+            </p>
+            <p className="text-xs sm:text-sm text-text-secondary leading-relaxed">
+              The link will <span className="font-medium text-text-primary">expire in 10 minutes</span>. Please check your inbox and spam folder.
+            </p>
+          </div>
           <Link
             href="/login"
             className="inline-flex w-full py-3 rounded-xl bg-primary-500 text-white font-medium text-sm hover:bg-primary-600 active:bg-primary-700 transition-colors items-center justify-center gap-2 shadow-sm"
