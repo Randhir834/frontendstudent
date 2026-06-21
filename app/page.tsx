@@ -31,7 +31,7 @@ export default function Home() {
         'animate-tangerine'
       ];
       
-      let activeBoxes = new Set(); // Track currently active boxes
+      let activeBoxes = new Set<number>(); // Track currently active boxes
       
       // Function to maintain 7-8 active boxes at all times
       const maintainActiveBoxes = () => {
@@ -44,10 +44,12 @@ export default function Home() {
           
           for (let i = 0; i < Math.min(boxesToRemove, activeArray.length); i++) {
             const randomActiveIndex = Math.floor(Math.random() * activeArray.length);
-            const boxIndex = activeArray.splice(randomActiveIndex, 1)[0];
-            
+            const boxIndex = activeArray.splice(randomActiveIndex, 1)[0] as number;
+
             // Remove animation from box
-            animations.forEach(anim => boxes[boxIndex].classList.remove(anim));
+            animations.forEach(anim => {
+              boxes[boxIndex]?.classList.remove(anim);
+            });
             activeBoxes.delete(boxIndex);
           }
         }
@@ -67,7 +69,7 @@ export default function Home() {
           if (attempts <= 100) {
             // Assign a color that's not currently in use (when possible)
             const usedAnimations = Array.from(activeBoxes).map(index => {
-              const box = boxes[index];
+              const box = boxes[index as number];
               return animations.find(anim => box.classList.contains(anim));
             }).filter(Boolean);
             
@@ -76,12 +78,12 @@ export default function Home() {
               ? availableAnimations[Math.floor(Math.random() * availableAnimations.length)]
               : animations[Math.floor(Math.random() * animations.length)];
             
-            boxes[randomIndex].classList.add(animationToUse);
+            boxes[randomIndex]?.classList.add(animationToUse);
             activeBoxes.add(randomIndex);
             
             // Schedule removal of this animation
             setTimeout(() => {
-              boxes[randomIndex].classList.remove(animationToUse);
+              boxes[randomIndex]?.classList.remove(animationToUse);
               activeBoxes.delete(randomIndex);
             }, 2400 + Math.random() * 1200); // Remove after 2.4-3.6s
           }
