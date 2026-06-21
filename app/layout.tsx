@@ -13,12 +13,12 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "PlayFit",
-  description: "Interactive Learning Platform by PlayFit - Student Portal",
+  title: "Playfit - Online Courses for Kids | Art, Chess, Piano, Abacus & More",
+  description: "Live online skill development courses for children. Learn Art & Drawing, Chess, Piano, Phonics, Public Speaking, Abacus, Computers, Rubiks Cube and more with expert instructors.",
   appleWebApp: {
     capable: true,
     statusBarStyle: 'default',
-    title: 'PlayFit',
+    title: 'Playfit',
   },
   icons: {
     icon: [

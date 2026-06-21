@@ -1,6 +1,34 @@
 @import "tailwindcss";
 @import "../styles/responsive.css";
 
+/* Animation for blob backgrounds */
+@keyframes blob {
+  0% {
+    transform: translate(0px, 0px) scale(1);
+  }
+  33% {
+    transform: translate(30px, -50px) scale(1.1);
+  }
+  66% {
+    transform: translate(-20px, 20px) scale(0.9);
+  }
+  100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+}
+
+.animate-blob {
+  animation: blob 7s infinite;
+}
+
+.animation-delay-2000 {
+  animation-delay: 2s;
+}
+
+.animation-delay-4000 {
+  animation-delay: 4s;
+}
+
 @theme inline {
   --color-background: #F5F5F5;
   --color-foreground: #1E3A5F;
@@ -198,6 +226,148 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Premium Random Community Grid Animation - Extended Colors */
+@keyframes community-blink-light-orange {
+  0%, 100% {
+    background-color: rgb(255 255 255 / 0.1);
+    box-shadow: none;
+    transform: scale(1);
+  }
+  50% {
+    background-color: rgb(254 215 170); /* Light Orange */
+    box-shadow: 0 0 15px rgb(254 215 170 / 0.6), 0 0 30px rgb(254 215 170 / 0.3);
+    transform: scale(1.08);
+  }
+}
+
+@keyframes community-blink-medium-orange {
+  0%, 100% {
+    background-color: rgb(255 255 255 / 0.1);
+    box-shadow: none;
+    transform: scale(1);
+  }
+  50% {
+    background-color: rgb(249 163 78); /* Medium Orange */
+    box-shadow: 0 0 18px rgb(249 163 78 / 0.7), 0 0 35px rgb(249 163 78 / 0.4);
+    transform: scale(1.1);
+  }
+}
+
+@keyframes community-blink-dark-orange {
+  0%, 100% {
+    background-color: rgb(255 255 255 / 0.1);
+    box-shadow: none;
+    transform: scale(1);
+  }
+  50% {
+    background-color: rgb(234 88 12); /* Dark Orange */
+    box-shadow: 0 0 20px rgb(234 88 12 / 0.8), 0 0 40px rgb(234 88 12 / 0.4);
+    transform: scale(1.12);
+  }
+}
+
+@keyframes community-blink-amber {
+  0%, 100% {
+    background-color: rgb(255 255 255 / 0.1);
+    box-shadow: none;
+    transform: scale(1);
+  }
+  50% {
+    background-color: rgb(245 158 11); /* Amber */
+    box-shadow: 0 0 22px rgb(245 158 11 / 0.7), 0 0 42px rgb(245 158 11 / 0.3);
+    transform: scale(1.1);
+  }
+}
+
+@keyframes community-blink-gold {
+  0%, 100% {
+    background-color: rgb(255 255 255 / 0.1);
+    box-shadow: none;
+    transform: scale(1);
+  }
+  50% {
+    background-color: rgb(217 119 6); /* Gold */
+    box-shadow: 0 0 25px rgb(217 119 6 / 0.8), 0 0 45px rgb(217 119 6 / 0.4);
+    transform: scale(1.15);
+  }
+}
+
+@keyframes community-blink-yellow {
+  0%, 100% {
+    background-color: rgb(255 255 255 / 0.1);
+    box-shadow: none;
+    transform: scale(1);
+  }
+  50% {
+    background-color: rgb(250 204 21); /* Yellow */
+    box-shadow: 0 0 20px rgb(250 204 21 / 0.6), 0 0 38px rgb(250 204 21 / 0.3);
+    transform: scale(1.09);
+  }
+}
+
+@keyframes community-blink-peach {
+  0%, 100% {
+    background-color: rgb(255 255 255 / 0.1);
+    box-shadow: none;
+    transform: scale(1);
+  }
+  50% {
+    background-color: rgb(255 154 0); /* Peach */
+    box-shadow: 0 0 18px rgb(255 154 0 / 0.7), 0 0 36px rgb(255 154 0 / 0.4);
+    transform: scale(1.11);
+  }
+}
+
+@keyframes community-blink-tangerine {
+  0%, 100% {
+    background-color: rgb(255 255 255 / 0.1);
+    box-shadow: none;
+    transform: scale(1);
+  }
+  50% {
+    background-color: rgb(255 138 101); /* Tangerine */
+    box-shadow: 0 0 16px rgb(255 138 101 / 0.6), 0 0 32px rgb(255 138 101 / 0.3);
+    transform: scale(1.07);
+  }
+}
+
+.community-grid-item {
+  background-color: rgb(255 255 255 / 0.1);
+  transition: all 0.3s ease-in-out;
+}
+
+.community-grid-item.animate-light-orange {
+  animation: community-blink-light-orange 2.5s ease-in-out;
+}
+
+.community-grid-item.animate-medium-orange {
+  animation: community-blink-medium-orange 2.8s ease-in-out;
+}
+
+.community-grid-item.animate-dark-orange {
+  animation: community-blink-dark-orange 3s ease-in-out;
+}
+
+.community-grid-item.animate-amber {
+  animation: community-blink-amber 2.6s ease-in-out;
+}
+
+.community-grid-item.animate-gold {
+  animation: community-blink-gold 3.2s ease-in-out;
+}
+
+.community-grid-item.animate-yellow {
+  animation: community-blink-yellow 2.4s ease-in-out;
+}
+
+.community-grid-item.animate-peach {
+  animation: community-blink-peach 2.7s ease-in-out;
+}
+
+.community-grid-item.animate-tangerine {
+  animation: community-blink-tangerine 2.9s ease-in-out;
+}
+
 /* Blob animation */
 @keyframes blob {
   0% {
@@ -283,6 +453,16 @@ html {
 
 .animate-float-slower {
   animation: float-slower 10s ease-in-out infinite;
+}
+
+/* Shimmer animation for premium effects */
+@keyframes shimmer {
+  0% {
+    transform: translateX(-200%);
+  }
+  100% {
+    transform: translateX(200%);
+  }
 }
 
 /* Fade in animations */
