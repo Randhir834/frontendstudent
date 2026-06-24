@@ -150,9 +150,7 @@ export default function CourseLiveClasses({ courseId }: CourseLiveClassesProps) 
                       )}
                     </div>
 
-                    {liveClass.description && (
-                      <p className="text-sm text-[#78909C] mb-3 line-clamp-2">{liveClass.description}</p>
-                    )}
+                    {/* Description - Hidden */}
 
                     <div className="flex flex-wrap items-center gap-4 text-sm text-[#78909C]">
                       <div className="flex items-center gap-1">

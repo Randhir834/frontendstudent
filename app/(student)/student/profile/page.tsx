@@ -2,11 +2,10 @@
 
 import { useState, useEffect } from 'react';
 import {
-  Mail, Phone, MapPin, Calendar, BookOpen, Trophy,
-  Camera, Bell, Shield, Settings, LogOut, Loader2, Trash2, Save,
-  Heart, Users, ChevronRight, School
+  Mail, Phone, MapPin, Calendar, BookOpen,
+  Camera, Loader2, Save,
+  Heart, School, Trash2
 } from 'lucide-react';
-import { useRouter } from 'next/navigation';
 import { userService, UserProfile } from '@/services/userService';
 import { enrollmentService } from '@/services/enrollmentService';
 import { getAvatarUrl } from '@/utils/avatarUtils';
@@ -14,13 +13,11 @@ import { getAvatarUrl } from '@/utils/avatarUtils';
 interface StudentDashboardData {
   stats: {
     coursesEnrolled: number;
-    certificatesEarned: number;
     totalStudents: number;
   };
 }
 
 export default function StudentProfilePage() {
-  const router = useRouter();
   const [user, setUser] = useState<UserProfile | null>(null);
   const [dashboardData, setDashboardData] = useState<StudentDashboardData | null>(null);
   const [loading, setLoading] = useState(true);
@@ -29,16 +26,12 @@ export default function StudentProfilePage() {
   const [isEditingContact, setIsEditingContact] = useState(false);
   const [uploadingPhoto, setUploadingPhoto] = useState(false);
 
-  const handleLogout = () => {
-    userService.logout();
-  };
-
   const [formData, setFormData] = useState({
     name: '',
-    phone: 'N/A',
-    location: 'N/A',
-    school: 'N/A',
-    grade: 'N/A'
+    phone: '',
+    location: '',
+    school: '',
+    grade: ''
   });
 
   useEffect(() => {
@@ -46,14 +39,13 @@ export default function StudentProfilePage() {
       try {
         const profile = await userService.getProfile();
         setUser(profile);
-        setFormData(prev => ({
-          ...prev,
-          name: profile.name,
-          phone: profile.phone || 'N/A',
-          location: profile.location || 'N/A',
-          school: profile.school || 'N/A',
-          grade: profile.grade || 'N/A'
-        }));
+        setFormData({
+          name: profile.name || '',
+          phone: profile.phone || '',
+          location: profile.location || '',
+          school: profile.school || '',
+          grade: profile.grade || ''
+        });
 
         const enrollmentData = await enrollmentService.getEnrollments();
         const courses = enrollmentData.enrollments || [];
@@ -61,12 +53,12 @@ export default function StudentProfilePage() {
         setDashboardData({
           stats: {
             coursesEnrolled: courses.length,
-            certificatesEarned: 0,
             totalStudents: 0,
           }
         });
       } catch (err) {
         console.error('Failed to load profile data:', err);
+        setMessage('Failed to load profile data. Please refresh the page.');
       } finally {
         setLoading(false);
       }
@@ -75,29 +67,34 @@ export default function StudentProfilePage() {
   }, []);
 
   const handleUpdateProfile = async () => {
-    if (!formData.name.trim()) return;
+    if (!formData.name.trim()) {
+      setMessage('Name is required.');
+      setTimeout(() => setMessage(''), 3000);
+      return;
+    }
+    
     setSaving(true);
     try {
       const updatedUser = await userService.updateProfile({
-        name: formData.name,
-        phone: formData.phone === 'N/A' ? undefined : formData.phone,
-        location: formData.location === 'N/A' ? undefined : formData.location,
-        school: formData.school === 'N/A' ? undefined : formData.school,
-        grade: formData.grade === 'N/A' ? undefined : formData.grade
+        name: formData.name.trim(),
+        phone: formData.phone.trim() || undefined,
+        location: formData.location.trim() || undefined,
+        school: formData.school.trim() || undefined,
+        grade: formData.grade.trim() || undefined
       });
       setUser(updatedUser);
-      setFormData(prev => ({
-        ...prev,
-        name: updatedUser.name,
-        phone: updatedUser.phone || 'N/A',
-        location: updatedUser.location || 'N/A',
-        school: updatedUser.school || 'N/A',
-        grade: updatedUser.grade || 'N/A'
-      }));
+      setFormData({
+        name: updatedUser.name || '',
+        phone: updatedUser.phone || '',
+        location: updatedUser.location || '',
+        school: updatedUser.school || '',
+        grade: updatedUser.grade || ''
+      });
       setMessage('Profile updated successfully!');
       setTimeout(() => setMessage(''), 3000);
-    } catch (err) {
-      setMessage('Failed to update profile.');
+    } catch (err: any) {
+      const errorMsg = err?.response?.data?.error || 'Failed to update profile.';
+      setMessage(errorMsg);
       setTimeout(() => setMessage(''), 3000);
     } finally {
       setSaving(false);
@@ -133,11 +130,14 @@ export default function StudentProfilePage() {
       
       setMessage('Profile photo updated successfully!');
       setTimeout(() => setMessage(''), 3000);
-    } catch (err) {
-      setMessage('Failed to upload profile photo.');
+    } catch (err: any) {
+      const errorMsg = err?.response?.data?.error || 'Failed to upload profile photo.';
+      setMessage(errorMsg);
       setTimeout(() => setMessage(''), 3000);
     } finally {
       setUploadingPhoto(false);
+      // Reset input to allow uploading the same file again
+      e.target.value = '';
     }
   };
 
@@ -157,8 +157,9 @@ export default function StudentProfilePage() {
       
       setMessage('Profile photo removed successfully!');
       setTimeout(() => setMessage(''), 3000);
-    } catch (err) {
-      setMessage('Failed to remove profile photo.');
+    } catch (err: any) {
+      const errorMsg = err?.response?.data?.error || 'Failed to remove profile photo.';
+      setMessage(errorMsg);
       setTimeout(() => setMessage(''), 3000);
     } finally {
       setUploadingPhoto(false);
@@ -167,7 +168,7 @@ export default function StudentProfilePage() {
 
   if (loading) {
     return (
-      <div className="flex-1 flex items-center justify-center h-[calc(100vh-73px)]">
+      <div className="flex-1 flex items-center justify-center min-h-[calc(100vh-73px)]">
         <div className="text-center">
           <Loader2 className="size-8 animate-spin text-[#1E88E5] mx-auto mb-4" />
           <p className="text-[#78909C]">Loading profile...</p>
@@ -179,31 +180,31 @@ export default function StudentProfilePage() {
   const displayName = user?.name || 'Student';
   const role = user?.role || 'student';
   const email = user?.email || '';
-  const joinDate = user?.created_at ? new Date(user.created_at).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }) : 'N/A';
+  const joinDate = user?.created_at 
+    ? new Date(user.created_at).toLocaleDateString('en-US', { 
+        day: 'numeric', 
+        month: 'short', 
+        year: 'numeric' 
+      }) 
+    : 'N/A';
   const age = user?.date_of_birth 
     ? Math.floor((new Date().getTime() - new Date(user.date_of_birth).getTime()) / (1000 * 60 * 60 * 24 * 365.25))
-    : 'N/A';
-
-  const stats = [
-    { label: 'Courses Enrolled', value: dashboardData?.stats.coursesEnrolled || 0, icon: BookOpen, color: 'text-[#1E88E5]', bg: 'bg-[#C5E1A5]' },
-    { label: 'Certificates', value: dashboardData?.stats.certificatesEarned || 0, icon: Trophy, color: 'text-[#7BC943]', bg: 'bg-[#DBEAFE]' },
-    { label: 'Progress', value: 0, icon: Heart, color: 'text-[#FF5CA8]', bg: 'bg-[#FCE7F3]' },
-  ];
+    : null;
 
   return (
-    <div className="p-4 md:p-8 max-w-[1400px] mx-auto">
+    <div className="p-4 md:p-6 lg:p-8 max-w-[1400px] mx-auto">
       {message && (
-        <div className={`mb-4 p-3 rounded-lg text-sm font-medium ${message.includes('successfully') ? 'bg-[#C5E1A5] text-[#1565C0]' : 'bg-[#FEE2E2] text-[#EC407A]'} animate-in fade-in slide-in-from-top-4`}>
+        <div className={`mb-6 p-4 rounded-xl text-sm font-medium ${message.includes('successfully') ? 'bg-[#E8F5E9] text-[#2E7D32]' : 'bg-[#FFEBEE] text-[#C62828]'} animate-in fade-in slide-in-from-top-4 shadow-sm`}>
           {message}
         </div>
       )}
 
-        <div className="space-y-4 md:space-y-6">
+        <div className="space-y-6">
           {/* Profile Header Card */}
-          <div className="bg-white rounded-2xl border border-[#E0E0E0] p-4 md:p-8">
-            <div className="flex flex-col md:flex-row items-center md:items-start gap-6 md:gap-8 text-center md:text-left">
-              <div className="relative">
-                <div className="w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden border-4 border-[#F1F8E9]">
+          <div className="bg-white rounded-2xl border border-[#E0E0E0] shadow-sm p-6 md:p-8">
+            <div className="flex flex-col md:flex-row items-center md:items-start gap-6 md:gap-8">
+              <div className="relative shrink-0">
+                <div className="w-28 h-28 md:w-36 md:h-36 rounded-full overflow-hidden border-4 border-[#E3F2FD] shadow-md">
                   <img 
                     src={getAvatarUrl(user?.avatar_url, displayName)} 
                     alt={displayName}
@@ -221,107 +222,94 @@ export default function StudentProfilePage() {
                 <button 
                   onClick={() => document.getElementById('photo-upload')?.click()}
                   disabled={uploadingPhoto}
-                  className="absolute bottom-1 right-1 w-8 h-8 bg-white border border-[#E0E0E0] rounded-full flex items-center justify-center text-[#78909C] hover:text-[#1E88E5] shadow-sm transition-colors disabled:opacity-50 cursor-pointer"
+                  className="absolute bottom-0 right-0 w-10 h-10 bg-[#1E88E5] border-2 border-white rounded-full flex items-center justify-center text-white hover:bg-[#1565C0] shadow-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  title="Upload photo"
                 >
-                  {uploadingPhoto ? <Loader2 size={16} className="animate-spin" /> : <Camera size={16} />}
+                  {uploadingPhoto ? <Loader2 size={18} className="animate-spin" /> : <Camera size={18} />}
                 </button>
                 {user?.avatar_url && (
                   <button
                     onClick={handleDeletePhoto}
                     disabled={uploadingPhoto}
-                    className="absolute top-1 right-1 w-6 h-6 bg-red-500 border border-white rounded-full flex items-center justify-center text-white hover:bg-red-600 shadow-sm transition-colors disabled:opacity-50 cursor-pointer"
+                    className="absolute top-0 right-0 w-8 h-8 bg-[#EC407A] border-2 border-white rounded-full flex items-center justify-center text-white hover:bg-[#D81B60] shadow-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                    title="Remove photo"
                   >
-                    <Trash2 size={12} />
+                    <Trash2 size={14} />
                   </button>
                 )}
               </div>
 
               <div className="flex-1 w-full">
                 <div className="flex flex-col md:flex-row items-center justify-between mb-6 gap-4">
-                  <div className="flex flex-col md:flex-row items-center gap-3">
+                  <div className="flex flex-col md:flex-row items-center gap-3 w-full md:w-auto">
                     <input 
                       type="text"
                       value={formData.name}
                       onChange={(e) => setFormData({...formData, name: e.target.value})}
-                      className="text-xl md:text-2xl font-bold text-[#1E3A5F] bg-transparent border-none focus:ring-0 p-0 w-full md:w-auto text-center md:text-left"
+                      disabled={saving}
+                      className="text-2xl md:text-3xl font-bold text-[#1E3A5F] bg-transparent border-b-2 border-transparent hover:border-[#E0E0E0] focus:border-[#1E88E5] focus:outline-none px-2 py-1 w-full md:w-auto text-center md:text-left transition-colors disabled:cursor-not-allowed"
+                      placeholder="Your Name"
                     />
-                    <span className="px-3 py-0.5 bg-[#C5E1A5] text-[#1E88E5] text-xs font-semibold rounded-md capitalize">
+                    <span className="px-3 py-1 bg-gradient-to-r from-[#1E88E5] to-[#1565C0] text-white text-xs font-semibold rounded-full capitalize shadow-sm">
                       {role}
                     </span>
                   </div>
                   {formData.name !== user?.name && (
                     <button 
                       onClick={handleUpdateProfile}
-                      disabled={saving}
-                      className="w-full md:w-auto px-4 py-2 bg-[#1E88E5] text-white text-sm font-medium rounded-lg hover:bg-[#1565C0] transition-colors flex items-center justify-center gap-2"
+                      disabled={saving || !formData.name.trim()}
+                      className="w-full md:w-auto px-6 py-2.5 bg-[#1E88E5] text-white text-sm font-medium rounded-lg hover:bg-[#1565C0] transition-all flex items-center justify-center gap-2 shadow-md hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
                     >
-                      {saving ? <Loader2 size={14} className="animate-spin" /> : <Save size={14} />}
+                      {saving ? <Loader2 size={16} className="animate-spin" /> : <Save size={16} />}
                       Save Changes
                     </button>
                   )}
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-4 md:gap-x-12">
-                  <div className="flex items-center justify-between sm:justify-start gap-4 sm:gap-12">
-                    <div className="flex items-center gap-2 w-28 sm:w-32">
-                      <Calendar size={16} className="text-[#B0BEC5] shrink-0" />
-                      <span className="text-sm text-[#78909C]">Member Since</span>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
+                  <div className="flex items-center gap-3 p-3 bg-[#FAFAFA] rounded-xl">
+                    <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center shrink-0 shadow-sm">
+                      <Calendar size={18} className="text-[#1E88E5]" />
                     </div>
-                    <span className="text-sm font-medium text-[#1E3A5F] whitespace-nowrap">{joinDate}</span>
+                    <div className="min-w-0">
+                      <p className="text-xs text-[#78909C] mb-0.5">Member Since</p>
+                      <p className="text-sm font-semibold text-[#1E3A5F] truncate">{joinDate}</p>
+                    </div>
                   </div>
-                  <div className="flex items-center justify-between sm:justify-start gap-4 sm:gap-12">
-                    <div className="flex items-center gap-2 w-28 sm:w-32">
-                      <Heart size={16} className="text-[#B0BEC5] shrink-0" />
-                      <span className="text-sm text-[#78909C]">Age</span>
+                  <div className="flex items-center gap-3 p-3 bg-[#FAFAFA] rounded-xl">
+                    <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center shrink-0 shadow-sm">
+                      <Heart size={18} className="text-[#EC407A]" />
                     </div>
-                    <span className="text-sm font-medium text-[#1E3A5F] whitespace-nowrap">{age === 'N/A' ? 'N/A' : `${age} years`}</span>
+                    <div className="min-w-0">
+                      <p className="text-xs text-[#78909C] mb-0.5">Age</p>
+                      <p className="text-sm font-semibold text-[#1E3A5F]">{age ? `${age} years` : 'Not set'}</p>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Two-Column Layout below Header */}
-          <div className="grid grid-cols-12 gap-4 md:gap-6">
-            {/* Left Column: Stats & Contact info */}
-            <div className="col-span-12 lg:col-span-8 space-y-4 md:space-y-6">
-              {/* Stats Grid */}
-              {stats.length > 0 && (
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
-                  {stats.map((stat, i) => (
-                    <div key={i} className="bg-white rounded-xl border border-[#E0E0E0] p-4 md:p-5">
-                      <div className="flex items-center gap-3 md:gap-4 mb-3">
-                        <div className={`w-8 h-8 md:w-10 md:h-10 ${stat.bg} rounded-full flex items-center justify-center`}>
-                          <stat.icon size={16} className={stat.color} />
-                        </div>
-                        <span className="text-lg md:text-xl font-bold text-[#1E3A5F]">{stat.value}</span>
-                      </div>
-                      <p className="text-[10px] md:text-xs text-[#78909C]">{stat.label}</p>
-                    </div>
-                  ))}
-                </div>
-              )}
-
-              {/* Contact Information */}
-              <div className="bg-white rounded-2xl border border-[#E0E0E0] p-4 md:p-6">
-                <div className="flex items-center justify-between mb-5">
-                  <h3 className="font-bold text-[#1E3A5F]">Contact Information</h3>
+          {/* Contact Information */}
+          <div className="bg-white rounded-2xl border border-[#E0E0E0] shadow-sm p-6">
+                <div className="flex items-center justify-between mb-6">
+                  <h3 className="text-lg font-bold text-[#1E3A5F]">Contact Information</h3>
                   {isEditingContact ? (
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-3">
                       <button
                         type="button"
                         onClick={() => {
-                          setFormData(prev => ({
-                            ...prev,
-                            phone: user?.phone || 'N/A',
-                            location: user?.location || 'N/A',
-                            school: user?.school || 'N/A',
-                            grade: user?.grade || 'N/A'
-                          }));
+                          setFormData({
+                            name: user?.name || '',
+                            phone: user?.phone || '',
+                            location: user?.location || '',
+                            school: user?.school || '',
+                            grade: user?.grade || ''
+                          });
                           setIsEditingContact(false);
                         }}
                         disabled={saving}
-                        className="text-[11px] text-[#78909C] hover:text-[#1E3A5F] font-bold cursor-pointer"
+                        className="text-xs text-[#78909C] hover:text-[#1E3A5F] font-semibold transition-colors disabled:cursor-not-allowed"
                       >
                         Cancel
                       </button>
@@ -332,9 +320,9 @@ export default function StudentProfilePage() {
                           setIsEditingContact(false);
                         }}
                         disabled={saving}
-                        className="text-[11px] text-[#1E88E5] hover:text-[#1565C0] font-bold cursor-pointer flex items-center gap-1"
+                        className="text-xs text-[#1E88E5] hover:text-[#1565C0] font-semibold flex items-center gap-1 transition-colors disabled:cursor-not-allowed"
                       >
-                        {saving && <Loader2 size={10} className="animate-spin" />}
+                        {saving && <Loader2 size={12} className="animate-spin" />}
                         Save
                       </button>
                     </div>
@@ -342,7 +330,7 @@ export default function StudentProfilePage() {
                     <button
                       type="button"
                       onClick={() => setIsEditingContact(true)}
-                      className="text-[11px] text-[#1E88E5] font-bold hover:underline cursor-pointer"
+                      className="text-xs text-[#1E88E5] font-semibold hover:underline transition-all"
                     >
                       Edit
                     </button>
@@ -350,126 +338,99 @@ export default function StudentProfilePage() {
                 </div>
                 <div className="space-y-4">
                   {email && (
-                    <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 bg-[#FAFAFA] rounded-lg flex items-center justify-center text-[#B0BEC5] shrink-0">
-                        <Mail size={16} />
+                    <div className="flex items-center gap-4 p-3 bg-[#FAFAFA] rounded-xl">
+                      <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center text-[#1E88E5] shrink-0 shadow-sm">
+                        <Mail size={18} />
                       </div>
-                      <span className="text-sm text-[#78909C] break-all">{email}</span>
+                      <div className="min-w-0 flex-1">
+                        <p className="text-xs text-[#78909C] mb-1">Email Address</p>
+                        <p className="text-sm font-medium text-[#1E3A5F] truncate">{email}</p>
+                      </div>
                     </div>
                   )}
-                  <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 bg-[#FAFAFA] rounded-lg flex items-center justify-center text-[#B0BEC5] shrink-0">
-                      <Phone size={16} />
+                  <div className="flex items-center gap-4 p-3 bg-[#FAFAFA] rounded-xl">
+                    <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center text-[#1E88E5] shrink-0 shadow-sm">
+                      <Phone size={18} />
                     </div>
-                    {isEditingContact ? (
-                      <input
-                        type="text"
-                        value={formData.phone === 'N/A' ? '' : formData.phone}
-                        onChange={(e) => setFormData({ ...formData, phone: e.target.value || 'N/A' })}
-                        disabled={saving}
-                        className="flex-1 px-3 py-1.5 text-sm rounded-lg border border-[#E0E0E0] text-[#1E3A5F] focus:ring-1 focus:ring-[#1E88E5]/20 focus:border-[#1E88E5] outline-none transition-all"
-                      />
-                    ) : (
-                      <span className="text-sm text-[#78909C]">{formData.phone}</span>
-                    )}
+                    <div className="min-w-0 flex-1">
+                      <p className="text-xs text-[#78909C] mb-1">Phone Number</p>
+                      {isEditingContact ? (
+                        <input
+                          type="tel"
+                          value={formData.phone}
+                          onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                          disabled={saving}
+                          placeholder="Enter phone number"
+                          className="w-full px-3 py-2 text-sm rounded-lg border border-[#E0E0E0] text-[#1E3A5F] focus:ring-2 focus:ring-[#1E88E5]/20 focus:border-[#1E88E5] outline-none transition-all disabled:cursor-not-allowed"
+                        />
+                      ) : (
+                        <p className="text-sm font-medium text-[#1E3A5F]">{formData.phone || 'Not provided'}</p>
+                      )}
+                    </div>
                   </div>
-                  <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 bg-[#FAFAFA] rounded-lg flex items-center justify-center text-[#B0BEC5] shrink-0">
-                      <MapPin size={16} />
+                  <div className="flex items-center gap-4 p-3 bg-[#FAFAFA] rounded-xl">
+                    <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center text-[#1E88E5] shrink-0 shadow-sm">
+                      <MapPin size={18} />
                     </div>
-                    {isEditingContact ? (
-                      <input
-                        type="text"
-                        value={formData.location === 'N/A' ? '' : formData.location}
-                        onChange={(e) => setFormData({ ...formData, location: e.target.value || 'N/A' })}
-                        disabled={saving}
-                        className="flex-1 px-3 py-1.5 text-sm rounded-lg border border-[#E0E0E0] text-[#1E3A5F] focus:ring-1 focus:ring-[#1E88E5]/20 focus:border-[#1E88E5] outline-none transition-all"
-                      />
-                    ) : (
-                      <span className="text-sm text-[#78909C] line-clamp-1">{formData.location}</span>
-                    )}
+                    <div className="min-w-0 flex-1">
+                      <p className="text-xs text-[#78909C] mb-1">Location</p>
+                      {isEditingContact ? (
+                        <input
+                          type="text"
+                          value={formData.location}
+                          onChange={(e) => setFormData({ ...formData, location: e.target.value })}
+                          disabled={saving}
+                          placeholder="Enter your location"
+                          className="w-full px-3 py-2 text-sm rounded-lg border border-[#E0E0E0] text-[#1E3A5F] focus:ring-2 focus:ring-[#1E88E5]/20 focus:border-[#1E88E5] outline-none transition-all disabled:cursor-not-allowed"
+                        />
+                      ) : (
+                        <p className="text-sm font-medium text-[#1E3A5F] truncate">{formData.location || 'Not provided'}</p>
+                      )}
+                    </div>
                   </div>
-                  <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 bg-[#FAFAFA] rounded-lg flex items-center justify-center text-[#B0BEC5] shrink-0">
-                      <School size={16} />
+                  <div className="flex items-center gap-4 p-3 bg-[#FAFAFA] rounded-xl">
+                    <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center text-[#1E88E5] shrink-0 shadow-sm">
+                      <School size={18} />
                     </div>
-                    {isEditingContact ? (
-                      <input
-                        type="text"
-                        value={formData.school === 'N/A' ? '' : formData.school}
-                        onChange={(e) => setFormData({ ...formData, school: e.target.value || 'N/A' })}
-                        disabled={saving}
-                        className="flex-1 px-3 py-1.5 text-sm rounded-lg border border-[#E0E0E0] text-[#1E3A5F] focus:ring-1 focus:ring-[#1E88E5]/20 focus:border-[#1E88E5] outline-none transition-all"
-                      />
-                    ) : (
-                      <span className="text-sm text-[#78909C]">{formData.school}</span>
-                    )}
+                    <div className="min-w-0 flex-1">
+                      <p className="text-xs text-[#78909C] mb-1">School</p>
+                      {isEditingContact ? (
+                        <input
+                          type="text"
+                          value={formData.school}
+                          onChange={(e) => setFormData({ ...formData, school: e.target.value })}
+                          disabled={saving}
+                          placeholder="Enter your school name"
+                          className="w-full px-3 py-2 text-sm rounded-lg border border-[#E0E0E0] text-[#1E3A5F] focus:ring-2 focus:ring-[#1E88E5]/20 focus:border-[#1E88E5] outline-none transition-all disabled:cursor-not-allowed"
+                        />
+                      ) : (
+                        <p className="text-sm font-medium text-[#1E3A5F]">{formData.school || 'Not provided'}</p>
+                      )}
+                    </div>
                   </div>
-                  <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 bg-[#FAFAFA] rounded-lg flex items-center justify-center text-[#B0BEC5] shrink-0">
-                      <BookOpen size={16} />
+                  <div className="flex items-center gap-4 p-3 bg-[#FAFAFA] rounded-xl">
+                    <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center text-[#1E88E5] shrink-0 shadow-sm">
+                      <BookOpen size={18} />
                     </div>
-                    {isEditingContact ? (
-                      <input
-                        type="text"
-                        value={formData.grade === 'N/A' ? '' : formData.grade}
-                        onChange={(e) => setFormData({ ...formData, grade: e.target.value || 'N/A' })}
-                        disabled={saving}
-                        className="flex-1 px-3 py-1.5 text-sm rounded-lg border border-[#E0E0E0] text-[#1E3A5F] focus:ring-1 focus:ring-[#1E88E5]/20 focus:border-[#1E88E5] outline-none transition-all"
-                      />
-                    ) : (
-                      <span className="text-sm text-[#78909C]">{formData.grade}</span>
-                    )}
+                    <div className="min-w-0 flex-1">
+                      <p className="text-xs text-[#78909C] mb-1">Grade/Class</p>
+                      {isEditingContact ? (
+                        <input
+                          type="text"
+                          value={formData.grade}
+                          onChange={(e) => setFormData({ ...formData, grade: e.target.value })}
+                          disabled={saving}
+                          placeholder="Enter your grade"
+                          className="w-full px-3 py-2 text-sm rounded-lg border border-[#E0E0E0] text-[#1E3A5F] focus:ring-2 focus:ring-[#1E88E5]/20 focus:border-[#1E88E5] outline-none transition-all disabled:cursor-not-allowed"
+                        />
+                      ) : (
+                        <p className="text-sm font-medium text-[#1E3A5F]">{formData.grade || 'Not provided'}</p>
+                      )}
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-
-            {/* Right Column: Account Settings */}
-            <div className="col-span-12 lg:col-span-4">
-              <div className="bg-white rounded-2xl border border-[#E0E0E0] p-4 md:p-6 h-full flex flex-col">
-                <h3 className="font-bold text-[#1E3A5F] mb-5">Account Settings</h3>
-                <div className="space-y-2 flex-1">
-                  {[
-                    { label: 'Notification Preferences', icon: Bell, path: undefined as string | undefined },
-                    { label: 'Privacy Settings', icon: Settings, path: undefined as string | undefined },
-                  ].map((item, i) => (
-                    <button
-                      key={i}
-                      onClick={() => item.path && router.push(item.path)}
-                      className="w-full flex items-center justify-between p-3 hover:bg-[#FAFAFA] rounded-xl transition-colors group"
-                    >
-                      <div className="flex items-center gap-3">
-                        <item.icon size={18} className="text-[#B0BEC5] group-hover:text-[#1E88E5]" />
-                        <span className="text-sm text-[#78909C] font-medium">{item.label}</span>
-                      </div>
-                      <ChevronRight size={16} className="text-[#E0E0E0]" />
-                    </button>
-                  ))}
-
-                  <button
-                    onClick={handleLogout}
-                    className="w-full flex items-center justify-between p-3 hover:bg-[#FEF2F2] rounded-xl transition-colors group"
-                  >
-                    <div className="flex items-center gap-3">
-                      <LogOut size={18} className="text-[#EC407A] opacity-80" />
-                      <span className="text-sm text-[#EC407A] font-semibold">Logout</span>
-                    </div>
-                    <ChevronRight size={16} className="text-[#EC407A] opacity-50" />
-                  </button>
-
-                  <button className="w-full flex items-center justify-between p-3 hover:bg-[#FFF5F5] rounded-xl transition-colors group">
-                    <div className="flex items-center gap-3">
-                      <Trash2 size={18} className="text-[#EC407A] opacity-50" />
-                      <span className="text-sm text-[#EC407A] font-medium">Deactivate Account</span>
-                    </div>
-                    <ChevronRight size={16} className="text-[#EC407A] opacity-30" />
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
-      </div>
+    </div>
   );
 }

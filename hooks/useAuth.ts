@@ -1,79 +1,62 @@
-'use client';
-
-import { useState, useEffect, useCallback } from 'react';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 interface User {
   id: number;
   name: string;
   email: string;
   role: string;
-  date_of_birth?: string;
-  school?: string;
-  grade?: string;
-  parent_guardian_name?: string;
-  phone?: string;
-  location?: string;
 }
 
 export function useAuth() {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
-    const initAuth = async () => {
+    // Check authentication status
+    const checkAuth = () => {
       try {
-        const storedUser = localStorage.getItem('user');
         const token = localStorage.getItem('token');
-        
-        if (storedUser && token) {
-          try {
-            const userData = JSON.parse(storedUser);
-            setUser(userData);
-            setIsAuthenticated(true);
-          } catch (parseError) {
-            // Invalid stored user data - clear it
-            localStorage.removeItem('user');
-            localStorage.removeItem('token');
-            setUser(null);
-            setIsAuthenticated(false);
-          }
-        } else {
-          setUser(null);
+        const userStr = localStorage.getItem('user');
+
+        if (!token || !userStr) {
           setIsAuthenticated(false);
+          setUser(null);
+          setLoading(false);
+          router.push('/login');
+          return;
         }
-      } catch (error) {
-        console.error('Auth initialization error:', error);
-        setUser(null);
-        setIsAuthenticated(false);
-      } finally {
+
+        const userData = JSON.parse(userStr);
+        setUser(userData);
+        setIsAuthenticated(true);
         setLoading(false);
+      } catch (error) {
+        console.error('[useAuth] Error checking authentication:', error);
+        setIsAuthenticated(false);
+        setUser(null);
+        setLoading(false);
+        router.push('/login');
       }
     };
 
-    initAuth();
-  }, []);
+    checkAuth();
 
-  const login = useCallback((userData: User, token: string) => {
-    localStorage.setItem('token', token);
-    localStorage.setItem('user', JSON.stringify(userData));
-    setUser(userData);
-    setIsAuthenticated(true);
-  }, []);
+    // Listen for logout events
+    const handleLogout = () => {
+      setIsAuthenticated(false);
+      setUser(null);
+      router.push('/login');
+    };
 
-  const logout = useCallback(() => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
-    setUser(null);
-    setIsAuthenticated(false);
-  }, []);
+    window.addEventListener('auth:logout', handleLogout);
 
-  return { 
-    user, 
-    loading, 
-    login, 
-    logout, 
-    isAuthenticated,
-    token: typeof window !== 'undefined' ? localStorage.getItem('token') : null
-  };
+    return () => {
+      window.removeEventListener('auth:logout', handleLogout);
+    };
+  }, [router]);
+
+  return { user, loading, isAuthenticated };
 }

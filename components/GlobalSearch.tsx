@@ -14,18 +14,12 @@ interface GlobalSearchProps {
 const getSearchContext = (pathname: string) => {
   const courseMatch = pathname.match(/\/courses\/(\d+)/);
   const myCoursesMatch = pathname.match(/\/my-courses\/(\d+)/);
-  const assignmentMatch = pathname.match(/\/assignments/);
-  const quizMatch = pathname.match(/\/quizzes/);
   const liveClassMatch = pathname.match(/\/live-classes/);
   
   if (myCoursesMatch) {
     return { type: 'course', id: parseInt(myCoursesMatch[1]) };
   } else if (courseMatch) {
     return { type: 'course', id: parseInt(courseMatch[1]) };
-  } else if (assignmentMatch) {
-    return { type: 'assignment', id: null };
-  } else if (quizMatch) {
-    return { type: 'quiz', id: null };
   } else if (liveClassMatch) {
     return { type: 'live_class', id: null };
   }
@@ -121,14 +115,6 @@ export default function GlobalSearch({ initialQuery = '', className = '' }: Glob
           router.push(`/student/my-courses/${section.course_id}`);
         }
         break;
-      case 'assignment':
-        // Navigate to assignments page
-        router.push(`/student/assignments`);
-        break;
-      case 'quiz':
-        // Navigate to quizzes page
-        router.push(`/student/quizzes`);
-        break;
       case 'live_class':
         // Navigate to live classes page
         router.push(`/student/live-classes`);
@@ -150,10 +136,6 @@ export default function GlobalSearch({ initialQuery = '', className = '' }: Glob
         return <Video className="text-[#1E88E5]" size={18} />;
       case 'section':
         return <Folder className="text-[#8B5CF6]" size={18} />;
-      case 'assignment':
-        return <FileText className="text-[#FFA726]" size={18} />;
-      case 'quiz':
-        return <FileText className="text-[#EF4444]" size={18} />;
       case 'live_class':
         return <Video className="text-[#EC4899]" size={18} />;
       case 'category':
@@ -168,8 +150,6 @@ export default function GlobalSearch({ initialQuery = '', className = '' }: Glob
       course: 'Course',
       lesson: 'Lesson',
       section: 'Section',
-      assignment: 'Assignment',
-      quiz: 'Quiz',
       live_class: 'Live Class',
       category: 'Category',
     };
@@ -242,14 +222,10 @@ export default function GlobalSearch({ initialQuery = '', className = '' }: Glob
     const context = getSearchContext(pathname || '');
     if (context.type === 'course') {
       return 'Search in this course...';
-    } else if (context.type === 'assignment') {
-      return 'Search assignments...';
-    } else if (context.type === 'quiz') {
-      return 'Search quizzes...';
     } else if (context.type === 'live_class') {
       return 'Search live classes...';
     }
-    return 'Search for courses, lessons, assignments...';
+    return 'Search for courses, lessons, live classes...';
   };
 
   return (
@@ -327,26 +303,6 @@ export default function GlobalSearch({ initialQuery = '', className = '' }: Glob
                   </p>
                 </div>
                 {results.results.lessons.map((item) => renderResultItem(item, 'lesson'))}
-              </div>
-            )}
-            {results.results.assignments.length > 0 && (
-              <div>
-                <div className="px-4 py-2 bg-[#FAFAFA] border-b border-[#E0E0E0]">
-                  <p className="text-xs font-semibold text-[#78909C] uppercase tracking-wide">
-                    Assignments
-                  </p>
-                </div>
-                {results.results.assignments.map((item) => renderResultItem(item, 'assignment'))}
-              </div>
-            )}
-            {results.results.quizzes.length > 0 && (
-              <div>
-                <div className="px-4 py-2 bg-[#FAFAFA] border-b border-[#E0E0E0]">
-                  <p className="text-xs font-semibold text-[#78909C] uppercase tracking-wide">
-                    Quizzes
-                  </p>
-                </div>
-                {results.results.quizzes.map((item) => renderResultItem(item, 'quiz'))}
               </div>
             )}
             {results.results.liveClasses.length > 0 && (

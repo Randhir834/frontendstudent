@@ -120,58 +120,6 @@ function SearchResultsContent() {
                 </section>
               )}
 
-              {/* Assignments */}
-              {results.assignments && results.assignments.length > 0 && (
-                <section>
-                  <h2 className="text-xl font-semibold text-foreground mb-4 flex items-center gap-2">
-                    <ClipboardList className="h-5 w-5 text-primary" />
-                    Assignments
-                  </h2>
-                  <div className="space-y-3">
-                    {results.assignments.map((assignment: any) => (
-                      <Link key={assignment.id} href={`/student/course/${assignment.course_id}`}>
-                        <Card className="hover:shadow-md transition-shadow cursor-pointer">
-                          <CardContent className="p-4">
-                            <h3 className="font-semibold text-foreground mb-1">{assignment.title}</h3>
-                            <p className="text-sm text-muted mb-2">{assignment.description}</p>
-                            <p className="text-xs text-muted">
-                              Course: {assignment.course_title}
-                              {assignment.due_date && ` • Due: ${new Date(assignment.due_date).toLocaleDateString()}`}
-                            </p>
-                          </CardContent>
-                        </Card>
-                      </Link>
-                    ))}
-                  </div>
-                </section>
-              )}
-
-              {/* Quizzes */}
-              {results.quizzes && results.quizzes.length > 0 && (
-                <section>
-                  <h2 className="text-xl font-semibold text-foreground mb-4 flex items-center gap-2">
-                    <HelpCircle className="h-5 w-5 text-primary" />
-                    Quizzes
-                  </h2>
-                  <div className="space-y-3">
-                    {results.quizzes.map((quiz: any) => (
-                      <Link key={quiz.id} href={`/student/course/${quiz.course_id}`}>
-                        <Card className="hover:shadow-md transition-shadow cursor-pointer">
-                          <CardContent className="p-4">
-                            <h3 className="font-semibold text-foreground mb-1">{quiz.title}</h3>
-                            <p className="text-sm text-muted mb-2">{quiz.description}</p>
-                            <p className="text-xs text-muted">
-                              Course: {quiz.course_title}
-                              {quiz.time_limit && ` • Time: ${quiz.time_limit} min`}
-                            </p>
-                          </CardContent>
-                        </Card>
-                      </Link>
-                    ))}
-                  </div>
-                </section>
-              )}
-
               {/* Live Classes */}
               {results.liveClasses && results.liveClasses.length > 0 && (
                 <section>
@@ -185,7 +133,7 @@ function SearchResultsContent() {
                         <Card className="hover:shadow-md transition-shadow cursor-pointer">
                           <CardContent className="p-4">
                             <h3 className="font-semibold text-foreground mb-1">{liveClass.title}</h3>
-                            <p className="text-sm text-muted mb-2">{liveClass.description}</p>
+                            {/* Description - Hidden */}
                             <p className="text-xs text-muted">
                               Course: {liveClass.course_title}
                               {liveClass.scheduled_at && ` • ${new Date(liveClass.scheduled_at).toLocaleString()}`}

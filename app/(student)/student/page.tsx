@@ -2,20 +2,16 @@
 
 import { useState, useEffect } from 'react';
 import {
-  BookOpen, Video, ClipboardList, Loader2,
-  ChevronRight, Award, Trophy
+  BookOpen, Video,
+  ChevronRight, Trophy, TrendingUp, Zap, Target
 } from 'lucide-react';
 import { dashboardService, DashboardData } from '@/services/dashboardService';
-import { certificateService } from '@/services/certificateService';
 import { userService, UserProfile } from '@/services/userService';
 import UpcomingLiveClasses from '@/components/UpcomingLiveClasses';
-import RecentAssignments from '@/components/RecentAssignments';
-import RecentQuizzes from '@/components/RecentQuizzes';
 
 export default function StudentHomePage() {
   const [dashboardData, setDashboardData] = useState<DashboardData | null>(null);
   const [user, setUser] = useState<UserProfile | null>(null);
-  const [certificateCount, setCertificateCount] = useState(0);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -23,14 +19,12 @@ export default function StudentHomePage() {
     const fetchAll = async () => {
       try {
         setLoading(true);
-        const [dashData, profile, certs] = await Promise.all([
+        const [dashData, profile] = await Promise.all([
           dashboardService.getDashboardData(),
-          userService.getProfile().catch(() => null),
-          certificateService.getMyCertificates().catch(() => ({ certificates: [], total: 0 }))
+          userService.getProfile().catch(() => null)
         ]);
         setDashboardData(dashData);
         setUser(profile);
-        setCertificateCount(certs.total);
       } catch (err) {
         console.error('Error fetching dashboard data:', err);
         setError('Failed to load dashboard data');
@@ -49,23 +43,18 @@ export default function StudentHomePage() {
     return () => clearInterval(interval);
   }, []);
 
-  if (loading) {
-    return (
-      <div className="flex-1 flex items-center justify-center h-[calc(100vh-73px)]">
-        <div className="text-center">
-          <Loader2 className="size-8 animate-spin text-[#1E88E5] mx-auto mb-4" />
-          <p className="text-[#78909C]">Loading dashboard...</p>
-        </div>
-      </div>
-    );
-  }
-
   if (error) {
     return (
-      <div className="flex-1 flex items-center justify-center h-[calc(100vh-73px)]">
-        <div className="text-center">
-          <p className="text-[#EC407A] mb-4">{error}</p>
-          <button onClick={() => window.location.reload()} className="px-4 py-2 bg-[#1E88E5] text-white rounded-lg hover:bg-[#1565C0] transition-colors">
+      <div className="flex-1 flex items-center justify-center min-h-[60vh] sm:min-h-[70vh] p-4">
+        <div className="text-center max-w-md mx-auto">
+          <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <span className="text-3xl">😕</span>
+          </div>
+          <p className="text-base text-red-600 mb-4 font-medium">{error}</p>
+          <button 
+            onClick={() => window.location.reload()} 
+            className="px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-xl hover:from-blue-700 hover:to-purple-700 transition-all hover:scale-105 shadow-lg"
+          >
             Retry
           </button>
         </div>
@@ -73,7 +62,7 @@ export default function StudentHomePage() {
     );
   }
 
-  const stats = dashboardData?.stats || { enrolledCourses: 0, liveClasses: 0, assignments: 0, achievements: 0 };
+  const stats = dashboardData?.stats || { enrolledCourses: 0, liveClasses: 0, achievements: 0 };
   const courses = dashboardData?.courses || [];
 
   const displayName = user?.name || 'Student';
@@ -81,32 +70,78 @@ export default function StudentHomePage() {
   return (
     <div className="flex flex-col xl:flex-row">
       {/* Center Content */}
-      <main className="flex-1 p-3 sm:p-4 md:p-6 lg:p-8 min-w-0">
-          {/* Welcome Message */}
-          <div className="mb-6 sm:mb-8">
-            <h1 className="text-lg sm:text-xl text-[#1E3A5F]">Welcome back,</h1>
-            <h1 className="text-xl sm:text-2xl font-bold text-[#1E88E5]">{displayName}! 👋</h1>
-            <p className="text-xs sm:text-sm text-[#78909C] mt-1">Keep going! Your next milestone is closer than you think.</p>
+      <main className="flex-1 p-4 sm:p-5 md:p-6 lg:p-8 min-w-0 max-w-[1600px] mx-auto w-full">
+          {/* Welcome Message - Enhanced */}
+          <div className="mb-6 sm:mb-8 md:mb-10 relative">
+            <div className="absolute inset-0 bg-gradient-to-r from-blue-100 via-purple-100 to-pink-100 rounded-3xl blur-3xl opacity-30 -z-10"></div>
+            <div className="relative bg-white/80 backdrop-blur-sm rounded-2xl p-6 sm:p-7 md:p-8 border border-gray-200 shadow-lg">
+              <div className="flex items-start justify-between gap-4">
+                <div className="flex-1">
+                  <div className="flex items-center gap-2 mb-2">
+                    <Zap className="w-5 h-5 text-yellow-500 fill-yellow-500" />
+                    <span className="text-sm font-medium text-gray-600">Welcome back,</span>
+                  </div>
+                  <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent break-words mb-3">
+                    {displayName}! 👋
+                  </h1>
+                  <p className="text-sm sm:text-base text-gray-600 max-w-2xl">
+                    Keep going! Your next milestone is closer than you think. 🚀
+                  </p>
+                </div>
+                <div className="hidden sm:block">
+                  <div className="w-20 h-20 md:w-24 md:h-24 bg-gradient-to-br from-blue-500 to-purple-500 rounded-2xl flex items-center justify-center shadow-xl transform rotate-6 hover:rotate-12 transition-transform">
+                    <Target className="w-10 h-10 md:w-12 md:h-12 text-white" />
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
 
-          {/* Summary Cards */}
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4 md:gap-5 mb-6 sm:mb-8">
+          {/* Summary Cards - Fully Responsive Grid with Gradients */}
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-3 sm:gap-4 md:gap-5 mb-6 sm:mb-8 md:mb-10">
             {[
-              { label: 'Enrolled Courses', value: String(stats.enrolledCourses), icon: BookOpen, iconBg: 'bg-[#C5E1A5]', iconColor: 'text-[#1E88E5]' },
-              { label: 'Live Classes', value: String(stats.liveClasses), icon: Video, iconBg: 'bg-[#FEF3C7]', iconColor: 'text-[#D97706]' },
-              { label: 'Assignments', value: String(stats.assignments), icon: ClipboardList, iconBg: 'bg-[#DBEAFE]', iconColor: 'text-[#1E88E5]' },
-              { label: 'Quizzes', value: String(stats.achievements), icon: Trophy, iconBg: 'bg-[#F8BBD0]', iconColor: 'text-[#C2185B]' },
-              { label: 'Certificates', value: String(certificateCount), icon: Award, iconBg: 'bg-[#F3E5AB]', iconColor: 'text-[#F57C00]' },
+              { 
+                label: 'Enrolled Courses', 
+                value: String(stats.enrolledCourses), 
+                icon: BookOpen, 
+                gradient: 'from-blue-500 to-cyan-500',
+                bgGradient: 'from-blue-50 to-cyan-50',
+                shadowColor: 'shadow-blue-500/20'
+              },
+              { 
+                label: 'Live Classes', 
+                value: String(stats.liveClasses), 
+                icon: Video, 
+                gradient: 'from-purple-500 to-pink-500',
+                bgGradient: 'from-purple-50 to-pink-50',
+                shadowColor: 'shadow-purple-500/20'
+              },
             ].map((card, index) => (
-              <div key={index} className="bg-white rounded-xl border border-[#E0E0E0] p-3 sm:p-4 lg:p-5">
-                <div className="flex items-center gap-2 sm:gap-3 lg:gap-4">
-                  <div className={`w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 ${card.iconBg} rounded-full flex items-center justify-center flex-shrink-0`}>
-                    <card.icon size={16} className={`sm:size-5 lg:size-6 ${card.iconColor}`} />
+              <div 
+                key={index} 
+                className={`group relative bg-gradient-to-br ${card.bgGradient} rounded-2xl border border-white shadow-lg hover:shadow-2xl ${card.shadowColor} transition-all duration-300 hover:-translate-y-2 overflow-hidden`}
+              >
+                {/* Gradient Overlay on Hover */}
+                <div className={`absolute inset-0 bg-gradient-to-br ${card.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-300`}></div>
+                
+                <div className="relative p-4 sm:p-5 md:p-6">
+                  <div className="flex flex-col gap-3">
+                    {/* Icon */}
+                    <div className={`w-12 h-12 sm:w-14 sm:h-14 bg-gradient-to-br ${card.gradient} rounded-xl flex items-center justify-center shadow-lg group-hover:scale-110 group-hover:rotate-6 transition-all duration-300`}>
+                      <card.icon className="w-6 h-6 sm:w-7 sm:h-7 text-white" />
+                    </div>
+                    
+                    {/* Stats */}
+                    <div>
+                      <p className="text-xs sm:text-sm text-gray-600 mb-1 font-medium">{card.label}</p>
+                      <p className={`text-3xl sm:text-4xl font-bold bg-gradient-to-br ${card.gradient} bg-clip-text text-transparent`}>
+                        {card.value}
+                      </p>
+                    </div>
                   </div>
-                  <div className="min-w-0 flex-1">
-                    <p className="text-xs text-[#78909C] mb-0.5 truncate">{card.label}</p>
-                    <p className="text-lg sm:text-xl lg:text-2xl font-bold text-[#1E3A5F]">{card.value}</p>
-                  </div>
+                  
+                  {/* Decorative Corner */}
+                  <div className={`absolute top-0 right-0 w-20 h-20 bg-gradient-to-br ${card.gradient} opacity-5 rounded-bl-full`}></div>
                 </div>
               </div>
             ))}
@@ -114,16 +149,10 @@ export default function StudentHomePage() {
 
           {/* Upcoming Live Classes */}
           {courses.length > 0 && (
-            <div className="mt-6">
+            <div className="mt-6 sm:mt-8">
               <UpcomingLiveClasses />
             </div>
           )}
-
-          {/* Recent Assignments and Quizzes */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
-            <RecentAssignments />
-            <RecentQuizzes />
-          </div>
         </main>
       </div>
   );

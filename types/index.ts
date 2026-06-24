@@ -47,6 +47,7 @@ export interface Course {
   total_sections?: number;
   is_enrolled?: boolean;
   progress?: number;
+  google_meet_link?: string;
   created_at: string;
   updated_at: string;
 }

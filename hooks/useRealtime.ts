@@ -54,16 +54,9 @@ export const REALTIME_EVENTS = {
   PROGRESS_UPDATED: 'progress:updated',
   LESSON_COMPLETED: 'lesson:completed',
 
-  // Attendance events
-  ATTENDANCE_MARKED: 'attendance:marked',
-  ATTENDANCE_UPDATED: 'attendance:updated',
-
   // Payment events
   PAYMENT_CREATED: 'payment:created',
   PAYMENT_UPDATED: 'payment:updated',
-
-  // Certificate events
-  CERTIFICATE_GENERATED: 'certificate:generated',
 
   // Category events
   CATEGORY_CREATED: 'category:created',

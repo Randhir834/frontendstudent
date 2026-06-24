@@ -251,11 +251,7 @@ function StudentCourseLiveClassesContent() {
                                     {timeUntil}
                                   </div>
 
-                                  {liveClass.description && (
-                                    <p className="text-xs text-[#78909C] mt-2 line-clamp-2">
-                                      {liveClass.description}
-                                    </p>
-                                  )}
+                                  {/* Description - Hidden */}
                                 </div>
 
                                 <a

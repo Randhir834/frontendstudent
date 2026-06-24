@@ -1,7 +1,8 @@
+import React from 'react';
 import { cn } from '@/utils/cn';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: 'primary' | 'secondary' | 'outline' | 'ghost';
+  variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'danger' | 'success';
   size?: 'sm' | 'md' | 'lg';
   children: React.ReactNode;
 }
@@ -22,6 +23,8 @@ export default function Button({
           'bg-card text-primary-500 border border-primary-500 hover:bg-primary-50': variant === 'secondary',
           'border border-border text-text-primary hover:bg-hover': variant === 'outline',
           'text-text-secondary hover:bg-hover': variant === 'ghost',
+          'bg-red-600 hover:bg-red-700 text-white focus:ring-red-500': variant === 'danger',
+          'bg-green-600 hover:bg-green-700 text-white focus:ring-green-500': variant === 'success',
         },
         {
           'px-2 py-1.5 text-xs sm:px-3 sm:text-sm': size === 'sm',
@@ -36,3 +39,6 @@ export default function Button({
     </button>
   );
 }
+
+// Also export as named export for compatibility
+export { Button };

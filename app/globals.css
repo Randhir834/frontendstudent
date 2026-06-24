@@ -30,76 +30,112 @@
 }
 
 @theme inline {
-  --color-background: #F5F5F5;
-  --color-foreground: #1E3A5F;
+  /* Modern Vibrant Background */
+  --color-background: #F8FAFC;
+  --color-foreground: #1E293B;
 
-  /* Primary Blue Palette (from PlayFit logo) */
-  --color-primary-50: #E3F2FD;
-  --color-primary-100: #BBDEFB;
-  --color-primary-200: #90CAF9;
-  --color-primary-300: #64B5F6;
-  --color-primary-400: #42A5F5;
-  --color-primary-500: #1E88E5;
-  --color-primary-600: #1976D2;
-  --color-primary-700: #1565C0;
-  --color-primary-800: #0D47A1;
-  --color-primary-900: #0A3A7F;
+  /* Primary Blue Palette (from PlayFit logo) - Enhanced */
+  --color-primary-50: #EFF6FF;
+  --color-primary-100: #DBEAFE;
+  --color-primary-200: #BFDBFE;
+  --color-primary-300: #93C5FD;
+  --color-primary-400: #60A5FA;
+  --color-primary-500: #3B82F6;
+  --color-primary-600: #2563EB;
+  --color-primary-700: #1D4ED8;
+  --color-primary-800: #1E40AF;
+  --color-primary-900: #1E3A8A;
 
-  /* Secondary Green Palette (from PlayFit logo) */
-  --color-secondary-50: #F1F8E9;
-  --color-secondary-100: #DCEDC8;
-  --color-secondary-200: #C5E1A5;
-  --color-secondary-300: #AED581;
-  --color-secondary-400: #9CCC65;
-  --color-secondary-500: #7CB342;
-  --color-secondary-600: #689F38;
-  --color-secondary-700: #558B2F;
-  --color-secondary-800: #33691E;
-  --color-secondary-900: #1B5E20;
+  /* Secondary Green Palette (from PlayFit logo) - Vibrant */
+  --color-secondary-50: #F0FDF4;
+  --color-secondary-100: #DCFCE7;
+  --color-secondary-200: #BBF7D0;
+  --color-secondary-300: #86EFAC;
+  --color-secondary-400: #4ADE80;
+  --color-secondary-500: #22C55E;
+  --color-secondary-600: #16A34A;
+  --color-secondary-700: #15803D;
+  --color-secondary-800: #166534;
+  --color-secondary-900: #14532D;
 
-  /* Accent Colors (from PlayFit rainbow logo) */
-  --color-accent-yellow: #FFA726;
-  --color-accent-yellow-light: #FFE0B2;
-  --color-accent-pink: #EC407A;
-  --color-accent-pink-light: #F8BBD0;
-  --color-accent-purple: #AB47BC;
-  --color-accent-purple-light: #E1BEE7;
-  --color-accent-teal: #26C6DA;
-  --color-accent-teal-light: #B2EBF2;
-  --color-accent-orange: #FF7043;
-  --color-accent-orange-light: #FFCCBC;
+  /* Accent Colors (from PlayFit rainbow logo) - Enhanced Vibrancy */
+  --color-accent-yellow: #FBBF24;
+  --color-accent-yellow-light: #FEF3C7;
+  --color-accent-yellow-dark: #F59E0B;
+  --color-accent-pink: #EC4899;
+  --color-accent-pink-light: #FCE7F3;
+  --color-accent-pink-dark: #DB2777;
+  --color-accent-purple: #A855F7;
+  --color-accent-purple-light: #F3E8FF;
+  --color-accent-purple-dark: #9333EA;
+  --color-accent-teal: #14B8A6;
+  --color-accent-teal-light: #CCFBF1;
+  --color-accent-teal-dark: #0D9488;
+  --color-accent-orange: #F97316;
+  --color-accent-orange-light: #FFEDD5;
+  --color-accent-orange-dark: #EA580C;
+  --color-accent-indigo: #6366F1;
+  --color-accent-indigo-light: #E0E7FF;
+  --color-accent-indigo-dark: #4F46E5;
+  --color-accent-rose: #F43F5E;
+  --color-accent-rose-light: #FFE4E6;
+  --color-accent-rose-dark: #E11D48;
+  --color-accent-emerald: #10B981;
+  --color-accent-emerald-light: #D1FAE5;
+  --color-accent-emerald-dark: #059669;
 
   /* Dark Navy Palette (from PlayFit logo) */
-  --color-dark-50: #E8EEF5;
-  --color-dark-100: #C5D3E6;
-  --color-dark-200: #9FB5D4;
-  --color-dark-300: #7897C2;
-  --color-dark-400: #5B80B5;
-  --color-dark-500: #3E69A8;
-  --color-dark-600: #3861A0;
-  --color-dark-700: #305697;
-  --color-dark-800: #284C8D;
-  --color-dark-900: #1E3A5F;
+  --color-dark-50: #F8FAFC;
+  --color-dark-100: #F1F5F9;
+  --color-dark-200: #E2E8F0;
+  --color-dark-300: #CBD5E1;
+  --color-dark-400: #94A3B8;
+  --color-dark-500: #64748B;
+  --color-dark-600: #475569;
+  --color-dark-700: #334155;
+  --color-dark-800: #1E293B;
+  --color-dark-900: #0F172A;
 
-  /* Neutral Colors */
+  /* Neutral Colors - Modern & Clean */
   --color-card: #FFFFFF;
   --color-sidebar: #FFFFFF;
-  --color-border: #E0E0E0;
-  --color-border-soft: #F0F0F0;
-  --color-hover: #FAFAFA;
+  --color-border: #E2E8F0;
+  --color-border-soft: #F1F5F9;
+  --color-hover: #F8FAFC;
 
-  /* Text Colors */
-  --color-text-primary: #1E3A5F;
-  --color-text-secondary: #546E7A;
-  --color-text-muted: #78909C;
-  --color-text-placeholder: #B0BEC5;
+  /* Text Colors - Improved Contrast */
+  --color-text-primary: #0F172A;
+  --color-text-secondary: #475569;
+  --color-text-muted: #64748B;
+  --color-text-placeholder: #94A3B8;
   --color-text-white: #FFFFFF;
 
-  /* Dashboard Status Colors */
-  --color-success: #7CB342;
-  --color-warning: #FFA726;
-  --color-error: #EC407A;
-  --color-info: #1E88E5;
+  /* Dashboard Status Colors - Vibrant */
+  --color-success: #22C55E;
+  --color-success-light: #BBF7D0;
+  --color-warning: #F59E0B;
+  --color-warning-light: #FEF3C7;
+  --color-error: #EF4444;
+  --color-error-light: #FEE2E2;
+  --color-info: #3B82F6;
+  --color-info-light: #DBEAFE;
+
+  /* Gradient Definitions */
+  --gradient-primary: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
+  --gradient-secondary: linear-gradient(135deg, #22C55E 0%, #16A34A 100%);
+  --gradient-rainbow: linear-gradient(135deg, #EC4899 0%, #A855F7 25%, #3B82F6 50%, #14B8A6 75%, #FBBF24 100%);
+  --gradient-warm: linear-gradient(135deg, #F97316 0%, #FBBF24 100%);
+  --gradient-cool: linear-gradient(135deg, #3B82F6 0%, #14B8A6 100%);
+  --gradient-purple: linear-gradient(135deg, #A855F7 0%, #EC4899 100%);
+  --gradient-orange: linear-gradient(135deg, #F97316 0%, #F59E0B 100%);
+  --gradient-blue: linear-gradient(135deg, #3B82F6 0%, #6366F1 100%);
+
+  /* Shadow Definitions */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  --shadow-colored: 0 10px 30px -5px rgb(59 130 246 / 0.3);
 
   /* Fonts */
   --font-sans: var(--font-geist-sans);
@@ -125,9 +161,25 @@
 
 /* Touch target optimization for mobile */
 @media (max-width: 640px) {
-  button, a, [role="button"] {
+  button, a, [role="button"], input[type="submit"], input[type="button"] {
     min-height: 44px;
     min-width: 44px;
+  }
+  
+  /* Prevent text size adjustment on iOS */
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+  
+  /* Improve tap highlight */
+  * {
+    -webkit-tap-highlight-color: rgba(30, 136, 229, 0.1);
+  }
+  
+  /* Better form inputs on mobile */
+  input, select, textarea {
+    font-size: 16px; /* Prevents iOS zoom on focus */
   }
 }
 
@@ -209,7 +261,142 @@
 body {
   background: var(--color-background);
   color: var(--color-foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Premium Glass Effect */
+.glass-effect {
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Premium Card with Gradient Border */
+.card-gradient-border {
+  position: relative;
+  background: white;
+  border-radius: 12px;
+}
+
+.card-gradient-border::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 12px;
+  padding: 2px;
+  background: linear-gradient(135deg, #3B82F6, #A855F7, #EC4899);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+
+/* Hover Lift Effect */
+.hover-lift {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.15);
+}
+
+/* Gradient Text */
+.gradient-text {
+  background: linear-gradient(135deg, #3B82F6 0%, #A855F7 50%, #EC4899 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Premium Button Styles */
+.btn-gradient {
+  background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
+  color: white;
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.btn-gradient:hover {
+  background: linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px -4px rgba(59, 130, 246, 0.4);
+}
+
+/* Icon Container Styles */
+.icon-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.icon-container:hover {
+  transform: rotate(10deg) scale(1.1);
+}
+
+/* Premium Divider */
+.divider-gradient {
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #E2E8F0, transparent);
+}
+
+/* Shimmer Loading Effect */
+.shimmer {
+  background: linear-gradient(90deg, #F1F5F9 0%, #E2E8F0 50%, #F1F5F9 100%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Progress Bar */
+.progress-bar {
+  height: 8px;
+  background: #E2E8F0;
+  border-radius: 9999px;
+  overflow: hidden;
+  position: relative;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #3B82F6, #A855F7);
+  border-radius: 9999px;
+  transition: width 0.5s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.progress-bar-fill::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  animation: progress-shimmer 2s infinite;
+}
+
+@keyframes progress-shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
 }
 
 /* Hide scrollbar utility */
@@ -508,6 +695,17 @@ html {
   }
 }
 
+@keyframes slide-in-from-bottom {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 @keyframes zoom-in {
   from {
     opacity: 0;
@@ -531,6 +729,45 @@ html {
   }
 }
 
+@keyframes bounce-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  70% {
+    transform: scale(0.9);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes rotate-in {
+  from {
+    opacity: 0;
+    transform: rotate(-180deg) scale(0.5);
+  }
+  to {
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
+  }
+}
+
+@keyframes flip-in {
+  from {
+    opacity: 0;
+    transform: perspective(400px) rotateY(-90deg);
+  }
+  to {
+    opacity: 1;
+    transform: perspective(400px) rotateY(0deg);
+  }
+}
+
 .animate-in {
   animation-fill-mode: both;
 }
@@ -551,12 +788,32 @@ html {
   animation: slide-in-from-top 0.5s ease-out;
 }
 
+.slide-in-from-bottom {
+  animation: slide-in-from-bottom 0.5s ease-out;
+}
+
 .zoom-in {
   animation: zoom-in 0.5s ease-out;
 }
 
 .shake-in {
   animation: shake-in 0.5s ease-out;
+}
+
+.bounce-in {
+  animation: bounce-in 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.rotate-in {
+  animation: rotate-in 0.7s ease-out;
+}
+
+.flip-in {
+  animation: flip-in 0.6s ease-out;
+}
+
+.delay-100 {
+  animation-delay: 0.1s;
 }
 
 .delay-200 {
@@ -586,6 +843,16 @@ html {
 .duration-1000 {
   animation-duration: 1s;
 }
+
+/* Stagger animations for lists */
+.stagger-item:nth-child(1) { animation-delay: 0.05s; }
+.stagger-item:nth-child(2) { animation-delay: 0.1s; }
+.stagger-item:nth-child(3) { animation-delay: 0.15s; }
+.stagger-item:nth-child(4) { animation-delay: 0.2s; }
+.stagger-item:nth-child(5) { animation-delay: 0.25s; }
+.stagger-item:nth-child(6) { animation-delay: 0.3s; }
+.stagger-item:nth-child(7) { animation-delay: 0.35s; }
+.stagger-item:nth-child(8) { animation-delay: 0.4s; }
 
 /* Pulse animation for stars and icons */
 @keyframes pulse-subtle {
