@@ -17,16 +17,18 @@ export default function RoleGuard({
 
   useEffect(() => {
     const checkAuth = () => {
-      // Check if logout was initiated - prevent bfcache access
+      // Check if logout was initiated - redirect to homepage instead of login
       const logoutInitiated = sessionStorage.getItem('logout_initiated');
       if (logoutInitiated === 'true') {
         sessionStorage.removeItem('logout_initiated');
         localStorage.removeItem('user');
         localStorage.removeItem('token');
+        localStorage.removeItem('sessionToken');
         sessionStorage.removeItem('auth_session');
         setIsAuthorized(false);
         setIsChecking(false);
-        window.location.href = '/login';
+        // Redirect to homepage, not login
+        window.location.replace('/');
         return false;
       }
 
@@ -47,6 +49,7 @@ export default function RoleGuard({
         if (!user?.role || !allowedRoles.includes(user.role as 'admin' | 'instructor' | 'student')) {
           localStorage.removeItem('user');
           localStorage.removeItem('token');
+          localStorage.removeItem('sessionToken');
           sessionStorage.removeItem('auth_session');
           setIsAuthorized(false);
           setIsChecking(false);
@@ -59,6 +62,7 @@ export default function RoleGuard({
       } catch {
         localStorage.removeItem('user');
         localStorage.removeItem('token');
+        localStorage.removeItem('sessionToken');
         sessionStorage.removeItem('auth_session');
         setIsAuthorized(false);
         setIsChecking(false);

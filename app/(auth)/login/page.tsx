@@ -20,6 +20,17 @@ export default function LoginPage() {
 
   // Redirect if already authenticated
   useEffect(() => {
+    // Check if user just logged out - if so, redirect to homepage immediately
+    if (typeof window !== 'undefined') {
+      const logoutInitiated = sessionStorage.getItem('logout_initiated');
+      if (logoutInitiated === 'true') {
+        sessionStorage.removeItem('logout_initiated');
+        // Immediately redirect to homepage without showing login page
+        window.location.replace('/');
+        return;
+      }
+    }
+    
     // Clear logout flag if present
     sessionStorage.removeItem('logout_initiated');
     

@@ -52,13 +52,14 @@ export const userService = {
 
   logout: () => {
     if (typeof window !== 'undefined') {
+      // Set logout flag FIRST before any clearing
+      sessionStorage.setItem('logout_initiated', 'true');
+      
       // Clear all authentication data
       localStorage.removeItem('token');
       localStorage.removeItem('user');
+      localStorage.removeItem('sessionToken');
       sessionStorage.removeItem('auth_session');
-      
-      // Set logout flag to prevent bfcache access
-      sessionStorage.setItem('logout_initiated', 'true');
       
       // Clear any cached data
       if ('caches' in window) {
@@ -72,9 +73,9 @@ export const userService = {
       // Dispatch custom event for other components
       window.dispatchEvent(new Event('auth:logout'));
       
-      // Redirect to Student Home Page with cache-busting to force full page reload
-      // This prevents bfcache from restoring the previous page
-      window.location.href = `/?logout=${Date.now()}`;
+      // Redirect to Student Home Page directly using replace (no history entry)
+      // This ensures smooth transition without showing login page
+      window.location.replace('/');
     }
   },
 };
