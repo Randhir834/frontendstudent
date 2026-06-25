@@ -88,32 +88,32 @@ export default function RegisterPage() {
     >
       <div className="w-full relative">
         {/* Gradient Background Blobs */}
-        <div className="absolute -top-20 -left-20 w-40 h-40 bg-gradient-to-br from-purple-400 to-pink-400 rounded-full blur-3xl opacity-20 animate-blob"></div>
-        <div className="absolute top-1/2 -right-20 w-40 h-40 bg-gradient-to-br from-yellow-400 to-orange-400 rounded-full blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
+        <div className="absolute -top-12 xs:-top-16 sm:-top-20 -left-12 xs:-left-16 sm:-left-20 w-32 xs:w-36 sm:w-40 h-32 xs:h-36 sm:h-40 bg-gradient-to-br from-purple-400 to-pink-400 rounded-full blur-3xl opacity-20 animate-blob"></div>
+        <div className="absolute top-1/2 -right-12 xs:-right-16 sm:-right-20 w-32 xs:w-36 sm:w-40 h-32 xs:h-36 sm:h-40 bg-gradient-to-br from-yellow-400 to-orange-400 rounded-full blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
         
         <div className="relative">
-          <div className="text-center mb-8">
-            <h2 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 bg-clip-text text-transparent mb-2">
+          <div className="text-center mb-6 xs:mb-7 sm:mb-8">
+            <h2 className="text-xl xs:text-2xl sm:text-3xl font-bold bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 bg-clip-text text-transparent mb-2">
               Create Student Account
             </h2>
-            <p className="text-sm text-gray-600">Fill in your details to get started</p>
+            <p className="text-xs xs:text-sm text-gray-600">Fill in your details to get started</p>
           </div>
 
           {error && (
-            <div className="mb-6 relative">
+            <div className="mb-4 xs:mb-5 sm:mb-6 relative">
               <div className="h-1 bg-gradient-to-r from-red-500 to-pink-500 absolute top-0 left-0 right-0 rounded-t-xl"></div>
-              <div className="p-4 rounded-xl bg-red-50 border border-red-200 text-red-700 text-sm text-center pt-5">
+              <div className="p-3 xs:p-3.5 sm:p-4 rounded-xl bg-red-50 border border-red-200 text-red-700 text-xs xs:text-sm text-center pt-4 xs:pt-4.5 sm:pt-5">
                 {error}
               </div>
             </div>
           )}
 
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div className="space-y-2">
-            <label htmlFor="name" className="block text-sm font-semibold text-gray-700">Full Name</label>
+        <form onSubmit={handleSubmit} className="space-y-3 xs:space-y-3.5 sm:space-y-4">
+          <div className="space-y-1.5 xs:space-y-2">
+            <label htmlFor="name" className="block text-xs xs:text-sm font-semibold text-gray-700">Full Name</label>
             <div className="relative group">
-              <div className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-purple-500 transition-colors">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              <div className="absolute left-3 xs:left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-purple-500 transition-colors">
+                <svg width="16" height="16" className="xs:w-[18px] xs:h-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
               </div>
               <input
                 id="name"
@@ -122,7 +122,7 @@ export default function RegisterPage() {
                 onChange={(e) => setName(e.target.value)}
                 required
                 autoComplete="name"
-                className="w-full pl-12 pr-4 py-3 rounded-xl border border-gray-200 text-sm text-gray-800 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 bg-white shadow-sm transition-all"
+                className="w-full pl-10 xs:pl-12 pr-3 xs:pr-4 py-2.5 xs:py-3 rounded-xl border border-gray-200 text-xs xs:text-sm text-gray-800 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 bg-white shadow-sm transition-all touch-target"
               />
             </div>
           </div>
@@ -176,12 +176,12 @@ export default function RegisterPage() {
             <p className="text-xs text-gray-500">Use at least 8 characters.</p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div className="space-y-2">
-              <label htmlFor="dateOfBirth" className="block text-sm font-semibold text-gray-700">Date of Birth</label>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 xs:gap-3.5 sm:gap-4">
+            <div className="space-y-1.5 xs:space-y-2">
+              <label htmlFor="dateOfBirth" className="block text-xs xs:text-sm font-semibold text-gray-700">Date of Birth</label>
               <div className="relative group">
-                <div className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-indigo-500 transition-colors">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
+                <div className="absolute left-3 xs:left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-indigo-500 transition-colors">
+                  <svg width="16" height="16" className="xs:w-[18px] xs:h-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
                 </div>
                 <input
                   id="dateOfBirth"
@@ -189,16 +189,16 @@ export default function RegisterPage() {
                   value={dateOfBirth}
                   onChange={(e) => setDateOfBirth(e.target.value)}
                   required
-                  className="w-full pl-12 pr-4 py-3 rounded-xl border border-gray-200 text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 bg-white shadow-sm transition-all"
+                  className="w-full pl-10 xs:pl-12 pr-3 xs:pr-4 py-2.5 xs:py-3 rounded-xl border border-gray-200 text-xs xs:text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 bg-white shadow-sm transition-all touch-target"
                 />
               </div>
             </div>
 
-            <div className="space-y-2">
-              <label htmlFor="grade" className="block text-sm font-semibold text-gray-700">Grade</label>
+            <div className="space-y-1.5 xs:space-y-2">
+              <label htmlFor="grade" className="block text-xs xs:text-sm font-semibold text-gray-700">Grade</label>
               <div className="relative group">
-                <div className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-yellow-500 transition-colors">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <div className="absolute left-3 xs:left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-yellow-500 transition-colors">
+                  <svg width="16" height="16" className="xs:w-[18px] xs:h-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
                 </div>
                 <input
                   id="grade"
@@ -206,7 +206,7 @@ export default function RegisterPage() {
                   value={grade}
                   onChange={(e) => setGrade(e.target.value)}
                   required
-                  className="w-full pl-12 pr-4 py-3 rounded-xl border border-gray-200 text-sm text-gray-800 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 bg-white shadow-sm transition-all"
+                  className="w-full pl-10 xs:pl-12 pr-3 xs:pr-4 py-2.5 xs:py-3 rounded-xl border border-gray-200 text-xs xs:text-sm text-gray-800 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 bg-white shadow-sm transition-all touch-target"
                 />
               </div>
             </div>
@@ -285,30 +285,30 @@ export default function RegisterPage() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-3.5 rounded-xl bg-gradient-to-r from-purple-500 via-pink-500 to-purple-500 text-white font-semibold text-sm hover:from-purple-600 hover:via-pink-600 hover:to-purple-600 active:from-purple-700 active:via-pink-700 active:to-purple-700 disabled:opacity-60 disabled:cursor-not-allowed transition-all flex items-center justify-center gap-2 shadow-lg hover:shadow-xl hover:-translate-y-0.5"
+            className="w-full py-2.5 xs:py-3 sm:py-3.5 rounded-xl bg-gradient-to-r from-purple-500 via-pink-500 to-purple-500 text-white font-semibold text-xs xs:text-sm hover:from-purple-600 hover:via-pink-600 hover:to-purple-600 active:from-purple-700 active:via-pink-700 active:to-purple-700 disabled:opacity-60 disabled:cursor-not-allowed transition-all flex items-center justify-center gap-2 shadow-lg hover:shadow-xl hover:-translate-y-0.5 touch-target active:scale-95"
           >
             {loading ? (
               <>
-                <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                <div className="w-4 h-4 xs:w-5 xs:h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
                 Creating account...
               </>
             ) : (
               <>
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" x2="19" y1="8" y2="14"/><line x1="22" x2="16" y1="11" y2="11"/></svg>
+                <svg width="16" height="16" className="xs:w-[18px] xs:h-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" x2="19" y1="8" y2="14"/><line x1="22" x2="16" y1="11" y2="11"/></svg>
                 Create account
               </>
             )}
           </button>
         </form>
 
-      <p className="mt-6 text-center text-sm text-gray-600">
+      <p className="mt-4 xs:mt-5 sm:mt-6 text-center text-xs xs:text-sm text-gray-600">
         Already have an account?{' '}
-        <Link href="/login" className="font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent hover:from-purple-700 hover:to-pink-700">
+        <Link href="/login" className="font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent hover:from-purple-700 hover:to-pink-700 active:scale-95">
           Sign in
         </Link>
       </p>
 
-      <div className="h-10 shrink-0"></div>
+      <div className="h-6 xs:h-8 sm:h-10 shrink-0"></div>
         </div>
       </div>
     </StudentAuthSplitShell>

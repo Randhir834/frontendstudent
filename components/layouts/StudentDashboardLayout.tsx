@@ -102,18 +102,18 @@ export default function StudentDashboardLayout({ children }: StudentDashboardLay
         />
       )}
 
-      {/* Left Sidebar — Modernized */}
+      {/* Left Sidebar — Modernized - Fully Responsive */}
       <aside
         className={`bg-white/90 backdrop-blur-xl border-r border-gray-200 flex flex-col z-50 shadow-xl
           fixed inset-y-0 left-0 transform transition-transform duration-300 ease-in-out
           ${mobileOpen ? 'translate-x-0' : '-translate-x-full'}
           lg:translate-x-0 lg:flex
-          w-72 lg:w-64
+          w-64 xs:w-72 sm:w-72 lg:w-64 xl:w-72
         `}
       >
         {/* Logo with gradient background */}
-        <div className="relative border-b border-gray-200 lg:border-none flex items-center justify-center px-4 py-6 shrink-0 bg-gradient-to-r from-indigo-600 to-purple-600 lg:bg-none">
-          <div className="relative flex items-center justify-center shrink-0 transition-all duration-300 w-full h-14 sm:h-16 lg:h-20">
+        <div className="relative border-b border-gray-200 lg:border-none flex items-center justify-center px-3 xs:px-4 py-4 xs:py-5 sm:py-6 shrink-0 bg-gradient-to-r from-indigo-600 to-purple-600 lg:bg-none">
+          <div className="relative flex items-center justify-center shrink-0 transition-all duration-300 w-full h-12 xs:h-14 sm:h-16 lg:h-16 xl:h-20">
             <img
               src="/images/navbarlogo.png"
               alt="PlayFit"
@@ -122,23 +122,23 @@ export default function StudentDashboardLayout({ children }: StudentDashboardLay
           </div>
           <button
             onClick={() => setMobileOpen(false)}
-            className="absolute right-4 top-4 lg:hidden p-2 rounded-lg hover:bg-white/20 text-white transition-colors"
+            className="absolute right-3 xs:right-4 top-3 xs:top-4 lg:hidden p-2 rounded-lg hover:bg-white/20 text-white transition-colors touch-target"
           >
-            <X size={20} />
+            <X size={18} className="xs:w-5 xs:h-5" />
           </button>
         </div>
 
-        <div className="flex-1 min-h-0 overflow-y-auto no-scrollbar px-3 py-4">
+        <div className="flex-1 min-h-0 overflow-y-auto no-scrollbar px-2 xs:px-3 py-3 xs:py-4">
           {/* Welcome Badge */}
-          <div className="mb-4 px-3 py-3 bg-gradient-to-r from-indigo-50 to-purple-50 rounded-xl border border-indigo-100">
-            <div className="flex items-center gap-2 text-sm font-medium text-indigo-700">
-              <Sparkles className="w-4 h-4" />
+          <div className="mb-3 xs:mb-4 px-2 xs:px-3 py-2 xs:py-3 bg-gradient-to-r from-indigo-50 to-purple-50 rounded-xl border border-indigo-100">
+            <div className="flex items-center gap-1.5 xs:gap-2 text-xs xs:text-sm font-medium text-indigo-700">
+              <Sparkles className="w-3.5 h-3.5 xs:w-4 xs:h-4" />
               <span>Keep Learning!</span>
             </div>
           </div>
 
           {/* Navigation */}
-          <nav className="space-y-1.5">
+          <nav className="space-y-1 xs:space-y-1.5">
             {menuItems.map((item, index) => {
               const isActive = item.href === '/student'
                 ? pathname === '/student'
@@ -148,7 +148,7 @@ export default function StudentDashboardLayout({ children }: StudentDashboardLay
                   key={index}
                   href={item.href}
                   onClick={() => setMobileOpen(false)}
-                  className={`group relative w-full flex items-center gap-3 px-4 py-3.5 rounded-xl text-sm font-medium transition-all duration-200 ${
+                  className={`group relative w-full flex items-center gap-2 xs:gap-3 px-3 xs:px-4 py-2.5 xs:py-3 sm:py-3.5 rounded-xl text-xs xs:text-sm font-medium transition-all duration-200 touch-target active:scale-95 ${
                     isActive
                       ? 'bg-gradient-to-r text-white shadow-lg'
                       : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
@@ -158,11 +158,11 @@ export default function StudentDashboardLayout({ children }: StudentDashboardLay
                     <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent rounded-xl"></div>
                   )}
                   <div className={`relative ${isActive ? 'scale-110' : 'group-hover:scale-110'} transition-transform`}>
-                    <item.icon size={20} className="shrink-0" />
+                    <item.icon size={18} className="xs:w-5 xs:h-5 shrink-0" />
                   </div>
                   <span className="relative truncate">{item.label}</span>
                   {isActive && (
-                    <div className="absolute right-2 w-2 h-2 bg-white rounded-full shadow-lg animate-pulse"></div>
+                    <div className="absolute right-2 w-1.5 h-1.5 xs:w-2 xs:h-2 bg-white rounded-full shadow-lg animate-pulse"></div>
                   )}
                 </Link>
               );
@@ -170,7 +170,7 @@ export default function StudentDashboardLayout({ children }: StudentDashboardLay
           </nav>
 
           {/* Bottom Image Section */}
-          <div className="mt-6 px-2">
+          <div className="mt-4 xs:mt-5 sm:mt-6 px-1 xs:px-2">
             <div className="relative rounded-2xl overflow-hidden shadow-lg group hover:shadow-xl transition-shadow">
               <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent group-hover:from-black/30 transition-colors"></div>
               <img
@@ -184,29 +184,29 @@ export default function StudentDashboardLayout({ children }: StudentDashboardLay
       </aside>
 
       {/* Main Content Area */}
-      <div className="flex-1 flex flex-col min-w-0 lg:ml-64 lg:h-screen lg:overflow-y-auto no-scrollbar">
-        {/* Top Header - Modernized */}
-        <header className="bg-white/80 backdrop-blur-xl border-b border-gray-200 px-4 sm:px-6 lg:px-8 py-3 sticky top-0 z-20 shadow-sm">
-          <div className="flex items-center justify-between gap-4">
-            <div className="flex-1 flex items-center gap-3">
+      <div className="flex-1 flex flex-col min-w-0 lg:ml-64 xl:ml-72 lg:h-screen lg:overflow-y-auto no-scrollbar">
+        {/* Top Header - Modernized & Fully Responsive */}
+        <header className="bg-white/80 backdrop-blur-xl border-b border-gray-200 px-3 xs:px-4 sm:px-6 lg:px-8 py-2.5 xs:py-3 sticky top-0 z-20 shadow-sm">
+          <div className="flex items-center justify-between gap-2 xs:gap-3 sm:gap-4">
+            <div className="flex-1 flex items-center gap-2 xs:gap-3 min-w-0">
               {/* Mobile hamburger */}
               <button
                 onClick={() => setMobileOpen(true)}
-                className="lg:hidden p-2.5 rounded-xl hover:bg-gradient-to-r hover:from-indigo-50 hover:to-purple-50 text-gray-600 hover:text-indigo-600 transition-all"
+                className="lg:hidden p-2 xs:p-2.5 rounded-xl hover:bg-gradient-to-r hover:from-indigo-50 hover:to-purple-50 text-gray-600 hover:text-indigo-600 transition-all touch-target shrink-0"
                 aria-label="Open menu"
               >
-                <Menu size={22} />
+                <Menu size={20} className="xs:w-[22px] xs:h-[22px]" />
               </button>
-              <div className="hidden lg:block w-4" />
+              <div className="hidden lg:block w-2 xl:w-4 shrink-0" />
               {/* Global Search */}
               <GlobalSearch className="flex-1 max-w-4xl" />
             </div>
 
-            <div className="flex items-center gap-3 shrink-0">
+            <div className="flex items-center gap-2 xs:gap-3 shrink-0">
               {/* Profile Display */}
-              <div className="flex items-center gap-3 pl-4 border-l border-gray-200">
+              <div className="flex items-center gap-2 xs:gap-3 pl-2 xs:pl-3 sm:pl-4 border-l border-gray-200">
                 {userLoading ? (
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-r from-indigo-400 to-purple-400 animate-pulse"></div>
+                  <div className="w-8 h-8 xs:w-9 xs:h-9 sm:w-10 sm:h-10 rounded-full bg-gradient-to-r from-indigo-400 to-purple-400 animate-pulse"></div>
                 ) : (
                   <div className="relative group">
                     <div className="absolute -inset-0.5 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-full opacity-75 group-hover:opacity-100 blur transition-opacity"></div>
@@ -214,31 +214,31 @@ export default function StudentDashboardLayout({ children }: StudentDashboardLay
                       key={user?.avatar_url || 'default'}
                       src={avatarUrl}
                       alt={displayName}
-                      className="relative w-10 h-10 rounded-full object-cover ring-2 ring-white"
+                      className="relative w-8 h-8 xs:w-9 xs:h-9 sm:w-10 sm:h-10 rounded-full object-cover ring-2 ring-white"
                     />
                   </div>
                 )}
                 <div className="hidden sm:block text-right">
-                  <p className="text-sm font-semibold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">{displayName}</p>
-                  <p className="text-xs text-gray-500">Student</p>
+                  <p className="text-xs xs:text-sm font-semibold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent truncate max-w-[120px] lg:max-w-[150px]">{displayName}</p>
+                  <p className="text-[10px] xs:text-xs text-gray-500">Student</p>
                 </div>
 
                 <button
                   type="button"
                   onClick={handleLogout}
-                  className="sm:hidden p-2.5 rounded-xl border border-red-200 bg-white text-red-500 hover:text-red-600 hover:bg-red-50 transition-all"
+                  className="sm:hidden p-2 xs:p-2.5 rounded-xl border border-red-200 bg-white text-red-500 hover:text-red-600 hover:bg-red-50 transition-all touch-target active:scale-95"
                   aria-label="Logout"
                 >
-                  <LogOut size={18} />
+                  <LogOut size={16} className="xs:w-[18px] xs:h-[18px]" />
                 </button>
 
                 <button
                   type="button"
                   onClick={handleLogout}
-                  className="hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-red-200 bg-white text-red-500 text-sm font-semibold hover:bg-red-50 hover:border-red-300 transition-all hover:scale-105"
+                  className="hidden sm:inline-flex items-center gap-1.5 xs:gap-2 px-3 xs:px-4 py-1.5 xs:py-2 rounded-xl border border-red-200 bg-white text-red-500 text-xs xs:text-sm font-semibold hover:bg-red-50 hover:border-red-300 transition-all hover:scale-105 touch-target active:scale-95"
                   aria-label="Logout"
                 >
-                  <LogOut size={16} />
+                  <LogOut size={14} className="xs:w-4 xs:h-4" />
                   Logout
                 </button>
               </div>

@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
-import { ArrowRight, CheckCircle, BookOpen, Users, Trophy, Star, Menu, X, Play, Award, TrendingUp, Mail, Phone, Sparkles, Zap, Heart, Target } from 'lucide-react';
+import { ArrowRight, CheckCircle, BookOpen, Users, Trophy, Star, Menu, X, Award, TrendingUp, Mail, Phone, Sparkles, Zap, Heart, Target } from 'lucide-react';
 import { trialService } from '@/services/trialService';
 import CourseRecommendationSection from '@/components/CourseRecommendation/CourseRecommendationSection';
 
@@ -103,7 +103,7 @@ export default function Home() {
     return cleanup;
   }, []);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
     setError('');
@@ -129,61 +129,61 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-purple-50">
+    <div className="min-h-screen bg-gradient-to-br from-blue-100 via-purple-100 to-pink-100">
       {/* Clean Professional Header - Mobile Optimized */}
-      <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-200 safe-top shadow-sm">
-        <div className="w-full px-3 sm:px-4 md:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-14 sm:h-16 md:h-18 lg:h-20">
-            <Link href="/" className="flex items-center flex-shrink-0">
+      <header className="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-purple-200 safe-top shadow-lg shadow-purple-500/10">
+        <div className="w-full px-3 sm:px-4 md:px-6 lg:px-8 max-w-[1920px] mx-auto">
+          <div className="flex justify-between items-center h-14 sm:h-16 md:h-16 lg:h-18 xl:h-20">
+            <Link href="/" className="flex items-center flex-shrink-0 min-w-0">
               <img
                 src="/images/playfit-logo.jpg"
                 alt="Playfit"
-                className="h-8 sm:h-10 md:h-12 lg:h-14 xl:h-16 w-auto object-contain max-w-[120px] sm:max-w-[140px] md:max-w-[180px] transition-transform hover:scale-105"
+                className="h-7 sm:h-9 md:h-11 lg:h-13 xl:h-15 w-auto object-contain max-w-[100px] xs:max-w-[110px] sm:max-w-[130px] md:max-w-[160px] transition-transform hover:scale-105"
               />
             </Link>
             
-            <nav className="hidden md:flex items-center gap-3 lg:gap-4 xl:gap-6">
-              <Link href="#courses" className="text-xs lg:text-sm font-medium text-gray-700 hover:text-blue-600 transition-all hover:scale-105 whitespace-nowrap relative group">
+            <nav className="hidden md:flex items-center gap-2 lg:gap-3 xl:gap-5">
+              <Link href="#courses" className="text-xs lg:text-sm xl:text-base font-bold text-gray-700 hover:text-purple-600 transition-all hover:scale-105 whitespace-nowrap relative group px-1 lg:px-2">
                 Courses
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 group-hover:w-full transition-all"></span>
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-600 to-pink-600 group-hover:w-full transition-all"></span>
               </Link>
-              <Link href="#about" className="text-xs lg:text-sm font-medium text-gray-700 hover:text-blue-600 transition-all hover:scale-105 whitespace-nowrap relative group">
+              <Link href="#about" className="text-xs lg:text-sm xl:text-base font-bold text-gray-700 hover:text-purple-600 transition-all hover:scale-105 whitespace-nowrap relative group px-1 lg:px-2">
                 About
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 group-hover:w-full transition-all"></span>
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-600 to-pink-600 group-hover:w-full transition-all"></span>
               </Link>
-              <Link href="#trial" className="text-xs lg:text-sm font-medium text-gray-700 hover:text-blue-600 transition-all hover:scale-105 whitespace-nowrap relative group">
+              <Link href="#trial" className="text-xs lg:text-sm xl:text-base font-bold text-gray-700 hover:text-purple-600 transition-all hover:scale-105 whitespace-nowrap relative group px-1 lg:px-2">
                 Free Trial
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 group-hover:w-full transition-all"></span>
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-600 to-pink-600 group-hover:w-full transition-all"></span>
               </Link>
-              <Link href="/login" className="ml-2 lg:ml-3 px-4 lg:px-6 py-2 lg:py-2.5 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white text-xs lg:text-sm font-semibold rounded-full transition-all hover:scale-105 hover:shadow-lg whitespace-nowrap shadow-blue-500/30">
+              <Link href="/login" className="ml-1 lg:ml-2 xl:ml-3 px-3 md:px-4 lg:px-5 xl:px-6 py-1.5 md:py-2 lg:py-2.5 bg-gradient-to-r from-purple-600 via-pink-600 to-orange-500 hover:from-purple-700 hover:via-pink-700 hover:to-orange-600 text-white text-xs lg:text-sm xl:text-base font-bold rounded-full transition-all hover:scale-105 hover:shadow-xl whitespace-nowrap shadow-purple-500/40">
                 Login
               </Link>
             </nav>
 
             <button 
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden p-2 hover:bg-blue-50 rounded-lg transition-colors touch-target"
+              className="md:hidden p-2 hover:bg-purple-50 rounded-lg transition-colors touch-target"
               aria-label="Toggle menu"
             >
-              {mobileMenuOpen ? <X className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600" /> : <Menu className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600" />}
+              {mobileMenuOpen ? <X className="w-5 h-5 sm:w-6 sm:h-6 text-purple-600" /> : <Menu className="w-5 h-5 sm:w-6 sm:h-6 text-purple-600" />}
             </button>
           </div>
         </div>
 
         {/* Mobile Menu - Full Width */}
         {mobileMenuOpen && (
-          <div className="md:hidden border-t border-gray-200 bg-white/95 backdrop-blur-md shadow-lg">
-            <nav className="px-3 sm:px-4 py-3 space-y-2">
-              <Link href="#courses" onClick={() => setMobileMenuOpen(false)} className="block py-2.5 px-3 text-sm font-medium text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all touch-target">
+          <div className="md:hidden border-t border-purple-200 bg-white/95 backdrop-blur-md shadow-lg animate-in slide-in-from-top duration-300">
+            <nav className="px-3 sm:px-4 py-3 space-y-2 max-w-md mx-auto">
+              <Link href="#courses" onClick={() => setMobileMenuOpen(false)} className="block py-3 px-4 text-sm font-bold text-gray-700 hover:text-purple-600 hover:bg-purple-50 rounded-lg transition-all touch-target active:scale-95">
                 Courses
               </Link>
-              <Link href="#about" onClick={() => setMobileMenuOpen(false)} className="block py-2.5 px-3 text-sm font-medium text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all touch-target">
+              <Link href="#about" onClick={() => setMobileMenuOpen(false)} className="block py-3 px-4 text-sm font-bold text-gray-700 hover:text-purple-600 hover:bg-purple-50 rounded-lg transition-all touch-target active:scale-95">
                 About
               </Link>
-              <Link href="#trial" onClick={() => setMobileMenuOpen(false)} className="block py-2.5 px-3 text-sm font-medium text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all touch-target">
+              <Link href="#trial" onClick={() => setMobileMenuOpen(false)} className="block py-3 px-4 text-sm font-bold text-gray-700 hover:text-purple-600 hover:bg-purple-50 rounded-lg transition-all touch-target active:scale-95">
                 Free Trial
               </Link>
-              <Link href="/login" onClick={() => setMobileMenuOpen(false)} className="block px-4 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white text-sm font-semibold rounded-lg text-center hover:from-blue-700 hover:to-blue-800 transition-all mt-2 touch-target shadow-lg shadow-blue-500/30">
+              <Link href="/login" onClick={() => setMobileMenuOpen(false)} className="block px-4 py-3 bg-gradient-to-r from-purple-600 via-pink-600 to-orange-500 text-white text-sm font-bold rounded-lg text-center hover:from-purple-700 hover:via-pink-700 hover:to-orange-600 transition-all mt-2 touch-target shadow-lg shadow-purple-500/40 active:scale-95">
                 Login
               </Link>
             </nav>
@@ -191,100 +191,125 @@ export default function Home() {
         )}
       </header>
 
-      {/* Hero Section - Mobile Optimized */}
-      <section className="relative bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600 text-white overflow-hidden">
-        {/* Animated Background Elements */}
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-0 right-0 w-96 h-96 bg-purple-400 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob"></div>
-          <div className="absolute top-0 left-0 w-96 h-96 bg-cyan-400 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-2000"></div>
-          <div className="absolute bottom-0 right-1/2 w-96 h-96 bg-pink-400 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-4000"></div>
-          <div className="absolute top-1/2 left-1/4 w-80 h-80 bg-yellow-300 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-3000"></div>
+      {/* Hero Section - Premium Clean Colorful Design */}
+      <section className="relative bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 overflow-hidden min-h-[calc(100vh-3.5rem)] sm:min-h-[calc(100vh-4rem)] md:min-h-[calc(100vh-4rem)] lg:min-h-[calc(100vh-4.5rem)] xl:min-h-[calc(100vh-5rem)] flex items-center">
+        {/* Vibrant Background Elements */}
+        <div className="absolute inset-0">
+          <div className="absolute top-0 right-0 w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 bg-gradient-to-br from-blue-400/20 to-purple-400/20 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute bottom-0 left-0 w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 bg-gradient-to-br from-pink-400/20 to-orange-400/20 rounded-full blur-3xl animate-pulse animation-delay-2000"></div>
         </div>
 
-        <div className="relative w-full px-3 sm:px-4 md:px-6 lg:px-8 py-12 sm:py-16 md:py-20 lg:py-24 xl:py-32">
-          <div className="max-w-7xl mx-auto">
-            <div className="grid lg:grid-cols-2 gap-8 sm:gap-10 md:gap-12 lg:gap-16 items-center">
-              {/* Left Content */}
-              <div className="space-y-4 sm:space-y-5 md:space-y-6 lg:space-y-8 animate-in slide-in-from-left">
-                <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-md rounded-full border border-white/20">
-                  <Star className="w-4 h-4 text-yellow-300 fill-yellow-300" />
-                  <span className="text-sm font-medium">Trusted by 10,000+ Students</span>
+        <div className="relative max-w-7xl mx-auto px-3 xs:px-4 sm:px-6 lg:px-8 py-12 xs:py-16 sm:py-20 md:py-24 lg:py-28 xl:py-32 w-full">
+          <div className="grid lg:grid-cols-[45%_55%] gap-8 sm:gap-10 md:gap-12 lg:gap-14 xl:gap-16 items-center">
+            {/* Left Content - 45% */}
+            <div className="space-y-5 xs:space-y-6 sm:space-y-7 md:space-y-8">
+              {/* Trust Badge */}
+              <div className="inline-flex items-center gap-2 px-3 xs:px-4 py-1.5 xs:py-2 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full shadow-lg shadow-blue-500/25">
+                <Star className="w-3 xs:w-4 h-3 xs:h-4 text-yellow-300 fill-yellow-300" />
+                <span className="text-xs xs:text-sm font-bold text-white">✨ Trusted by 10,000+ Students</span>
+              </div>
+
+              {/* Main Headline */}
+              <h1 className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-6xl xl:text-7xl font-extrabold leading-tight tracking-tight">
+                <span className="block text-gray-900">Transform Your</span>
+                <span className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600">
+                  Learning Journey
+                </span>
+              </h1>
+
+              {/* Description */}
+              <p className="text-base xs:text-lg sm:text-xl md:text-xl text-gray-700 leading-relaxed max-w-xl font-medium">
+                Interactive <span className="text-blue-600 font-bold">live classes</span> in Art, Chess, Piano, Public Speaking, and more. Designed for students aged <span className="text-purple-600 font-bold">8-18</span>.
+              </p>
+
+              {/* CTA Buttons */}
+              <div className="flex flex-col xs:flex-row gap-3 xs:gap-4 pt-2">
+                <Link 
+                  href="#courses"
+                  className="group inline-flex items-center justify-center gap-2 px-6 xs:px-7 sm:px-8 py-3 xs:py-3.5 sm:py-4 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-white text-sm xs:text-base font-bold rounded-xl shadow-lg shadow-purple-500/30 hover:shadow-xl hover:shadow-purple-500/40 transition-all hover:scale-[1.02] touch-target active:scale-95"
+                >
+                  Explore Courses
+                  <ArrowRight className="w-4 xs:w-5 h-4 xs:h-5 group-hover:translate-x-1 transition-transform" />
+                </Link>
+                <Link 
+                  href="#trial"
+                  className="inline-flex items-center justify-center gap-2 px-6 xs:px-7 sm:px-8 py-3 xs:py-3.5 sm:py-4 bg-gradient-to-r from-amber-400 to-orange-500 text-white text-sm xs:text-base font-bold rounded-xl shadow-lg shadow-orange-500/30 hover:shadow-xl hover:shadow-orange-500/40 transition-all hover:scale-[1.02] touch-target active:scale-95"
+                >
+                  Start Free Trial
+                </Link>
+              </div>
+
+              {/* Trust Indicators */}
+              <div className="flex items-center gap-3 xs:gap-4 sm:gap-5 md:gap-6 pt-4 flex-wrap">
+                <div className="bg-white/80 backdrop-blur-sm rounded-lg xs:rounded-xl px-3 xs:px-4 py-2 xs:py-3 shadow-md border border-blue-100">
+                  <div className="text-xl xs:text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">10,000+</div>
+                  <div className="text-xs xs:text-sm text-gray-700 font-medium">Active Students</div>
                 </div>
-                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight">
-                  <span className="block text-white drop-shadow-lg">Unlock Your Child's</span>
-                  <span className="block bg-clip-text text-transparent bg-gradient-to-r from-yellow-300 via-pink-300 to-purple-300 drop-shadow-lg">
-                    Creative Potential
-                  </span>
-                </h1>
-                <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-blue-50 leading-relaxed">
-                  Discover engaging <span className="font-semibold text-white bg-white/20 px-3 py-1.5 rounded-lg">live online classes</span> in <span className="font-bold text-yellow-300">Art & Drawing</span>, <span className="font-bold text-green-300">Chess</span>, <span className="font-bold text-purple-300">Piano</span>, <span className="font-bold text-pink-300">Public Speaking</span>, and more.
-                </p>
-                <div className="flex flex-col sm:flex-row gap-4">
-                  <Link 
-                    href="#trial"
-                    className="group inline-flex items-center justify-center gap-3 px-8 py-4 bg-gradient-to-r from-yellow-400 to-orange-500 text-gray-900 text-base font-bold rounded-full hover:from-yellow-500 hover:to-orange-600 transition-all hover:scale-105 hover:shadow-2xl shadow-yellow-500/50 touch-target"
-                  >
-                    START YOUR FREE TRIAL
-                    <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                  </Link>
-                  <Link 
-                    href="#courses"
-                    className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-white/10 backdrop-blur-md text-white text-base font-bold rounded-full hover:bg-white/20 transition-all hover:scale-105 border-2 border-white/50 hover:border-white touch-target"
-                  >
-                    <Play className="w-5 h-5" />
-                    Explore Courses
-                  </Link>
+                <div className="bg-white/80 backdrop-blur-sm rounded-lg xs:rounded-xl px-3 xs:px-4 py-2 xs:py-3 shadow-md border border-purple-100">
+                  <div className="text-xl xs:text-2xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">11+</div>
+                  <div className="text-xs xs:text-sm text-gray-700 font-medium">Skill Courses</div>
+                </div>
+                <div className="bg-white/80 backdrop-blur-sm rounded-lg xs:rounded-xl px-3 xs:px-4 py-2 xs:py-3 shadow-md border border-orange-100">
+                  <div className="flex items-center gap-1 mb-1">
+                    <Star className="w-4 xs:w-5 h-4 xs:h-5 text-yellow-500 fill-yellow-500" />
+                    <span className="text-xl xs:text-2xl font-bold bg-gradient-to-r from-orange-600 to-pink-600 bg-clip-text text-transparent">4.9</span>
+                  </div>
+                  <div className="text-xs xs:text-sm text-gray-700 font-medium">Parent Rating</div>
+                </div>
+              </div>
+            </div>
+
+            {/* Right Content - 55% */}
+            <div className="grid grid-cols-2 gap-3 xs:gap-4 sm:gap-5 md:gap-5 lg:gap-6">
+              {/* Feature Card 1 - Live Classes */}
+              <div className="group bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl sm:rounded-2xl p-4 xs:p-5 sm:p-6 shadow-xl shadow-blue-500/25 hover:shadow-2xl hover:shadow-blue-500/40 transition-all duration-300 hover:scale-[1.02]">
+                <div className="w-10 h-10 xs:w-12 xs:h-12 sm:w-14 sm:h-14 bg-white/20 backdrop-blur-sm rounded-lg xs:rounded-xl flex items-center justify-center mb-3 xs:mb-4 group-hover:bg-white/30 group-hover:scale-110 transition-all">
+                  <Users className="w-5 h-5 xs:w-6 xs:h-6 sm:w-7 sm:h-7 text-white" />
+                </div>
+                <h3 className="text-base xs:text-lg sm:text-xl font-bold text-white mb-1.5 xs:mb-2">Live Classes</h3>
+                <p className="text-xs xs:text-sm text-blue-100 mb-3 xs:mb-4">Interactive sessions with expert instructors</p>
+                <div className="inline-flex items-center gap-1 xs:gap-1.5 px-2 xs:px-3 py-1 xs:py-1.5 bg-white/20 backdrop-blur-sm rounded-full border border-white/30">
+                  <div className="w-1.5 xs:w-2 h-1.5 xs:h-2 bg-white rounded-full animate-pulse"></div>
+                  <span className="text-[10px] xs:text-xs font-bold text-white">Live Now</span>
                 </div>
               </div>
 
-              {/* Right Visual - Enhanced 3D Elements with Icons Inside */}
-              <div className="relative h-[300px] sm:h-[350px] md:h-[400px] lg:h-[500px] xl:h-[550px] animate-in slide-in-from-right">
-                {/* Large Card 1 - Yellow/Orange (Top Right) with Art & Drawing icons */}
-                <div className="absolute top-0 right-0 w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 lg:w-64 lg:h-64 rounded-3xl bg-gradient-to-br from-yellow-400 to-orange-500 opacity-80 animate-float shadow-2xl shadow-yellow-500/50 rotate-12 overflow-hidden">
-                  {/* Small cards inside - consistent 48px size */}
-                  <div className="absolute top-3 right-3 w-12 h-12 bg-white rounded-xl shadow-lg flex items-center justify-center">
-                    <span className="text-2xl">🎨</span>
-                  </div>
-                  <div className="absolute bottom-3 left-3 w-12 h-12 bg-white rounded-xl shadow-lg flex items-center justify-center">
-                    <span className="text-2xl">🖌️</span>
-                  </div>
-                  <div className="absolute bottom-3 right-3 w-12 h-12 bg-white rounded-xl shadow-lg flex items-center justify-center">
-                    <span className="text-2xl">📚</span>
-                  </div>
+              {/* Feature Card 2 - AI Learning */}
+              <div className="group bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl sm:rounded-2xl p-4 xs:p-5 sm:p-6 shadow-xl shadow-purple-500/25 hover:shadow-2xl hover:shadow-purple-500/40 transition-all duration-300 hover:scale-[1.02]">
+                <div className="w-10 h-10 xs:w-12 xs:h-12 sm:w-14 sm:h-14 bg-white/20 backdrop-blur-sm rounded-lg xs:rounded-xl flex items-center justify-center mb-3 xs:mb-4 group-hover:bg-white/30 group-hover:scale-110 transition-all">
+                  <Sparkles className="w-5 h-5 xs:w-6 xs:h-6 sm:w-7 sm:h-7 text-white" />
                 </div>
-                
-                {/* Large Card 2 - Blue/Cyan (Bottom Left) with Chess & Logic icons */}
-                <div className="absolute bottom-10 left-0 w-28 h-28 sm:w-32 sm:h-32 md:w-40 md:h-40 lg:w-56 lg:h-56 rounded-3xl bg-gradient-to-br from-blue-400 to-cyan-500 opacity-80 animate-float-slow shadow-2xl shadow-blue-500/50 -rotate-12 overflow-hidden">
-                  {/* Small cards inside - consistent 48px size */}
-                  <div className="absolute top-3 left-3 w-12 h-12 bg-white rounded-xl shadow-lg flex items-center justify-center">
-                    <span className="text-2xl">♟️</span>
-                  </div>
-                  <div className="absolute top-3 right-3 w-12 h-12 bg-white rounded-xl shadow-lg flex items-center justify-center">
-                    <span className="text-2xl">🎯</span>
-                  </div>
-                  <div className="absolute bottom-3 left-3 w-12 h-12 bg-white rounded-xl shadow-lg flex items-center justify-center">
-                    <span className="text-2xl">🧩</span>
-                  </div>
-                  <div className="absolute bottom-3 right-3 w-12 h-12 bg-white rounded-xl shadow-lg flex items-center justify-center">
-                    <span className="text-2xl">💻</span>
-                  </div>
+                <h3 className="text-base xs:text-lg sm:text-xl font-bold text-white mb-1.5 xs:mb-2">AI Learning</h3>
+                <p className="text-xs xs:text-sm text-purple-100 mb-3 xs:mb-4">Personalized recommendations for every student</p>
+                <div className="inline-flex items-center gap-1 xs:gap-1.5 px-2 xs:px-3 py-1 xs:py-1.5 bg-white/20 backdrop-blur-sm rounded-full border border-white/30">
+                  <Sparkles className="w-2.5 xs:w-3 h-2.5 xs:h-3 text-white" />
+                  <span className="text-[10px] xs:text-xs font-bold text-white">Smart</span>
                 </div>
-                
-                {/* Large Card 3 - Purple/Pink/Rose (Center) with Music & Speaking icons */}
-                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-36 h-36 sm:w-40 sm:h-40 md:w-48 md:h-48 lg:w-64 lg:h-64 rounded-3xl bg-gradient-to-br from-purple-400 via-pink-500 to-rose-500 opacity-90 animate-float-slower shadow-2xl shadow-purple-500/50 overflow-hidden">
-                  {/* Small cards inside - consistent 48px size */}
-                  <div className="absolute top-3 left-3 w-12 h-12 bg-white rounded-xl shadow-lg flex items-center justify-center">
-                    <span className="text-2xl">🎹</span>
-                  </div>
-                  <div className="absolute top-3 right-3 w-12 h-12 bg-white rounded-xl shadow-lg flex items-center justify-center">
-                    <span className="text-2xl">🎤</span>
-                  </div>
-                  <div className="absolute bottom-3 left-3 w-12 h-12 bg-white rounded-xl shadow-lg flex items-center justify-center">
-                    <span className="text-2xl">�</span>
-                  </div>
-                  <div className="absolute bottom-3 right-3 w-12 h-12 bg-white rounded-xl shadow-lg flex items-center justify-center">
-                    <span className="text-2xl">🗣️</span>
-                  </div>
+              </div>
+
+              {/* Feature Card 3 - Practice Tests */}
+              <div className="group bg-gradient-to-br from-pink-500 to-pink-600 rounded-xl sm:rounded-2xl p-4 xs:p-5 sm:p-6 shadow-xl shadow-pink-500/25 hover:shadow-2xl hover:shadow-pink-500/40 transition-all duration-300 hover:scale-[1.02]">
+                <div className="w-10 h-10 xs:w-12 xs:h-12 sm:w-14 sm:h-14 bg-white/20 backdrop-blur-sm rounded-lg xs:rounded-xl flex items-center justify-center mb-3 xs:mb-4 group-hover:bg-white/30 group-hover:scale-110 transition-all">
+                  <BookOpen className="w-5 h-5 xs:w-6 xs:h-6 sm:w-7 sm:h-7 text-white" />
+                </div>
+                <h3 className="text-base xs:text-lg sm:text-xl font-bold text-white mb-1.5 xs:mb-2">Practice Tests</h3>
+                <p className="text-xs xs:text-sm text-pink-100 mb-3 xs:mb-4">Master skills with interactive exercises</p>
+                <div className="inline-flex items-center gap-1 xs:gap-1.5 px-2 xs:px-3 py-1 xs:py-1.5 bg-white/20 backdrop-blur-sm rounded-full border border-white/30">
+                  <Target className="w-2.5 xs:w-3 h-2.5 xs:h-3 text-white" />
+                  <span className="text-[10px] xs:text-xs font-bold text-white">Interactive</span>
+                </div>
+              </div>
+
+              {/* Feature Card 4 - Progress Tracker */}
+              <div className="group bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl sm:rounded-2xl p-4 xs:p-5 sm:p-6 shadow-xl shadow-orange-500/25 hover:shadow-2xl hover:shadow-orange-500/40 transition-all duration-300 hover:scale-[1.02]">
+                <div className="w-10 h-10 xs:w-12 xs:h-12 sm:w-14 sm:h-14 bg-white/20 backdrop-blur-sm rounded-lg xs:rounded-xl flex items-center justify-center mb-3 xs:mb-4 group-hover:bg-white/30 group-hover:scale-110 transition-all">
+                  <TrendingUp className="w-5 h-5 xs:w-6 xs:h-6 sm:w-7 sm:h-7 text-white" />
+                </div>
+                <h3 className="text-base xs:text-lg sm:text-xl font-bold text-white mb-1.5 xs:mb-2">Progress Tracker</h3>
+                <p className="text-xs xs:text-sm text-orange-100 mb-3 xs:mb-4">Monitor growth with detailed analytics</p>
+                <div className="inline-flex items-center gap-1 xs:gap-1.5 px-2 xs:px-3 py-1 xs:py-1.5 bg-white/20 backdrop-blur-sm rounded-full border border-white/30">
+                  <Trophy className="w-2.5 xs:w-3 h-2.5 xs:h-3 text-white" />
+                  <span className="text-[10px] xs:text-xs font-bold text-white">Track Growth</span>
                 </div>
               </div>
             </div>
@@ -292,63 +317,102 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Stats Section - Enhanced with More Color */}
-      <section className="py-12 sm:py-14 md:py-16 lg:py-20 bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-600 relative overflow-hidden">
-        {/* Animated Background Shapes */}
+      {/* Stats Section - PREMIUM WORLD-CLASS DESIGN */}
+      <section className="py-12 xs:py-16 sm:py-20 md:py-24 lg:py-28 xl:py-32 bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-600 relative overflow-hidden">
+        {/* Premium Animated Background */}
         <div className="absolute inset-0">
-          <div className="absolute top-10 left-10 w-64 h-64 bg-white/10 rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute bottom-10 right-10 w-80 h-80 bg-white/10 rounded-full blur-3xl animate-pulse" style={{animationDelay: '1s'}}></div>
+          <div className="absolute top-0 right-0 w-[300px] h-[300px] sm:w-[400px] sm:h-[400px] md:w-[500px] md:h-[500px] bg-gradient-to-br from-white/10 to-transparent rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute bottom-0 left-0 w-[400px] h-[400px] sm:w-[500px] sm:h-[500px] md:w-[600px] md:h-[600px] bg-gradient-to-tr from-pink-400/20 to-transparent rounded-full blur-3xl animate-pulse" style={{animationDelay: '1s'}}></div>
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] sm:w-[350px] sm:h-[350px] md:w-[400px] md:h-[400px] bg-white/5 rounded-full blur-3xl"></div>
         </div>
         
-        <div className="relative w-full px-3 sm:px-4 md:px-6 lg:px-8">
-          <div className="max-w-7xl mx-auto">
-            {/* Section Header */}
-            <div className="text-center mb-12 md:mb-16">
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4">
-                Join The Learning Revolution
-              </h2>
-              <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto">
-                Thousands of students are already mastering new skills with us
-              </p>
+        <div className="relative max-w-7xl mx-auto px-3 xs:px-4 sm:px-6 lg:px-8">
+          {/* Premium Header */}
+          <div className="text-center mb-10 xs:mb-12 sm:mb-14 md:mb-16 lg:mb-20">
+            <div className="inline-flex items-center gap-2 px-4 xs:px-5 py-2 xs:py-2.5 bg-white/10 backdrop-blur-md rounded-full mb-4 xs:mb-5 sm:mb-6 border border-white/20">
+              <Sparkles className="w-4 xs:w-5 h-4 xs:h-5 text-yellow-300" />
+              <span className="text-xs xs:text-sm font-bold text-white">Trusted Worldwide</span>
             </div>
+            <h2 className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-3 xs:mb-4 sm:mb-5 md:mb-6 leading-tight">
+              Join The Learning
+              <span className="block bg-gradient-to-r from-yellow-300 via-pink-300 to-purple-300 bg-clip-text text-transparent">
+                Revolution
+              </span>
+            </h2>
+            <p className="text-sm xs:text-base sm:text-lg md:text-xl text-white/90 max-w-3xl mx-auto font-medium px-4">
+              Thousands of students are already mastering new skills with our world-class platform
+            </p>
+          </div>
 
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 md:gap-6 lg:gap-8">
-              {[
-                { number: "10,000+", label: "Happy Students", subtext: "Learning Daily", gradient: "from-cyan-400 to-blue-500", icon: "👨‍🎓", bgGlow: "bg-cyan-400/20" },
-                { number: "50+", label: "Expert Instructors", subtext: "Certified & Trained", gradient: "from-pink-400 to-rose-500", icon: "👩‍🏫", bgGlow: "bg-pink-400/20" },
-                { number: "11+", label: "Skill Courses", subtext: "And Growing", gradient: "from-amber-400 to-orange-500", icon: "📚", bgGlow: "bg-amber-400/20" },
-                { number: "98%", label: "Satisfaction Rate", subtext: "Parent Approved", gradient: "from-emerald-400 to-green-500", icon: "⭐", bgGlow: "bg-emerald-400/20" }
-              ].map((stat, i) => (
-                <div key={i} className="group relative">
-                  {/* Glow Effect */}
-                  <div className={`absolute -inset-1 ${stat.bgGlow} rounded-3xl blur-xl opacity-50 group-hover:opacity-100 transition-opacity`}></div>
+          {/* Premium Stats Grid */}
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 xs:gap-5 sm:gap-6 md:gap-7 lg:gap-8">
+            {[
+              { 
+                number: "10,000+", 
+                label: "Happy Students", 
+                subtext: "Learning Daily", 
+                gradient: "from-cyan-400 via-blue-400 to-blue-500", 
+                icon: "👨‍🎓",
+                iconBg: "from-cyan-500 to-blue-500"
+              },
+              { 
+                number: "50+", 
+                label: "Expert Instructors", 
+                subtext: "Certified & Trained", 
+                gradient: "from-pink-400 via-rose-400 to-rose-500", 
+                icon: "👩‍🏫",
+                iconBg: "from-pink-500 to-rose-500"
+              },
+              { 
+                number: "11+", 
+                label: "Skill Courses", 
+                subtext: "And Growing", 
+                gradient: "from-amber-400 via-orange-400 to-orange-500", 
+                icon: "📚",
+                iconBg: "from-amber-500 to-orange-500"
+              },
+              { 
+                number: "98%", 
+                label: "Satisfaction", 
+                subtext: "Parent Approved", 
+                gradient: "from-emerald-400 via-green-400 to-green-500", 
+                icon: "⭐",
+                iconBg: "from-emerald-500 to-green-500"
+              }
+            ].map((stat, i) => (
+              <div key={i} className="group relative">
+                {/* Premium Glow Effect */}
+                <div className={`absolute -inset-1 bg-gradient-to-r ${stat.gradient} rounded-3xl blur-xl opacity-50 group-hover:opacity-100 transition-all duration-500`}></div>
+                
+                {/* Premium Card */}
+                <div className="relative bg-white/95 backdrop-blur-xl rounded-xl xs:rounded-2xl p-4 xs:p-5 sm:p-6 md:p-7 lg:p-8 shadow-2xl hover:shadow-3xl transition-all duration-500 hover:-translate-y-2 border border-white/50 overflow-hidden">
+                  {/* Decorative Gradient Corner */}
+                  <div className={`absolute -top-12 -right-12 w-24 h-24 xs:w-28 xs:h-28 sm:w-32 sm:h-32 bg-gradient-to-br ${stat.gradient} opacity-10 rounded-full`}></div>
                   
-                  {/* Card */}
-                  <div className="relative bg-white/95 backdrop-blur-sm rounded-2xl p-6 sm:p-7 md:p-8 shadow-xl hover:shadow-2xl transition-all hover:-translate-y-3 border border-white/50 overflow-hidden">
-                    {/* Decorative Corner */}
-                    <div className={`absolute top-0 right-0 w-24 h-24 bg-gradient-to-br ${stat.gradient} opacity-10 rounded-bl-full`}></div>
-                    
-                    {/* Icon */}
-                    <div className="text-5xl mb-4 transform group-hover:scale-110 transition-transform">{stat.icon}</div>
-                    
-                    {/* Number */}
-                    <div className={`text-4xl sm:text-5xl md:text-6xl font-bold bg-gradient-to-r ${stat.gradient} bg-clip-text text-transparent mb-2`}>
-                      {stat.number}
-                    </div>
-                    
-                    {/* Label */}
-                    <div className="text-sm sm:text-base md:text-lg font-bold text-gray-800 leading-tight mb-1">
-                      {stat.label}
-                    </div>
-                    
-                    {/* Subtext */}
-                    <div className="text-xs sm:text-sm text-gray-600">
-                      {stat.subtext}
+                  {/* Icon with Premium Background */}
+                  <div className="relative mb-4 xs:mb-5 sm:mb-6">
+                    <div className={`inline-flex w-12 h-12 xs:w-14 xs:h-14 sm:w-16 sm:h-16 items-center justify-center rounded-xl xs:rounded-2xl bg-gradient-to-br ${stat.iconBg} shadow-xl transform group-hover:scale-110 group-hover:rotate-6 transition-all duration-500`}>
+                      <span className="text-2xl xs:text-3xl sm:text-4xl filter drop-shadow-lg">{stat.icon}</span>
                     </div>
                   </div>
+                  
+                  {/* Number with Premium Gradient */}
+                  <div className={`text-3xl xs:text-4xl sm:text-5xl lg:text-6xl font-extrabold bg-gradient-to-r ${stat.gradient} bg-clip-text text-transparent mb-2 xs:mb-2.5 sm:mb-3 leading-tight`}>
+                    {stat.number}
+                  </div>
+                  
+                  {/* Label */}
+                  <div className="text-sm xs:text-base sm:text-lg font-bold text-gray-900 mb-1.5 xs:mb-2 leading-tight">
+                    {stat.label}
+                  </div>
+                  
+                  {/* Subtext */}
+                  <div className="text-xs xs:text-sm text-gray-600 font-medium">
+                    {stat.subtext}
+                  </div>
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -356,112 +420,134 @@ export default function Home() {
       {/* Find Your Best Courses Section */}
       <CourseRecommendationSection />
 
-      {/* How It Works - New Section */}
-      <section className="py-16 sm:py-20 md:py-24 lg:py-28 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white relative overflow-hidden">
-        {/* Background Pattern */}
-        <div className="absolute inset-0 opacity-5">
-          <div className="absolute inset-0" style={{backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)', backgroundSize: '40px 40px'}}></div>
+      {/* How It Works - WORLD-CLASS PREMIUM DESIGN */}
+      <section className="py-12 xs:py-16 sm:py-20 md:py-24 lg:py-28 xl:py-32 bg-gradient-to-b from-gray-900 via-slate-900 to-gray-900 text-white relative overflow-hidden">
+        {/* Premium Background Pattern */}
+        <div className="absolute inset-0">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(120,119,198,0.3),transparent_50%)]"></div>
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(236,72,153,0.3),transparent_50%)]"></div>
+          <div className="absolute inset-0 opacity-10" style={{backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)', backgroundSize: '48px 48px'}}></div>
         </div>
 
-        <div className="relative w-full px-3 sm:px-4 md:px-6 lg:px-8">
-          <div className="max-w-7xl mx-auto">
-            {/* Header */}
-            <div className="text-center mb-12 md:mb-16">
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full mb-6">
-                <Sparkles className="w-5 h-5 text-yellow-400" />
-                <span className="text-sm font-semibold">Simple Process</span>
-              </div>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
-                Getting Started Is <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400">Super Easy</span>
-              </h2>
-              <p className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto">
-                Join thousands of students in just 3 simple steps
-              </p>
+        <div className="relative max-w-7xl mx-auto px-3 xs:px-4 sm:px-6 lg:px-8">
+          {/* Premium Header */}
+          <div className="text-center mb-10 xs:mb-12 sm:mb-14 md:mb-16 lg:mb-20">
+            <div className="inline-flex items-center gap-2 px-4 xs:px-5 py-2 xs:py-2.5 bg-white/10 backdrop-blur-md rounded-full mb-4 xs:mb-6 sm:mb-8 border border-white/20 shadow-xl">
+              <Zap className="w-4 xs:w-5 h-4 xs:h-5 text-yellow-400" />
+              <span className="text-xs xs:text-sm font-bold">Simple 3-Step Process</span>
             </div>
+            <h2 className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold mb-3 xs:mb-4 sm:mb-5 md:mb-6 leading-tight">
+              Getting Started Is{' '}
+              <span className="relative inline-block">
+                <span className="relative z-10 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+                  Super Easy
+                </span>
+                <span className="absolute inset-0 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 blur-2xl opacity-50"></span>
+              </span>
+            </h2>
+            <p className="text-sm xs:text-base sm:text-lg md:text-xl text-gray-300 max-w-3xl mx-auto font-medium px-4">
+              Join thousands of students in just 3 simple steps
+            </p>
+          </div>
 
-            {/* Steps */}
-            <div className="grid md:grid-cols-3 gap-8 md:gap-6 lg:gap-8 relative">
-              {/* Connection Lines - Desktop Only */}
-              <div className="hidden md:block absolute top-24 left-0 right-0 h-0.5 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 opacity-30" style={{width: 'calc(100% - 8rem)', left: '4rem'}}></div>
+          {/* Premium Steps Grid */}
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6 xs:gap-7 sm:gap-8 md:gap-10 lg:gap-12 relative">
+            {/* Premium Connection Line */}
+            <div className="hidden md:block absolute top-16 xs:top-18 sm:top-20 md:top-24 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 opacity-20 rounded-full" style={{width: 'calc(100% - 4rem)', left: '2rem', marginLeft: 'auto', marginRight: 'auto'}}></div>
 
-              {[
-                {
-                  step: "01",
-                  title: "Choose Your Course",
-                  description: "Browse our 11+ courses and pick what excites your child the most",
-                  icon: <BookOpen className="w-8 h-8" />,
-                  color: "from-blue-500 to-cyan-500",
-                  bgColor: "bg-blue-500/10"
-                },
-                {
-                  step: "02",
-                  title: "Book Free Trial",
-                  description: "Try a live class absolutely free—no credit card, no commitment",
-                  icon: <Target className="w-8 h-8" />,
-                  color: "from-purple-500 to-pink-500",
-                  bgColor: "bg-purple-500/10"
-                },
-                {
-                  step: "03",
-                  title: "Start Learning",
-                  description: "Join small interactive classes and watch your child grow",
-                  icon: <Zap className="w-8 h-8" />,
-                  color: "from-orange-500 to-pink-500",
-                  bgColor: "bg-orange-500/10"
-                }
-              ].map((item, i) => (
-                <div key={i} className="relative">
-                  {/* Card */}
-                  <div className="relative bg-white/5 backdrop-blur-sm rounded-3xl p-8 border border-white/10 hover:border-white/20 transition-all group hover:bg-white/10">
-                    {/* Step Number */}
-                    <div className={`absolute -top-4 -left-4 w-16 h-16 bg-gradient-to-br ${item.color} rounded-2xl flex items-center justify-center shadow-2xl transform group-hover:scale-110 group-hover:rotate-6 transition-all`}>
-                      <span className="text-2xl font-bold text-white">{item.step}</span>
-                    </div>
+            {[
+              {
+                step: "01",
+                title: "Choose Your Course",
+                description: "Browse our 11+ expertly designed courses and pick what excites your child the most",
+                icon: <BookOpen className="w-8 h-8" />,
+                color: "from-blue-500 via-cyan-500 to-teal-500",
+                glowColor: "from-blue-500/50 to-cyan-500/50"
+              },
+              {
+                step: "02",
+                title: "Book Free Trial",
+                description: "Experience a live class absolutely free—no credit card required, zero commitment",
+                icon: <Target className="w-8 h-8" />,
+                color: "from-purple-500 via-pink-500 to-rose-500",
+                glowColor: "from-purple-500/50 to-pink-500/50"
+              },
+              {
+                step: "03",
+                title: "Start Learning",
+                description: "Join small interactive classes and watch your child grow with confidence",
+                icon: <Zap className="w-8 h-8" />,
+                color: "from-orange-500 via-amber-500 to-yellow-500",
+                glowColor: "from-orange-500/50 to-yellow-500/50"
+              }
+            ].map((item, i) => (
+              <div key={i} className="relative group">
+                {/* Premium Glow Effect */}
+                <div className={`absolute -inset-4 bg-gradient-to-r ${item.glowColor} rounded-3xl blur-2xl opacity-0 group-hover:opacity-100 transition-all duration-500`}></div>
+                
+                {/* Premium Card */}
+                <div className="relative bg-gradient-to-br from-white/5 to-white/10 backdrop-blur-xl rounded-3xl p-8 lg:p-10 border border-white/10 hover:border-white/20 transition-all duration-500 group-hover:translate-y-[-8px] shadow-2xl h-full min-h-[400px] flex flex-col">
+                  {/* Premium Step Badge */}
+                  <div className={`absolute -top-6 -left-6 w-20 h-20 bg-gradient-to-br ${item.color} rounded-2xl flex items-center justify-center shadow-2xl transform group-hover:scale-110 group-hover:rotate-12 transition-all duration-500 border-4 border-gray-900`}>
+                    <span className="text-2xl font-black text-white">{item.step}</span>
+                  </div>
 
-                    {/* Icon Circle */}
-                    <div className={`w-20 h-20 ${item.bgColor} rounded-2xl flex items-center justify-center mb-6 mt-8 group-hover:scale-110 transition-transform`}>
-                      <div className={`text-white bg-gradient-to-br ${item.color} w-16 h-16 rounded-xl flex items-center justify-center`}>
+                  {/* Icon Container */}
+                  <div className="mt-8 mb-6">
+                    <div className={`inline-flex w-20 h-20 items-center justify-center rounded-2xl bg-gradient-to-br ${item.color} shadow-xl transform group-hover:scale-110 transition-all duration-500`}>
+                      <div className="text-white">
                         {item.icon}
                       </div>
                     </div>
+                  </div>
 
-                    {/* Content */}
-                    <h3 className="text-2xl font-bold mb-3 text-white">{item.title}</h3>
-                    <p className="text-gray-400 leading-relaxed">{item.description}</p>
+                  {/* Content */}
+                  <div className="flex-grow">
+                    <h3 className="text-2xl lg:text-3xl font-bold mb-4 text-white leading-tight">
+                      {item.title}
+                    </h3>
+                    <p className="text-gray-300 leading-relaxed text-lg">
+                      {item.description}
+                    </p>
                   </div>
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
+          </div>
 
-            {/* CTA */}
-            <div className="text-center mt-12 md:mt-16">
-              <Link href="#trial" className="inline-flex items-center gap-3 px-10 py-5 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-white text-lg font-bold rounded-full hover:shadow-2xl hover:shadow-purple-500/50 transition-all hover:scale-105">
-                Start Your Free Trial Now
-                <ArrowRight className="w-6 h-6" />
-              </Link>
-            </div>
+          {/* Premium CTA */}
+          <div className="text-center mt-16 lg:mt-20">
+            <Link 
+              href="#trial" 
+              className="group inline-flex items-center gap-3 px-10 py-5 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-white text-lg font-bold rounded-2xl hover:shadow-2xl hover:shadow-purple-500/50 transition-all hover:scale-105 shadow-xl relative overflow-hidden"
+            >
+              <span className="absolute inset-0 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 opacity-0 group-hover:opacity-20 transition-opacity"></span>
+              <span className="relative">Start Your Free Trial Now</span>
+              <ArrowRight className="w-6 h-6 group-hover:translate-x-2 transition-transform relative" />
+            </Link>
           </div>
         </div>
       </section>
 
-      {/* Course Section - Mobile Optimized Cards */}
-      <section id="courses" className="py-12 sm:py-14 md:py-16 lg:py-20 bg-gradient-to-br from-white via-blue-50 to-purple-50 relative overflow-hidden">
+      {/* Course Section - Vibrant Colorful Cards */}
+      <section id="courses" className="py-12 sm:py-14 md:py-16 lg:py-20 bg-gradient-to-br from-pink-100 via-purple-100 to-blue-100 relative overflow-hidden">
         {/* Decorative Elements */}
-        <div className="absolute top-0 left-0 w-72 h-72 bg-blue-300 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
-        <div className="absolute bottom-0 right-0 w-72 h-72 bg-purple-300 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
+        <div className="absolute top-0 left-0 w-96 h-96 bg-gradient-to-br from-pink-400 to-rose-400 rounded-full mix-blend-multiply filter blur-3xl opacity-30"></div>
+        <div className="absolute bottom-0 right-0 w-96 h-96 bg-gradient-to-br from-blue-400 to-purple-400 rounded-full mix-blend-multiply filter blur-3xl opacity-30"></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-gradient-to-br from-amber-400 to-orange-400 rounded-full mix-blend-multiply filter blur-3xl opacity-20"></div>
         
         <div className="relative w-full px-3 sm:px-4 md:px-6 lg:px-8">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-8 sm:mb-10 md:mb-12 lg:mb-16">
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-100 text-blue-700 rounded-full text-sm font-semibold mb-4">
-                <Star className="w-4 h-4 fill-blue-600" />
-                11+ Courses Available
+              <div className="inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-full text-sm font-bold mb-6 shadow-lg shadow-purple-500/30">
+                <Star className="w-5 h-5 fill-yellow-300 text-yellow-300" />
+                11+ Courses Available ✨
               </div>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent mb-3 sm:mb-4 px-2">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent mb-4 sm:mb-5 px-2">
                 Explore Our Skill Development Courses
               </h2>
-              <p className="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto px-3">
-                Live online classes designed to nurture creativity, confidence, and critical thinking
+              <p className="text-lg sm:text-xl md:text-2xl text-gray-700 font-medium max-w-3xl mx-auto px-3">
+                Live online classes designed to nurture <span className="text-purple-600 font-bold">creativity</span>, <span className="text-pink-600 font-bold">confidence</span>, and <span className="text-blue-600 font-bold">critical thinking</span>
               </p>
             </div>
 
@@ -961,18 +1047,7 @@ export default function Home() {
               ))}
             </div>
 
-            {/* Guarantee Badge */}
-            <div className="mt-16 text-center">
-              <div className="inline-flex items-center gap-4 px-8 py-6 bg-gradient-to-r from-green-50 to-emerald-50 border-2 border-green-200 rounded-3xl">
-                <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-emerald-600 rounded-full flex items-center justify-center text-white shadow-lg">
-                  <CheckCircle className="w-8 h-8" />
-                </div>
-                <div className="text-left">
-                  <div className="text-xl font-bold text-gray-900">100% Satisfaction Guarantee</div>
-                  <div className="text-sm text-gray-600">Not happy? Get a full refund within first 7 days</div>
-                </div>
-              </div>
-            </div>
+
           </div>
         </div>
       </section>
@@ -1157,12 +1232,7 @@ export default function Home() {
               <p className="text-white/90 text-lg mb-6">
                 <strong>Join 10,000+ happy families</strong> who trust Playfit for their child's skill development
               </p>
-              <div className="flex justify-center gap-2">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-6 h-6 fill-yellow-400 text-yellow-400" />
-                ))}
-                <span className="ml-2 text-white font-semibold">4.9/5 from 500+ reviews</span>
-              </div>
+
             </div>
           </div>
         </div>
@@ -1189,12 +1259,7 @@ export default function Home() {
                 <p className="text-xs sm:text-sm text-gray-300 leading-relaxed mb-4">
                   Empowering children with creative and skill-building courses in Art, Chess, Piano, Public Speaking, Abacus, and more.
                 </p>
-                <div className="flex gap-2">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-                  ))}
-                </div>
-                <p className="text-xs text-gray-400 mt-2">4.9/5 from 500+ reviews</p>
+
               </div>
 
               {/* Courses Section */}
