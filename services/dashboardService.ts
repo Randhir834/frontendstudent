@@ -1,7 +1,6 @@
 import api from './api';
 import { enrollmentService } from './enrollmentService';
 import { liveClassService } from './liveClassService';
-import { assignmentService } from './assignmentService';
 import { notificationService } from './notificationService';
 import { progressService } from './progressService';
 
