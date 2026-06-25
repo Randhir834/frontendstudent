@@ -82,7 +82,7 @@ export default function StudentHomePage() {
                     <span className="text-sm font-medium text-gray-600">Welcome back,</span>
                   </div>
                   <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent break-words mb-3">
-                    {displayName}! 👋
+                    {displayName}!
                   </h1>
                   <p className="text-sm sm:text-base text-gray-600 max-w-2xl">
                     Keep going! Your next milestone is closer than you think. 🚀

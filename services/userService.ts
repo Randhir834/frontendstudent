@@ -72,9 +72,9 @@ export const userService = {
       // Dispatch custom event for other components
       window.dispatchEvent(new Event('auth:logout'));
       
-      // Use window.location.href with cache-busting to force full page reload
+      // Redirect to Student Home Page with cache-busting to force full page reload
       // This prevents bfcache from restoring the previous page
-      window.location.href = `/login?logout=${Date.now()}`;
+      window.location.href = `/?logout=${Date.now()}`;
     }
   },
 };
