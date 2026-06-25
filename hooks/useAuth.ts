@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
+'use client';
+
+import { useState, useEffect, useCallback } from 'react';
 
 interface User {
   id: number;
@@ -11,52 +12,43 @@ interface User {
 export function useAuth() {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const router = useRouter();
 
   useEffect(() => {
-    // Check authentication status
-    const checkAuth = () => {
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
       try {
-        const token = localStorage.getItem('token');
-        const userStr = localStorage.getItem('user');
-
-        if (!token || !userStr) {
-          setIsAuthenticated(false);
-          setUser(null);
-          setLoading(false);
-          router.push('/login');
-          return;
-        }
-
-        const userData = JSON.parse(userStr);
-        setUser(userData);
-        setIsAuthenticated(true);
-        setLoading(false);
-      } catch (error) {
-        console.error('[useAuth] Error checking authentication:', error);
-        setIsAuthenticated(false);
-        setUser(null);
-        setLoading(false);
-        router.push('/login');
+        setUser(JSON.parse(storedUser));
+      } catch {
+        localStorage.removeItem('user');
       }
-    };
+    }
+    setLoading(false);
+  }, []);
 
-    checkAuth();
+  const login = useCallback((userData: User, token: string, sessionToken?: string) => {
+    localStorage.setItem('token', token);
+    localStorage.setItem('user', JSON.stringify(userData));
+    if (sessionToken) {
+      localStorage.setItem('sessionToken', sessionToken);
+    }
+    setUser(userData);
+  }, []);
 
-    // Listen for logout events
-    const handleLogout = () => {
-      setIsAuthenticated(false);
-      setUser(null);
-      router.push('/login');
-    };
+  const logout = useCallback(() => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    localStorage.removeItem('sessionToken');
+    setUser(null);
+  }, []);
 
-    window.addEventListener('auth:logout', handleLogout);
+  const updateUser = useCallback((userData: Partial<User>) => {
+    const currentUser = user;
+    if (currentUser) {
+      const updatedUser = { ...currentUser, ...userData };
+      localStorage.setItem('user', JSON.stringify(updatedUser));
+      setUser(updatedUser);
+    }
+  }, [user]);
 
-    return () => {
-      window.removeEventListener('auth:logout', handleLogout);
-    };
-  }, [router]);
-
-  return { user, loading, isAuthenticated };
+  return { user, loading, login, logout, updateUser, isAuthenticated: !!user };
 }
