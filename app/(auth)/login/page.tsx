@@ -41,6 +41,8 @@ export default function LoginPage() {
       try {
         const userData = JSON.parse(user);
         if (userData.role === 'student') {
+          // Set auth session to prevent redirect loop
+          sessionStorage.setItem('auth_session', 'active');
           router.replace('/student');
           return;
         }

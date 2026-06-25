@@ -15,11 +15,18 @@ export function useAuth() {
 
   useEffect(() => {
     const storedUser = localStorage.getItem('user');
-    if (storedUser) {
+    const token = localStorage.getItem('token');
+    
+    if (storedUser && token) {
       try {
-        setUser(JSON.parse(storedUser));
+        const parsedUser = JSON.parse(storedUser);
+        setUser(parsedUser);
+        // Set auth session if user is already logged in
+        sessionStorage.setItem('auth_session', 'active');
       } catch {
         localStorage.removeItem('user');
+        localStorage.removeItem('token');
+        sessionStorage.removeItem('auth_session');
       }
     }
     setLoading(false);
@@ -31,6 +38,8 @@ export function useAuth() {
     if (sessionToken) {
       localStorage.setItem('sessionToken', sessionToken);
     }
+    // Set auth session to prevent redirect loops
+    sessionStorage.setItem('auth_session', 'active');
     setUser(userData);
   }, []);
 
@@ -38,6 +47,7 @@ export function useAuth() {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
     localStorage.removeItem('sessionToken');
+    sessionStorage.removeItem('auth_session');
     setUser(null);
   }, []);
 
