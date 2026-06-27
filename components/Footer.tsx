@@ -6,6 +6,21 @@ import { Mail, Phone, MapPin, Heart } from 'lucide-react';
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
+  const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, sectionId: string) => {
+    e.preventDefault();
+    const element = document.getElementById(sectionId);
+    if (element) {
+      const offset = 80; // Adjust for fixed header
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - offset;
+      
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
+  };
+
   return (
     <footer className="bg-gradient-to-br from-gray-900 via-slate-900 to-gray-900 text-white relative overflow-hidden">
       {/* Decorative Background Elements */}
@@ -60,22 +75,34 @@ export default function Footer() {
               <h4 className="text-white font-bold mb-4 text-base">Quick Links</h4>
               <ul className="space-y-3">
                 <li>
-                  <Link href="#courses" className="text-gray-400 hover:text-white transition-colors text-sm flex items-center gap-2 group">
+                  <a 
+                    href="#courses" 
+                    onClick={(e) => scrollToSection(e, 'courses')}
+                    className="text-gray-400 hover:text-white transition-colors text-sm flex items-center gap-2 group cursor-pointer"
+                  >
                     <span className="w-1.5 h-1.5 rounded-full bg-purple-500 group-hover:bg-pink-500 transition-colors"></span>
                     Explore Courses
-                  </Link>
+                  </a>
                 </li>
                 <li>
-                  <Link href="#about" className="text-gray-400 hover:text-white transition-colors text-sm flex items-center gap-2 group">
+                  <a 
+                    href="#about" 
+                    onClick={(e) => scrollToSection(e, 'about')}
+                    className="text-gray-400 hover:text-white transition-colors text-sm flex items-center gap-2 group cursor-pointer"
+                  >
                     <span className="w-1.5 h-1.5 rounded-full bg-purple-500 group-hover:bg-pink-500 transition-colors"></span>
                     About Us
-                  </Link>
+                  </a>
                 </li>
                 <li>
-                  <Link href="#trial" className="text-gray-400 hover:text-white transition-colors text-sm flex items-center gap-2 group">
+                  <a 
+                    href="#trial" 
+                    onClick={(e) => scrollToSection(e, 'trial')}
+                    className="text-gray-400 hover:text-white transition-colors text-sm flex items-center gap-2 group cursor-pointer"
+                  >
                     <span className="w-1.5 h-1.5 rounded-full bg-purple-500 group-hover:bg-pink-500 transition-colors"></span>
                     Free Trial
-                  </Link>
+                  </a>
                 </li>
                 <li>
                   <Link href="/login" className="text-gray-400 hover:text-white transition-colors text-sm flex items-center gap-2 group">
@@ -97,34 +124,54 @@ export default function Footer() {
               <h4 className="text-white font-bold mb-4 text-base">Popular Courses</h4>
               <ul className="space-y-3">
                 <li>
-                  <Link href="#courses" className="text-gray-400 hover:text-white transition-colors text-sm flex items-center gap-2 group">
+                  <a 
+                    href="#courses" 
+                    onClick={(e) => scrollToSection(e, 'courses')}
+                    className="text-gray-400 hover:text-white transition-colors text-sm flex items-center gap-2 group cursor-pointer"
+                  >
                     <span className="w-1.5 h-1.5 rounded-full bg-blue-500 group-hover:bg-purple-500 transition-colors"></span>
                     Art & Drawing
-                  </Link>
+                  </a>
                 </li>
                 <li>
-                  <Link href="#courses" className="text-gray-400 hover:text-white transition-colors text-sm flex items-center gap-2 group">
+                  <a 
+                    href="#courses" 
+                    onClick={(e) => scrollToSection(e, 'courses')}
+                    className="text-gray-400 hover:text-white transition-colors text-sm flex items-center gap-2 group cursor-pointer"
+                  >
                     <span className="w-1.5 h-1.5 rounded-full bg-blue-500 group-hover:bg-purple-500 transition-colors"></span>
                     Chess Mastery
-                  </Link>
+                  </a>
                 </li>
                 <li>
-                  <Link href="#courses" className="text-gray-400 hover:text-white transition-colors text-sm flex items-center gap-2 group">
+                  <a 
+                    href="#courses" 
+                    onClick={(e) => scrollToSection(e, 'courses')}
+                    className="text-gray-400 hover:text-white transition-colors text-sm flex items-center gap-2 group cursor-pointer"
+                  >
                     <span className="w-1.5 h-1.5 rounded-full bg-blue-500 group-hover:bg-purple-500 transition-colors"></span>
                     Piano Lessons
-                  </Link>
+                  </a>
                 </li>
                 <li>
-                  <Link href="#courses" className="text-gray-400 hover:text-white transition-colors text-sm flex items-center gap-2 group">
+                  <a 
+                    href="#courses" 
+                    onClick={(e) => scrollToSection(e, 'courses')}
+                    className="text-gray-400 hover:text-white transition-colors text-sm flex items-center gap-2 group cursor-pointer"
+                  >
                     <span className="w-1.5 h-1.5 rounded-full bg-blue-500 group-hover:bg-purple-500 transition-colors"></span>
                     Public Speaking
-                  </Link>
+                  </a>
                 </li>
                 <li>
-                  <Link href="#courses" className="text-gray-400 hover:text-white transition-colors text-sm flex items-center gap-2 group">
+                  <a 
+                    href="#courses" 
+                    onClick={(e) => scrollToSection(e, 'courses')}
+                    className="text-gray-400 hover:text-white transition-colors text-sm flex items-center gap-2 group cursor-pointer"
+                  >
                     <span className="w-1.5 h-1.5 rounded-full bg-blue-500 group-hover:bg-purple-500 transition-colors"></span>
                     View All Courses
-                  </Link>
+                  </a>
                 </li>
               </ul>
             </div>
