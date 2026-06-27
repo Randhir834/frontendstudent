@@ -49,7 +49,6 @@ const nextConfig: NextConfig = {
   
   // Optimized for production
   reactStrictMode: true,
-  swcMinify: true,
 };
 
 export default nextConfig;
