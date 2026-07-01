@@ -92,15 +92,71 @@ export interface Enrollment {
 export interface Payment {
   id: number;
   user_id: number;
-  enrollment_id: number;
+  course_id: number;
+  enrollment_id?: number;
   amount: number;
-  payment_method: string;
-  transaction_id?: string;
+  currency: string;
+  payment_method?: string;
+  razorpay_order_id?: string;
+  razorpay_payment_id?: string;
+  razorpay_signature?: string;
   status: 'pending' | 'completed' | 'failed' | 'refunded';
   paid_at?: string;
   course_title?: string;
+  course_thumbnail?: string;
+  student_name?: string;
+  student_email?: string;
   created_at: string;
   updated_at: string;
+}
+
+export interface RazorpayOptions {
+  key: string;
+  amount: number;
+  currency: string;
+  name: string;
+  description: string;
+  order_id: string;
+  handler: (response: RazorpayResponse) => void;
+  config?: {
+    display: {
+      blocks: {
+        [key: string]: {
+          name: string;
+          instruments: Array<{
+            method: string;
+          }>;
+        };
+      };
+      sequence: string[];
+      preferences: {
+        show_default_blocks: boolean;
+      };
+    };
+  };
+  prefill?: {
+    name?: string;
+    email?: string;
+    contact?: string;
+  };
+  theme?: {
+    color?: string;
+  };
+  modal?: {
+    ondismiss?: () => void;
+  };
+}
+
+export interface RazorpayResponse {
+  razorpay_payment_id: string;
+  razorpay_order_id: string;
+  razorpay_signature: string;
+}
+
+declare global {
+  interface Window {
+    Razorpay: any;
+  }
 }
 
 export interface Assignment {

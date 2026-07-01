@@ -177,7 +177,7 @@ export default function ResetPasswordPage() {
       }
       leftSubtitle="Pick a new password to keep your learning progress and profile safe."
     >
-      <Suspense fallback={<p className="text-center text-sm text-text-muted">Loading…</p>}>
+      <Suspense fallback={null}>
         <ResetPasswordForm />
       </Suspense>
     </StudentAuthSplitShell>

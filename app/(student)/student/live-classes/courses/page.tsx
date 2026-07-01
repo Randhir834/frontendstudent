@@ -286,15 +286,7 @@ function StudentCourseLiveClassesContent() {
 
 export default function StudentCourseLiveClassesPage() {
   return (
-    <Suspense fallback={
-      <StudentDashboardLayout>
-        <div className="p-4 md:p-8 max-w-[1400px] mx-auto">
-          <div className="flex items-center justify-center py-12">
-            <Loader2 className="size-8 animate-spin text-[#1E88E5]" />
-          </div>
-        </div>
-      </StudentDashboardLayout>
-    }>
+    <Suspense fallback={null}>
       <StudentCourseLiveClassesContent />
     </Suspense>
   );

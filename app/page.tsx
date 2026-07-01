@@ -265,7 +265,7 @@ export default function Home() {
 
               {/* Description */}
               <p className="text-base xs:text-lg sm:text-xl md:text-xl text-gray-700 leading-relaxed max-w-xl font-medium">
-                Interactive <span className="text-blue-600 font-bold">live classes</span> in Art, Chess, Piano, Public Speaking, and more. Designed for students aged <span className="text-purple-600 font-bold">8-18</span>.
+                Interactive <span className="text-blue-600 font-bold">live classes</span> in Art, Chess, Piano, Public Speaking, and more. Designed for students passionate about learning.
               </p>
 
               {/* CTA Buttons */}
@@ -592,7 +592,7 @@ export default function Home() {
             <div className="text-center mb-8 sm:mb-10 md:mb-12 lg:mb-16">
               <div className="inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-full text-sm font-bold mb-6 shadow-lg shadow-purple-500/30">
                 <Star className="w-5 h-5 fill-yellow-300 text-yellow-300" />
-                11+ Courses Available ✨
+                12+ Courses Available ✨
               </div>
               <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent mb-4 sm:mb-5 px-2">
                 Explore Our Skill Development Courses
@@ -604,17 +604,18 @@ export default function Home() {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 md:gap-7 lg:gap-8">
               {[
-                { title: "Art & Drawing", age: "Ages 5-15", gradient: "from-rose-500 to-pink-600", icon: "🎨", bgPattern: "from-rose-50 via-pink-50 to-rose-100", description: "Unleash creativity on canvas" },
-                { title: "Chess", age: "Ages 6-16", gradient: "from-slate-700 to-gray-900", icon: "♟️", bgPattern: "from-slate-50 via-gray-50 to-slate-100", description: "Master strategic thinking" },
-                { title: "Piano", age: "Ages 5-15", gradient: "from-violet-500 to-purple-600", icon: "🎹", bgPattern: "from-violet-50 via-purple-50 to-violet-100", description: "Create beautiful melodies" },
-                { title: "Phonics", age: "Ages 4-8", gradient: "from-sky-500 to-blue-600", icon: "🅰️", bgPattern: "from-sky-50 via-blue-50 to-sky-100", description: "Build reading confidence" },
-                { title: "Public Speaking", age: "Ages 7-17", gradient: "from-emerald-500 to-green-600", icon: "🎤", bgPattern: "from-emerald-50 via-green-50 to-emerald-100", description: "Speak with confidence" },
-                { title: "Abacus", age: "Ages 5-12", gradient: "from-amber-500 to-orange-600", icon: "🧮", bgPattern: "from-amber-50 via-orange-50 to-amber-100", description: "Lightning-fast mental math" },
-                { title: "Reader's Club", age: "Ages 6-14", gradient: "from-orange-500 to-red-600", icon: "📚", bgPattern: "from-orange-50 via-red-50 to-orange-100", description: "Discover reading joy" },
-                { title: "Toastmaster", age: "Ages 10-17", gradient: "from-teal-500 to-cyan-600", icon: "🗣️", bgPattern: "from-teal-50 via-cyan-50 to-teal-100", description: "Lead and inspire others" },
-                { title: "Sholak", age: "Ages 7-15", gradient: "from-indigo-500 to-purple-600", icon: "🎯", bgPattern: "from-indigo-50 via-purple-50 to-indigo-100", description: "Ancient wisdom meets modern" },
-                { title: "Computers", age: "Ages 8-16", gradient: "from-blue-500 to-cyan-600", icon: "💻", bgPattern: "from-blue-50 via-cyan-50 to-blue-100", description: "Code the future" },
-                { title: "Rubiks Cube", age: "Ages 6-14", gradient: "from-fuchsia-500 to-pink-600", icon: "🧩", bgPattern: "from-fuchsia-50 via-pink-50 to-fuchsia-100", description: "Puzzle-solving genius" }
+                { title: "Art & Drawing", gradient: "from-rose-500 to-pink-600", icon: "🎨", bgPattern: "from-rose-50 via-pink-50 to-rose-100", description: "Unleash creativity on canvas" },
+                { title: "Chess", gradient: "from-slate-700 to-gray-900", icon: "♟️", bgPattern: "from-slate-50 via-gray-50 to-slate-100", description: "Master strategic thinking" },
+                { title: "Piano", gradient: "from-violet-500 to-purple-600", icon: "🎹", bgPattern: "from-violet-50 via-purple-50 to-violet-100", description: "Create beautiful melodies" },
+                { title: "Phonics", gradient: "from-sky-500 to-blue-600", icon: "🅰️", bgPattern: "from-sky-50 via-blue-50 to-sky-100", description: "Build reading confidence" },
+                { title: "Public Speaking", gradient: "from-emerald-500 to-green-600", icon: "🎤", bgPattern: "from-emerald-50 via-green-50 to-emerald-100", description: "Speak with confidence" },
+                { title: "Abacus", gradient: "from-amber-500 to-orange-600", icon: "🧮", bgPattern: "from-amber-50 via-orange-50 to-amber-100", description: "Lightning-fast mental math" },
+                { title: "Reader's Club", gradient: "from-orange-500 to-red-600", icon: "📚", bgPattern: "from-orange-50 via-red-50 to-orange-100", description: "Discover reading joy" },
+                { title: "Toastmaster", gradient: "from-teal-500 to-cyan-600", icon: "🗣️", bgPattern: "from-teal-50 via-cyan-50 to-teal-100", description: "Lead and inspire others" },
+                { title: "Sholak", gradient: "from-indigo-500 to-purple-600", icon: "🎯", bgPattern: "from-indigo-50 via-purple-50 to-indigo-100", description: "Ancient wisdom meets modern" },
+                { title: "Computers", gradient: "from-blue-500 to-cyan-600", icon: "💻", bgPattern: "from-blue-50 via-cyan-50 to-blue-100", description: "Code the future" },
+                { title: "Rubiks Cube", gradient: "from-fuchsia-500 to-pink-600", icon: "🧩", bgPattern: "from-fuchsia-50 via-pink-50 to-fuchsia-100", description: "Puzzle-solving genius" },
+                { title: "AI & Machine Learning", gradient: "from-cyan-500 to-blue-700", icon: "🤖", bgPattern: "from-cyan-50 via-blue-50 to-cyan-100", description: "Build intelligent systems" }
               ].map((course, i) => (
                 <div key={i} className={`group relative bg-gradient-to-br ${course.bgPattern} rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-3 border-2 border-white hover:border-white/50`}>
                   {/* Animated Gradient Overlay */}
@@ -638,10 +639,6 @@ export default function Home() {
                       <div>
                         <h3 className="font-bold text-gray-900 mb-3 text-xl md:text-2xl leading-tight group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:${course.gradient} transition-all">{course.title}</h3>
                         <p className="text-sm text-gray-600 mb-3">{course.description}</p>
-                        <div className={`inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r ${course.gradient} text-white text-sm font-bold rounded-full shadow-lg`}>
-                          <Users className="w-4 h-4" />
-                          {course.age}
-                        </div>
                       </div>
                       
                       <button className="group/btn inline-flex items-center gap-2 text-sm font-bold text-gray-700 hover:text-gray-900 transition-colors">
@@ -922,7 +919,6 @@ export default function Home() {
               {[
                 { 
                   name: "Ananya Sharma", 
-                  age: "10 years", 
                   location: "Mumbai", 
                   course: "Art Champion", 
                   quote: "I never imagined I could draw like this! My teacher helped me discover my artistic side, and now I love creating art every day.",
@@ -932,7 +928,6 @@ export default function Home() {
                 },
                 { 
                   name: "Rohan Patel", 
-                  age: "12 years", 
                   location: "Delhi", 
                   course: "Chess Master", 
                   quote: "Chess taught me to think ahead and solve problems. Now I'm winning tournaments and even teaching my friends!",
@@ -942,7 +937,6 @@ export default function Home() {
                 },
                 { 
                   name: "Priya Reddy", 
-                  age: "9 years", 
                   location: "Bangalore", 
                   course: "Piano Prodigy", 
                   quote: "Playing piano brings me so much joy! I performed at my school's annual function and everyone loved it.",
@@ -952,7 +946,6 @@ export default function Home() {
                 },
                 {
                   name: "Mrs. Kapoor",
-                  age: "Parent",
                   location: "Pune",
                   course: "Public Speaking Student",
                   quote: "My son was extremely shy. After joining the Public Speaking course, his confidence has skyrocketed. Thank you Playfit!",
@@ -962,7 +955,6 @@ export default function Home() {
                 },
                 {
                   name: "Aarav Kumar",
-                  age: "11 years",
                   location: "Hyderabad",
                   course: "Abacus Champion",
                   quote: "Mental math is now my superpower! I can calculate faster than calculators and it's so much fun.",
@@ -972,7 +964,6 @@ export default function Home() {
                 },
                 {
                   name: "Mr. & Mrs. Singh",
-                  age: "Parents",
                   location: "Kolkata",
                   course: "Piano Students",
                   quote: "Both our daughters take piano lessons. The teachers are patient, skilled, and genuinely care about their progress.",
@@ -1001,7 +992,7 @@ export default function Home() {
                     </div>
                     <div className="flex-1 min-w-0">
                       <h4 className="font-bold text-gray-900 text-base truncate">{testimonial.name}</h4>
-                      <p className="text-sm text-gray-600">{testimonial.age} • {testimonial.location}</p>
+                      <p className="text-sm text-gray-600">{testimonial.location}</p>
                       <p className={`text-sm font-semibold bg-gradient-to-r ${testimonial.gradient} bg-clip-text text-transparent`}>
                         {testimonial.course}
                       </p>

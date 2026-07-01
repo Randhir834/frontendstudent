@@ -34,7 +34,7 @@ export default function CourseRecommendationSection() {
             {
               icon: Target,
               title: 'Personalized Results',
-              description: 'Get customized recommendations based on age, personality traits, and developmental goals.',
+              description: 'Get customized recommendations based on personality traits, interests, and developmental goals.',
               color: 'bg-purple-50 border-purple-200',
               iconBg: 'bg-purple-500'
             },

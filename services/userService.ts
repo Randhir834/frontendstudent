@@ -13,7 +13,6 @@ export interface UserProfile {
   parent_guardian_phone?: string;
   phone?: string;
   location?: string;
-  age?: number;
   created_at?: string;
   updated_at?: string;
 }
