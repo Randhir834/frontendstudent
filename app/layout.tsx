@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Toaster } from 'react-hot-toast';
+import BrandSchema from '@/components/SEO/BrandSchema';
+import WebSiteSchema from '@/components/SEO/WebSiteSchema';
 import "./globals.css";
 
 const geistSans = Geist({
@@ -84,8 +86,8 @@ export const metadata: Metadata = {
     },
   },
   verification: {
-    google: 'your-google-verification-code',
-    yandex: 'your-yandex-verification-code',
+    google: '4XfWGOETDOkCvyMo_c6AevkSVsEXVM0UdaBx5-jslQs', // Google Search Console verification
+    // yandex: 'your-yandex-verification-code',
   },
   alternates: {
     canonical: 'https://playfitclasses.com',
@@ -129,6 +131,10 @@ export default function RootLayout({
         {/* Preconnect to external domains */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        
+        {/* Brand & Website Schema */}
+        <BrandSchema />
+        <WebSiteSchema />
         
         {/* JSON-LD Structured Data */}
         <script
