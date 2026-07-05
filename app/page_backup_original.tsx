@@ -136,7 +136,7 @@ export default function Home() {
           <div className="flex justify-between items-center h-14 sm:h-16 md:h-18 lg:h-20">
             <Link href="/" className="flex items-center flex-shrink-0">
               <img
-                src="/images/playfit-logo.jpg"
+                src="/logo.jpg"
                 alt="Playfit"
                 className="h-8 sm:h-10 md:h-12 lg:h-14 xl:h-16 w-auto object-contain max-w-[120px] sm:max-w-[140px] md:max-w-[180px] transition-transform hover:scale-105"
               />
@@ -780,7 +780,7 @@ export default function Home() {
               <div>
                 <Link href="/" className="inline-block mb-3 sm:mb-4">
                   <img
-                    src="/images/playfit-logo.jpg"
+                    src="/logo.jpg"
                     alt="Playfit"
                     className="h-8 sm:h-10 md:h-12 w-auto object-contain"
                   />
@@ -824,7 +824,7 @@ export default function Home() {
                   </li>
                   <li className="flex items-center gap-2 text-xs sm:text-sm text-gray-400">
                     <Phone className="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0" />
-                    <span>+1 (234) 567-890</span>
+                    <span>+91 891 048 4299</span>
                   </li>
                 </ul>
               </div>

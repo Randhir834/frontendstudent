@@ -23,7 +23,7 @@ export default function WebSiteSchema() {
       "name": "PlayFit Classes",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://playfitclasses.com/images/playfit-logo.jpg"
+        "url": "https://playfitclasses.com/logo.jpg"
       }
     }
   };

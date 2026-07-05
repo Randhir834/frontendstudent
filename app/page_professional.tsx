@@ -76,7 +76,7 @@ export default function Home() {
         <div className="flex items-center">
           <Link href="/" className="relative flex items-center justify-start shrink-0 transition-all duration-300 h-12 sm:h-14 md:h-16 w-auto hover:scale-105 group">
             <img
-              src="/images/playfit-logo.jpg"
+              src="/logo.jpg"
               alt="PlayFit"
               className="w-auto h-full object-contain max-w-full max-h-full transform group-hover:rotate-2 transition-transform"
             />
@@ -802,7 +802,7 @@ export default function Home() {
             <div className="flex items-center gap-2 mb-6">
               <Link href="/" className="relative flex items-center justify-center shrink-0 transition-all duration-300 h-12 w-auto hover:scale-105">
                 <img
-                  src="/images/playfit-logo.jpg"
+                  src="/logo.jpg"
                   alt="PlayFit"
                   className="w-full h-full object-contain max-w-full max-h-full"
                 />

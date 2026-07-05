@@ -60,7 +60,7 @@ export const metadata: Metadata = {
     description: 'Live online skill development courses for children aged 8-18. Join 10,000+ students learning Art, Chess, Piano, Public Speaking, and more with expert instructors.',
     images: [
       {
-        url: '/images/playfit-logo.jpg',
+        url: '/logo.jpg',
         width: 1200,
         height: 630,
         alt: 'Playfit Classes - Online Learning Platform for Kids',
@@ -71,7 +71,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Playfit Classes - Online Courses for Kids | Art, Chess, Piano & More',
     description: 'Live online skill development courses for children aged 8-18. Join 10,000+ students today!',
-    images: ['/images/playfit-logo.jpg'],
+    images: ['/logo.jpg'],
     creator: '@playfitclasses',
   },
   robots: {
@@ -99,11 +99,11 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: '/favicon.png', sizes: '1254x1254', type: 'image/png' },
-      { url: '/images/playfit-logo.jpg', sizes: '1254x1254', type: 'image/png' }
+      { url: '/logo.jpg', sizes: '1254x1254', type: 'image/jpeg' },
+      { url: '/logo.jpg', sizes: '1254x1254', type: 'image/jpeg' }
     ],
-    shortcut: '/favicon.png',
-    apple: '/favicon.png',
+    shortcut: '/logo.jpg',
+    apple: '/logo.jpg',
   },
   category: 'Education',
 };
@@ -145,7 +145,7 @@ export default function RootLayout({
               "@type": "EducationalOrganization",
               "name": "Playfit Classes",
               "url": "https://playfitclasses.com",
-              "logo": "https://playfitclasses.com/images/playfit-logo.jpg",
+              "logo": "https://playfitclasses.com/logo.jpg",
               "description": "Live online skill development courses for children aged 8-18. Learn Art, Chess, Piano, Public Speaking, and more with expert instructors.",
               "sameAs": [
                 "https://facebook.com/playfitclasses",
@@ -155,7 +155,7 @@ export default function RootLayout({
               ],
               "contactPoint": {
                 "@type": "ContactPoint",
-                "telephone": "+1-XXX-XXX-XXXX",
+                "telephone": "+91-891-048-4299",
                 "contactType": "Customer Service",
                 "availableLanguage": "English"
               },

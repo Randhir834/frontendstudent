@@ -11,7 +11,7 @@ export default function BrandSchema() {
     "name": "PlayFit",
     "alternateName": "Playfit Classes",
     "url": "https://playfitclasses.com",
-    "logo": "https://playfitclasses.com/images/playfit-logo.jpg",
+    "logo": "https://playfitclasses.com/logo.jpg",
     "sameAs": [
       "https://facebook.com/playfitclasses",
       "https://twitter.com/playfitclasses",

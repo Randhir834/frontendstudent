@@ -33,7 +33,7 @@ export const generatePageMetadata = ({
       type: 'website',
       images: [
         {
-          url: `${baseUrl}/images/playfit-logo.jpg`,
+          url: `${baseUrl}/logo.jpg`,
           width: 1200,
           height: 630,
           alt: siteName,
@@ -44,7 +44,7 @@ export const generatePageMetadata = ({
       card: 'summary_large_image',
       title: fullTitle,
       description: metaDescription,
-      images: [`${baseUrl}/images/playfit-logo.jpg`],
+      images: [`${baseUrl}/logo.jpg`],
     },
     alternates: {
       canonical: url,

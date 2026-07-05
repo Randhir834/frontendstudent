@@ -115,7 +115,7 @@ export default function StudentDashboardLayout({ children }: StudentDashboardLay
         <div className="relative border-b border-gray-200 lg:border-none flex items-center justify-center px-3 xs:px-4 py-4 xs:py-5 sm:py-6 shrink-0 bg-gradient-to-r from-indigo-600 to-purple-600 lg:bg-none">
           <div className="relative flex items-center justify-center shrink-0 transition-all duration-300 w-full h-12 xs:h-14 sm:h-16 lg:h-16 xl:h-20">
             <img
-              src="/images/navbarlogo.png"
+              src="/logo.jpg"
               alt="PlayFit"
               className="w-full h-full object-contain max-w-full max-h-full filter lg:filter-none brightness-0 invert lg:brightness-100 lg:invert-0"
             />

@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     title: 'About PlayFit Classes - Leading Online Learning Platform for Kids',
     description: 'Discover how PlayFit Classes is transforming children\'s education with live online courses in art, chess, piano, and more.',
     url: 'https://playfitclasses.com/about',
-    images: ['/images/playfit-logo.jpg'],
+    images: ['/logo.jpg'],
   },
   alternates: {
     canonical: 'https://playfitclasses.com/about',
@@ -198,7 +198,7 @@ export default function AboutPage() {
               },
               "slogan": "Transform Your Learning Journey",
               "url": "https://playfitclasses.com",
-              "logo": "https://playfitclasses.com/images/playfit-logo.jpg",
+              "logo": "https://playfitclasses.com/logo.jpg",
               "aggregateRating": {
                 "@type": "AggregateRating",
                 "ratingValue": "4.9",

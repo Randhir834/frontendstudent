@@ -11,12 +11,12 @@ export default function manifest(): MetadataRoute.Manifest {
     theme_color: '#1E88E5',
     icons: [
       {
-        src: '/favicon.png',
+        src: '/logo.jpg',
         sizes: '1254x1254',
         type: 'image/png',
       },
       {
-        src: '/images/playfit-logo.jpg',
+        src: '/logo.jpg',
         sizes: '1254x1254',
         type: 'image/jpeg',
       },
