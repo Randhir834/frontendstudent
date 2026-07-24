@@ -28,8 +28,8 @@ export const userService = {
     return response.data.user;
   },
 
-  changePassword: async (oldPassword: string, newPassword: string, confirmPassword: string): Promise<any> => {
-    const response = await api.post('/users/change-password', { oldPassword, newPassword, confirmPassword });
+  changePassword: async (data: { oldPassword: string; newPassword: string; confirmPassword: string }): Promise<any> => {
+    const response = await api.post('/users/change-password', data);
     return response.data;
   },
 
