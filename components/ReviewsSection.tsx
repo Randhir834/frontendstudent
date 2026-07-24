@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { Star, Quote, Loader2, MessageSquare, ChevronLeft, ChevronRight } from 'lucide-react';
 import { getApprovedReviews } from '@/services/reviewService';
 import { Review } from '@/types';
+import { io, Socket } from 'socket.io-client';
 
 export default function ReviewsSection() {
   const [reviews, setReviews] = useState<Review[]>([]);
@@ -13,6 +14,31 @@ export default function ReviewsSection() {
 
   useEffect(() => {
     fetchReviews();
+
+    // Connect to Socket.IO for real-time updates
+    const socket: Socket = io(process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5001', {
+      transports: ['websocket', 'polling'],
+    });
+
+    socket.on('connect', () => {
+      console.log('[ReviewsSection] Socket connected');
+    });
+
+    // Listen for review approval events
+    socket.on('review-approved', (data) => {
+      console.log('[ReviewsSection] Review approved:', data);
+      // Refresh the reviews list
+      fetchReviews();
+    });
+
+    socket.on('disconnect', () => {
+      console.log('[ReviewsSection] Socket disconnected');
+    });
+
+    // Cleanup on unmount
+    return () => {
+      socket.disconnect();
+    };
   }, []);
 
   const fetchReviews = async () => {
