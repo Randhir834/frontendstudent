@@ -6,6 +6,8 @@ import Head from 'next/head';
 import { ArrowRight, CheckCircle, BookOpen, Users, Trophy, Star, Menu, X, Award, TrendingUp, Mail, Phone, Sparkles, Zap, Heart, Target } from 'lucide-react';
 import { contactService } from '@/services/contactService';
 import CourseRecommendationSection from '@/components/CourseRecommendation/CourseRecommendationSection';
+import WriteReview from '@/components/WriteReview';
+import ReviewsSection from '@/components/ReviewsSection';
 
 export default function Home() {
   const [formData, setFormData] = useState({ 
@@ -1050,6 +1052,12 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Reviews Section - Approved Reviews from Database */}
+      <ReviewsSection />
+
+      {/* Write a Review Section */}
+      <WriteReview />
 
       {/* About Playfit Section */}
       <section id="about" className="py-16 sm:py-20 md:py-24 bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 scroll-mt-16 relative overflow-hidden">

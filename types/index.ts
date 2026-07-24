@@ -313,6 +313,26 @@ export interface AuthResponse {
   token: string;
 }
 
+export interface Review {
+  id: number;
+  name: string;
+  role: string;
+  rating: number;
+  message: string;
+  course_name?: string;
+  created_at: string;
+}
+
+export interface ReviewSubmission {
+  name: string;
+  role: string;
+  rating: number;
+  message: string;
+  email?: string;
+  phone?: string;
+  courseName?: string;
+}
+
 export interface ApiError {
   error: string;
 }
