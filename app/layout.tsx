@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { Toaster } from 'react-hot-toast';
 import BrandSchema from '@/components/SEO/BrandSchema';
 import WebSiteSchema from '@/components/SEO/WebSiteSchema';
+import GoogleAnalytics from '@/components/GoogleAnalytics';
 import "./globals.css";
 
 const geistSans = Geist({
@@ -18,14 +19,17 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL('https://playfitclasses.com'),
   title: {
-    default: "Playfit - Online Courses for Kids | Art, Chess, Piano, Abacus & More",
-    template: "%s | Playfit - Online Learning Platform for Kids"
+    default: "Online Skills Courses Kolkata | Art, Chess, Piano | PlayFit",
+    template: "%s | PlayFit"
   },
-  description: "Live online skill development courses for children aged 8-18. Learn Art & Drawing, Chess, Piano, Phonics, Public Speaking, Abacus, Computers, Rubiks Cube and more with expert instructors. Join 10,000+ students today!",
+  description: "Join online skills courses in Kolkata for Art, Chess, Piano, and more. Expert-led live classes help kids build creativity, confidence, and essential life skills.",
   keywords: [
     'Playfit',
+    'PlayFit',
     'online courses for kids',
     'online learning for children',
+    'online courses Kolkata',
+    'kids classes Kolkata',
     'art classes for kids online',
     'chess classes for kids',
     'piano lessons online',
@@ -41,7 +45,9 @@ export const metadata: Metadata = {
     'online tutoring for kids',
     'creative classes for kids',
     'STEM education',
-    'extracurricular activities'
+    'extracurricular activities',
+    'Kolkata online classes',
+    'West Bengal online courses'
   ],
   authors: [{ name: 'Playfit' }],
   creator: 'Playfit',
@@ -55,9 +61,9 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     url: 'https://playfitclasses.com',
-    siteName: 'Playfit Classes',
-    title: 'Playfit Classes - Online Courses for Kids | Art, Chess, Piano & More',
-    description: 'Live online skill development courses for children aged 8-18. Join 10,000+ students learning Art, Chess, Piano, Public Speaking, and more with expert instructors.',
+    siteName: 'PlayFit',
+    title: 'Online Skills Courses Kolkata | Art, Chess, Piano | PlayFit',
+    description: 'Join online skills courses in Kolkata for Art, Chess, Piano, and more. Expert-led live classes help kids build creativity, confidence, and essential life skills.',
     images: [
       {
         url: '/logo.jpg',
@@ -69,8 +75,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Playfit Classes - Online Courses for Kids | Art, Chess, Piano & More',
-    description: 'Live online skill development courses for children aged 8-18. Join 10,000+ students today!',
+    title: 'Online Skills Courses Kolkata | Art, Chess, Piano | PlayFit',
+    description: 'Join online skills courses in Kolkata for Art, Chess, Piano, and more. Expert-led live classes help kids build creativity, confidence, and essential life skills.',
     images: ['/logo.jpg'],
     creator: '@playfitclasses',
   },
@@ -86,7 +92,7 @@ export const metadata: Metadata = {
     },
   },
   verification: {
-    google: '4XfWGOETDOkCvyMo_c6AevkSVsEXVM0UdaBx5-jslQs', // Google Search Console verification
+    google: 'Cp6blwy343IfJBbqgGCYvl9oeBK_FwWeNYNbb7ggA9I', // Google Search Console verification
     // yandex: 'your-yandex-verification-code',
   },
   alternates: {
@@ -95,7 +101,7 @@ export const metadata: Metadata = {
   appleWebApp: {
     capable: true,
     statusBarStyle: 'default',
-    title: 'Playfit',
+    title: 'PlayFit',
   },
   icons: {
     icon: [
@@ -143,16 +149,22 @@ export default function RootLayout({
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "EducationalOrganization",
-              "name": "Playfit Classes",
+              "name": "PlayFit",
               "url": "https://playfitclasses.com",
               "logo": "https://playfitclasses.com/logo.jpg",
-              "description": "Live online skill development courses for children aged 8-18. Learn Art, Chess, Piano, Public Speaking, and more with expert instructors.",
+              "description": "Join online skills courses in Kolkata for Art, Chess, Piano, and more. Expert-led live classes help kids build creativity, confidence, and essential life skills.",
               "sameAs": [
                 "https://facebook.com/playfitclasses",
                 "https://twitter.com/playfitclasses",
                 "https://instagram.com/playfitclasses",
                 "https://linkedin.com/company/playfitclasses"
               ],
+              "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Kolkata",
+                "addressRegion": "West Bengal",
+                "addressCountry": "IN"
+              },
               "contactPoint": {
                 "@type": "ContactPoint",
                 "telephone": "+91-891-048-4299",
@@ -192,7 +204,7 @@ export default function RootLayout({
                   "description": "Creative art and drawing courses for children",
                   "provider": {
                     "@type": "Organization",
-                    "name": "Playfit Classes"
+                    "name": "PlayFit"
                   }
                 },
                 {
@@ -202,7 +214,7 @@ export default function RootLayout({
                   "description": "Strategic chess training for young minds",
                   "provider": {
                     "@type": "Organization",
-                    "name": "Playfit Classes"
+                    "name": "PlayFit"
                   }
                 },
                 {
@@ -212,7 +224,7 @@ export default function RootLayout({
                   "description": "Music education with expert piano instructors",
                   "provider": {
                     "@type": "Organization",
-                    "name": "Playfit Classes"
+                    "name": "PlayFit"
                   }
                 }
               ]
@@ -221,6 +233,7 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-full flex flex-col">
+        <GoogleAnalytics />
         {children}
         <Toaster position="top-right" />
       </body>
