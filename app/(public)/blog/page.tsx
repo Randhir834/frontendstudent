@@ -2,10 +2,9 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Search, Calendar, User, ArrowRight, BookOpen, Menu, X } from 'lucide-react';
+import { Search, Calendar, User, ArrowRight, BookOpen, Menu, X, Mail, Phone, Heart } from 'lucide-react';
 import { blogService } from '@/services/blogService';
 import type { Blog } from '@/types';
-import Footer from '@/components/layouts/Footer';
 
 export default function BlogListPage() {
   const [blogs, setBlogs] = useState<Blog[]>([]);
@@ -318,8 +317,101 @@ export default function BlogListPage() {
         </div>
       </main>
 
-      {/* Footer */}
-      <Footer />
+      {/* Footer - Enhanced with Color */}
+      <footer className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white py-8 sm:py-10 md:py-12 lg:py-16 safe-bottom relative overflow-hidden">
+        {/* Decorative Background Elements */}
+        <div className="absolute top-0 right-0 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-purple-600/10 rounded-full blur-3xl"></div>
+        
+        <div className="relative w-full px-3 sm:px-4 md:px-6 lg:px-8">
+          <div className="max-w-7xl mx-auto">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-6 md:gap-8 mb-6 sm:mb-8">
+              {/* Brand Section */}
+              <div>
+                <Link href="/" className="inline-block mb-3 sm:mb-4">
+                  <img
+                    src="/logo.jpg"
+                    alt="Playfit"
+                    className="h-10 sm:h-12 md:h-14 w-auto object-contain"
+                  />
+                </Link>
+                <p className="text-xs sm:text-sm text-gray-300 leading-relaxed mb-4">
+                  Empowering children with creative and skill-building courses in Art, Chess, Piano, Public Speaking, Abacus, and more.
+                </p>
+              </div>
+
+              {/* Courses Section */}
+              <div>
+                <h4 className="font-semibold text-white mb-3 sm:mb-4 text-sm sm:text-base flex items-center gap-2">
+                  <span className="w-2 h-2 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full"></span>
+                  Popular Courses
+                </h4>
+                <ul className="space-y-1.5 sm:space-y-2">
+                  <li><a href="/#courses" className="text-xs sm:text-sm text-gray-300 hover:text-blue-400 transition-colors block py-1 hover:translate-x-1 transition-transform">🎨 Art & Drawing</a></li>
+                  <li><a href="/#courses" className="text-xs sm:text-sm text-gray-300 hover:text-purple-400 transition-colors block py-1 hover:translate-x-1 transition-transform">♟️ Chess</a></li>
+                  <li><a href="/#courses" className="text-xs sm:text-sm text-gray-300 hover:text-pink-400 transition-colors block py-1 hover:translate-x-1 transition-transform">🎹 Piano</a></li>
+                  <li><a href="/#courses" className="text-xs sm:text-sm text-gray-300 hover:text-green-400 transition-colors block py-1 hover:translate-x-1 transition-transform">🎤 Public Speaking</a></li>
+                  <li><a href="/#courses" className="text-xs sm:text-sm text-gray-300 hover:text-amber-400 transition-colors block py-1 hover:translate-x-1 transition-transform">🧮 Abacus</a></li>
+                </ul>
+              </div>
+
+              {/* Quick Links Section */}
+              <div>
+                <h4 className="font-semibold text-white mb-3 sm:mb-4 text-sm sm:text-base flex items-center gap-2">
+                  <span className="w-2 h-2 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full"></span>
+                  Quick Links
+                </h4>
+                <ul className="space-y-1.5 sm:space-y-2">
+                  <li><Link href="/#about" className="text-xs sm:text-sm text-gray-300 hover:text-purple-400 transition-colors block py-1 hover:translate-x-1 transition-transform">About Us</Link></li>
+                  <li><Link href="/#contact" className="text-xs sm:text-sm text-gray-300 hover:text-blue-400 transition-colors block py-1 hover:translate-x-1 transition-transform">Contact Us</Link></li>
+                  <li><Link href="/#trial" className="text-xs sm:text-sm text-gray-300 hover:text-pink-400 transition-colors block py-1 hover:translate-x-1 transition-transform">Free Trial</Link></li>
+                  <li><Link href="/login" className="text-xs sm:text-sm text-gray-300 hover:text-green-400 transition-colors block py-1 hover:translate-x-1 transition-transform">Student Login</Link></li>
+                  <li><a href="#" className="text-xs sm:text-sm text-gray-300 hover:text-amber-400 transition-colors block py-1 hover:translate-x-1 transition-transform">Help Center</a></li>
+                </ul>
+              </div>
+
+              {/* Contact Section */}
+              <div>
+                <h4 className="font-semibold text-white mb-3 sm:mb-4 text-sm sm:text-base flex items-center gap-2">
+                  <span className="w-2 h-2 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full"></span>
+                  Contact Us
+                </h4>
+                <ul className="space-y-2 sm:space-y-3">
+                  <li className="flex items-start gap-2 text-xs sm:text-sm text-gray-300 group">
+                    <Mail className="w-4 h-4 flex-shrink-0 mt-0.5 group-hover:text-blue-400 transition-colors" />
+                    <a href="mailto:cplayfit@gmail.com" className="break-all group-hover:text-blue-400 transition-colors">cplayfit@gmail.com</a>
+                  </li>
+                  <li className="flex items-center gap-2 text-xs sm:text-sm text-gray-300 group">
+                    <Phone className="w-4 h-4 flex-shrink-0 group-hover:text-green-400 transition-colors" />
+                    <a href="tel:+918910484299" className="group-hover:text-green-400 transition-colors">+91 8910484299</a>
+                  </li>
+                </ul>
+                
+                {/* CTA Button */}
+                <div className="mt-6">
+                  <Link href="/#contact" className="inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white text-sm font-semibold rounded-full transition-all hover:scale-105 shadow-lg">
+                    <Mail className="w-4 h-4" />
+                    Contact Us
+                  </Link>
+                </div>
+              </div>
+            </div>
+
+            <div className="border-t border-gray-700 pt-6 sm:pt-8">
+              <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
+                <p className="text-xs sm:text-sm text-gray-400 text-center sm:text-left">
+                  © {new Date().getFullYear()} Playfit. All rights reserved. Made with <Heart className="inline w-4 h-4 text-red-500 fill-red-500" /> for young learners.
+                </p>
+                <div className="flex gap-4">
+                  <a href="#" className="text-gray-400 hover:text-blue-400 transition-colors text-xs sm:text-sm">Privacy</a>
+                  <a href="#" className="text-gray-400 hover:text-purple-400 transition-colors text-xs sm:text-sm">Terms</a>
+                  <a href="#" className="text-gray-400 hover:text-pink-400 transition-colors text-xs sm:text-sm">Cookie Policy</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
