@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { authService } from '@/services/authService';
 import { useAuth } from '@/hooks/useAuth';
@@ -8,7 +8,7 @@ import Link from 'next/link';
 import StudentAuthSplitShell from '@/components/layouts/StudentAuthSplitShell';
 import { getUserFriendlyError, logTechnicalError } from '@/utils/errorHandler';
 
-export default function LoginPage() {
+function LoginForm() {
   const [identifier, setIdentifier] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -260,5 +260,17 @@ export default function LoginPage() {
         </div>
       </div>
     </StudentAuthSplitShell>
+  );
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense fallback={
+      <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+      </div>
+    }>
+      <LoginForm />
+    </Suspense>
   );
 }
