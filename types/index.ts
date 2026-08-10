@@ -89,6 +89,19 @@ export interface Enrollment {
   updated_at: string;
 }
 
+export interface Blog {
+  id: number;
+  title: string;
+  slug: string;
+  content: string;
+  excerpt?: string;
+  author: string;
+  featured_image_url?: string;
+  publication_date?: string;
+  created_at: string;
+  updated_at: string;
+}
+
 export interface Payment {
   id: number;
   user_id: number;

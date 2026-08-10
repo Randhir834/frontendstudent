@@ -6,6 +6,7 @@ import Head from 'next/head';
 import { ArrowRight, CheckCircle, BookOpen, Users, Trophy, Star, Menu, X, Award, TrendingUp, Mail, Phone, Sparkles, Zap, Heart, Target } from 'lucide-react';
 import { contactService } from '@/services/contactService';
 import CourseRecommendationSection from '@/components/CourseRecommendation/CourseRecommendationSection';
+import CoursesSection from '@/components/CoursesSection/CoursesSection';
 import WriteReview from '@/components/WriteReview';
 import ReviewsSection from '@/components/ReviewsSection';
 
@@ -190,14 +191,20 @@ export default function Home() {
             </Link>
             
             <nav className="hidden md:flex items-center gap-2 lg:gap-3 xl:gap-5">
-              <a 
-                href="#courses" 
-                onClick={(e) => scrollToSection(e, 'courses')}
+              <Link 
+                href="/courses"
                 className="text-xs lg:text-sm xl:text-base font-bold text-gray-700 hover:text-purple-600 transition-all hover:scale-105 whitespace-nowrap relative group px-1 lg:px-2 cursor-pointer"
               >
                 Courses
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-600 to-pink-600 group-hover:w-full transition-all"></span>
-              </a>
+              </Link>
+              <Link 
+                href="/blog"
+                className="text-xs lg:text-sm xl:text-base font-bold text-gray-700 hover:text-purple-600 transition-all hover:scale-105 whitespace-nowrap relative group px-1 lg:px-2 cursor-pointer"
+              >
+                Blog
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-600 to-pink-600 group-hover:w-full transition-all"></span>
+              </Link>
               <a 
                 href="#about" 
                 onClick={(e) => scrollToSection(e, 'about')}
@@ -241,13 +248,20 @@ export default function Home() {
         {mobileMenuOpen && (
           <div className="md:hidden border-t border-purple-200 bg-white/95 backdrop-blur-md shadow-lg animate-in slide-in-from-top duration-300">
             <nav className="px-3 sm:px-4 py-3 space-y-2 max-w-md mx-auto">
-              <a 
-                href="#courses" 
-                onClick={(e) => scrollToSection(e, 'courses')}
+              <Link 
+                href="/courses"
+                onClick={() => setMobileMenuOpen(false)}
                 className="block py-3 px-4 text-sm font-bold text-gray-700 hover:text-purple-600 hover:bg-purple-50 rounded-lg transition-all touch-target active:scale-95 cursor-pointer"
               >
                 Courses
-              </a>
+              </Link>
+              <Link 
+                href="/blog"
+                onClick={() => setMobileMenuOpen(false)}
+                className="block py-3 px-4 text-sm font-bold text-gray-700 hover:text-purple-600 hover:bg-purple-50 rounded-lg transition-all touch-target active:scale-95 cursor-pointer"
+              >
+                Blog
+              </Link>
               <a 
                 href="#about" 
                 onClick={(e) => scrollToSection(e, 'about')}
@@ -504,6 +518,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Courses Section - All Available Courses */}
+      <CoursesSection />
 
       {/* Find Your Best Courses Section */}
       <CourseRecommendationSection />

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { authService } from '@/services/authService';
 import { useAuth } from '@/hooks/useAuth';
 import Link from 'next/link';
@@ -17,6 +17,8 @@ export default function LoginPage() {
   const [checkingAuth, setCheckingAuth] = useState(true);
   const { login } = useAuth();
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const returnUrl = searchParams.get('returnUrl');
 
   // Redirect if already authenticated
   useEffect(() => {
@@ -87,8 +89,12 @@ export default function LoginPage() {
       
       login(data.user, data.token, data.sessionToken);
       
-      // Use replace to prevent back navigation to login page after successful login
-      router.replace('/student');
+      // Redirect to returnUrl if provided, otherwise go to student dashboard
+      if (returnUrl) {
+        router.replace(returnUrl);
+      } else {
+        router.replace('/student');
+      }
     } catch (err: unknown) {
       logTechnicalError('Student Login', err);
       const message = getUserFriendlyError(err);
