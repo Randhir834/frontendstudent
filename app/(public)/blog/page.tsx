@@ -173,30 +173,6 @@ export default function BlogListPage() {
         </div>
 
         <div className="relative max-w-7xl mx-auto px-3 xs:px-4 sm:px-6 lg:px-8">
-          {/* Page Header */}
-          <div className="text-center mb-10 xs:mb-12 sm:mb-14 md:mb-16">
-            <h1 className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 mb-3 xs:mb-4 sm:mb-5 leading-tight">
-              Stories & Insights
-            </h1>
-            <p className="text-sm xs:text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-              Discover articles, tips, and insights about learning and education
-            </p>
-          </div>
-
-          {/* Search Bar */}
-          <form onSubmit={handleSearch} className="max-w-2xl mx-auto mb-10 sm:mb-12">
-            <div className="relative">
-              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-              <input
-                type="text"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search blog posts..."
-                className="w-full pl-12 pr-4 py-4 bg-white border-2 border-gray-200 rounded-2xl focus:ring-2 focus:ring-purple-500 focus:border-purple-500 shadow-lg text-gray-900 placeholder-gray-400"
-              />
-            </div>
-          </form>
-
           {/* Loading State */}
           {loading && (
             <div className="flex items-center justify-center py-12">
