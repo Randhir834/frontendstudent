@@ -5,7 +5,6 @@ import Link from 'next/link';
 import { ArrowLeft, BookOpen, Clock, Users, Star, Search, Filter, X, Menu, ArrowRight } from 'lucide-react';
 import { courseService } from '@/services/courseService';
 import type { Course } from '@/types';
-import Footer from '@/components/layouts/Footer';
 
 export default function CoursesPage() {
   const [courses, setCourses] = useState<Course[]>([]);
@@ -172,15 +171,6 @@ export default function CoursesPage() {
       {/* Main Content */}
       <main className="py-8 sm:py-12 md:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Back Button */}
-          <Link
-            href="/"
-            className="inline-flex items-center gap-2 text-purple-600 hover:text-purple-700 font-semibold mb-6 sm:mb-8 group"
-          >
-            <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
-            Back to Home
-          </Link>
-
           {/* Page Header */}
           <div className="text-center mb-8 sm:mb-12">
             <div className="inline-flex items-center gap-2 px-5 py-2.5 bg-white/80 backdrop-blur-md rounded-full mb-6 border border-purple-200 shadow-lg">
@@ -438,9 +428,6 @@ export default function CoursesPage() {
           )}
         </div>
       </main>
-
-      {/* Footer */}
-      <Footer />
     </div>
   );
 }

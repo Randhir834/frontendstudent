@@ -176,10 +176,6 @@ export default function BlogListPage() {
         <div className="relative max-w-7xl mx-auto px-3 xs:px-4 sm:px-6 lg:px-8">
           {/* Page Header */}
           <div className="text-center mb-10 xs:mb-12 sm:mb-14 md:mb-16">
-            <div className="inline-flex items-center gap-2 px-4 xs:px-5 py-2 xs:py-2.5 bg-white/80 backdrop-blur-md rounded-full mb-4 xs:mb-6 border border-purple-200 shadow-lg">
-              <BookOpen className="w-4 xs:w-5 h-4 xs:h-5 text-purple-600" />
-              <span className="text-xs xs:text-sm font-bold text-purple-600">Our Blog</span>
-            </div>
             <h1 className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 mb-3 xs:mb-4 sm:mb-5 leading-tight">
               Stories & Insights
             </h1>
