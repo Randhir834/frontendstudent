@@ -145,11 +145,6 @@ export default function CoursesSection() {
                       {/* Course Stats */}
                       <div className="flex items-center justify-between gap-2 text-xs">
                         <div className="flex items-center gap-2">
-                          <div className="flex items-center gap-1.5 bg-blue-50 px-2 py-1 rounded-lg">
-                            <Clock className="w-3 h-3 text-blue-600" />
-                            <span className="text-gray-700 font-medium whitespace-nowrap">{formatDuration(course.duration_value, course.duration_unit)}</span>
-                          </div>
-                          
                           {course.rating && (
                             <div className="flex items-center gap-1.5 bg-yellow-50 px-2 py-1 rounded-lg">
                               <Star className="w-3 h-3 fill-yellow-400 text-yellow-400" />

@@ -252,25 +252,7 @@ export default function CourseDetailsPage({ params }: CourseDetailsPageProps) {
               )}
 
               {/* Course Stats */}
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
-                <div className="bg-gradient-to-br from-blue-50 to-cyan-50 p-4 rounded-lg border border-blue-100">
-                  <Clock className="w-6 h-6 text-blue-600 mb-2" />
-                  <div className="text-xs text-gray-600">Duration</div>
-                  <div className="text-sm font-bold text-gray-900">{formatDuration(course.duration_value, course.duration_unit)}</div>
-                </div>
-
-                <div className="bg-gradient-to-br from-purple-50 to-pink-50 p-4 rounded-lg border border-purple-100">
-                  <BookOpen className="w-6 h-6 text-purple-600 mb-2" />
-                  <div className="text-xs text-gray-600">Lessons</div>
-                  <div className="text-sm font-bold text-gray-900">{totalLessons}</div>
-                </div>
-
-                <div className="bg-gradient-to-br from-green-50 to-emerald-50 p-4 rounded-lg border border-green-100">
-                  <Globe className="w-6 h-6 text-green-600 mb-2" />
-                  <div className="text-xs text-gray-600">Language</div>
-                  <div className="text-sm font-bold text-gray-900">{course.language}</div>
-                </div>
-
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
                 {course.rating && (
                   <div className="bg-gradient-to-br from-yellow-50 to-orange-50 p-4 rounded-lg border border-yellow-100">
                     <Star className="w-6 h-6 text-yellow-600 mb-2 fill-yellow-400" />
