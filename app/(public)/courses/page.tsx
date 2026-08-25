@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { ArrowLeft, BookOpen, Clock, Users, Star, Search, Filter, X, Menu, ArrowRight, Mail, Phone, Heart } from 'lucide-react';
 import { courseService } from '@/services/courseService';
+import { useAuth } from '@/hooks/useAuth';
 import type { Course } from '@/types';
 
 export default function CoursesPage() {
@@ -14,6 +15,7 @@ export default function CoursesPage() {
   const [sortBy, setSortBy] = useState('');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [showFilters, setShowFilters] = useState(false);
+  const { isAuthenticated } = useAuth();
 
   useEffect(() => {
     const fetchCourses = async () => {
@@ -232,13 +234,15 @@ export default function CoursesPage() {
                             )}
                           </div>
 
-                          {/* Instructor */}
-                          <div className="flex items-center gap-2 bg-gradient-to-r from-indigo-50 to-purple-50 p-2 rounded-lg border border-indigo-100">
-                            <div className="w-6 h-6 bg-gradient-to-br from-indigo-500 to-purple-500 rounded-lg flex items-center justify-center flex-shrink-0">
-                              <Users className="w-3 h-3 text-white" />
+                          {/* Instructor - Only show if authenticated */}
+                          {isAuthenticated && (
+                            <div className="flex items-center gap-2 bg-gradient-to-r from-indigo-50 to-purple-50 p-2 rounded-lg border border-indigo-100">
+                              <div className="w-6 h-6 bg-gradient-to-br from-indigo-500 to-purple-500 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <Users className="w-3 h-3 text-white" />
+                              </div>
+                              <span className="text-xs text-gray-700 font-medium truncate">{instructorNames}</span>
                             </div>
-                            <span className="text-xs text-gray-700 font-medium truncate">{instructorNames}</span>
-                          </div>
+                          )}
 
                           {/* Course Stats */}
                           <div className="flex items-center justify-between gap-2 text-xs">
@@ -252,12 +256,14 @@ export default function CoursesPage() {
                             </div>
                           </div>
 
-                          {/* Price */}
+                          {/* Price - Only show if authenticated */}
                           <div className="flex items-center justify-between pt-2 border-t border-gray-100">
-                            <div className="text-2xl font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">
-                              {formatPrice(course.price)}
-                            </div>
-                            <div className="text-xs font-semibold text-purple-600 group-hover:text-pink-600 transition-colors flex items-center gap-1">
+                            {isAuthenticated && (
+                              <div className="text-2xl font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">
+                                {formatPrice(course.price)}
+                              </div>
+                            )}
+                            <div className={`text-xs font-semibold text-purple-600 group-hover:text-pink-600 transition-colors flex items-center gap-1 ${!isAuthenticated ? 'ml-auto' : ''}`}>
                               View Details
                               <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
                             </div>

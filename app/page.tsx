@@ -306,7 +306,7 @@ export default function Home() {
               {/* Trust Badge */}
               <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full shadow-lg shadow-blue-500/25">
                 <Star className="w-3 sm:w-4 h-3 sm:h-4 text-yellow-300 fill-yellow-300" />
-                <span className="text-xs sm:text-sm font-bold text-white">Trusted by 10,000+ Students</span>
+                <span className="text-xs sm:text-sm font-bold text-white">Trusted by 5,000+ Students</span>
               </div>
 
               {/* Main Headline */}
@@ -342,11 +342,11 @@ export default function Home() {
               {/* Trust Indicators */}
               <div className="flex items-center gap-4 sm:gap-6 pt-4 flex-wrap">
                 <div className="bg-white/80 backdrop-blur-sm rounded-lg px-4 py-3 shadow-md border border-blue-100">
-                  <div className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">10,000+</div>
+                  <div className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">5,000+</div>
                   <div className="text-sm text-gray-700 font-medium">Active Students</div>
                 </div>
                 <div className="bg-white/80 backdrop-blur-sm rounded-lg px-4 py-3 shadow-md border border-purple-100">
-                  <div className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">11+</div>
+                  <div className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">9+</div>
                   <div className="text-sm text-gray-700 font-medium">Skill Courses</div>
                 </div>
                 <div className="bg-white/80 backdrop-blur-sm rounded-lg px-4 py-3 shadow-md border border-orange-100">
@@ -450,7 +450,7 @@ export default function Home() {
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 xs:gap-5 sm:gap-6 md:gap-7 lg:gap-8">
             {[
               { 
-                number: "10,000+", 
+                number: "5,000+", 
                 label: "Happy Students", 
                 subtext: "Learning Daily", 
                 gradient: "from-cyan-400 via-blue-400 to-blue-500", 
@@ -466,7 +466,7 @@ export default function Home() {
                 iconBg: "from-pink-500 to-rose-500"
               },
               { 
-                number: "11+", 
+                number: "9+", 
                 label: "Skill Courses", 
                 subtext: "And Growing", 
                 gradient: "from-amber-400 via-orange-400 to-orange-500", 
@@ -615,17 +615,7 @@ export default function Home() {
             ))}
           </div>
 
-          {/* Premium CTA */}
-          <div className="text-center mt-16 lg:mt-20">
-            <Link 
-              href="#trial" 
-              className="group inline-flex items-center gap-3 px-10 py-5 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-white text-lg font-bold rounded-2xl hover:shadow-2xl hover:shadow-purple-500/50 transition-all hover:scale-105 shadow-xl relative overflow-hidden"
-            >
-              <span className="absolute inset-0 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 opacity-0 group-hover:opacity-20 transition-opacity"></span>
-              <span className="relative">Start Your Free Trial Now</span>
-              <ArrowRight className="w-6 h-6 group-hover:translate-x-2 transition-transform relative" />
-            </Link>
-          </div>
+
         </div>
       </section>
 
@@ -641,30 +631,21 @@ export default function Home() {
             <div className="text-center mb-8 sm:mb-10 md:mb-12 lg:mb-16">
               <div className="inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-full text-sm font-bold mb-6 shadow-lg shadow-purple-500/30">
                 <Star className="w-5 h-5 fill-yellow-300 text-yellow-300" />
-                12+ Courses Available ✨
+                3 Courses Coming Soon ✨
               </div>
               <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent mb-4 sm:mb-5 px-2">
-                Explore Our Skill Development Courses
+                Upcoming Courses
               </h2>
               <p className="text-lg sm:text-xl md:text-2xl text-gray-700 font-medium max-w-3xl mx-auto px-3">
-                Live online classes designed to nurture <span className="text-purple-600 font-bold">creativity</span>, <span className="text-pink-600 font-bold">confidence</span>, and <span className="text-blue-600 font-bold">critical thinking</span>
+                New courses launching soon to help your child excel
               </p>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 md:gap-7 lg:gap-8">
               {[
-                { title: "Art & Drawing", gradient: "from-rose-500 to-pink-600", icon: "🎨", bgPattern: "from-rose-50 via-pink-50 to-rose-100", description: "Unleash creativity on canvas" },
-                { title: "Chess", gradient: "from-slate-700 to-gray-900", icon: "♟️", bgPattern: "from-slate-50 via-gray-50 to-slate-100", description: "Master strategic thinking" },
-                { title: "Piano", gradient: "from-violet-500 to-purple-600", icon: "🎹", bgPattern: "from-violet-50 via-purple-50 to-violet-100", description: "Create beautiful melodies" },
-                { title: "Phonics", gradient: "from-sky-500 to-blue-600", icon: "🅰️", bgPattern: "from-sky-50 via-blue-50 to-sky-100", description: "Build reading confidence" },
-                { title: "Public Speaking", gradient: "from-emerald-500 to-green-600", icon: "🎤", bgPattern: "from-emerald-50 via-green-50 to-emerald-100", description: "Speak with confidence" },
-                { title: "Abacus", gradient: "from-amber-500 to-orange-600", icon: "🧮", bgPattern: "from-amber-50 via-orange-50 to-amber-100", description: "Lightning-fast mental math" },
-                { title: "Reader's Club", gradient: "from-orange-500 to-red-600", icon: "📚", bgPattern: "from-orange-50 via-red-50 to-orange-100", description: "Discover reading joy" },
-                { title: "Toastmaster", gradient: "from-teal-500 to-cyan-600", icon: "🗣️", bgPattern: "from-teal-50 via-cyan-50 to-teal-100", description: "Lead and inspire others" },
-                { title: "Sholak", gradient: "from-indigo-500 to-purple-600", icon: "🎯", bgPattern: "from-indigo-50 via-purple-50 to-indigo-100", description: "Ancient wisdom meets modern" },
-                { title: "Computers", gradient: "from-blue-500 to-cyan-600", icon: "💻", bgPattern: "from-blue-50 via-cyan-50 to-blue-100", description: "Code the future" },
-                { title: "Rubiks Cube", gradient: "from-fuchsia-500 to-pink-600", icon: "🧩", bgPattern: "from-fuchsia-50 via-pink-50 to-fuchsia-100", description: "Puzzle-solving genius" },
-                { title: "AI & Machine Learning", gradient: "from-cyan-500 to-blue-700", icon: "🤖", bgPattern: "from-cyan-50 via-blue-50 to-cyan-100", description: "Build intelligent systems" }
+                { title: "Grammar", gradient: "from-emerald-500 to-green-600", icon: "📝", bgPattern: "from-emerald-50 via-green-50 to-emerald-100", description: "Master language and communication skills" },
+                { title: "Art and Craft", gradient: "from-rose-500 to-pink-600", icon: "🎨", bgPattern: "from-rose-50 via-pink-50 to-rose-100", description: "Create beautiful handmade crafts" },
+                { title: "Maths", gradient: "from-blue-500 to-indigo-600", icon: "🔢", bgPattern: "from-blue-50 via-indigo-50 to-blue-100", description: "Build strong mathematical foundations" }
               ].map((course, i) => (
                 <div key={i} className={`group relative bg-gradient-to-br ${course.bgPattern} rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-3 border-2 border-white hover:border-white/50`}>
                   {/* Animated Gradient Overlay */}
@@ -710,231 +691,6 @@ export default function Home() {
                 Enroll in Your First Course
                 <ArrowRight className="w-5 h-5" />
               </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Features Section - Mobile Optimized */}
-      <section className="py-8 sm:py-10 md:py-12 lg:py-16 bg-white">
-        <div className="w-full px-3 sm:px-4 md:px-6 lg:px-8">
-          <div className="max-w-7xl mx-auto">
-            <div className="grid lg:grid-cols-2 gap-6 sm:gap-8 md:gap-10 lg:gap-12 items-center">
-              {/* Left - Visual */}
-              <div className="relative">
-                <div className="aspect-square max-w-xs sm:max-w-sm md:max-w-md mx-auto rounded-xl sm:rounded-2xl bg-gradient-to-br from-orange-100 to-orange-200 flex items-center justify-center p-6 sm:p-8 md:p-10 lg:p-12">
-                  <div className="text-center space-y-3 sm:space-y-4 md:space-y-5 lg:space-y-6">
-                    <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-28 lg:h-28 mx-auto bg-gradient-to-br from-orange-400 to-orange-600 rounded-full flex items-center justify-center">
-                      <BookOpen className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 text-white" />
-                    </div>
-                    <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-gray-900">Expert Learning</h3>
-                  </div>
-                </div>
-              </div>
-
-              {/* Right - Content */}
-              <div className="space-y-3 sm:space-y-4 md:space-y-5 lg:space-y-6">
-                <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900">
-                  Discover Unique Learning Experiences
-                </h2>
-                <p className="text-sm sm:text-base md:text-lg text-gray-600 leading-relaxed">
-                  From artistic expression through Art & Drawing to strategic thinking with Chess, from musical mastery with Piano to mental math with Abacus - we offer diverse courses that spark curiosity and build lifelong skills.
-                </p>
-                <Link 
-                  href="#trial"
-                  className="inline-flex items-center justify-center gap-2 px-4 sm:px-5 md:px-6 py-2 sm:py-2.5 md:py-3 bg-white border-2 border-gray-900 text-gray-900 text-xs sm:text-sm md:text-base font-medium rounded-md hover:bg-gray-50 transition-colors touch-target w-full sm:w-auto"
-                >
-                  START YOUR FREE TRIAL
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Skills Development Section - Mobile Optimized */}
-      <section className="py-8 sm:py-10 md:py-12 lg:py-16 bg-dark-900 text-white">
-        <div className="w-full px-3 sm:px-4 md:px-6 lg:px-8">
-          <div className="max-w-7xl mx-auto">
-            <div className="grid lg:grid-cols-2 gap-6 sm:gap-8 md:gap-10 lg:gap-12 items-center">
-              {/* Left - Visual */}
-              <div className="relative order-2 lg:order-1">
-                <div className="aspect-[4/3] rounded-xl sm:rounded-2xl overflow-hidden bg-gradient-to-br from-purple-100 to-purple-200 flex items-center justify-center p-4 sm:p-6 md:p-8">
-                  <div className="grid grid-cols-2 gap-2 sm:gap-3 md:gap-4 w-full max-w-xs sm:max-w-sm">
-                    <div className="aspect-square bg-gradient-to-br from-yellow-400 to-yellow-500 rounded-lg sm:rounded-xl md:rounded-2xl flex items-center justify-center">
-                      <TrendingUp className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-12 lg:h-12 text-white" />
-                    </div>
-                    <div className="aspect-square bg-gradient-to-br from-purple-400 to-purple-500 rounded-lg sm:rounded-xl md:rounded-2xl flex items-center justify-center">
-                      <Award className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-12 lg:h-12 text-white" />
-                    </div>
-                    <div className="aspect-square bg-gradient-to-br from-blue-400 to-blue-500 rounded-lg sm:rounded-xl md:rounded-2xl flex items-center justify-center">
-                      <Trophy className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-12 lg:h-12 text-white" />
-                    </div>
-                    <div className="aspect-square bg-gradient-to-br from-orange-400 to-orange-500 rounded-lg sm:rounded-xl md:rounded-2xl flex items-center justify-center">
-                      <Star className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-12 lg:h-12 text-white" />
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Right - Content */}
-              <div className="space-y-3 sm:space-y-4 md:space-y-5 lg:space-y-6 order-1 lg:order-2">
-                <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold">
-                  Build Skills Beyond Academics
-                </h2>
-                <p className="text-sm sm:text-base md:text-lg text-gray-300 leading-relaxed">
-                  Our courses help children develop creativity through Art, strategic thinking with Chess, musical talent via Piano, public confidence through Speaking, and computational speed with Abacus - essential skills for the 21st century.
-                </p>
-                <div className="flex flex-wrap gap-2 sm:gap-2.5 md:gap-3 text-[10px] sm:text-xs md:text-sm text-gray-300">
-                  <span className="px-2 sm:px-3 md:px-4 py-1 sm:py-1.5 md:py-2 bg-white/10 rounded">Creative Arts</span>
-                  <span className="px-2 sm:px-3 md:px-4 py-1 sm:py-1.5 md:py-2 bg-white/10 rounded">Strategic Thinking</span>
-                  <span className="px-2 sm:px-3 md:px-4 py-1 sm:py-1.5 md:py-2 bg-white/10 rounded">Music & Performance</span>
-                </div>
-                <Link 
-                  href="#trial"
-                  className="inline-flex items-center justify-center gap-2 px-4 sm:px-5 md:px-6 py-2 sm:py-2.5 md:py-3 bg-white text-dark-900 text-xs sm:text-sm md:text-base font-medium rounded-md hover:bg-gray-100 transition-colors touch-target w-full sm:w-auto"
-                >
-                  EXPLORE PROGRAMS
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Global Community Section - Mobile Optimized */}
-      <section className="py-8 sm:py-10 md:py-12 lg:py-16 bg-dark-900 text-white">
-        <div className="w-full px-3 sm:px-4 md:px-6 lg:px-8">
-          <div className="max-w-7xl mx-auto">
-            <div className="grid lg:grid-cols-2 gap-6 sm:gap-8 md:gap-10 lg:gap-12 items-center">
-              {/* Left - Visual (Abstract Pattern) */}
-              <div className="space-y-3 sm:space-y-4 md:space-y-6">
-                <div ref={gridRef} className="grid grid-cols-8 gap-0.5 sm:gap-1 max-w-xs sm:max-w-sm mx-auto lg:mx-0">
-                  {Array.from({ length: 64 }).map((_, i) => (
-                    <div 
-                      key={i} 
-                      className="aspect-square rounded community-grid-item"
-                    />
-                  ))}
-                </div>
-                <div className="flex gap-2 sm:gap-3 md:gap-4 justify-center lg:justify-start">
-                  <div className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 bg-gradient-to-br from-blue-400 to-blue-600 rounded-lg flex items-center justify-center">
-                    <Users className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 lg:w-8 lg:h-8 text-white" />
-                  </div>
-                  <div className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 bg-gradient-to-br from-green-400 to-green-600 rounded-lg flex items-center justify-center">
-                    <Users className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 lg:w-8 lg:h-8 text-white" />
-                  </div>
-                  <div className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 bg-gradient-to-br from-purple-400 to-purple-600 rounded-lg flex items-center justify-center">
-                    <Users className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 lg:w-8 lg:h-8 text-white" />
-                  </div>
-                </div>
-              </div>
-
-              {/* Right - Content */}
-              <div className="space-y-3 sm:space-y-4 md:space-y-5 text-center lg:text-left">
-                <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold">
-                  Join Thousands of Young Learners
-                </h2>
-                <p className="text-sm sm:text-base md:text-lg text-gray-300 leading-relaxed">
-                  Students from across India are mastering Art, Chess, Piano, Public Speaking, Abacus, and more through our live online classes
-                </p>
-                <Link 
-                  href="#trial"
-                  className="inline-flex items-center justify-center gap-2 px-4 sm:px-5 md:px-6 py-2 sm:py-2.5 md:py-3 bg-white text-dark-900 text-xs sm:text-sm md:text-base font-medium rounded-md hover:bg-gray-100 transition-colors touch-target w-full sm:w-auto"
-                >
-                  START YOUR FREE TRIAL
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Curriculum Section - Mobile Optimized */}
-      <section className="py-8 sm:py-10 md:py-12 lg:py-16 xl:py-20 bg-gradient-to-b from-yellow-500 to-yellow-600 w-full overflow-hidden">
-        <div className="w-full px-3 sm:px-4 md:px-6 lg:px-8">
-          <div className="max-w-7xl mx-auto">
-            <div className="grid lg:grid-cols-2 gap-6 sm:gap-8 md:gap-10 lg:gap-12 xl:gap-16 items-center">
-              {/* Left - Curriculum Icons - Better Mobile Grid */}
-              <div className="grid grid-cols-3 sm:grid-cols-4 gap-2 sm:gap-3 md:gap-4 lg:gap-5">
-                {[
-                  { icon: "🎨", label: "ART & DRAWING" },
-                  { icon: "♟️", label: "CHESS" },
-                  { icon: "🎹", label: "PIANO" },
-                  { icon: "🅰️", label: "PHONICS" },
-                  { icon: "🎤", label: "PUBLIC SPEAKING" },
-                  { icon: "🧮", label: "ABACUS" },
-                  { icon: "📚", label: "READER'S CLUB" },
-                  { icon: "🗣️", label: "TOASTMASTER" },
-                  { icon: "🎯", label: "SHOLAK" },
-                  { icon: "💻", label: "COMPUTERS" },
-                  { icon: "🧩", label: "RUBIKS CUBE" },
-                  { icon: "🎓", label: "MORE COMING" },
-                  { icon: "✨", label: "CREATIVITY" },
-                  { icon: "🧠", label: "LOGIC" },
-                  { icon: "📈", label: "GROWTH" },
-                  { icon: "🌟", label: "EXCELLENCE" }
-                ].map((item, i) => (
-                  <div key={i} className="bg-white rounded-md sm:rounded-lg p-2 sm:p-3 md:p-4 lg:p-5 text-center space-y-1 sm:space-y-1.5 md:space-y-2 hover:shadow-md transition-shadow">
-                    <div className="text-xl sm:text-2xl md:text-3xl lg:text-4xl">{item.icon}</div>
-                    <div className="text-[8px] sm:text-[9px] md:text-[10px] lg:text-xs font-semibold text-gray-900 leading-tight break-words">
-                      {item.label}
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              {/* Right - Content */}
-              <div className="space-y-3 sm:space-y-4 md:space-y-5 lg:space-y-6">
-                <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-white leading-tight">
-                  Expert-Led Courses by Certified Instructors
-                </h2>
-                <p className="text-sm sm:text-base md:text-lg lg:text-xl text-yellow-100 leading-relaxed">
-                  Our carefully crafted curriculum spans creative arts, strategic games, music, communication, and cognitive development
-                </p>
-                <p className="text-xs sm:text-sm md:text-base lg:text-lg text-yellow-100 leading-relaxed">
-                  Each course is designed to build confidence, creativity, and critical thinking in a fun, engaging online environment
-                </p>
-                <Link 
-                  href="#trial"
-                  className="inline-flex items-center justify-center gap-2 px-5 sm:px-6 md:px-7 lg:px-8 py-2.5 sm:py-3 md:py-3.5 lg:py-4 bg-white text-yellow-700 font-semibold rounded-md hover:bg-gray-50 transition-colors text-xs sm:text-sm md:text-base lg:text-lg touch-target w-full sm:w-auto"
-                >
-                  START YOUR FREE TRIAL
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Activities Section - Mobile Optimized */}
-      <section className="py-8 sm:py-10 md:py-12 lg:py-16 bg-gradient-to-b from-blue-600 to-blue-700 text-white">
-        <div className="w-full px-3 sm:px-4 md:px-6 lg:px-8">
-          <div className="max-w-7xl mx-auto">
-            <div className="text-center mb-6 sm:mb-8 md:mb-10">
-              <p className="text-[10px] sm:text-xs md:text-sm font-medium text-blue-200 mb-2 sm:mb-3 md:mb-4">
-                EXPLORE OUR DIVERSE SKILL CATEGORIES
-              </p>
-            </div>
-
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4 md:gap-5 lg:gap-6">
-              {[
-                { icon: "🎨", label: "ART STUDIO" },
-                { icon: "♟️", label: "CHESS ACADEMY" },
-                { icon: "🎹", label: "MUSIC ROOM" },
-                { icon: "🎤", label: "SPEAKING LAB" },
-                { icon: "🧮", label: "MATH HUB" },
-                { icon: "💻", label: "TECH ZONE" }
-              ].map((activity, i) => (
-                <div key={i} className="text-center space-y-2 sm:space-y-3">
-                  <div className="w-14 h-14 sm:w-16 sm:h-16 md:w-18 md:h-18 lg:w-20 lg:h-20 mx-auto bg-white/10 rounded-full flex items-center justify-center text-xl sm:text-2xl md:text-3xl border-2 sm:border-3 md:border-4 border-white/20">
-                    {activity.icon}
-                  </div>
-                  <div className="text-[9px] sm:text-[10px] md:text-xs font-semibold uppercase leading-tight px-1">
-                    {activity.label}
-                  </div>
-                </div>
-              ))}
             </div>
           </div>
         </div>
@@ -1057,7 +813,7 @@ export default function Home() {
                 { icon: "⭐", number: "4.9/5", label: "Average Rating" },
                 { icon: "💬", number: "500+", label: "Happy Reviews" },
                 { icon: "🏆", number: "98%", label: "Recommend Us" },
-                { icon: "❤️", number: "10K+", label: "Satisfied Families" }
+                { icon: "❤️", number: "5K+", label: "Satisfied Families" }
               ].map((stat, i) => (
                 <div key={i} className="text-center">
                   <div className="text-4xl mb-2">{stat.icon}</div>
@@ -1129,7 +885,7 @@ export default function Home() {
                     </div>
                     <div>
                       <h4 className="text-2xl font-bold text-gray-900">Puja Agarwal</h4>
-                      <p className="text-purple-600 font-semibold">Co-Founder & Lead Educator</p>
+                      <p className="text-purple-600 font-semibold">Co-founder, COO & Lead Educator</p>
                     </div>
                   </div>
                   <p className="text-gray-700 leading-relaxed mb-4">
@@ -1152,7 +908,7 @@ export default function Home() {
                     </div>
                     <div>
                       <h4 className="text-2xl font-bold text-gray-900">Sonika Goel</h4>
-                      <p className="text-blue-600 font-semibold">Co-Founder & Marketing Lead</p>
+                      <p className="text-blue-600 font-semibold">Co-founder & CEO</p>
                     </div>
                   </div>
                   <p className="text-gray-700 leading-relaxed mb-4">
@@ -1319,7 +1075,6 @@ export default function Home() {
                         value={formData.email}
                         onChange={handleChange}
                         className="w-full px-5 py-4 text-base border-2 border-gray-200 rounded-2xl focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition"
-                        placeholder="your@email.com"
                       />
                     </div>
 
@@ -1335,7 +1090,6 @@ export default function Home() {
                         value={formData.phone}
                         onChange={handleChange}
                         className="w-full px-5 py-4 text-base border-2 border-gray-200 rounded-2xl focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition"
-                        placeholder="+91 98765 43210"
                       />
                     </div>
                   </div>

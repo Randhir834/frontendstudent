@@ -19,17 +19,17 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL('https://playfitclasses.com'),
   title: {
-    default: "Online Skills Courses Kolkata | Art, Chess, Piano | PlayFit",
+    default: "Online Skills Courses | Art, Chess, Piano | PlayFit",
     template: "%s | PlayFit"
   },
-  description: "Join online skills courses in Kolkata for Art, Chess, Piano, and more. Expert-led live classes help kids build creativity, confidence, and essential life skills.",
+  description: "Join online skills courses for Art, Chess, Piano, and more. Expert-led live classes help kids build creativity, confidence, and essential life skills.",
   keywords: [
     'Playfit',
     'PlayFit',
     'online courses for kids',
     'online learning for children',
-    'online courses Kolkata',
-    'kids classes Kolkata',
+    'online courses',
+    'kids classes',
     'art classes for kids online',
     'chess classes for kids',
     'piano lessons online',
@@ -46,8 +46,8 @@ export const metadata: Metadata = {
     'creative classes for kids',
     'STEM education',
     'extracurricular activities',
-    'Kolkata online classes',
-    'West Bengal online courses'
+    'online classes',
+    'online courses'
   ],
   authors: [{ name: 'Playfit' }],
   creator: 'Playfit',
@@ -62,8 +62,8 @@ export const metadata: Metadata = {
     locale: 'en_US',
     url: 'https://playfitclasses.com',
     siteName: 'PlayFit',
-    title: 'Online Skills Courses Kolkata | Art, Chess, Piano | PlayFit',
-    description: 'Join online skills courses in Kolkata for Art, Chess, Piano, and more. Expert-led live classes help kids build creativity, confidence, and essential life skills.',
+    title: 'Online Skills Courses | Art, Chess, Piano | PlayFit',
+    description: 'Join online skills courses for Art, Chess, Piano, and more. Expert-led live classes help kids build creativity, confidence, and essential life skills.',
     images: [
       {
         url: '/logo.jpg',
@@ -75,8 +75,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Online Skills Courses Kolkata | Art, Chess, Piano | PlayFit',
-    description: 'Join online skills courses in Kolkata for Art, Chess, Piano, and more. Expert-led live classes help kids build creativity, confidence, and essential life skills.',
+    title: 'Online Skills Courses | Art, Chess, Piano | PlayFit',
+    description: 'Join online skills courses for Art, Chess, Piano, and more. Expert-led live classes help kids build creativity, confidence, and essential life skills.',
     images: ['/logo.jpg'],
     creator: '@playfitclasses',
   },
@@ -152,7 +152,7 @@ export default function RootLayout({
               "name": "PlayFit",
               "url": "https://playfitclasses.com",
               "logo": "https://playfitclasses.com/logo.jpg",
-              "description": "Join online skills courses in Kolkata for Art, Chess, Piano, and more. Expert-led live classes help kids build creativity, confidence, and essential life skills.",
+              "description": "Join online skills courses for Art, Chess, Piano, and more. Expert-led live classes help kids build creativity, confidence, and essential life skills.",
               "sameAs": [
                 "https://facebook.com/playfitclasses",
                 "https://twitter.com/playfitclasses",
@@ -161,7 +161,7 @@ export default function RootLayout({
               ],
               "address": {
                 "@type": "PostalAddress",
-                "addressLocality": "Kolkata",
+                "addressLocality": "India",
                 "addressRegion": "West Bengal",
                 "addressCountry": "IN"
               },

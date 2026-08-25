@@ -4,11 +4,13 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { BookOpen, Clock, Users, Star, ArrowRight } from 'lucide-react';
 import { courseService } from '@/services/courseService';
+import { useAuth } from '@/hooks/useAuth';
 import type { Course } from '@/types';
 
 export default function CoursesSection() {
   const [courses, setCourses] = useState<Course[]>([]);
   const [loading, setLoading] = useState(true);
+  const { isAuthenticated } = useAuth();
 
   useEffect(() => {
     const fetchCourses = async () => {
@@ -71,9 +73,9 @@ export default function CoursesSection() {
             <span className="text-xs xs:text-sm font-bold text-purple-600">Explore Our Courses</span>
           </div>
           <h2 className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 mb-3 xs:mb-4 sm:mb-5 leading-tight">
-            Available{' '}
+            Explore Our{' '}
             <span className="bg-gradient-to-r from-purple-600 via-pink-600 to-orange-600 bg-clip-text text-transparent">
-              Courses
+              Skill Development Courses
             </span>
           </h2>
           <p className="text-sm xs:text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
@@ -134,13 +136,15 @@ export default function CoursesSection() {
                         )}
                       </div>
 
-                      {/* Instructor */}
-                      <div className="flex items-center gap-2 bg-gradient-to-r from-indigo-50 to-purple-50 p-2 rounded-lg border border-indigo-100">
-                        <div className="w-6 h-6 bg-gradient-to-br from-indigo-500 to-purple-500 rounded-lg flex items-center justify-center flex-shrink-0">
-                          <Users className="w-3 h-3 text-white" />
+                      {/* Instructor - Only show if authenticated */}
+                      {isAuthenticated && (
+                        <div className="flex items-center gap-2 bg-gradient-to-r from-indigo-50 to-purple-50 p-2 rounded-lg border border-indigo-100">
+                          <div className="w-6 h-6 bg-gradient-to-br from-indigo-500 to-purple-500 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <Users className="w-3 h-3 text-white" />
+                          </div>
+                          <span className="text-xs text-gray-700 font-medium truncate">{instructorNames}</span>
                         </div>
-                        <span className="text-xs text-gray-700 font-medium truncate">{instructorNames}</span>
-                      </div>
+                      )}
 
                       {/* Course Stats */}
                       <div className="flex items-center justify-between gap-2 text-xs">
@@ -154,12 +158,14 @@ export default function CoursesSection() {
                         </div>
                       </div>
 
-                      {/* Price */}
+                      {/* Price - Only show if authenticated */}
                       <div className="flex items-center justify-between pt-2 border-t border-gray-100">
-                        <div className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">
-                          {formatPrice(course.price)}
-                        </div>
-                        <div className="text-xs font-semibold text-purple-600 group-hover:text-pink-600 transition-colors flex items-center gap-1">
+                        {isAuthenticated && (
+                          <div className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">
+                            {formatPrice(course.price)}
+                          </div>
+                        )}
+                        <div className={`text-xs font-semibold text-purple-600 group-hover:text-pink-600 transition-colors flex items-center gap-1 ${!isAuthenticated ? 'ml-auto' : ''}`}>
                           View Details
                           <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
                         </div>

@@ -3,7 +3,7 @@
 import { useState, useEffect, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { Sparkles, TrendingUp, CheckCircle, ArrowRight, Loader2, Award, BookOpen } from 'lucide-react';
+import { Sparkles, ArrowRight, Loader2, BookOpen } from 'lucide-react';
 import { recommendationService, type CourseRecommendation } from '@/services/recommendationService';
 
 function ResultsContent() {
@@ -38,10 +38,18 @@ function ResultsContent() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-primary-50 via-white to-secondary-50 flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 flex items-center justify-center p-4">
         <div className="text-center">
-          <Loader2 className="w-12 h-12 text-primary-600 animate-spin mx-auto mb-4" />
-          <p className="text-gray-600">Finding your perfect courses...</p>
+          <div className="relative">
+            <div className="w-20 h-20 mx-auto mb-6">
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 rounded-full animate-spin" style={{animationDuration: '3s'}}></div>
+              <div className="absolute inset-2 bg-white rounded-full flex items-center justify-center">
+                <Sparkles className="w-8 h-8 text-purple-600 animate-pulse" />
+              </div>
+            </div>
+          </div>
+          <h2 className="text-2xl font-bold text-gray-900 mb-2">Finding Your Perfect Courses...</h2>
+          <p className="text-gray-600">Analyzing your responses to create personalized recommendations</p>
         </div>
       </div>
     );
@@ -100,165 +108,113 @@ function ResultsContent() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-primary-50 via-white to-secondary-50 py-12 px-4">
-      <div className="max-w-6xl mx-auto">
-        {/* Success Header */}
-        <div className="text-center mb-12">
-          <div className="w-20 h-20 bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
-            <CheckCircle className="w-10 h-10 text-white" />
-          </div>
-          <h1 className="text-4xl md:text-5xl font-bold text-dark-900 mb-4">
-            Your Personalized Course Recommendations
-          </h1>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Based on your responses, we've found {recommendations.length} course{recommendations.length > 1 ? 's' : ''} perfectly suited for your child's interests and goals.
-          </p>
-        </div>
-
-        {/* Recommendations List */}
-        <div className="space-y-6 mb-12">
-          {recommendations.map((rec, index) => (
-            <div
-              key={rec.course_id}
-              className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all"
-            >
-              <div className="md:flex">
-                {/* Course Image */}
-                <div className="md:w-80 h-64 md:h-auto bg-gradient-to-br from-primary-100 to-secondary-100 flex items-center justify-center relative">
-                  {rec.course_thumbnail ? (
-                    <img
-                      src={rec.course_thumbnail}
-                      alt={rec.course_title}
-                      className="w-full h-full object-cover"
-                    />
-                  ) : (
-                    <BookOpen className="w-24 h-24 text-primary-600 opacity-50" />
-                  )}
-                  {/* Match Badge */}
-                  <div className="absolute top-4 left-4 bg-gradient-to-r from-green-500 to-green-600 text-white px-4 py-2 rounded-full shadow-lg">
-                    <div className="flex items-center gap-2">
-                      <TrendingUp className="w-5 h-5" />
-                      <span className="font-bold">{rec.score}% Match</span>
-                    </div>
-                  </div>
-                  {/* Rank Badge */}
-                  {index === 0 && (
-                    <div className="absolute top-4 right-4 bg-gradient-to-r from-yellow-400 to-yellow-500 text-gray-900 px-4 py-2 rounded-full shadow-lg">
-                      <div className="flex items-center gap-2">
-                        <Award className="w-5 h-5" />
-                        <span className="font-bold">Best Match</span>
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-purple-50">
+      {/* Main Content */}
+      <div className="relative py-16 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto">
+          {/* Recommendations List */}
+          <div className="space-y-6 mb-12">
+            {recommendations.map((rec, index) => {
+              return (
+                <div
+                  key={rec.course_id}
+                  className="group bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden border-2 border-transparent hover:border-purple-200"
+                >
+                  <div className="lg:flex">
+                    {/* Left Side - Image */}
+                    <div className="lg:w-80 xl:w-96 relative bg-white flex items-center justify-center p-8">
+                      <div className="w-full aspect-square flex items-center justify-center">
+                        {rec.course_thumbnail ? (
+                          <img
+                            src={rec.course_thumbnail}
+                            alt={rec.course_title}
+                            className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500"
+                          />
+                        ) : (
+                          <div className="flex items-center justify-center w-full h-full bg-gradient-to-br from-blue-100 via-purple-100 to-pink-100 rounded-2xl">
+                            <BookOpen className="w-24 h-24 text-purple-400 opacity-50" />
+                          </div>
+                        )}
                       </div>
                     </div>
-                  )}
+
+                    {/* Right Side - Content */}
+                    <div className="flex-1 p-6 sm:p-8">
+                      {/* Course Title & Price */}
+                      <div className="flex flex-col gap-4 mb-6">
+                        <div className="flex-1">
+                          <h2 className="text-2xl sm:text-3xl font-extrabold text-gray-900 mb-3 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-blue-600 group-hover:to-purple-600 transition-all leading-tight">
+                            {rec.course_title}
+                          </h2>
+                          <p className="text-base text-gray-600 leading-relaxed line-clamp-2">
+                            {rec.course_description}
+                          </p>
+                        </div>
+                        <div className="flex items-center gap-3">
+                          <div className="inline-flex items-baseline gap-2 px-5 py-3 bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl border-2 border-green-200">
+                            <span className="text-3xl font-black bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">
+                              ₹{rec.course_price?.toLocaleString()}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Action Buttons */}
+                      <div className="flex flex-col sm:flex-row gap-3">
+                        <Link
+                          href={`/courses/${rec.course_id}`}
+                          className="flex-1 group/btn flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-white rounded-xl font-bold text-base hover:shadow-2xl hover:shadow-purple-500/50 transition-all hover:scale-105 relative overflow-hidden"
+                        >
+                          <span className="absolute inset-0 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 opacity-0 group-hover/btn:opacity-20 transition-opacity"></span>
+                          <span className="relative">View Course Details</span>
+                          <ArrowRight className="w-5 h-5 group-hover/btn:translate-x-1 transition-transform relative" />
+                        </Link>
+                        <Link
+                          href={`/courses/${rec.course_id}?enroll=true`}
+                          className="px-6 py-3 border-2 border-purple-600 text-purple-600 rounded-xl font-bold text-base hover:bg-purple-50 transition-all text-center"
+                        >
+                          Enroll Now
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
                 </div>
+              );
+            })}
+          </div>
 
-                {/* Course Details */}
-                <div className="flex-1 p-8">
-                  <div className="flex items-start justify-between mb-4">
-                    <div>
-                      <h2 className="text-2xl font-bold text-dark-900 mb-2">
-                        {rec.course_title}
-                      </h2>
-                      <p className="text-gray-600 mb-4">
-                        {rec.course_description}
-                      </p>
-                    </div>
-                    <div className="text-right">
-                      <div className="text-3xl font-bold text-primary-600">
-                        ₹{rec.course_price}
-                      </div>
-                      <div className="text-sm text-gray-500 capitalize">
-                        {rec.course_level} Level
-                      </div>
-                    </div>
-                  </div>
+          {/* Bottom CTA Section */}
+          <div className="bg-gradient-to-r from-slate-900 via-purple-900 to-slate-900 rounded-3xl shadow-2xl overflow-hidden">
+            <div className="relative p-8 sm:p-12">
+              {/* Background Pattern */}
+              <div className="absolute inset-0 opacity-10">
+                <div className="absolute inset-0" style={{backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)', backgroundSize: '32px 32px'}}></div>
+              </div>
 
-                  {/* Why Recommended */}
-                  {rec.reasons && rec.reasons.length > 0 && (
-                    <div className="mb-4">
-                      <h3 className="text-sm font-semibold text-gray-700 mb-2 flex items-center gap-2">
-                        <Sparkles className="w-4 h-4 text-primary-600" />
-                        Why this course is perfect for your child:
-                      </h3>
-                      <ul className="space-y-1">
-                        {rec.reasons.map((reason, idx) => (
-                          <li key={idx} className="flex items-start gap-2 text-sm text-gray-600">
-                            <CheckCircle className="w-4 h-4 text-green-600 mt-0.5 flex-shrink-0" />
-                            <span>{reason}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
-
-                  {/* Skills Developed */}
-                  {rec.skills_developed && rec.skills_developed.length > 0 && (
-                    <div className="mb-6">
-                      <h3 className="text-sm font-semibold text-gray-700 mb-2">
-                        Skills Your Child Will Develop:
-                      </h3>
-                      <div className="flex flex-wrap gap-2">
-                        {rec.skills_developed.slice(0, 6).map((skill, idx) => (
-                          <span
-                            key={idx}
-                            className="px-3 py-1 bg-primary-50 text-primary-700 rounded-full text-sm font-medium"
-                          >
-                            {skill}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Action Buttons */}
-                  <div className="flex gap-3">
-                    <Link
-                      href={`/student/courses?id=${rec.course_id}`}
-                      className="flex-1 flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-primary-600 to-secondary-600 text-white rounded-lg font-semibold hover:from-primary-700 hover:to-secondary-700 transition-all"
-                    >
-                      View Course Details
-                      <ArrowRight className="w-5 h-5" />
-                    </Link>
-                    <Link
-                      href={`/student/courses?enroll=${rec.course_id}`}
-                      className="px-6 py-3 border-2 border-primary-600 text-primary-600 rounded-lg font-semibold hover:bg-primary-50 transition-all"
-                    >
-                      Enroll Now
-                    </Link>
-                  </div>
+              <div className="relative text-center">
+                <h3 className="text-3xl sm:text-4xl font-extrabold text-white mb-4">
+                  Ready to Start Learning?
+                </h3>
+                <p className="text-lg text-gray-300 mb-8 max-w-2xl mx-auto">
+                  Choose a course above or explore more options to find the perfect fit for your child
+                </p>
+                
+                <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                  <Link
+                    href="/courses"
+                    className="px-8 py-4 bg-white text-gray-900 rounded-xl font-bold hover:bg-gray-100 transition-all hover:scale-105 shadow-xl"
+                  >
+                    Browse All Courses
+                  </Link>
+                  <Link
+                    href="/course-finder"
+                    className="px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl font-bold hover:from-blue-700 hover:to-purple-700 transition-all hover:scale-105 shadow-xl"
+                  >
+                    Retake Quiz
+                  </Link>
                 </div>
               </div>
             </div>
-          ))}
-        </div>
-
-        {/* Additional Actions */}
-        <div className="bg-white rounded-2xl shadow-lg p-8 text-center">
-          <h3 className="text-2xl font-bold text-dark-900 mb-4">
-            Want to Explore More Options?
-          </h3>
-          <p className="text-gray-600 mb-6">
-            Browse all our courses or retake the quiz with different preferences.
-          </p>
-          <div className="flex flex-wrap gap-4 justify-center">
-            <Link
-              href="/student/courses"
-              className="px-8 py-3 bg-gray-100 text-gray-900 rounded-lg font-semibold hover:bg-gray-200 transition-all"
-            >
-              Browse All Courses
-            </Link>
-            <Link
-              href="/course-finder"
-              className="px-8 py-3 bg-gradient-to-r from-primary-600 to-secondary-600 text-white rounded-lg font-semibold hover:from-primary-700 hover:to-secondary-700 transition-all"
-            >
-              Retake Quiz
-            </Link>
-            <Link
-              href="/"
-              className="px-8 py-3 border-2 border-gray-300 text-gray-700 rounded-lg font-semibold hover:bg-gray-50 transition-all"
-            >
-              Back to Home
-            </Link>
           </div>
         </div>
       </div>

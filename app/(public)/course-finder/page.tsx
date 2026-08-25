@@ -403,8 +403,8 @@ export default function CourseFinderPage() {
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
               {[
-                { number: "10,000+", label: "Happy Students" },
-                { number: "11+", label: "Skill Courses" },
+                { number: "5,000+", label: "Happy Students" },
+                { number: "9+", label: "Skill Courses" },
                 { number: "98%", label: "Satisfaction Rate" }
               ].map((stat, i) => (
                 <div key={i} className="text-center">

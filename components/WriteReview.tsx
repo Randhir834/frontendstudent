@@ -114,7 +114,6 @@ export default function WriteReview() {
                   type="text"
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  placeholder="Enter your name"
                   className="w-full px-4 py-3 border border-[#E2E8F0] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#6366F1] focus:border-transparent transition-all"
                   required
                 />
@@ -150,7 +149,6 @@ export default function WriteReview() {
                   type="email"
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  placeholder="your.email@example.com"
                   className="w-full px-4 py-3 border border-[#E2E8F0] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#6366F1] focus:border-transparent transition-all"
                 />
               </div>
@@ -163,7 +161,6 @@ export default function WriteReview() {
                   type="tel"
                   value={formData.phone}
                   onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                  placeholder="+1 234 567 8900"
                   className="w-full px-4 py-3 border border-[#E2E8F0] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#6366F1] focus:border-transparent transition-all"
                 />
               </div>
@@ -178,7 +175,6 @@ export default function WriteReview() {
                 type="text"
                 value={formData.courseName}
                 onChange={(e) => setFormData({ ...formData, courseName: e.target.value })}
-                placeholder="Which course did you take?"
                 className="w-full px-4 py-3 border border-[#E2E8F0] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#6366F1] focus:border-transparent transition-all"
               />
             </div>
@@ -225,7 +221,6 @@ export default function WriteReview() {
               <textarea
                 value={formData.message}
                 onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                placeholder="Share your experience with us... (minimum 10 characters)"
                 rows={5}
                 className="w-full px-4 py-3 border border-[#E2E8F0] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#6366F1] focus:border-transparent transition-all resize-none"
                 required
