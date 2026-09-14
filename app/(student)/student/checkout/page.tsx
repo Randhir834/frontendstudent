@@ -52,7 +52,7 @@ function CheckoutContent() {
 
     // ===== PAYMENT DISABLED - REDIRECT TO DIRECT ENROLLMENT =====
     // This page should not be accessible anymore, but just in case, redirect to enrollment
-    toast.info('Payment is disabled. Redirecting to direct enrollment...');
+    toast.success('Payment is disabled. Redirecting to direct enrollment...');
     router.push(`/student/course/${course.id}`);
     
     // // Previous payment flow (COMMENTED OUT)
