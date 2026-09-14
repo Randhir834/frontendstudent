@@ -53,14 +53,24 @@ export default function CourseDetailsPage({ params }: { params: Promise<{ id: st
     try {
       setEnrollLoading(true);
       
-      if (course.price > 0) {
-        // Redirect to checkout page for paid courses
-        window.location.href = `/student/checkout?courseId=${courseId}`;
-      } else {
-        await enrollmentService.enrollCourse(courseId);
-        setEnrolled(true);
-        alert('Successfully enrolled in the free course!');
-      }
+      // ===== PAYMENT DISABLED - DIRECT ENROLLMENT =====
+      // All courses now enroll directly without payment
+      await enrollmentService.enrollCourse(courseId);
+      setEnrolled(true);
+      alert('Successfully enrolled in the course! You can now access all course materials.');
+      
+      // Redirect to my courses after successful enrollment
+      router.push(`/student/my-courses/${courseId}`);
+      
+      // // Previous payment flow (COMMENTED OUT)
+      // if (course.price > 0) {
+      //   // Redirect to checkout page for paid courses
+      //   window.location.href = `/student/checkout?courseId=${courseId}`;
+      // } else {
+      //   await enrollmentService.enrollCourse(courseId);
+      //   setEnrolled(true);
+      //   alert('Successfully enrolled in the free course!');
+      // }
     } catch (err: any) {
       const msg = err?.response?.data?.error || 'Failed to enroll';
       alert(msg);

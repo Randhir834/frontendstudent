@@ -1,3 +1,9 @@
+// ===== RAZORPAY PAYMENT DISABLED =====
+// This hook has been disabled. Direct enrollment is now enabled.
+// To re-enable payments, uncomment the code below and update enrollment flow.
+
+/* COMMENTED OUT - RAZORPAY PAYMENT HOOK
+
 import { useEffect, useState } from 'react';
 import { paymentService } from '@/services/paymentService';
 import { RazorpayOptions, RazorpayResponse } from '@/types';
@@ -172,5 +178,18 @@ export const useRazorpay = () => {
     isLoaded,
     isProcessing,
     initiatePayment,
+  };
+};
+
+END OF COMMENTED OUT CODE */
+
+// Dummy hook for compatibility (no actual Razorpay functionality)
+export const useRazorpay = () => {
+  return {
+    isLoaded: true,
+    isProcessing: false,
+    initiatePayment: () => {
+      console.warn('Razorpay is disabled. Direct enrollment is enabled.');
+    },
   };
 };

@@ -48,14 +48,17 @@ export default function PublicCourseDetailsPage({ params }: { params: Promise<{ 
       return;
     }
 
-
-    // User is authenticated, redirect to checkout
-    if (course && course.price > 0) {
-      window.location.href = `/student/checkout?courseId=${courseId}`;
-    } else {
-      // Free course - redirect to student course page to enroll
-      router.push(`/student/course/${courseId}`);
-    }
+    // ===== PAYMENT DISABLED - DIRECT ENROLLMENT =====
+    // All courses now redirect to enrollment page (no payment required)
+    router.push(`/student/course/${courseId}`);
+    
+    // // Previous payment flow (COMMENTED OUT)
+    // if (course && course.price > 0) {
+    //   window.location.href = `/student/checkout?courseId=${courseId}`;
+    // } else {
+    //   // Free course - redirect to student course page to enroll
+    //   router.push(`/student/course/${courseId}`);
+    // }
   };
 
   const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, sectionId: string) => {
