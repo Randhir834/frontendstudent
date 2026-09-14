@@ -50,27 +50,33 @@ function CheckoutContent() {
   const handlePayment = async () => {
     if (!course || !user) return;
 
-    if (course.price === 0) {
-      toast.error('This is a free course. You can enroll directly.');
-      router.push(`/student/course/${course.id}`);
-      return;
-    }
-
-    await initiatePayment(
-      course.id,
-      course.title,
-      course.price,
-      { name: user.name, email: user.email },
-      (enrollment) => {
-        // Success - redirect to course page
-        toast.success('Enrollment successful!');
-        router.push(`/student/my-courses/${course.id}`);
-      },
-      (error) => {
-        // Failure handled in hook
-        console.error('Payment failed:', error);
-      }
-    );
+    // ===== PAYMENT DISABLED - REDIRECT TO DIRECT ENROLLMENT =====
+    // This page should not be accessible anymore, but just in case, redirect to enrollment
+    toast.info('Payment is disabled. Redirecting to direct enrollment...');
+    router.push(`/student/course/${course.id}`);
+    
+    // // Previous payment flow (COMMENTED OUT)
+    // if (course.price === 0) {
+    //   toast.error('This is a free course. You can enroll directly.');
+    //   router.push(`/student/course/${course.id}`);
+    //   return;
+    // }
+    //
+    // await initiatePayment(
+    //   course.id,
+    //   course.title,
+    //   course.price,
+    //   { name: user.name, email: user.email },
+    //   (enrollment) => {
+    //     // Success - redirect to course page
+    //     toast.success('Enrollment successful!');
+    //     router.push(`/student/my-courses/${course.id}`);
+    //   },
+    //   (error) => {
+    //     // Failure handled in hook
+    //     console.error('Payment failed:', error);
+    //   }
+    // );
   };
 
   if (loading) {
@@ -108,6 +114,25 @@ function CheckoutContent() {
 
   return (
     <div className="p-3 sm:p-4 md:p-6 lg:p-8 max-w-[1400px] mx-auto space-y-4 sm:space-y-6">
+      {/* ===== PAYMENT DISABLED NOTICE ===== */}
+      <div className="relative bg-yellow-50 border-2 border-yellow-400 rounded-2xl p-4 sm:p-5 md:p-6 shadow-lg">
+        <div className="flex items-start gap-3">
+          <AlertCircle className="w-6 h-6 text-yellow-600 flex-shrink-0 mt-0.5" />
+          <div>
+            <h3 className="text-lg font-bold text-yellow-900 mb-2">Payment Currently Disabled</h3>
+            <p className="text-sm text-yellow-800 mb-3">
+              Direct enrollment is now enabled for all courses. You can enroll without making any payment.
+            </p>
+            <button
+              onClick={() => router.push(`/student/course/${courseId}`)}
+              className="px-4 py-2 bg-yellow-600 text-white font-semibold rounded-lg hover:bg-yellow-700 transition text-sm"
+            >
+              Go to Course Enrollment
+            </button>
+          </div>
+        </div>
+      </div>
+
       {/* Header */}
       <div className="relative">
         <div className="absolute inset-0 bg-gradient-to-r from-purple-100 via-pink-100 to-purple-100 rounded-2xl blur-3xl opacity-30 -z-10"></div>
