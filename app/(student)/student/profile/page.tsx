@@ -9,6 +9,7 @@ import {
 import { userService, UserProfile } from '@/services/userService';
 import { enrollmentService } from '@/services/enrollmentService';
 import { getAvatarUrl } from '@/utils/avatarUtils';
+import { PageLoading } from '@/components/ui/LoadingSpinner';
 
 interface StudentDashboardData {
   stats: {
@@ -167,14 +168,7 @@ export default function StudentProfilePage() {
   };
 
   if (loading) {
-    return (
-      <div className="flex-1 flex items-center justify-center min-h-[calc(100vh-73px)]">
-        <div className="text-center">
-          <Loader2 className="size-8 animate-spin text-[#1E88E5] mx-auto mb-4" />
-          <p className="text-[#78909C]">Loading profile...</p>
-        </div>
-      </div>
-    );
+    return <PageLoading message="Loading profile..." />;
   }
 
   const displayName = user?.name || 'Student';

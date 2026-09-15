@@ -4,6 +4,7 @@ import { Toaster } from 'react-hot-toast';
 import BrandSchema from '@/components/SEO/BrandSchema';
 import WebSiteSchema from '@/components/SEO/WebSiteSchema';
 import GoogleAnalytics from '@/components/GoogleAnalytics';
+import TopLoadingBar from "@/components/TopLoadingBar";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -234,6 +235,7 @@ export default function RootLayout({
       </head>
       <body className="min-h-full flex flex-col">
         <GoogleAnalytics />
+        <TopLoadingBar />
         {children}
         <Toaster position="top-right" />
       </body>
