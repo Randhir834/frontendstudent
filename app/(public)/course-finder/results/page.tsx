@@ -5,6 +5,7 @@ import { useSearchParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { Sparkles, ArrowRight, Loader2, BookOpen } from 'lucide-react';
 import { recommendationService, type CourseRecommendation } from '@/services/recommendationService';
+import { PageLoading } from '@/components/ui/LoadingSpinner';
 
 function ResultsContent() {
   const router = useRouter();
@@ -224,7 +225,7 @@ function ResultsContent() {
 
 export default function ResultsPage() {
   return (
-    <Suspense fallback={null}>
+    <Suspense fallback={<PageLoading message="Finding your perfect courses..." />}>
       <ResultsContent />
     </Suspense>
   );

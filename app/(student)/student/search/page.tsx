@@ -7,6 +7,7 @@ import { Search, BookOpen, FileText, ClipboardList, HelpCircle, Video, FolderOpe
 import Card, { CardHeader, CardTitle, CardContent } from '@/components/ui/Card';
 import { searchService } from '@/services/searchService';
 import type { SearchResults } from '@/services/searchService';
+import { PageLoading } from '@/components/ui/LoadingSpinner';
 
 function SearchResultsContent() {
   const searchParams = useSearchParams();
@@ -186,7 +187,7 @@ function SearchResultsContent() {
 
 export default function SearchPage() {
   return (
-    <Suspense fallback={null}>
+    <Suspense fallback={<PageLoading message="Loading search results..." />}>
       <SearchResultsContent />
     </Suspense>
   );

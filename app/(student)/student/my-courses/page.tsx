@@ -7,6 +7,7 @@ import Card, { CardContent } from '@/components/ui/Card';
 import CourseCard from '@/components/ui/CourseCard';
 import { enrollmentService } from '@/services/enrollmentService';
 import type { Course } from '@/types';
+import { PageLoading } from '@/components/ui/LoadingSpinner';
 
 function MyCoursesContent() {
   const searchParams = useSearchParams();
@@ -137,7 +138,7 @@ function MyCoursesContent() {
 
 export default function MyCoursesPage() {
   return (
-    <Suspense fallback={null}>
+    <Suspense fallback={<PageLoading message="Loading your courses..." />}>
       <MyCoursesContent />
     </Suspense>
   );
