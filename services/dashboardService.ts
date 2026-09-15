@@ -122,20 +122,43 @@ export const dashboardService = {
     try {
       const enrollments = await enrollmentService.getEnrollments();
       
-      if (!enrollments.enrollments) return [];
+      if (!enrollments.enrollments || enrollments.enrollments.length === 0) return [];
 
       // Use Promise.allSettled to prevent one failure from breaking all
       const results = await Promise.allSettled(
         enrollments.enrollments.map(async (enrollment: any) => {
-          const progress = await progressService.getCourseProgress(enrollment.course_id);
-          return {
-            id: enrollment.course_id,
-            title: enrollment.course_title || 'Unknown Course',
-            thumbnail_url: enrollment.thumbnail_url,
-            progress: enrollment.progress || 0, // Use enrollment.progress directly
-            totalLessons: progress.data?.total_lessons || 12,
-            completedLessons: progress.data?.completed_lessons || 0
-          };
+          try {
+            // Get progress for this specific course
+            const progressResponse = await progressService.getCourseProgress(enrollment.course_id);
+            const progressData = progressResponse.data || {};
+            
+            // Calculate progress percentage
+            const totalLessons = progressData.total_lessons || 12;
+            const completedLessons = progressData.completed_lessons || 0;
+            const progressPercentage = totalLessons > 0 
+              ? Math.round((completedLessons / totalLessons) * 100) 
+              : 0;
+            
+            return {
+              id: enrollment.course_id,
+              title: enrollment.course_title || 'Unknown Course',
+              thumbnail_url: enrollment.thumbnail_url,
+              progress: progressPercentage,
+              totalLessons: totalLessons,
+              completedLessons: completedLessons
+            };
+          } catch (error) {
+            // If progress fetch fails, return enrollment data with 0 progress
+            console.warn(`Failed to fetch progress for course ${enrollment.course_id}:`, error);
+            return {
+              id: enrollment.course_id,
+              title: enrollment.course_title || 'Unknown Course',
+              thumbnail_url: enrollment.thumbnail_url,
+              progress: 0,
+              totalLessons: 12,
+              completedLessons: 0
+            };
+          }
         })
       );
 
