@@ -200,26 +200,17 @@ export default function CourseDetailsPage({ params }: { params: Promise<{ id: st
         </div>
       )}
 
-      {/* Progress Bar for Enrolled Students */}
-      {enrolled && enrollmentData?.progress !== undefined && (
+      {/* Continue Learning Button for Enrolled Students */}
+      {enrolled && (
         <div className="relative bg-white rounded-2xl p-4 sm:p-5 md:p-6 border border-gray-200 shadow-lg">
-          <div className="absolute inset-0 bg-gradient-to-r from-green-50 via-emerald-50 to-green-50 rounded-2xl opacity-50"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-purple-50 via-pink-50 to-purple-50 rounded-2xl opacity-50"></div>
           <div className="relative">
-            <div className="flex items-center justify-between mb-3">
-              <span className="text-base sm:text-lg font-bold text-gray-800 flex items-center gap-2">
-                <Award className="size-5 sm:size-6 text-purple-600" />
-                Your Progress
-              </span>
-              <span className="text-xl sm:text-2xl font-extrabold bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 bg-clip-text text-transparent">
-                {Math.round(enrollmentData.progress)}%
-              </span>
-            </div>
-            <div className="w-full bg-gray-200 rounded-full h-3 sm:h-4 overflow-hidden shadow-inner">
-              <div 
-                className="bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 h-3 sm:h-4 rounded-full transition-all duration-500"
-                style={{ width: `${enrollmentData.progress}%` }}
-              />
-            </div>
+            <Link href={`/student/my-courses/${courseId}`}>
+              <Button className="w-full px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 text-white font-bold rounded-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2 text-sm sm:text-base">
+                <Play className="size-4 sm:size-5" />
+                Continue Learning
+              </Button>
+            </Link>
           </div>
         </div>
       )}

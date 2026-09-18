@@ -135,21 +135,14 @@ export default function EnrolledCourseDetailsPage({ params }: { params: Promise<
                   </div>
                 </div>
 
-                {/* Progress Bar */}
-                {enrollmentData?.progress !== undefined && (
-                  <div className="bg-[#FAFAFA] p-4 rounded-lg">
-                    <div className="flex items-center justify-between mb-2">
-                      <span className="text-sm font-medium text-[#1E3A5F]">Course Progress</span>
-                      <span className="text-sm text-[#78909C]">{Math.round(enrollmentData.progress)}%</span>
-                    </div>
-                    <div className="w-full bg-[#E0E0E0] rounded-full h-3">
-                      <div 
-                        className="bg-[#1E88E5] h-3 rounded-full transition-all duration-300"
-                        style={{ width: `${enrollmentData.progress}%` }}
-                      />
-                    </div>
-                  </div>
-                )}
+                {/* Continue Learning Button */}
+                <div className="mt-4">
+                  <Link href={`/student/learn?courseId=${courseId}`}>
+                    <Button className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white hover:from-purple-700 hover:to-pink-700">
+                      Continue Learning
+                    </Button>
+                  </Link>
+                </div>
 
                 {/* Description */}
                 {course.description && (
