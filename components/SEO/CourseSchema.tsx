@@ -18,7 +18,7 @@ export default function CourseSchema({
   description,
   provider = 'Playfit Classes',
   price,
-  priceCurrency = 'USD',
+  priceCurrency = 'INR',
   courseMode = 'online',
   duration,
   instructor,

@@ -222,7 +222,15 @@ export default function Footer() {
         <div className="border-t border-white/10 py-6">
           <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
             <p className="text-gray-400 text-sm text-center sm:text-left">
-              © {currentYear} PlayFit. All rights reserved.
+              © 2026 PlayFit Classes. Built with ❤️ by{' '}
+              <a 
+                href="https://devcastle.in" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-gray-400 hover:text-white transition-colors underline"
+              >
+                DevCastle.in
+              </a>
             </p>
             
             <div className="flex items-center gap-4">
