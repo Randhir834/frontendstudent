@@ -43,17 +43,17 @@ export default function Footer() {
             </ul>
           </div>
         </div>
-        <div className="pt-8 border-t border-gray-800">
-          <div className="flex flex-col sm:flex-row justify-center items-center gap-2 text-center">
-            <p className="text-xs text-gray-500">
-              © 2026 PlayFit Classes. Built with ❤️ by{' '}
+        <div className="pt-6 border-t border-gray-800">
+          <div className="flex justify-center items-center">
+            <p className="text-sm text-gray-400 text-center">
+              © 2026 Playfit Classes. Built by{' '}
               <a 
-                href="https://devcastle.in" 
+                href="https://devkettle.in" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="text-gray-400 hover:text-white transition-colors underline"
               >
-                DevCastle.in
+                DevKettle.in
               </a>
             </p>
           </div>
