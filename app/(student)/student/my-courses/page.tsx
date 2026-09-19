@@ -70,7 +70,7 @@ function MyCoursesContent() {
                 <BookOpen className="w-6 h-6 text-white" />
               </div>
               <div className="flex-1">
-                <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold bg-gradient-to-r from-green-600 via-emerald-600 to-teal-600 bg-clip-text text-transparent">
+                <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold bg-gradient-to-r from-green-600 via-emerald-600 to-teal-600 bg-clip-text text-transparent pb-1 leading-tight">
                   My Courses
                 </h1>
               </div>

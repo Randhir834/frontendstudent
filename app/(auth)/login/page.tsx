@@ -136,7 +136,7 @@ function LoginForm() {
         
         <div className="relative">
           <div className="text-center mb-6 xs:mb-7 sm:mb-8">
-            <h2 className="text-xl xs:text-2xl sm:text-3xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent mb-2">
+            <h2 className="text-xl xs:text-2xl sm:text-3xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent mb-2 pb-1 leading-tight">
               Student Login
             </h2>
             <p className="text-xs xs:text-sm text-gray-600">Enter your details to access your account</p>
@@ -236,27 +236,6 @@ function LoginForm() {
               Create new account
             </Link>
           </p>
-
-          <div className="mt-6 xs:mt-7 sm:mt-8 pt-4 xs:pt-5 sm:pt-6 border-t border-gray-200 grid grid-cols-3 gap-3 xs:gap-4 sm:gap-6">
-            <div className="flex flex-col xs:flex-row items-center gap-1.5 xs:gap-2">
-              <div className="w-8 h-8 xs:w-9 xs:h-9 sm:w-10 sm:h-10 bg-gradient-to-br from-blue-100 to-cyan-100 rounded-lg xs:rounded-xl flex items-center justify-center shadow-sm shrink-0">
-                <svg width="14" height="14" className="xs:w-[15px] xs:h-[15px] sm:w-4 sm:h-4" viewBox="0 0 24 24" fill="none" stroke="#1E88E5" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-              </div>
-              <span className="text-[9px] xs:text-[10px] text-gray-600 leading-tight font-medium text-center xs:text-left">Secure<br className="xs:hidden" /> Platform</span>
-            </div>
-            <div className="flex flex-col xs:flex-row items-center gap-1.5 xs:gap-2">
-              <div className="w-8 h-8 xs:w-9 xs:h-9 sm:w-10 sm:h-10 bg-gradient-to-br from-green-100 to-emerald-100 rounded-lg xs:rounded-xl flex items-center justify-center shadow-sm shrink-0">
-                <svg width="14" height="14" className="xs:w-[15px] xs:h-[15px] sm:w-4 sm:h-4" viewBox="0 0 24 24" fill="none" stroke="#10B981" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
-              </div>
-              <span className="text-[9px] xs:text-[10px] text-gray-600 leading-tight font-medium text-center xs:text-left">Trusted by<br className="xs:hidden" /> Parents</span>
-            </div>
-            <div className="flex flex-col xs:flex-row items-center gap-1.5 xs:gap-2">
-              <div className="w-8 h-8 xs:w-9 xs:h-9 sm:w-10 sm:h-10 bg-gradient-to-br from-purple-100 to-pink-100 rounded-lg xs:rounded-xl flex items-center justify-center shadow-sm shrink-0">
-                <svg width="14" height="14" className="xs:w-[15px] xs:h-[15px] sm:w-4 sm:h-4" viewBox="0 0 24 24" fill="none" stroke="#A855F7" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-              </div>
-              <span className="text-[9px] xs:text-[10px] text-gray-600 leading-tight font-medium text-center xs:text-left">Safe & Child<br className="xs:hidden" /> Friendly</span>
-            </div>
-          </div>
         </div>
       </div>
     </StudentAuthSplitShell>

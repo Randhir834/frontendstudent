@@ -342,17 +342,17 @@ export default function Home() {
               {/* Trust Indicators */}
               <div className="flex items-center gap-4 sm:gap-6 pt-4 flex-wrap">
                 <div className="bg-white/80 backdrop-blur-sm rounded-lg px-4 py-3 shadow-md border border-blue-100">
-                  <div className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">5,000+</div>
+                  <div className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent pb-1 leading-tight">5,000+</div>
                   <div className="text-sm text-gray-700 font-medium">Active Students</div>
                 </div>
                 <div className="bg-white/80 backdrop-blur-sm rounded-lg px-4 py-3 shadow-md border border-purple-100">
-                  <div className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">9+</div>
+                  <div className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent pb-1 leading-tight">9+</div>
                   <div className="text-sm text-gray-700 font-medium">Skill Courses</div>
                 </div>
                 <div className="bg-white/80 backdrop-blur-sm rounded-lg px-4 py-3 shadow-md border border-orange-100">
                   <div className="flex items-center gap-1 mb-1">
                     <Star className="w-4 sm:w-5 h-4 sm:h-5 text-yellow-500 fill-yellow-500" />
-                    <span className="text-2xl font-bold bg-gradient-to-r from-orange-600 to-pink-600 bg-clip-text text-transparent">4.9</span>
+                    <span className="text-2xl font-bold bg-gradient-to-r from-orange-600 to-pink-600 bg-clip-text text-transparent pb-1 leading-tight">4.9</span>
                   </div>
                   <div className="text-sm text-gray-700 font-medium">Parent Rating</div>
                 </div>
@@ -437,7 +437,7 @@ export default function Home() {
             </div>
             <h2 className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-3 xs:mb-4 sm:mb-5 md:mb-6 leading-tight">
               Join The Learning
-              <span className="block bg-gradient-to-r from-yellow-300 via-pink-300 to-purple-300 bg-clip-text text-transparent">
+              <span className="block bg-gradient-to-r from-yellow-300 via-pink-300 to-purple-300 bg-clip-text text-transparent pb-2 leading-[1.15]">
                 Revolution
               </span>
             </h2>
@@ -499,7 +499,7 @@ export default function Home() {
                   </div>
                   
                   {/* Number with Premium Gradient */}
-                  <div className={`text-3xl xs:text-4xl sm:text-5xl lg:text-6xl font-extrabold bg-gradient-to-r ${stat.gradient} bg-clip-text text-transparent mb-2 xs:mb-2.5 sm:mb-3 leading-tight`}>
+                  <div className={`text-3xl xs:text-4xl sm:text-5xl lg:text-6xl font-extrabold bg-gradient-to-r ${stat.gradient} bg-clip-text text-transparent mb-2 xs:mb-2.5 sm:mb-3 leading-tight pb-2`}>
                     {stat.number}
                   </div>
                   
@@ -544,7 +544,7 @@ export default function Home() {
             <h2 className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold mb-3 xs:mb-4 sm:mb-5 md:mb-6 leading-tight">
               Getting Started Is{' '}
               <span className="relative inline-block">
-                <span className="relative z-10 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+                <span className="relative z-10 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent pb-1 leading-[1.2]">
                   Super Easy
                 </span>
                 <span className="absolute inset-0 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 blur-2xl opacity-50"></span>
@@ -633,7 +633,7 @@ export default function Home() {
                 <Star className="w-5 h-5 fill-yellow-300 text-yellow-300" />
                 3 Courses Coming Soon ✨
               </div>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent mb-4 sm:mb-5 px-2">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent mb-4 sm:mb-5 px-2 pb-2 leading-[1.2]">
                 Upcoming Courses
               </h2>
               <p className="text-lg sm:text-xl md:text-2xl text-gray-700 font-medium max-w-3xl mx-auto px-3">
@@ -798,7 +798,7 @@ export default function Home() {
                     <div className="flex-1 min-w-0">
                       <h4 className="font-bold text-gray-900 text-base truncate">{testimonial.name}</h4>
                       <p className="text-sm text-gray-600">{testimonial.location}</p>
-                      <p className={`text-sm font-semibold bg-gradient-to-r ${testimonial.gradient} bg-clip-text text-transparent`}>
+                      <p className={`text-sm font-semibold bg-gradient-to-r ${testimonial.gradient} bg-clip-text text-transparent pb-0.5`}>
                         {testimonial.course}
                       </p>
                     </div>
@@ -861,7 +861,7 @@ export default function Home() {
               <p className="text-lg md:text-xl text-gray-700 leading-relaxed text-center mb-6">
                 At Playfit, we believe that <strong className="text-pink-600">learning should be joyful, active, and meaningful</strong>. Each session is designed to make children participate, speak, think, read, and express themselves with confidence. Our child-friendly approach helps learners enjoy every class while developing strong foundational skills for school and life.
               </p>
-              <p className="text-xl md:text-2xl font-bold text-center bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
+              <p className="text-xl md:text-2xl font-bold text-center bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent pb-2 leading-relaxed">
                 Playfit aims to make every child a confident learner, active thinker, and happy communicator.
               </p>
             </div>

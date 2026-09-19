@@ -183,7 +183,7 @@ export default function StudentLiveClassesPage() {
                 <Video className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
               </div>
               <div>
-                <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-green-600 via-emerald-600 to-teal-600 bg-clip-text text-transparent">
+                <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-green-600 via-emerald-600 to-teal-600 bg-clip-text text-transparent pb-1 leading-tight">
                   Live Classes
                 </h1>
               </div>
@@ -215,7 +215,7 @@ export default function StudentLiveClassesPage() {
                 
                 <div>
                   <p className="text-xs sm:text-sm text-gray-600 mb-1 font-medium">Total Classes</p>
-                  <p className="text-3xl sm:text-4xl font-bold bg-gradient-to-br from-green-500 to-emerald-500 bg-clip-text text-transparent">
+                  <p className="text-3xl sm:text-4xl font-bold bg-gradient-to-br from-green-500 to-emerald-500 bg-clip-text text-transparent pb-2 leading-tight">
                     {liveClasses.length}
                   </p>
                 </div>
@@ -236,7 +236,7 @@ export default function StudentLiveClassesPage() {
                 
                 <div>
                   <p className="text-xs sm:text-sm text-gray-600 mb-1 font-medium">Today's Classes</p>
-                  <p className="text-3xl sm:text-4xl font-bold bg-gradient-to-br from-blue-500 to-cyan-500 bg-clip-text text-transparent">
+                  <p className="text-3xl sm:text-4xl font-bold bg-gradient-to-br from-blue-500 to-cyan-500 bg-clip-text text-transparent pb-2 leading-tight">
                     {liveClasses.filter(c => isToday(c.scheduled_at)).length}
                   </p>
                 </div>

@@ -93,7 +93,7 @@ export default function RegisterPage() {
         
         <div className="relative">
           <div className="text-center mb-6 xs:mb-7 sm:mb-8">
-            <h2 className="text-xl xs:text-2xl sm:text-3xl font-bold bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 bg-clip-text text-transparent mb-2">
+            <h2 className="text-xl xs:text-2xl sm:text-3xl font-bold bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 bg-clip-text text-transparent mb-2 pb-1 leading-tight">
               Create Student Account
             </h2>
             <p className="text-xs xs:text-sm text-gray-600">Fill in your details to get started</p>

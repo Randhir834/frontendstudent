@@ -134,7 +134,7 @@ export default function CourseDetailsPage({ params }: { params: Promise<{ id: st
           </div>
 
           {/* Title */}
-          <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 bg-clip-text text-transparent leading-tight mb-3 sm:mb-4">
+          <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 bg-clip-text text-transparent leading-tight mb-3 sm:mb-4 pb-1">
             {course.title}
           </h1>
 
@@ -164,7 +164,7 @@ export default function CourseDetailsPage({ params }: { params: Promise<{ id: st
           <div className="absolute inset-0 bg-gradient-to-r from-purple-50 via-pink-50 to-purple-50 rounded-2xl opacity-50"></div>
           <div className="relative flex items-center justify-between gap-4 flex-wrap">
             <div>
-              <div className="text-2xl sm:text-3xl md:text-4xl font-extrabold bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 bg-clip-text text-transparent">
+              <div className="text-2xl sm:text-3xl md:text-4xl font-extrabold bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 bg-clip-text text-transparent pb-2 leading-tight">
                 {formatPrice(course.price)}
               </div>
               <p className="text-xs sm:text-sm text-gray-500 mt-1">One-time payment</p>
@@ -311,7 +311,7 @@ export default function CourseDetailsPage({ params }: { params: Promise<{ id: st
             <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-br from-green-500 to-emerald-600 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-xl">
               <CheckCircle2 className="size-8 sm:size-10 text-white" />
             </div>
-            <h3 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-green-600 via-emerald-600 to-green-600 bg-clip-text text-transparent mb-3">
+            <h3 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-green-600 via-emerald-600 to-green-600 bg-clip-text text-transparent mb-3 pb-1 leading-tight">
               You're Enrolled!
             </h3>
             <p className="text-sm sm:text-base text-gray-600 mb-6 max-w-md mx-auto">

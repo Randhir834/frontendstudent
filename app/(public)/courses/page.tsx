@@ -215,7 +215,7 @@ export default function CoursesPage() {
                           {/* Title and Level */}
                           <div className="space-y-2">
                             <div className="flex items-start justify-between gap-2">
-                              <h3 className="font-bold text-lg text-gray-800 line-clamp-2 group-hover:bg-gradient-to-r group-hover:from-purple-600 group-hover:to-pink-600 group-hover:bg-clip-text group-hover:text-transparent transition-all leading-tight">
+                              <h3 className="font-bold text-lg text-gray-800 line-clamp-2 group-hover:bg-gradient-to-r group-hover:from-purple-600 group-hover:to-pink-600 group-hover:bg-clip-text group-hover:text-transparent transition-all leading-tight pb-0.5">
                                 {course.title}
                               </h3>
                               <span className={`px-2.5 py-1 text-xs font-semibold rounded-full whitespace-nowrap flex-shrink-0 shadow-sm ${
@@ -259,7 +259,7 @@ export default function CoursesPage() {
                           {/* Price - Only show if authenticated */}
                           <div className="flex items-center justify-between pt-2 border-t border-gray-100">
                             {isAuthenticated && (
-                              <div className="text-2xl font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">
+                              <div className="text-2xl font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent pb-1 leading-tight">
                                 {formatPrice(course.price)}
                               </div>
                             )}

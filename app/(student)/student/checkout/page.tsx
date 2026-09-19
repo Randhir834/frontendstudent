@@ -141,7 +141,7 @@ function CheckoutContent() {
             <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl flex items-center justify-center shadow-lg">
               <ShoppingCart className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
             </div>
-            <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 bg-clip-text text-transparent">
+            <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 bg-clip-text text-transparent pb-1 leading-tight">
               Checkout
             </h1>
           </div>
@@ -218,7 +218,7 @@ function CheckoutContent() {
           <div className="border-t border-gray-300 pt-4">
             <div className="flex justify-between items-center mb-4">
               <span className="text-base sm:text-lg font-bold text-gray-800">Total Amount</span>
-              <span className="text-2xl sm:text-3xl md:text-4xl font-bold bg-gradient-to-r from-green-600 via-emerald-600 to-green-600 bg-clip-text text-transparent">
+              <span className="text-2xl sm:text-3xl md:text-4xl font-bold bg-gradient-to-r from-green-600 via-emerald-600 to-green-600 bg-clip-text text-transparent pb-2 leading-tight">
                 ₹{totalAmount.toLocaleString()}
               </span>
             </div>

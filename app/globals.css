@@ -1058,6 +1058,30 @@ html {
   }
 }
 
+/* Global fix for bg-clip-text to prevent descender clipping */
+.bg-clip-text {
+  -webkit-background-clip: text;
+  background-clip: text;
+  padding-bottom: 0.125rem !important; /* 2px - Critical for g, y, p, q, j */
+  display: inline-block;
+  line-height: 1.2 !important;
+}
+
+/* Ensure all headings have proper line-height */
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1.25;
+  padding-bottom: 0.125rem;
+}
+
+/* Specifically fix gradient text in headings */
+h1 .bg-clip-text,
+h2 .bg-clip-text,
+h3 .bg-clip-text {
+  padding-bottom: 0.25rem !important; /* 4px for larger text */
+  line-height: 1.2 !important;
+  display: inline-block !important;
+}
+
 /* Remove all focus effects for select elements */
 select,
 select:focus,

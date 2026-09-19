@@ -85,7 +85,7 @@ export default function StudentHomePage() {
                   <Zap className="w-5 h-5 text-yellow-500 fill-yellow-500" />
                   <span className="text-sm font-medium text-gray-600">Welcome back,</span>
                 </div>
-                <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent break-words mb-3">
+                <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent break-words mb-3 pb-1 leading-tight">
                   {displayName}!
                 </h1>
                 <p className="text-sm sm:text-base text-gray-600 max-w-2xl">
@@ -140,7 +140,7 @@ export default function StudentHomePage() {
                     {/* Stats */}
                     <div>
                       <p className="text-xs sm:text-sm text-gray-600 mb-1 font-medium">{card.label}</p>
-                      <p className={`text-3xl sm:text-4xl font-bold bg-gradient-to-br ${card.gradient} bg-clip-text text-transparent`}>
+                      <p className={`text-3xl sm:text-4xl font-bold bg-gradient-to-br ${card.gradient} bg-clip-text text-transparent pb-2 leading-tight`}>
                         {card.value}
                       </p>
                     </div>

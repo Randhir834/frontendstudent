@@ -169,7 +169,7 @@ export default function UpcomingLiveClasses() {
               <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl flex items-center justify-center shadow-lg">
                 <Video className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
               </div>
-              <CardTitle className="text-lg sm:text-xl md:text-2xl font-bold bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 bg-clip-text text-transparent">
+              <CardTitle className="text-lg sm:text-xl md:text-2xl font-bold bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 bg-clip-text text-transparent pb-0.5 leading-tight">
                 Upcoming Live Classes
               </CardTitle>
             </div>
@@ -204,7 +204,7 @@ export default function UpcomingLiveClasses() {
               <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-red-500 to-orange-500 rounded-xl flex items-center justify-center shadow-lg">
                 <Video className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
               </div>
-              <CardTitle className="text-lg sm:text-xl md:text-2xl font-bold bg-gradient-to-r from-red-600 via-orange-600 to-pink-600 bg-clip-text text-transparent">
+              <CardTitle className="text-lg sm:text-xl md:text-2xl font-bold bg-gradient-to-r from-red-600 via-orange-600 to-pink-600 bg-clip-text text-transparent pb-0.5 leading-tight">
                 Upcoming Live Classes
               </CardTitle>
             </div>
@@ -237,7 +237,7 @@ export default function UpcomingLiveClasses() {
               <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl flex items-center justify-center shadow-lg">
                 <Video className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
               </div>
-              <CardTitle className="text-lg sm:text-xl md:text-2xl font-bold bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 bg-clip-text text-transparent">
+              <CardTitle className="text-lg sm:text-xl md:text-2xl font-bold bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 bg-clip-text text-transparent pb-0.5 leading-tight">
                 Upcoming Live Classes
               </CardTitle>
             </div>
@@ -282,7 +282,7 @@ export default function UpcomingLiveClasses() {
               <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl flex items-center justify-center shadow-lg">
                 <Video className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
               </div>
-              <CardTitle className="text-lg sm:text-xl md:text-2xl font-bold bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 bg-clip-text text-transparent">
+              <CardTitle className="text-lg sm:text-xl md:text-2xl font-bold bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 bg-clip-text text-transparent pb-0.5 leading-tight">
                 Upcoming Live Classes
               </CardTitle>
             </div>
@@ -357,7 +357,7 @@ export default function UpcomingLiveClasses() {
                             )}
                           </div>
                           
-                          <h4 className="font-bold text-base sm:text-lg text-gray-900 group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:bg-clip-text group-hover:from-purple-600 group-hover:to-pink-600 transition-all break-words leading-tight">
+                          <h4 className="font-bold text-base sm:text-lg text-gray-900 group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:bg-clip-text group-hover:from-purple-600 group-hover:to-pink-600 transition-all break-words leading-tight pb-0.5">
                             {liveClass.title}
                           </h4>
                           <p className="text-xs text-gray-600 font-medium">{liveClass.course_title}</p>

@@ -80,7 +80,7 @@ function StudentCoursesContent() {
               <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl flex items-center justify-center shadow-lg">
                 <BookOpen className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
               </div>
-              <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 bg-clip-text text-transparent">
+              <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 bg-clip-text text-transparent pb-1 leading-tight">
                 Browse Courses
               </h1>
             </div>
@@ -127,7 +127,7 @@ function StudentCoursesContent() {
                   {/* Stats */}
                   <div>
                     <p className="text-xs sm:text-sm text-gray-600 mb-1 font-medium">{card.label}</p>
-                    <p className={`text-3xl sm:text-4xl font-bold bg-gradient-to-br ${card.gradient} bg-clip-text text-transparent`}>
+                    <p className={`text-3xl sm:text-4xl font-bold bg-gradient-to-br ${card.gradient} bg-clip-text text-transparent pb-2 leading-tight`}>
                       {card.value}
                     </p>
                   </div>
