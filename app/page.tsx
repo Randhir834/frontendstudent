@@ -629,10 +629,6 @@ export default function Home() {
         <div className="relative w-full px-3 sm:px-4 md:px-6 lg:px-8">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-8 sm:mb-10 md:mb-12 lg:mb-16">
-              <div className="inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-full text-sm font-bold mb-6 shadow-lg shadow-purple-500/30">
-                <Star className="w-5 h-5 fill-yellow-300 text-yellow-300" />
-                3 Courses Coming Soon ✨
-              </div>
               <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent mb-4 sm:mb-5 px-2 pb-2 leading-[1.2]">
                 Upcoming Courses
               </h2>
