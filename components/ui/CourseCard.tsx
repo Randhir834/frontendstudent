@@ -80,6 +80,16 @@ export default function CourseCard({
           )}
           {/* Gradient Overlay on Hover */}
           <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+          
+          {/* Enrolled Badge - Show for enrolled students */}
+          {userRole === 'student' && course.is_enrolled && (
+            <div className="absolute top-3 left-3">
+              <div className="flex items-center gap-1.5 bg-gradient-to-r from-green-100/95 to-emerald-100/95 text-green-700 backdrop-blur-sm px-2.5 py-1.5 rounded-lg shadow-sm border border-green-200/80">
+                <CheckCircle2 className="w-3 h-3 flex-shrink-0" />
+                <span className="text-xs font-semibold">Enrolled</span>
+              </div>
+            </div>
+          )}
         </div>
 
       <div className="p-4 sm:p-5 flex-1 flex flex-col">
@@ -141,18 +151,11 @@ export default function CourseCard({
               )}
             </div>
 
-            {/* Price (Admin Only) and Enrollment Status */}
+            {/* Price (Admin Only) */}
             <div className="flex items-center justify-between gap-2">
               {userRole === 'admin' && (
                 <div className="text-lg sm:text-xl font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">
                   {formatPrice(course.price)}
-                </div>
-              )}
-              
-              {userRole === 'student' && course.is_enrolled && (
-                <div className="flex items-center gap-1.5 bg-gradient-to-r from-green-100 to-emerald-100 text-green-700 px-2.5 py-1.5 rounded-lg shadow-sm ml-auto">
-                  <CheckCircle2 className="w-3 h-3" />
-                  <span className="text-xs font-semibold">Enrolled</span>
                 </div>
               )}
             </div>
