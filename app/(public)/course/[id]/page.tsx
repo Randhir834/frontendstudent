@@ -2,8 +2,7 @@
 
 import { useEffect, useMemo, useState, use } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import { Loader2, Users, BookOpen, CheckCircle2, CreditCard, Play, Star, Award, FileText, Video, Menu, X } from 'lucide-react';
+import { Loader2, Users, BookOpen, CheckCircle2, Play, Star, Award, FileText, Video, Menu, X } from 'lucide-react';
 import Button from '@/components/ui/Button';
 import { courseService } from '@/services/courseService';
 import type { Course } from '@/types';
@@ -11,7 +10,6 @@ import Footer from '@/components/layouts/Footer';
 
 export default function PublicCourseDetailsPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
-  const router = useRouter();
   const courseId = Number(id);
 
   const [course, setCourse] = useState<Course | null>(null);
@@ -38,28 +36,6 @@ export default function PublicCourseDetailsPage({ params }: { params: Promise<{ 
     if (!course?.instructors?.length) return course?.instructor_name || 'No instructor';
     return course.instructors.map((i) => i.name).join(', ');
   }, [course]);
-
-  const handleBuyNow = () => {
-    // Check if user is authenticated
-    const token = localStorage.getItem('token');
-    if (!token) {
-      // Redirect to login with return URL
-      router.push(`/login?returnUrl=${encodeURIComponent(`/course/${courseId}`)}`);
-      return;
-    }
-
-    // ===== PAYMENT DISABLED - DIRECT ENROLLMENT =====
-    // All courses now redirect to enrollment page (no payment required)
-    router.push(`/student/course/${courseId}`);
-    
-    // // Previous payment flow (COMMENTED OUT)
-    // if (course && course.price > 0) {
-    //   window.location.href = `/student/checkout?courseId=${courseId}`;
-    // } else {
-    //   // Free course - redirect to student course page to enroll
-    //   router.push(`/student/course/${courseId}`);
-    // }
-  };
 
   const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, sectionId: string) => {
     e.preventDefault();
@@ -239,33 +215,23 @@ export default function PublicCourseDetailsPage({ params }: { params: Promise<{ 
           </div>
         </div>
 
-        {/* Price and Buy Button */}
+        {/* Contact Admin Section - Replaces Price and Buy Button */}
         <div className="relative bg-white rounded-2xl p-4 sm:p-5 md:p-6 border border-gray-200 shadow-lg">
           <div className="absolute inset-0 bg-gradient-to-r from-purple-50 via-pink-50 to-purple-50 rounded-2xl opacity-50"></div>
-          <div className="relative flex items-center justify-between gap-4 flex-wrap">
-            <div>
-              <div className="text-2xl sm:text-3xl md:text-4xl font-extrabold bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 bg-clip-text text-transparent">
-                {formatPrice(course.price)}
-              </div>
-              <p className="text-xs sm:text-sm text-gray-500 mt-1">One-time payment</p>
+          <div className="relative text-center">
+            <div className="text-lg sm:text-xl md:text-2xl font-bold text-gray-800 mb-3">
+              Interested in This Course?
             </div>
-            
-            <Button
-              onClick={handleBuyNow}
-              className="px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 text-white font-bold rounded-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 flex items-center gap-2 text-sm sm:text-base"
+            <p className="text-sm sm:text-base text-gray-600 mb-4">
+              Contact your administrator to enroll in this course.
+            </p>
+            <Link 
+              href="/#contact"
+              className="inline-flex items-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 text-white font-bold rounded-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 text-sm sm:text-base"
             >
-              {course.price > 0 ? (
-                <>
-                  <CreditCard className="size-4 sm:size-5" />
-                  Buy Now
-                </>
-              ) : (
-                <>
-                  <Play className="size-4 sm:size-5" />
-                  Enroll Free
-                </>
-              )}
-            </Button>
+              <Users className="size-4 sm:size-5" />
+              Contact Admin
+            </Link>
           </div>
         </div>
 
@@ -360,8 +326,4 @@ export default function PublicCourseDetailsPage({ params }: { params: Promise<{ 
       <Footer />
     </div>
   );
-
-  function formatPrice(price: number) {
-    return price === 0 ? 'Free' : `₹${price.toLocaleString()}`;
-  }
 }

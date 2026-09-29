@@ -114,43 +114,48 @@ export default function CourseCard({
             <span className="text-xs text-gray-700 font-medium truncate">{instructorNames}</span>
           </div>
 
-          {/* Course Stats */}
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-xs">
-            <div className="flex items-center gap-3 flex-wrap">
-              {course.enrollment_count !== undefined && course.enrollment_count > 0 && (
-                <div className="flex items-center gap-1.5 bg-purple-50 px-2 py-1 rounded-lg">
-                  <Users className="w-3 h-3 text-purple-600" />
-                  <span className="text-gray-700 font-medium">{course.enrollment_count}</span>
-                </div>
-              )}
+          {/* Course Stats and Enrollment Status */}
+          <div className="flex flex-col gap-2 pt-2">
+            {/* Course Stats */}
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-xs">
+              <div className="flex items-center gap-3 flex-wrap">
+                {course.enrollment_count !== undefined && course.enrollment_count > 0 && (
+                  <div className="flex items-center gap-1.5 bg-purple-50 px-2 py-1 rounded-lg">
+                    <Users className="w-3 h-3 text-purple-600" />
+                    <span className="text-gray-700 font-medium">{course.enrollment_count}</span>
+                  </div>
+                )}
 
-              {course.rating && (
-                <div className="flex items-center gap-1.5 bg-yellow-50 px-2 py-1 rounded-lg">
-                  <Star className="w-3 h-3 fill-yellow-400 text-yellow-400" />
-                  <span className="text-gray-700 font-semibold">{course.rating.toFixed(1)}</span>
-                </div>
-              )}
-            </div>
-
-            {course.category_name && (
-              <span className="text-xs bg-gradient-to-r from-gray-100 to-gray-200 text-gray-700 px-2.5 py-1 rounded-lg font-medium self-start sm:self-auto">
-                {course.category_name}
-              </span>
-            )}
-          </div>
-
-          {/* Price & Enrollment Status */}
-          <div className="flex items-center justify-between gap-2 pt-2">
-            <div className="text-lg sm:text-xl font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">
-              {formatPrice(course.price)}
-            </div>
-            
-            {userRole === 'student' && course.is_enrolled && (
-              <div className="flex items-center gap-1.5 bg-gradient-to-r from-green-100 to-emerald-100 text-green-700 px-2.5 py-1.5 rounded-lg shadow-sm">
-                <CheckCircle2 className="w-3 h-3" />
-                <span className="text-xs font-semibold">Enrolled</span>
+                {course.rating && (
+                  <div className="flex items-center gap-1.5 bg-yellow-50 px-2 py-1 rounded-lg">
+                    <Star className="w-3 h-3 fill-yellow-400 text-yellow-400" />
+                    <span className="text-gray-700 font-semibold">{course.rating.toFixed(1)}</span>
+                  </div>
+                )}
               </div>
-            )}
+
+              {course.category_name && (
+                <span className="text-xs bg-gradient-to-r from-gray-100 to-gray-200 text-gray-700 px-2.5 py-1 rounded-lg font-medium self-start sm:self-auto">
+                  {course.category_name}
+                </span>
+              )}
+            </div>
+
+            {/* Price (Admin Only) and Enrollment Status */}
+            <div className="flex items-center justify-between gap-2">
+              {userRole === 'admin' && (
+                <div className="text-lg sm:text-xl font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">
+                  {formatPrice(course.price)}
+                </div>
+              )}
+              
+              {userRole === 'student' && course.is_enrolled && (
+                <div className="flex items-center gap-1.5 bg-gradient-to-r from-green-100 to-emerald-100 text-green-700 px-2.5 py-1.5 rounded-lg shadow-sm ml-auto">
+                  <CheckCircle2 className="w-3 h-3" />
+                  <span className="text-xs font-semibold">Enrolled</span>
+                </div>
+              )}
+            </div>
           </div>
         </div>
 

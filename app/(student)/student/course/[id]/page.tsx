@@ -2,8 +2,7 @@
 
 import { useEffect, useMemo, useState, use } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import { Loader2, Users, BookOpen, CheckCircle2, CreditCard, Play, Star, Award, FileText, Video } from 'lucide-react';
+import { Loader2, Users, BookOpen, CheckCircle2, Play, Star, Award, FileText, Video, Mail } from 'lucide-react';
 import Card, { CardHeader, CardTitle, CardContent } from '@/components/ui/Card';
 import Button from '@/components/ui/Button';
 import { courseService } from '@/services/courseService';
@@ -12,12 +11,10 @@ import type { Course } from '@/types';
 
 export default function CourseDetailsPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
-  const router = useRouter();
   const courseId = Number(id);
 
   const [course, setCourse] = useState<Course | null>(null);
   const [loading, setLoading] = useState(true);
-  const [enrollLoading, setEnrollLoading] = useState(false);
   const [enrolled, setEnrolled] = useState(false);
   const [enrollmentData, setEnrollmentData] = useState<any>(null);
 
@@ -46,40 +43,6 @@ export default function CourseDetailsPage({ params }: { params: Promise<{ id: st
     if (!course?.instructors?.length) return course?.instructor_name || 'No instructor';
     return course.instructors.map((i) => i.name).join(', ');
   }, [course]);
-
-  const handleEnroll = async () => {
-    if (!course) return;
-
-    try {
-      setEnrollLoading(true);
-      
-      // ===== PAYMENT DISABLED - DIRECT ENROLLMENT =====
-      // All courses now enroll directly without payment
-      await enrollmentService.enrollCourse(courseId);
-      setEnrolled(true);
-      alert('Successfully enrolled in the course! You can now access all course materials.');
-      
-      // Redirect to my courses after successful enrollment
-      router.push(`/student/my-courses/${courseId}`);
-      
-      // // Previous payment flow (COMMENTED OUT)
-      // if (course.price > 0) {
-      //   // Redirect to checkout page for paid courses
-      //   window.location.href = `/student/checkout?courseId=${courseId}`;
-      // } else {
-      //   await enrollmentService.enrollCourse(courseId);
-      //   setEnrolled(true);
-      //   alert('Successfully enrolled in the free course!');
-      // }
-    } catch (err: any) {
-      const msg = err?.response?.data?.error || 'Failed to enroll';
-      alert(msg);
-    } finally {
-      setEnrollLoading(false);
-    }
-  };
-
-
 
   if (loading) {
     return (
@@ -158,44 +121,24 @@ export default function CourseDetailsPage({ params }: { params: Promise<{ id: st
         </div>
       </div>
 
-      {/* Price and Buy Button */}
+      {/* Contact Admin for Enrollment */}
       {!enrolled && (
         <div className="relative bg-white rounded-2xl p-4 sm:p-5 md:p-6 border border-gray-200 shadow-lg">
           <div className="absolute inset-0 bg-gradient-to-r from-purple-50 via-pink-50 to-purple-50 rounded-2xl opacity-50"></div>
-          <div className="relative flex items-center justify-between gap-4 flex-wrap">
-            <div>
-              <div className="text-2xl sm:text-3xl md:text-4xl font-extrabold bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 bg-clip-text text-transparent pb-2 leading-tight">
-                {formatPrice(course.price)}
-              </div>
-              <p className="text-xs sm:text-sm text-gray-500 mt-1">One-time payment</p>
+          <div className="relative text-center">
+            <div className="text-lg sm:text-xl md:text-2xl font-bold text-gray-800 mb-3">
+              Interested in This Course?
             </div>
-            
-            <Button
-              onClick={handleEnroll}
-              disabled={enrollLoading}
-              className="px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 text-white font-bold rounded-xl hover:shadow-2xl transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 transition-all duration-300 flex items-center gap-2 text-sm sm:text-base"
+            <p className="text-sm sm:text-base text-gray-600 mb-4">
+              Contact your administrator to enroll in this course. Only administrators can enroll students.
+            </p>
+            <Link 
+              href="/#contact"
+              className="inline-flex items-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 text-white font-bold rounded-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 text-sm sm:text-base"
             >
-              {enrollLoading ? (
-                <>
-                  <Loader2 className="size-4 sm:size-5 animate-spin" />
-                  Processing...
-                </>
-              ) : (
-                <>
-                  {course.price > 0 ? (
-                    <>
-                      <CreditCard className="size-4 sm:size-5" />
-                      Buy Now
-                    </>
-                  ) : (
-                    <>
-                      <Play className="size-4 sm:size-5" />
-                      Enroll Free
-                    </>
-                  )}
-                </>
-              )}
-            </Button>
+              <Mail className="size-4 sm:size-5" />
+              Contact Administrator
+            </Link>
           </div>
         </div>
       )}
@@ -272,36 +215,34 @@ export default function CourseDetailsPage({ params }: { params: Promise<{ id: st
       )}
 
       {/* Course Includes */}
-      {!enrolled && (
-        <div className="relative bg-white rounded-2xl p-4 sm:p-5 md:p-6 border border-gray-200 shadow-lg">
-          <div className="absolute inset-0 bg-gradient-to-r from-amber-50 via-yellow-50 to-amber-50 rounded-2xl opacity-50"></div>
-          <div className="relative">
-            <h4 className="text-lg sm:text-xl md:text-2xl font-bold text-gray-800 mb-3 sm:mb-4">This course includes:</h4>
-            <div className="space-y-2 sm:space-y-3">
-              <div className="flex items-start gap-3 p-3 sm:p-4 bg-purple-50 rounded-xl border border-purple-100 shadow-sm hover:shadow-md transition-all duration-200">
-                <CheckCircle2 className="size-4 sm:size-5 text-purple-600 flex-shrink-0 mt-0.5" />
-                <span className="text-sm sm:text-base text-gray-700">One-on-one mentoring sessions</span>
-              </div>
-              <div className="flex items-start gap-3 p-3 sm:p-4 bg-blue-50 rounded-xl border border-blue-100 shadow-sm hover:shadow-md transition-all duration-200">
-                <CheckCircle2 className="size-4 sm:size-5 text-blue-600 flex-shrink-0 mt-0.5" />
-                <span className="text-sm sm:text-base text-gray-700">Flexible scheduling</span>
-              </div>
-              <div className="flex items-start gap-3 p-3 sm:p-4 bg-pink-50 rounded-xl border border-pink-100 shadow-sm hover:shadow-md transition-all duration-200">
-                <CheckCircle2 className="size-4 sm:size-5 text-pink-600 flex-shrink-0 mt-0.5" />
-                <span className="text-sm sm:text-base text-gray-700">Course materials and resources</span>
-              </div>
-              <div className="flex items-start gap-3 p-3 sm:p-4 bg-green-50 rounded-xl border border-green-100 shadow-sm hover:shadow-md transition-all duration-200">
-                <CheckCircle2 className="size-4 sm:size-5 text-green-600 flex-shrink-0 mt-0.5" />
-                <span className="text-sm sm:text-base text-gray-700">Certificate of completion</span>
-              </div>
-              <div className="flex items-start gap-3 p-3 sm:p-4 bg-amber-50 rounded-xl border border-amber-100 shadow-sm hover:shadow-md transition-all duration-200">
-                <CheckCircle2 className="size-4 sm:size-5 text-amber-600 flex-shrink-0 mt-0.5" />
-                <span className="text-sm sm:text-base text-gray-700">Lifetime access to course content</span>
-              </div>
+      <div className="relative bg-white rounded-2xl p-4 sm:p-5 md:p-6 border border-gray-200 shadow-lg">
+        <div className="absolute inset-0 bg-gradient-to-r from-amber-50 via-yellow-50 to-amber-50 rounded-2xl opacity-50"></div>
+        <div className="relative">
+          <h4 className="text-lg sm:text-xl md:text-2xl font-bold text-gray-800 mb-3 sm:mb-4">This course includes:</h4>
+          <div className="space-y-2 sm:space-y-3">
+            <div className="flex items-start gap-3 p-3 sm:p-4 bg-purple-50 rounded-xl border border-purple-100 shadow-sm hover:shadow-md transition-all duration-200">
+              <CheckCircle2 className="size-4 sm:size-5 text-purple-600 flex-shrink-0 mt-0.5" />
+              <span className="text-sm sm:text-base text-gray-700">One-on-one mentoring sessions</span>
+            </div>
+            <div className="flex items-start gap-3 p-3 sm:p-4 bg-blue-50 rounded-xl border border-blue-100 shadow-sm hover:shadow-md transition-all duration-200">
+              <CheckCircle2 className="size-4 sm:size-5 text-blue-600 flex-shrink-0 mt-0.5" />
+              <span className="text-sm sm:text-base text-gray-700">Flexible scheduling</span>
+            </div>
+            <div className="flex items-start gap-3 p-3 sm:p-4 bg-pink-50 rounded-xl border border-pink-100 shadow-sm hover:shadow-md transition-all duration-200">
+              <CheckCircle2 className="size-4 sm:size-5 text-pink-600 flex-shrink-0 mt-0.5" />
+              <span className="text-sm sm:text-base text-gray-700">Course materials and resources</span>
+            </div>
+            <div className="flex items-start gap-3 p-3 sm:p-4 bg-green-50 rounded-xl border border-green-100 shadow-sm hover:shadow-md transition-all duration-200">
+              <CheckCircle2 className="size-4 sm:size-5 text-green-600 flex-shrink-0 mt-0.5" />
+              <span className="text-sm sm:text-base text-gray-700">Certificate of completion</span>
+            </div>
+            <div className="flex items-start gap-3 p-3 sm:p-4 bg-amber-50 rounded-xl border border-amber-100 shadow-sm hover:shadow-md transition-all duration-200">
+              <CheckCircle2 className="size-4 sm:size-5 text-amber-600 flex-shrink-0 mt-0.5" />
+              <span className="text-sm sm:text-base text-gray-700">Lifetime access to course content</span>
             </div>
           </div>
         </div>
-      )}
+      </div>
 
       {/* Enrolled Success Message */}
       {enrolled && (
@@ -328,8 +269,4 @@ export default function CourseDetailsPage({ params }: { params: Promise<{ id: st
       )}
     </div>
   );
-
-  function formatPrice(price: number) {
-    return price === 0 ? 'Free' : `₹${price.toLocaleString()}`;
-  }
 }
