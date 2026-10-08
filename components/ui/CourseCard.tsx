@@ -36,9 +36,7 @@ export default function CourseCard({
     advanced: 'bg-[#FEE2E2] text-[#EC407A]',
   };
 
-  const formatPrice = (price: number) => {
-    return price === 0 ? 'Free' : `₹${price.toLocaleString()}`;
-  };
+  // Removed formatPrice function since we don't show prices to public users
 
   const formatDuration = (value: number, unit: string) => {
     return `${value} ${unit}${value > 1 ? '' : ''}`;
@@ -153,11 +151,7 @@ export default function CourseCard({
 
             {/* Price (Admin Only) */}
             <div className="flex items-center justify-between gap-2">
-              {userRole === 'admin' && (
-                <div className="text-lg sm:text-xl font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">
-                  {formatPrice(course.price)}
-                </div>
-              )}
+              {/* No pricing shown to public users - removed price display */}
             </div>
           </div>
         </div>

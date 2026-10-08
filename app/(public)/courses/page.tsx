@@ -48,9 +48,7 @@ export default function CoursesPage() {
     return () => clearTimeout(timer);
   }, [searchTerm, levelFilter, sortBy]);
 
-  const formatPrice = (price: number) => {
-    return price === 0 ? 'Free' : `₹${price.toLocaleString()}`;
-  };
+  // Removed formatPrice function since we're not showing prices
 
   const formatDuration = (value: number, unit: string) => {
     return `${value} ${unit}`;

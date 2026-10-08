@@ -152,9 +152,9 @@ function ResultsContent() {
                           </p>
                         </div>
                         <div className="flex items-center gap-3">
-                          <div className="inline-flex items-baseline gap-2 px-5 py-3 bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl border-2 border-green-200">
-                            <span className="text-3xl font-black bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">
-                              ₹{rec.course_price?.toLocaleString()}
+                          <div className="inline-flex items-baseline gap-2 px-5 py-3 bg-gradient-to-r from-purple-50 to-pink-50 rounded-xl border-2 border-purple-200">
+                            <span className="text-lg font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+                              Contact Admin for Enrollment
                             </span>
                           </div>
                         </div>

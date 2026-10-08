@@ -96,8 +96,8 @@ export default function RecommendationResults({ recommendations, onClose }: Reco
                     </p>
                   </div>
                   <div className="ml-4 text-right">
-                    <div className="text-2xl font-bold text-primary-600">
-                      ₹{recommendation.course_price}
+                    <div className="text-lg font-bold text-purple-600">
+                      Contact Admin
                     </div>
                     <div className="text-sm text-dark-500">{recommendation.course_level}</div>
                   </div>

@@ -30,10 +30,6 @@ export default function CoursesSection() {
     fetchCourses();
   }, []);
 
-  const formatPrice = (price: number) => {
-    return price === 0 ? 'Free' : `₹${price.toLocaleString()}`;
-  };
-
   const formatDuration = (value: number, unit: string) => {
     return `${value} ${unit}${value > 1 ? '' : ''}`;
   };
@@ -158,14 +154,9 @@ export default function CoursesSection() {
                         </div>
                       </div>
 
-                      {/* Price - Only show if authenticated */}
+                      {/* Action Button - No pricing displayed */}
                       <div className="flex items-center justify-between pt-2 border-t border-gray-100">
-                        {isAuthenticated && (
-                          <div className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">
-                            {formatPrice(course.price)}
-                          </div>
-                        )}
-                        <div className={`text-xs font-semibold text-purple-600 group-hover:text-pink-600 transition-colors flex items-center gap-1 ${!isAuthenticated ? 'ml-auto' : ''}`}>
+                        <div className="text-xs font-semibold text-purple-600 group-hover:text-pink-600 transition-colors flex items-center gap-1 ml-auto">
                           View Details
                           <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
                         </div>

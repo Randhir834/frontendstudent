@@ -86,19 +86,11 @@ export default function CourseFilters({
     { value: 'advanced', label: 'Advanced' }
   ];
 
-  const priceOptions = [
-    { value: '', label: 'All Prices' },
-    { value: 'free', label: 'Free' },
-    { value: '0-1000', label: '₹0 - ₹1,000' },
-    { value: '1000-5000', label: '₹1,000 - ₹5,000' },
-    { value: '5000-10000', label: '₹5,000 - ₹10,000' },
-    { value: '10000+', label: '₹10,000+' }
-  ];
+  // Removed priceOptions as prices are not shown to public users
 
   const sortOptions = [
     { value: 'created_at', label: 'Newest First' },
     { value: 'title', label: 'Title A-Z' },
-    { value: 'price', label: 'Price Low to High' },
     { value: 'enrollment_count', label: 'Most Popular' },
     { value: 'rating', label: 'Highest Rated' }
   ];
@@ -230,23 +222,7 @@ export default function CourseFilters({
               </div>
             )}
 
-            {/* Price Range Filter */}
-            <div>
-              <label className="block text-sm font-medium text-[#374151] mb-2">
-                Price Range
-              </label>
-              <select
-                value={localFilters.price_range || ''}
-                onChange={(e) => handleFilterChange('price_range', e.target.value)}
-                className="w-full px-3 py-2 border border-[#E0E0E0] rounded-lg text-sm focus:outline-none "
-              >
-                {priceOptions.map(option => (
-                  <option key={option.value} value={option.value}>
-                    {option.label}
-                  </option>
-                ))}
-              </select>
-            </div>
+            {/* Removed Price Range Filter as prices are not shown to public users */}
 
             {/* Instructor Filter (Admin only) */}
             {userRole === 'admin' && instructors.length > 0 && (

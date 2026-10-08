@@ -5,6 +5,11 @@ const nextConfig: NextConfig = {
   compress: true, // Enable gzip compression
   poweredByHeader: false, // Remove X-Powered-By header for security
   
+  // Disable turbopack to use webpack
+  experimental: {
+    // turbo: false // Disable turbopack explicitly if needed
+  },
+  
   // Image optimization
   images: {
     formats: ['image/avif', 'image/webp'],

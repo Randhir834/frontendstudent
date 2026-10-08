@@ -205,11 +205,7 @@ export default function GlobalSearch({ initialQuery = '', className = '' }: Glob
               ⏱️ {item.duration} minutes
             </p>
           )}
-          {item.price !== undefined && item.price !== null && (
-            <p className="text-xs font-semibold text-[#1E88E5] mt-1">
-              {item.price === 0 ? 'Free' : `₹${item.price}`}
-            </p>
-          )}
+          {/* No pricing shown in search results */}
         </div>
       </button>
     );

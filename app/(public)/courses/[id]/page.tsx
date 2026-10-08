@@ -54,9 +54,7 @@ export default function CourseDetailsPage({ params }: CourseDetailsPageProps) {
     fetchCourseDetails();
   }, [id]);
 
-  const formatPrice = (price: number) => {
-    return price === 0 ? 'Free' : `₹${price.toLocaleString()}`;
-  };
+  // Removed formatPrice function since we're not showing prices anymore
 
   const formatDuration = (value: number, unit: string) => {
     return `${value} ${unit}`;
@@ -68,18 +66,7 @@ export default function CourseDetailsPage({ params }: CourseDetailsPageProps) {
     window.location.href = `/#${sectionId}`;
   };
 
-  const handleBuyNow = () => {
-    // Check if user is logged in
-    const token = localStorage.getItem('token');
-    
-    if (!token) {
-      // Redirect to login with return URL
-      router.push(`/login?returnUrl=/courses/${id}`);
-    } else {
-      // Redirect to payment page
-      router.push(`/student/courses/${id}/enroll`);
-    }
-  };
+  // Removed handleBuyNow function since we're not showing buy button
 
   const toggleSection = (sectionId: number) => {
     setExpandedSection(expandedSection === sectionId ? null : sectionId);
@@ -274,36 +261,34 @@ export default function CourseDetailsPage({ params }: CourseDetailsPageProps) {
               </div>
             </div>
 
-            {/* Purchase Card - Full Width */}
+            {/* Contact Admin Section - Replaces Purchase Card */}
             <div className="bg-white rounded-lg p-6 sm:p-8 shadow-lg border border-gray-200">
-              <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
-                <div>
-                  <div className="text-4xl font-extrabold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent mb-2">
-                    {formatPrice(course.price)}
-                  </div>
-                  {course.price > 0 && (
-                    <div className="text-sm text-gray-600">One-time payment</div>
-                  )}
+              <div className="text-center">
+                <div className="text-2xl font-bold text-gray-900 mb-3">
+                  Interested in This Course?
                 </div>
-
-                <button
-                  onClick={handleBuyNow}
-                  className="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-purple-600 via-pink-600 to-orange-500 hover:from-purple-700 hover:via-pink-700 hover:to-orange-600 text-white font-bold rounded-lg transition-all hover:shadow-2xl hover:scale-105 text-lg"
+                <p className="text-gray-600 mb-6">
+                  Contact your administrator to enroll in this course and start your learning journey.
+                </p>
+                <Link 
+                  href="/#contact"
+                  className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-purple-600 via-pink-600 to-orange-500 hover:from-purple-700 hover:via-pink-700 hover:to-orange-600 text-white font-bold rounded-lg transition-all hover:shadow-2xl hover:scale-105 text-lg"
                 >
-                  {course.price === 0 ? 'Enroll for Free' : 'Buy Now'}
-                </button>
+                  <Users className="w-6 h-6" />
+                  Contact Admin
+                </Link>
               </div>
 
               <div className="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-4">
-                <div className="flex items-center gap-2 text-gray-700">
+                <div className="flex items-center gap-2 text-gray-700 justify-center sm:justify-start">
                   <CheckCircle className="w-5 h-5 text-green-500" />
                   <span>Lifetime access</span>
                 </div>
-                <div className="flex items-center gap-2 text-gray-700">
+                <div className="flex items-center gap-2 text-gray-700 justify-center sm:justify-start">
                   <CheckCircle className="w-5 h-5 text-green-500" />
                   <span>Certificate of completion</span>
                 </div>
-                <div className="flex items-center gap-2 text-gray-700">
+                <div className="flex items-center gap-2 text-gray-700 justify-center sm:justify-start">
                   <CheckCircle className="w-5 h-5 text-green-500" />
                   <span>Access on mobile and desktop</span>
                 </div>
