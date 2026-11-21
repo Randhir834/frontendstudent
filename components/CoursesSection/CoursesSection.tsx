@@ -96,13 +96,15 @@ export default function CoursesSection() {
                   {/* Thumbnail */}
                   <div className="relative overflow-hidden h-44 sm:h-48">
                     {course.thumbnail_url ? (
-                      <Image
-                        fill
-                        src={course.thumbnail_url}
-                        alt={`${course.title} - Online course for kids`}
-                        className="object-cover transition-transform duration-300 group-hover:scale-110"
-                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                      />
+                      <>
+                        <Image
+                          fill
+                          src={course.thumbnail_url}
+                          alt={`${course.title} - Online course for kids`}
+                          className="object-cover transition-transform duration-300 group-hover:scale-110"
+                          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                        />
+                      </>
                     ) : (
                       <div className="w-full h-full bg-gradient-to-br from-blue-100 via-purple-100 to-pink-100 flex items-center justify-center transition-all duration-300 group-hover:from-blue-200 group-hover:via-purple-200 group-hover:to-pink-200">
                         <BookOpen className="w-12 h-12 text-purple-400" />

@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
+import Image from 'next/image';
 import { BookOpen, Star, ArrowRight } from 'lucide-react';
 import type { Course } from '@/types';
 import Header from '@/components/layouts/Header';
@@ -78,15 +79,16 @@ export default async function CoursesPage() {
                   >
                     <article className="h-full flex flex-col bg-white rounded-2xl border border-gray-200 hover:border-purple-300 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 cursor-pointer overflow-hidden">
                       {/* Thumbnail */}
-                      <div className="relative overflow-hidden">
+                      <div className="relative overflow-hidden h-48">
                         {course.thumbnail_url ? (
-                          <img
+                          <Image
                             src={course.thumbnail_url}
                             alt={`${course.title} - Online course for kids`}
                             className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110"
-                            width="400"
-                            height="200"
+                            width={400}
+                            height={192}
                             loading="lazy"
+                            unoptimized={!course.thumbnail_url.includes('supabase')}
                           />
                         ) : (
                           <div className="w-full h-48 bg-gradient-to-br from-blue-100 via-purple-100 to-pink-100 flex items-center justify-center transition-all duration-300 group-hover:from-blue-200 group-hover:via-purple-200 group-hover:to-pink-200">

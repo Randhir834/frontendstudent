@@ -26,6 +26,7 @@ export default function Header() {
               height={160}
               className="h-7 sm:h-9 md:h-11 lg:h-13 xl:h-15 w-auto object-contain max-w-[100px] xs:max-w-[110px] sm:max-w-[130px] md:max-w-[160px] transition-transform hover:scale-105"
               priority
+              unoptimized={false}
             />
           </Link>
           
