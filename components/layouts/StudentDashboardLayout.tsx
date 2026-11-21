@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
 import {
   Home, BookOpen, Award, Compass,
@@ -114,10 +115,13 @@ export default function StudentDashboardLayout({ children }: StudentDashboardLay
         {/* Logo with gradient background */}
         <div className="relative border-b border-gray-200 lg:border-none flex items-center justify-center px-3 xs:px-4 py-4 xs:py-5 sm:py-6 shrink-0 bg-gradient-to-r from-indigo-600 to-purple-600 lg:bg-none">
           <div className="relative flex items-center justify-center shrink-0 transition-all duration-300 w-full h-12 xs:h-14 sm:h-16 lg:h-16 xl:h-20">
-            <img
+            <Image
               src="/logo.jpg"
               alt="PlayFit"
+              width={160}
+              height={160}
               className="w-full h-full object-contain max-w-full max-h-full filter lg:filter-none brightness-0 invert lg:brightness-100 lg:invert-0"
+              priority
             />
           </div>
           <button
@@ -172,12 +176,16 @@ export default function StudentDashboardLayout({ children }: StudentDashboardLay
           {/* Bottom Image Section */}
           <div className="mt-4 xs:mt-5 sm:mt-6 px-1 xs:px-2">
             <div className="relative rounded-2xl overflow-hidden shadow-lg group hover:shadow-xl transition-shadow">
-              <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent group-hover:from-black/30 transition-colors"></div>
-              <img
-                src="/images/navbarstudentdown.png"
-                alt="Student Success"
-                className="w-full h-auto object-contain"
-              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent group-hover:from-black/30 transition-colors z-10"></div>
+              <div className="relative w-full aspect-[4/3]">
+                <Image
+                  src="/images/navbarstudentdown.webp"
+                  alt="Student Success"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 288px, 256px"
+                />
+              </div>
             </div>
           </div>
         </div>
