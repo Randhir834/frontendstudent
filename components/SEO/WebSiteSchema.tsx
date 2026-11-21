@@ -1,29 +1,24 @@
 'use client';
 
+import { ORGANIZATION } from '@/lib/structuredData';
+
 /**
- * Website Schema with SearchAction for Google Search Box
+ * Website Schema
+ * Removed SearchAction that pointed to /student/search (not public)
  */
 export default function WebSiteSchema() {
   const schema = {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    "name": "PlayFit Classes",
-    "alternateName": ["PlayFit", "Playfit Classes"],
-    "url": "https://playfitclasses.com",
-    "potentialAction": {
-      "@type": "SearchAction",
-      "target": {
-        "@type": "EntryPoint",
-        "urlTemplate": "https://playfitclasses.com/student/search?q={search_term_string}"
-      },
-      "query-input": "required name=search_term_string"
-    },
+    "name": ORGANIZATION.name,
+    "alternateName": ORGANIZATION.alternateName,
+    "url": ORGANIZATION.url,
     "publisher": {
       "@type": "Organization",
-      "name": "PlayFit Classes",
+      "name": ORGANIZATION.name,
       "logo": {
         "@type": "ImageObject",
-        "url": "https://playfitclasses.com/logo.jpg"
+        "url": ORGANIZATION.logo
       }
     }
   };

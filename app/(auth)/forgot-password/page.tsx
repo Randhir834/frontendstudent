@@ -171,12 +171,12 @@ export default function ForgotPasswordPage() {
           </div>
 
           <div className="text-center mb-6 xs:mb-7 sm:mb-8">
-            <h2 className="text-xl xs:text-2xl sm:text-3xl font-bold bg-gradient-to-r from-cyan-600 via-blue-600 to-cyan-600 bg-clip-text text-transparent mb-2 pb-1 leading-tight">
+            <h1 className="text-xl xs:text-2xl sm:text-3xl font-bold bg-gradient-to-r from-cyan-600 via-blue-600 to-cyan-600 bg-clip-text text-transparent mb-2 pb-1 leading-tight">
               {step === 'email' && 'Reset Password'}
               {step === 'otp' && 'Verify Code'}
               {step === 'password' && 'Create New Password'}
               {step === 'success' && 'Password Reset'}
-            </h2>
+            </h1>
             <p className="text-xs xs:text-sm text-gray-600">
               {step === 'email' && 'Enter your email address to receive a verification code.'}
               {step === 'otp' && `Enter the 4-digit code sent to ${email}`}

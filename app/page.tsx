@@ -3,12 +3,14 @@
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Head from 'next/head';
+import Image from 'next/image';
 import { ArrowRight, CheckCircle, BookOpen, Users, Trophy, Star, Menu, X, Award, TrendingUp, Mail, Phone, Sparkles, Zap, Heart, Target } from 'lucide-react';
 import { contactService } from '@/services/contactService';
 import CourseRecommendationSection from '@/components/CourseRecommendation/CourseRecommendationSection';
 import CoursesSection from '@/components/CoursesSection/CoursesSection';
 import WriteReview from '@/components/WriteReview';
 import ReviewsSection from '@/components/ReviewsSection';
+import { SITE_CONFIG, getMailtoLink, getPhoneLink } from '@/lib/siteConfig';
 
 export default function Home() {
   const [formData, setFormData] = useState({ 
@@ -183,10 +185,13 @@ export default function Home() {
         <div className="w-full px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
           <div className="flex justify-between items-center h-16 lg:h-20">
             <Link href="/" className="flex items-center flex-shrink-0 transition-opacity hover:opacity-80">
-              <img
+              <Image
                 src="/logo.jpg"
-                alt="Playfit"
+                alt="PlayFit - Online Classes for Kids"
+                width={80}
+                height={80}
                 className="h-12 sm:h-14 lg:h-16 w-auto object-contain"
+                priority
               />
             </Link>
             
@@ -298,6 +303,8 @@ export default function Home() {
         )}
       </header>
 
+      {/* Main Content */}
+      <main>
       {/* Fixed Responsive Hero Section */}
       <section className="relative overflow-hidden pt-16 pb-20 lg:pt-24 lg:pb-28 bg-gradient-to-br from-gray-50 via-blue-50/30 to-purple-50/30">
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -311,19 +318,21 @@ export default function Home() {
             <div className="space-y-8 lg:space-y-10">
               <div className="inline-flex items-center gap-2.5 px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full shadow-lg shadow-blue-500/20">
                 <Star className="w-4 h-4 text-yellow-300 fill-yellow-300 flex-shrink-0" />
-                <span className="text-sm font-semibold text-white">Trusted by 5,000+ Students</span>
+                <span className="text-sm font-semibold text-white">Trusted by {SITE_CONFIG.stats.students} Students</span>
               </div>
 
               <div className="space-y-6">
                 <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-gray-900 leading-[1.15] tracking-tight pb-2">
-                  Transform Your{' '}
                   <span className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 pb-1">
-                    Learning Journey
+                    {SITE_CONFIG.business.tagline}
+                  </span>
+                  <span className="block text-gray-900 mt-2">
+                    Phonics, Public Speaking, Grammar & More
                   </span>
                 </h1>
 
                 <p className="text-lg sm:text-xl lg:text-2xl text-gray-600 leading-relaxed font-normal max-w-2xl">
-                  Interactive <span className="text-blue-600 font-semibold">live classes</span> in Art, Chess, Piano, Public Speaking, and more. Designed for students passionate about learning.
+                  Interactive <span className="text-blue-600 font-semibold">live classes</span> for kids aged {SITE_CONFIG.audience.ageDisplay} in {SITE_CONFIG.courses.featured.slice(0, 3).join(', ')}, and more. Expert instructors, flexible scheduling.
                 </p>
               </div>
 
@@ -362,8 +371,10 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Right Content - Fixed Feature Cards */}
-            <div className="grid grid-cols-2 gap-4 sm:gap-5 lg:gap-6">
+            {/* Right Content - Feature Cards */}
+            <div className="space-y-4 sm:space-y-5">
+              <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">Why Choose PlayFit</h2>
+              <div className="grid grid-cols-2 gap-4 sm:gap-5 lg:gap-6">
               {[
                 { icon: Users, title: "Live Classes", desc: "Interactive sessions with expert instructors", color: "from-blue-500 to-blue-600", badge: "Live Now", badgeIcon: "pulse" },
                 { icon: Sparkles, title: "AI Learning", desc: "Personalized recommendations for every student", color: "from-purple-500 to-purple-600", badge: "Smart", badgeIcon: "sparkle" },
@@ -388,6 +399,7 @@ export default function Home() {
                 </div>
               ))}
             </div>
+            </div>
           </div>
         </div>
       </section>
@@ -409,7 +421,7 @@ export default function Home() {
               <span className="text-sm font-bold text-white whitespace-nowrap">Trusted Worldwide</span>
             </div>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-extrabold text-white mb-4 sm:mb-5 lg:mb-6 leading-tight px-4">
-              Join The Learning
+              Join the Learning
               <span className="block bg-gradient-to-r from-yellow-300 via-pink-300 to-purple-300 bg-clip-text text-transparent pb-2 leading-[1.15]">
                 Revolution
               </span>
@@ -467,7 +479,7 @@ export default function Home() {
                   {/* Icon with Premium Background */}
                   <div className="relative mb-3 sm:mb-4 lg:mb-6">
                     <div className={`inline-flex w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 items-center justify-center rounded-xl sm:rounded-2xl bg-gradient-to-br ${stat.iconBg} shadow-lg transform group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 flex-shrink-0`}>
-                      <span className="text-2xl sm:text-3xl lg:text-4xl filter drop-shadow-lg">{stat.icon}</span>
+                      <span className="text-2xl sm:text-3xl lg:text-4xl filter drop-shadow-lg" aria-hidden="true">{stat.icon}</span>
                     </div>
                   </div>
                   
@@ -627,7 +639,7 @@ export default function Home() {
                     {/* Icon Badge */}
                     <div className="mb-5 sm:mb-6">
                       <div className={`inline-flex w-20 h-20 sm:w-22 sm:h-22 lg:w-24 lg:h-24 items-center justify-center rounded-2xl sm:rounded-3xl bg-gradient-to-br ${course.gradient} shadow-2xl transform group-hover:scale-110 group-hover:rotate-12 transition-all duration-500 flex-shrink-0`}>
-                        <span className="text-4xl sm:text-5xl filter drop-shadow-xl">{course.icon}</span>
+                        <span className="text-4xl sm:text-5xl filter drop-shadow-xl" aria-hidden="true">{course.icon}</span>
                       </div>
                     </div>
                     
@@ -786,7 +798,7 @@ export default function Home() {
                 { icon: "❤️", number: "5K+", label: "Satisfied Families" }
               ].map((stat, i) => (
                 <div key={i} className="text-center">
-                  <div className="text-3xl sm:text-4xl mb-2">{stat.icon}</div>
+                  <div className="text-3xl sm:text-4xl mb-2" aria-hidden="true">{stat.icon}</div>
                   <div className="text-xl sm:text-2xl font-bold text-gray-900 mb-1">{stat.number}</div>
                   <div className="text-xs sm:text-sm text-gray-600">{stat.label}</div>
                 </div>
@@ -848,9 +860,11 @@ export default function Home() {
                 <div className="bg-white rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-10 shadow-xl hover:shadow-2xl transition-all duration-300 border-2 border-white hover:border-purple-200">
                   <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4 mb-5 sm:mb-6">
                     <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-xl sm:rounded-2xl overflow-hidden shadow-lg ring-4 ring-purple-100 flex-shrink-0">
-                      <img
+                      <Image
+                        width={96}
+                        height={96}
                         src="/images/puja.jpg"
-                        alt="Puja Agarwal"
+                        alt="Puja Agarwal - Phonics and Public Speaking Instructor"
                         className="w-full h-full object-cover"
                       />
                     </div>
@@ -871,9 +885,11 @@ export default function Home() {
                 <div className="bg-white rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-10 shadow-xl hover:shadow-2xl transition-all duration-300 border-2 border-white hover:border-blue-200">
                   <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4 mb-5 sm:mb-6">
                     <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-xl sm:rounded-2xl overflow-hidden shadow-lg ring-4 ring-blue-100 flex-shrink-0">
-                      <img
+                      <Image
+                        width={96}
+                        height={96}
                         src="/images/sonika.jpg"
-                        alt="Sonika Goel"
+                        alt="Sonika Goel - Art and Creative Skills Instructor"
                         className="w-full h-full object-cover"
                       />
                     </div>
@@ -895,7 +911,7 @@ export default function Home() {
             {/* Why Parents Trust Us - Benefits Grid - Fully Responsive */}
             <div>
               <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-center text-gray-900 mb-10 sm:mb-12 lg:mb-16 px-4">
-                Why 10,000+ Parents Choose Us
+                Why {SITE_CONFIG.stats.students} Parents Choose Us
               </h3>
 
               <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7 lg:gap-8">
@@ -1079,18 +1095,18 @@ export default function Home() {
                       className="w-full px-4 sm:px-5 py-3 sm:py-4 text-sm sm:text-base border-2 border-gray-200 rounded-xl sm:rounded-2xl focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition"
                     >
                       <option value="">Select a course</option>
-                      <option value="art">🎨 Art & Drawing</option>
-                      <option value="chess">♟️ Chess</option>
-                      <option value="piano">🎹 Piano</option>
-                      <option value="phonics">🅰️ Phonics</option>
-                      <option value="speaking">🎤 Public Speaking</option>
-                      <option value="abacus">🧮 Abacus</option>
-                      <option value="readers">📚 Reader's Club</option>
-                      <option value="toastmaster">🗣️ Toastmaster</option>
-                      <option value="sholak">🎯 Sholak</option>
-                      <option value="computers">💻 Computers</option>
-                      <option value="rubiks">🧩 Rubik's Cube</option>
-                      <option value="ai">🤖 AI & Machine Learning</option>
+                      <option value="art">Art & Drawing</option>
+                      <option value="chess">Chess</option>
+                      <option value="piano">Piano</option>
+                      <option value="phonics">Phonics</option>
+                      <option value="speaking">Public Speaking</option>
+                      <option value="abacus">Abacus</option>
+                      <option value="readers">Reader's Club</option>
+                      <option value="toastmaster">Toastmaster</option>
+                      <option value="sholak">Sholak</option>
+                      <option value="computers">Computers</option>
+                      <option value="rubiks">Rubik's Cube</option>
+                      <option value="ai">AI & Machine Learning</option>
                     </select>
                   </div>
 
@@ -1121,7 +1137,7 @@ export default function Home() {
                       </span>
                     ) : (
                       <span className="flex items-center justify-center gap-2.5">
-                        🎉 Book My FREE Trial Class
+                        <span aria-hidden="true">🎉</span> Book My FREE Trial Class
                         <ArrowRight className="w-5 sm:w-6 h-5 sm:h-6 flex-shrink-0" />
                       </span>
                     )}
@@ -1149,7 +1165,7 @@ export default function Home() {
             {/* Additional Trust Elements */}
             <div className="mt-10 sm:mt-12 text-center">
               <p className="text-white/90 text-base sm:text-lg mb-6 px-4">
-                <strong>Join 10,000+ happy families</strong> who trust Playfit for their child's skill development
+                <strong>Join {SITE_CONFIG.stats.students} happy families</strong> who trust {SITE_CONFIG.business.name} for their child's skill development
               </p>
             </div>
           </div>
@@ -1188,8 +1204,8 @@ export default function Home() {
                   <Phone className="w-7 h-7 sm:w-8 sm:h-8 text-white flex-shrink-0" />
                 </div>
                 <h3 className="text-lg sm:text-xl font-bold mb-2 sm:mb-3">Phone</h3>
-                <a href="tel:+918910484299" className="text-gray-300 hover:text-green-400 transition-colors text-base sm:text-lg break-words">
-                  +91 8910484299
+                <a href={getPhoneLink()} className="text-gray-300 hover:text-green-400 transition-colors text-base sm:text-lg break-words">
+                  {SITE_CONFIG.contact.phoneDisplay}
                 </a>
               </div>
 
@@ -1199,8 +1215,8 @@ export default function Home() {
                   <Mail className="w-7 h-7 sm:w-8 sm:h-8 text-white flex-shrink-0" />
                 </div>
                 <h3 className="text-lg sm:text-xl font-bold mb-2 sm:mb-3">Email</h3>
-                <a href="mailto:cplayfit@gmail.com" className="text-gray-300 hover:text-blue-400 transition-colors text-base sm:text-lg break-all">
-                  cplayfit@gmail.com
+                <a href={getMailtoLink()} className="text-gray-300 hover:text-blue-400 transition-colors text-base sm:text-lg break-all">
+                  {SITE_CONFIG.contact.email}
                 </a>
               </div>
 
@@ -1211,9 +1227,9 @@ export default function Home() {
                 </div>
                 <h3 className="text-lg sm:text-xl font-bold mb-2 sm:mb-3">Visit Us</h3>
                 <p className="text-gray-300 text-sm sm:text-base leading-relaxed">
-                  18, Rabindra Sarani, Terita Bazar<br />
-                  Poddar Court, 4th floor, Tiretti<br />
-                  Kolkata, West Bengal 700012
+                  {SITE_CONFIG.address.street}<br />
+                  {SITE_CONFIG.address.street2}<br />
+                  {SITE_CONFIG.address.city}, {SITE_CONFIG.address.state} {SITE_CONFIG.address.postalCode}
                 </p>
               </div>
             </div>
@@ -1248,6 +1264,8 @@ export default function Home() {
         </div>
       </section>
 
+      </main>
+
       {/* Footer - Fully Responsive */}
       <footer className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white py-10 sm:py-12 lg:py-16 safe-bottom relative overflow-hidden">
         {/* Decorative Background Elements */}
@@ -1260,9 +1278,11 @@ export default function Home() {
               {/* Brand Section */}
               <div className="text-center sm:text-left">
                 <Link href="/" className="inline-block mb-4 sm:mb-5">
-                  <img
+                  <Image
+                    width={100}
+                    height={100}
                     src="/logo.jpg"
-                    alt="Playfit"
+                    alt="PlayFit - Online Classes for Kids"
                     className="h-12 sm:h-14 lg:h-16 w-auto object-contain mx-auto sm:mx-0"
                   />
                 </Link>
@@ -1297,7 +1317,7 @@ export default function Home() {
                   <li><Link href="#contact" className="text-xs sm:text-sm text-gray-300 hover:text-blue-400 transition-colors block py-1 hover:translate-x-1 transition-transform inline-block">Contact Us</Link></li>
                   <li><Link href="#trial" className="text-xs sm:text-sm text-gray-300 hover:text-pink-400 transition-colors block py-1 hover:translate-x-1 transition-transform inline-block">Free Trial</Link></li>
                   <li><Link href="/login" className="text-xs sm:text-sm text-gray-300 hover:text-green-400 transition-colors block py-1 hover:translate-x-1 transition-transform inline-block">Student Login</Link></li>
-                  <li><a href="#" className="text-xs sm:text-sm text-gray-300 hover:text-amber-400 transition-colors block py-1 hover:translate-x-1 transition-transform inline-block">Help Center</a></li>
+                  <li><a href="/#contact" className="text-xs sm:text-sm text-gray-300 hover:text-amber-400 transition-colors block py-1 hover:translate-x-1 transition-transform inline-block">Help Center</a></li>
                 </ul>
               </div>
 
@@ -1310,11 +1330,11 @@ export default function Home() {
                 <ul className="space-y-3 sm:space-y-3.5">
                   <li className="flex items-start gap-2 text-xs sm:text-sm text-gray-300 group justify-center sm:justify-start">
                     <Mail className="w-4 h-4 flex-shrink-0 mt-0.5 group-hover:text-blue-400 transition-colors" />
-                    <a href="mailto:cplayfit@gmail.com" className="break-all group-hover:text-blue-400 transition-colors">cplayfit@gmail.com</a>
+                    <a href={getMailtoLink()} className="break-all group-hover:text-blue-400 transition-colors">{SITE_CONFIG.contact.email}</a>
                   </li>
                   <li className="flex items-center gap-2 text-xs sm:text-sm text-gray-300 group justify-center sm:justify-start">
                     <Phone className="w-4 h-4 flex-shrink-0 group-hover:text-green-400 transition-colors" />
-                    <a href="tel:+918910484299" className="group-hover:text-green-400 transition-colors">+91 8910484299</a>
+                    <a href={getPhoneLink()} className="group-hover:text-green-400 transition-colors">{SITE_CONFIG.contact.phoneDisplay}</a>
                   </li>
                 </ul>
                 

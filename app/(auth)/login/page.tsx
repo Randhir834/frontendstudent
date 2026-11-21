@@ -136,9 +136,9 @@ function LoginForm() {
         
         <div className="relative">
           <div className="text-center mb-6 xs:mb-7 sm:mb-8">
-            <h2 className="text-xl xs:text-2xl sm:text-3xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent mb-2 pb-1 leading-tight">
+            <h1 className="text-xl xs:text-2xl sm:text-3xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent mb-2 pb-1 leading-tight">
               Student Login
-            </h2>
+            </h1>
             <p className="text-xs xs:text-sm text-gray-600">Enter your details to access your account</p>
           </div>
 

@@ -1,20 +1,26 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Student Login | Playfit Classes - Access Your Learning Dashboard',
-  description: 'Login to your Playfit Classes student account. Access live online courses, track your progress, and continue your learning journey in Art, Chess, Piano, and more.',
-  keywords: ['student login', 'Playfit login', 'online learning login', 'student portal', 'learning dashboard'],
+  title: 'Student Login – Access Your Learning Dashboard',
+  description: 'Login to your PlayFit student account. Access live courses, track progress, and continue learning Phonics, Art, Chess, Piano, and more.',
   openGraph: {
-    title: 'Student Login | Playfit Classes',
-    description: 'Login to access your courses and learning materials',
+    title: 'Student Login – Access Your Learning Dashboard | PlayFit',
+    description: 'Login to access your courses, track progress, and continue your learning journey with PlayFit Classes.',
     url: 'https://playfitclasses.com/login',
     type: 'website',
+    images: ['/logo.jpg'],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Student Login – Access Your Learning Dashboard | PlayFit',
+    description: 'Login to access your courses and learning materials.',
+    images: ['/logo.jpg'],
   },
   alternates: {
-    canonical: 'https://playfitclasses.com/login',
+    canonical: '/login',
   },
   robots: {
-    index: false, // Login pages should not be indexed
+    index: false, // Don't index login page
     follow: true,
   },
 };

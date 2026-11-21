@@ -1,33 +1,26 @@
-// Google Analytics event tracking utilities
+/**
+ * Google Analytics 4 (GA4) Implementation
+ * Add your GA4 Measurement ID to environment variables
+ */
 
-// Declare gtag function for TypeScript
-declare global {
-  interface Window {
-    gtag?: (
-      command: 'config' | 'event' | 'js' | 'set',
-      targetId: string | Date,
-      config?: Record<string, unknown>
-    ) => void;
-    dataLayer?: unknown[];
-  }
-}
+export const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || '';
 
 // Track page views
-export const trackPageView = (url: string) => {
+export const pageview = (url: string) => {
   if (typeof window !== 'undefined' && window.gtag) {
-    window.gtag('config', 'G-00P3F888CW', {
+    window.gtag('config', GA_MEASUREMENT_ID, {
       page_path: url,
     });
   }
 };
 
 // Track custom events
-export const trackEvent = (
-  action: string,
-  category: string,
-  label?: string,
-  value?: number
-) => {
+export const event = ({ action, category, label, value }: {
+  action: string;
+  category: string;
+  label?: string;
+  value?: number;
+}) => {
   if (typeof window !== 'undefined' && window.gtag) {
     window.gtag('event', action, {
       event_category: category,
@@ -37,52 +30,129 @@ export const trackEvent = (
   }
 };
 
-// Track form submissions
+// Pre-defined event tracking functions
+export const trackCourseView = (courseId: string, courseName: string) => {
+  event({
+    action: 'view_course',
+    category: 'engagement',
+    label: `${courseId} - ${courseName}`,
+  });
+};
+
+export const trackEnrollment = (courseId: string, courseName: string, price: number) => {
+  event({
+    action: 'begin_checkout',
+    category: 'ecommerce',
+    label: `${courseId} - ${courseName}`,
+    value: price,
+  });
+};
+
+export const trackTrialRequest = (courseId: string, courseName: string) => {
+  event({
+    action: 'request_trial',
+    category: 'lead_generation',
+    label: `${courseId} - ${courseName}`,
+  });
+};
+
+export const trackVideoPlay = (courseId: string, videoTitle: string) => {
+  event({
+    action: 'play_video',
+    category: 'engagement',
+    label: `${courseId} - ${videoTitle}`,
+  });
+};
+
+export const trackSearch = (searchTerm: string, resultCount: number) => {
+  event({
+    action: 'search',
+    category: 'engagement',
+    label: searchTerm,
+    value: resultCount,
+  });
+};
+
 export const trackFormSubmission = (formName: string) => {
-  trackEvent('form_submission', 'engagement', formName);
+  event({
+    action: 'submit_form',
+    category: 'lead_generation',
+    label: formName,
+  });
 };
 
-// Track button clicks
-export const trackButtonClick = (buttonName: string) => {
-  trackEvent('button_click', 'engagement', buttonName);
+export const trackDownload = (resourceName: string) => {
+  event({
+    action: 'download',
+    category: 'engagement',
+    label: resourceName,
+  });
 };
 
-// Track course interest
-export const trackCourseInterest = (courseName: string) => {
-  trackEvent('course_interest', 'courses', courseName);
+export const trackOutboundLink = (url: string) => {
+  event({
+    action: 'click_outbound_link',
+    category: 'engagement',
+    label: url,
+  });
 };
 
-// Track trial booking
-export const trackTrialBooking = (courseName: string) => {
-  trackEvent('trial_booking', 'conversions', courseName);
+export const trackLessonComplete = (courseId: string, lessonId: string) => {
+  event({
+    action: 'complete_lesson',
+    category: 'engagement',
+    label: `${courseId} - ${lessonId}`,
+  });
 };
 
-// Track enrollment
-export const trackEnrollment = (courseName: string, price: number) => {
-  trackEvent('enrollment', 'conversions', courseName, price);
+export const trackPurchaseComplete = (
+  courseId: string,
+  courseName: string,
+  price: number,
+  transactionId: string
+) => {
+  if (typeof window !== 'undefined' && window.gtag) {
+    window.gtag('event', 'purchase', {
+      transaction_id: transactionId,
+      value: price,
+      currency: 'INR',
+      items: [
+        {
+          item_id: courseId,
+          item_name: courseName,
+          price: price,
+          quantity: 1,
+        },
+      ],
+    });
+  }
 };
 
-// Track user login
-export const trackLogin = (method: string) => {
-  trackEvent('login', 'user_engagement', method);
+// Enhanced ecommerce tracking
+export const trackAddToCart = (courseId: string, courseName: string, price: number) => {
+  if (typeof window !== 'undefined' && window.gtag) {
+    window.gtag('event', 'add_to_cart', {
+      currency: 'INR',
+      value: price,
+      items: [
+        {
+          item_id: courseId,
+          item_name: courseName,
+          price: price,
+          quantity: 1,
+        },
+      ],
+    });
+  }
 };
 
-// Track user signup
-export const trackSignup = (method: string) => {
-  trackEvent('sign_up', 'user_engagement', method);
-};
-
-// Track search
-export const trackSearch = (searchTerm: string) => {
-  trackEvent('search', 'engagement', searchTerm);
-};
-
-// Track video play
-export const trackVideoPlay = (videoTitle: string) => {
-  trackEvent('video_play', 'engagement', videoTitle);
-};
-
-// Track download
-export const trackDownload = (fileName: string) => {
-  trackEvent('file_download', 'engagement', fileName);
-};
+// Declare gtag types
+declare global {
+  interface Window {
+    gtag: (
+      command: 'config' | 'event',
+      targetId: string,
+      config?: any
+    ) => void;
+  }
+}

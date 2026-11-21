@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { ArrowLeft, FileText, CheckCircle, XCircle, AlertTriangle, Scale } from 'lucide-react';
+import { SITE_CONFIG, getMailtoLink, getPhoneLink } from '@/lib/siteConfig';
 
 export default function TermsOfServicePage() {
   return (
@@ -228,7 +229,7 @@ export default function TermsOfServicePage() {
             <div className="bg-gray-50 rounded-xl p-4">
               <h4 className="font-bold text-gray-900 mb-2">💰 Full Course Refunds</h4>
               <p className="text-gray-700 text-sm">
-                Refunds may be granted within <strong>7 days of purchase</strong> if you have attended fewer than <strong>2 classes</strong>. Refund requests must be submitted via email to <a href="mailto:cplayfit@gmail.com" className="text-blue-600 hover:underline">cplayfit@gmail.com</a>.
+                Refunds may be granted within <strong>7 days of purchase</strong> if you have attended fewer than <strong>2 classes</strong>. Refund requests must be submitted via email to <a href={getMailtoLink()} className="text-blue-600 hover:underline">{SITE_CONFIG.contact.email}</a>.
               </p>
             </div>
 
@@ -419,8 +420,8 @@ export default function TermsOfServicePage() {
               </div>
               <div>
                 <p className="font-semibold">Email</p>
-                <a href="mailto:cplayfit@gmail.com" className="text-purple-200 hover:text-white hover:underline">
-                  cplayfit@gmail.com
+                <a href={getMailtoLink()} className="text-purple-200 hover:text-white hover:underline">
+                  {SITE_CONFIG.contact.email}
                 </a>
               </div>
             </div>
@@ -431,8 +432,8 @@ export default function TermsOfServicePage() {
               </div>
               <div>
                 <p className="font-semibold">Phone</p>
-                <a href="tel:+918910484299" className="text-purple-200 hover:text-white hover:underline">
-                  +91 8910484299
+                <a href={getPhoneLink()} className="text-purple-200 hover:text-white hover:underline">
+                  {SITE_CONFIG.contact.phoneDisplay}
                 </a>
               </div>
             </div>
@@ -444,9 +445,9 @@ export default function TermsOfServicePage() {
               <div>
                 <p className="font-semibold">Address</p>
                 <p className="text-purple-200">
-                  18, Rabindra Sarani, Terita Bazar<br />
-                  Poddar Court, 4th floor, Tiretti<br />
-                  Kolkata, West Bengal 700012
+                  {SITE_CONFIG.address.street}<br />
+                  {SITE_CONFIG.address.street2}<br />
+                  {SITE_CONFIG.address.city}, {SITE_CONFIG.address.state} {SITE_CONFIG.address.postalCode}
                 </p>
               </div>
             </div>

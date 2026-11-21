@@ -130,6 +130,16 @@ export default function CourseFinderPage() {
       <section className="py-12 sm:py-16 md:py-20 bg-white">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           
+          {/* Page Header with H1 */}
+          <div className="text-center mb-8 sm:mb-12">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+              Find the Perfect Course for Your Child
+            </h1>
+            <p className="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto">
+              Answer a few questions to get personalized course recommendations tailored to your child's age, interests, and learning goals.
+            </p>
+          </div>
+          
           {/* Error Message */}
           {error && (
             <div className="mb-6 sm:mb-8 p-4 sm:p-6 bg-red-50 border-2 border-red-200 rounded-lg">

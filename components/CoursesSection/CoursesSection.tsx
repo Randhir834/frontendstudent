@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { BookOpen, Clock, Users, Star, ArrowRight } from 'lucide-react';
 import { courseService } from '@/services/courseService';
 import { useAuth } from '@/hooks/useAuth';
@@ -87,20 +88,23 @@ export default function CoursesSection() {
             return (
               <Link 
                 key={course.id} 
-                href={`/courses/${course.id}`}
+                href={`/course/${course.id}`}
                 className="group"
+                aria-label={`Explore ${course.title} classes for kids`}
               >
                 <div className="h-full flex flex-col bg-white rounded-2xl border border-gray-200 hover:border-purple-300 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 cursor-pointer overflow-hidden">
                   {/* Thumbnail */}
-                  <div className="relative overflow-hidden">
+                  <div className="relative overflow-hidden h-44 sm:h-48">
                     {course.thumbnail_url ? (
-                      <img
+                      <Image
+                        fill
                         src={course.thumbnail_url}
-                        alt={course.title}
-                        className="w-full h-44 sm:h-48 object-cover transition-transform duration-300 group-hover:scale-110"
+                        alt={`${course.title} - Online course for kids`}
+                        className="object-cover transition-transform duration-300 group-hover:scale-110"
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                       />
                     ) : (
-                      <div className="w-full h-44 sm:h-48 bg-gradient-to-br from-blue-100 via-purple-100 to-pink-100 flex items-center justify-center transition-all duration-300 group-hover:from-blue-200 group-hover:via-purple-200 group-hover:to-pink-200">
+                      <div className="w-full h-full bg-gradient-to-br from-blue-100 via-purple-100 to-pink-100 flex items-center justify-center transition-all duration-300 group-hover:from-blue-200 group-hover:via-purple-200 group-hover:to-pink-200">
                         <BookOpen className="w-12 h-12 text-purple-400" />
                       </div>
                     )}
@@ -154,10 +158,10 @@ export default function CoursesSection() {
                         </div>
                       </div>
 
-                      {/* Action Button - No pricing displayed */}
+                      {/* Action Button */}
                       <div className="flex items-center justify-between pt-2 border-t border-gray-100">
                         <div className="text-xs font-semibold text-purple-600 group-hover:text-pink-600 transition-colors flex items-center gap-1 ml-auto">
-                          View Details
+                          Explore {course.title} Classes
                           <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
                         </div>
                       </div>

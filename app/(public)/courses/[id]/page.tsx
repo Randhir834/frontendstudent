@@ -261,36 +261,36 @@ export default function CourseDetailsPage({ params }: CourseDetailsPageProps) {
               </div>
             </div>
 
-            {/* Contact Admin Section - Replaces Purchase Card */}
+            {/* Book Free Trial Section - Replaces Purchase Card */}
             <div className="bg-white rounded-lg p-6 sm:p-8 shadow-lg border border-gray-200">
               <div className="text-center">
                 <div className="text-2xl font-bold text-gray-900 mb-3">
-                  Interested in This Course?
+                  Ready to Get Started?
                 </div>
                 <p className="text-gray-600 mb-6">
-                  Contact your administrator to enroll in this course and start your learning journey.
+                  Book a free trial class and experience our interactive learning firsthand!
                 </p>
                 <Link 
-                  href="/#contact"
+                  href="/#trial"
                   className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-purple-600 via-pink-600 to-orange-500 hover:from-purple-700 hover:via-pink-700 hover:to-orange-600 text-white font-bold rounded-lg transition-all hover:shadow-2xl hover:scale-105 text-lg"
                 >
                   <Users className="w-6 h-6" />
-                  Contact Admin
+                  Book a Free Trial
                 </Link>
               </div>
 
               <div className="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <div className="flex items-center gap-2 text-gray-700 justify-center sm:justify-start">
                   <CheckCircle className="w-5 h-5 text-green-500" />
-                  <span>Lifetime access</span>
+                  <span>Expert Instructors</span>
                 </div>
                 <div className="flex items-center gap-2 text-gray-700 justify-center sm:justify-start">
                   <CheckCircle className="w-5 h-5 text-green-500" />
-                  <span>Certificate of completion</span>
+                  <span>Interactive Learning</span>
                 </div>
                 <div className="flex items-center gap-2 text-gray-700 justify-center sm:justify-start">
                   <CheckCircle className="w-5 h-5 text-green-500" />
-                  <span>Access on mobile and desktop</span>
+                  <span>Small Class Sizes</span>
                 </div>
               </div>
             </div>

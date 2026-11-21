@@ -1,28 +1,25 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
 import { ArrowRight, Award, Users, Globe, Heart, Target, Sparkles } from 'lucide-react';
+import { SITE_CONFIG } from '@/lib/siteConfig';
 
 export const metadata: Metadata = {
-  title: 'About PlayFit Classes - Leading Online Learning Platform for Kids',
-  description: 'Learn about PlayFit Classes, the trusted online education platform for children aged 8-18. Discover our mission, expert instructors, and how we help 10,000+ students master new skills through live interactive courses.',
-  keywords: [
-    'about PlayFit',
-    'PlayFit Classes about us',
-    'online learning platform for kids',
-    'who is PlayFit',
-    'PlayFit mission',
-    'best online courses for children',
-    'expert instructors for kids',
-    'trusted online education'
-  ],
+  title: `About ${SITE_CONFIG.business.name} – Online Classes for Kids in Kolkata`,
+  description: `${SITE_CONFIG.business.name} offers live online classes for kids aged ${SITE_CONFIG.audience.ageRange} in ${SITE_CONFIG.courses.featured.join(', ')}, and more. Trusted by ${SITE_CONFIG.stats.students} students.`,
   openGraph: {
-    title: 'About PlayFit Classes - Leading Online Learning Platform for Kids',
-    description: 'Discover how PlayFit Classes is transforming children\'s education with live online courses in art, chess, piano, and more.',
+    title: 'About PlayFit – Online Classes for Kids in Kolkata',
+    description: 'Discover how PlayFit transforms children\'s education with live online courses in art, chess, piano, and more for kids aged 4–10.',
     url: 'https://playfitclasses.com/about',
     images: ['/logo.jpg'],
   },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'About PlayFit – Online Classes for Kids in Kolkata',
+    description: 'Live online classes for kids aged 4–10. Learn Phonics, Art, Chess, Piano, Public Speaking, Abacus, and more with expert instructors.',
+    images: ['/logo.jpg'],
+  },
   alternates: {
-    canonical: 'https://playfitclasses.com/about',
+    canonical: '/about',
   },
 };
 
@@ -56,7 +53,7 @@ export default function AboutPage() {
                 At <strong>PlayFit Classes</strong>, we believe every child deserves access to world-class education. Our mission is to empower children aged 8-18 with essential life skills through engaging, expert-led online courses.
               </p>
               <p className="text-lg text-gray-700 mb-4 leading-relaxed">
-                Since our founding, <strong>PlayFit</strong> has grown to serve over 10,000 students across the globe, offering courses in art, chess, piano, phonics, public speaking, abacus, computers, and more.
+                Since our founding, <strong>{SITE_CONFIG.business.name}</strong> has grown to serve over {SITE_CONFIG.stats.students} students across the globe, offering courses in art, chess, piano, phonics, public speaking, abacus, computers, and more.
               </p>
               <p className="text-lg text-gray-700 leading-relaxed">
                 We're not just teaching subjects—we're building confidence, creativity, and character in the next generation.
@@ -65,8 +62,8 @@ export default function AboutPage() {
             <div className="space-y-6">
               <div className="bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl p-8 text-white shadow-xl">
                 <Users className="w-12 h-12 mb-4" />
-                <div className="text-4xl font-bold mb-2">10,000+</div>
-                <div className="text-blue-100">Happy Students Learning with PlayFit</div>
+                <div className="text-4xl font-bold mb-2">{SITE_CONFIG.stats.students}</div>
+                <div className="text-blue-100">Happy Students Learning with {SITE_CONFIG.business.name}</div>
               </div>
               <div className="bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl p-8 text-white shadow-xl">
                 <Award className="w-12 h-12 mb-4" />

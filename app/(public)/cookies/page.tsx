@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { ArrowLeft, Cookie, Settings, BarChart, Target, Shield } from 'lucide-react';
+import { SITE_CONFIG, getMailtoLink, getPhoneLink } from '@/lib/siteConfig';
 
 export default function CookiePolicyPage() {
   return (
@@ -133,7 +134,7 @@ export default function CookiePolicyPage() {
             </div>
 
             <div className="border-l-4 border-green-400 pl-4">
-              <h4 className="font-bold text-gray-900 mb-2">🎯 Personalization</h4>
+              <h4 className="font-bold text-gray-900 mb-2"><span aria-hidden="true">🎯</span> Personalization</h4>
               <p className="text-gray-700 text-sm">
                 Remember your preferences (language, region, display settings) and provide personalized course recommendations based on your interests.
               </p>
@@ -370,7 +371,7 @@ export default function CookiePolicyPage() {
           </div>
 
           <div className="bg-red-50 border-l-4 border-red-600 p-4 mb-6">
-            <p className="text-sm font-bold text-red-900 mb-2">⚠️ Important Note:</p>
+            <p className="text-sm font-bold text-red-900 mb-2"><span aria-hidden="true">⚠️</span> Important Note:</p>
             <p className="text-sm text-red-800">
               Disabling certain cookies may affect the functionality of our website. Some features may not work properly, and you may not be able to access certain areas of the site.
             </p>
@@ -409,8 +410,8 @@ export default function CookiePolicyPage() {
               </div>
               <div>
                 <p className="font-semibold">Email</p>
-                <a href="mailto:cplayfit@gmail.com" className="text-orange-200 hover:text-white hover:underline">
-                  cplayfit@gmail.com
+                <a href={getMailtoLink()} className="text-orange-200 hover:text-white hover:underline">
+                  {SITE_CONFIG.contact.email}
                 </a>
               </div>
             </div>
@@ -421,8 +422,8 @@ export default function CookiePolicyPage() {
               </div>
               <div>
                 <p className="font-semibold">Phone</p>
-                <a href="tel:+918910484299" className="text-orange-200 hover:text-white hover:underline">
-                  +91 8910484299
+                <a href={getPhoneLink()} className="text-orange-200 hover:text-white hover:underline">
+                  {SITE_CONFIG.contact.phoneDisplay}
                 </a>
               </div>
             </div>
