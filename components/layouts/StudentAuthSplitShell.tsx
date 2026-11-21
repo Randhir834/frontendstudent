@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react';
+import Image from 'next/image';
 
 interface StudentAuthSplitShellProps {
   leftTitle: ReactNode;
@@ -12,10 +13,13 @@ export default function StudentAuthSplitShell({ leftTitle, leftSubtitle, centere
     <div className="flex flex-col md:flex-row min-h-screen overflow-hidden">
       {/* Mobile-only branding */}
       <div className="md:hidden bg-primary-500 px-6 py-6 text-center flex-shrink-0">
-        <img
+        <Image
           src="/logo.jpg"
           alt="PlayFit"
+          width={120}
+          height={40}
           className="h-10 w-auto mx-auto mb-2"
+          priority
         />
         <p className="text-sm text-white/90 font-medium">Learning Platform</p>
       </div>
@@ -24,16 +28,19 @@ export default function StudentAuthSplitShell({ leftTitle, leftSubtitle, centere
       <div className="relative w-full md:w-[55%] hidden md:flex flex-col bg-[#C5C5C5] min-h-screen overflow-y-auto">
         {/* Background Image */}
         <div className="absolute inset-0 w-full h-full overflow-hidden">
-          <img 
-            src="/images/loginstudentpage.png" 
-            alt="Student Learning" 
-            className="w-full h-full object-cover object-center"
+          <Image 
+            src="/images/loginstudentpage.webp"
+            alt="Student Learning"
+            fill
+            className="object-cover object-center"
+            priority
+            sizes="55vw"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-black/5 to-black/20" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-black/5 to-black/20 z-10" />
         </div>
 
         {/* Content Overlay */}
-        <div className="relative z-10 flex-1 flex flex-col justify-center px-6 py-12 sm:px-8 md:px-12 lg:px-16 xl:px-20">
+        <div className="relative z-20 flex-1 flex flex-col justify-center px-6 py-12 sm:px-8 md:px-12 lg:px-16 xl:px-20">
           <div className="max-w-xl w-full">
             {/* Title and Subtitle */}
             <div className="mb-8 lg:mb-10">
