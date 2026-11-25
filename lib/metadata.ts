@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 
 const baseUrl = 'https://playfitclasses.com';
 const siteName = 'Playfit Classes';
-const defaultDescription = 'Live online skill development courses for children aged 8-18. Learn Art, Chess, Piano, Public Speaking, and more with expert instructors.';
+const defaultDescription = 'Live online skill development courses for children aged 4-10 worldwide. Learn Art, Chess, Piano, Public Speaking, Phonics, and more with expert instructors from India. Join students from 15+ countries.';
 
 export const generatePageMetadata = ({
   title,
@@ -68,7 +68,7 @@ import { SITE_CONFIG } from './siteConfig';
 
 export const homeMetadata = generatePageMetadata({
   title: 'Online Courses for Kids | Art, Chess, Piano, Abacus & More',
-  description: `Live online skill development courses for children aged ${SITE_CONFIG.audience.ageRange}. Join ${SITE_CONFIG.stats.students} students learning Art, Chess, Piano, Phonics, Public Speaking, Abacus, and more with expert instructors.`,
+  description: `Live online skill development courses for children aged ${SITE_CONFIG.audience.ageRange} worldwide. Join ${SITE_CONFIG.stats.students} students from 15+ countries learning Art, Chess, Piano, Phonics, Public Speaking, Abacus, and more with expert instructors from India.`,
   path: '/',
 });
 
@@ -87,7 +87,7 @@ export const registerMetadata = generatePageMetadata({
 
 export const coursesMetadata = generatePageMetadata({
   title: 'Browse All Courses - Find Your Perfect Class',
-  description: 'Explore 11+ skill development courses for ages 8-18. From Art & Drawing to Chess, Piano, Public Speaking, and more. Find the perfect class for your child.',
+  description: 'Explore 8+ skill development courses for ages 4-10 available worldwide. From Art & Drawing to Chess, Piano, Public Speaking, Phonics, and more. Find the perfect online class for your child.',
   path: '/student/courses',
 });
 

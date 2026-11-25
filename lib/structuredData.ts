@@ -28,13 +28,13 @@ export const ORGANIZATION = {
 };
 
 /**
- * Generate EducationalOrganization + LocalBusiness schema
+ * Generate EducationalOrganization + OnlineBusiness schema
  * This is the main entity for the organization
  */
 export function getOrganizationSchema() {
   return {
     "@context": "https://schema.org",
-    "@type": ["EducationalOrganization", "LocalBusiness"],
+    "@type": ["EducationalOrganization", "OnlineBusiness"],
     "name": ORGANIZATION.name,
     "alternateName": ORGANIZATION.alternateName,
     "url": ORGANIZATION.url,
@@ -48,6 +48,19 @@ export function getOrganizationSchema() {
       "addressRegion": ORGANIZATION.address.addressRegion,
       "postalCode": ORGANIZATION.address.postalCode,
       "addressCountry": ORGANIZATION.address.addressCountry
+    },
+    "areaServed": {
+      "@type": "Place",
+      "name": "Worldwide"
+    },
+    "serviceArea": {
+      "@type": "GeoCircle",
+      "geoMidpoint": {
+        "@type": "GeoCoordinates",
+        "latitude": "22.5726",
+        "longitude": "88.3639"
+      },
+      "description": "Global online service available worldwide"
     },
     "openingHoursSpecification": {
       "@type": "OpeningHoursSpecification",

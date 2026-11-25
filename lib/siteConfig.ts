@@ -12,8 +12,8 @@ export const SITE_CONFIG = {
     name: "PlayFit Classes",
     legalName: "PlayFit Classes",
     alternateName: "PlayFit",
-    tagline: "Live Online & Kolkata Classes for Kids",
-    description: "Interactive live classes for kids aged 4-10 in Phonics, Public Speaking, Art, Grammar, and more. Expert instructors, flexible scheduling, personalized learning.",
+    tagline: "Live Online Classes for Kids Worldwide",
+    description: "Global online learning platform for kids aged 4-10. Expert instructors from India teaching Phonics, Public Speaking, Art, Grammar, and more. Join students from 15+ countries with flexible scheduling and personalized learning.",
   },
 
   // Contact Information
@@ -110,8 +110,8 @@ export const SITE_CONFIG = {
   seo: {
     defaultTitle: "Online Classes for Kids – Phonics, Public Speaking, Art & More | PlayFit",
     titleTemplate: "%s | PlayFit",
-    defaultDescription: "Live online classes for kids aged 4–10 in Kolkata and across India. Learn Phonics, Public Speaking, Art, Chess, Piano, Abacus, Coding, and Rubik's Cube with expert instructors.",
-    keywords: ["online classes for kids", "Kolkata kids classes", "phonics classes", "public speaking for kids", "live online learning", "kids education India"],
+    defaultDescription: "Live online classes for kids aged 4–10 worldwide. Learn Phonics, Public Speaking, Art, Chess, Piano, Abacus, Coding, and more with expert instructors from India. Join students from 15+ countries.",
+    keywords: ["online classes for kids", "online classes for kids worldwide", "global kids education", "international online learning", "phonics classes online", "public speaking for kids", "live online classes", "virtual classes for children", "kids education from home"],
     twitterHandle: "@playfitclasses",
   },
 

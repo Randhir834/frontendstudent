@@ -4,18 +4,18 @@ import { ArrowRight, Award, Users, Globe, Heart, Target, Sparkles } from 'lucide
 import { SITE_CONFIG } from '@/lib/siteConfig';
 
 export const metadata: Metadata = {
-  title: `About ${SITE_CONFIG.business.name} – Online Classes for Kids in Kolkata`,
-  description: `${SITE_CONFIG.business.name} offers live online classes for kids aged ${SITE_CONFIG.audience.ageRange} in ${SITE_CONFIG.courses.featured.join(', ')}, and more. Trusted by ${SITE_CONFIG.stats.students} students.`,
+  title: `About ${SITE_CONFIG.business.name} – Global Online Classes for Kids`,
+  description: `${SITE_CONFIG.business.name} offers live online classes for kids aged ${SITE_CONFIG.audience.ageRange} worldwide. ${SITE_CONFIG.courses.featured.join(', ')}, and more. Based in Kolkata, India. Trusted by ${SITE_CONFIG.stats.students} students from 15+ countries.`,
   openGraph: {
-    title: 'About PlayFit – Online Classes for Kids in Kolkata',
-    description: 'Discover how PlayFit transforms children\'s education with live online courses in art, chess, piano, and more for kids aged 4–10.',
+    title: 'About PlayFit – Global Online Classes for Kids',
+    description: 'Discover how PlayFit transforms children\'s education with live online courses in Phonics, Public Speaking, Art, and more for kids aged 4–10 worldwide. Based in Kolkata, India.',
     url: 'https://playfitclasses.com/about',
     images: ['/logo.jpg'],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'About PlayFit – Online Classes for Kids in Kolkata',
-    description: 'Live online classes for kids aged 4–10. Learn Phonics, Art, Chess, Piano, Public Speaking, Abacus, and more with expert instructors.',
+    title: 'About PlayFit – Global Online Classes for Kids',
+    description: 'Live online classes for kids aged 4–10 worldwide. Learn Phonics, Public Speaking, Art, and more with expert instructors from India.',
     images: ['/logo.jpg'],
   },
   alternates: {
@@ -36,7 +36,7 @@ export default function AboutPage() {
             </span>
           </h1>
           <p className="text-xl text-gray-700 leading-relaxed">
-            <strong>PlayFit</strong> is transforming how children learn by offering live, interactive online courses that inspire creativity, critical thinking, and lifelong skills.
+            <strong>PlayFit</strong> is transforming how children learn worldwide by offering live, interactive online courses that inspire creativity, critical thinking, and lifelong skills. Based in Kolkata, India, we serve students from 15+ countries.
           </p>
         </div>
       </section>
@@ -50,13 +50,13 @@ export default function AboutPage() {
                 Our Mission at <span className="text-purple-600">PlayFit</span>
               </h2>
               <p className="text-lg text-gray-700 mb-4 leading-relaxed">
-                At <strong>PlayFit Classes</strong>, we believe every child deserves access to world-class education. Our mission is to empower children aged 8-18 with essential life skills through engaging, expert-led online courses.
+                At <strong>PlayFit Classes</strong>, we believe every child deserves access to world-class education, no matter where they live. Our mission is to empower children aged 4-10 worldwide with essential life skills through engaging, expert-led online courses from our headquarters in Kolkata, India.
               </p>
               <p className="text-lg text-gray-700 mb-4 leading-relaxed">
-                Since our founding, <strong>{SITE_CONFIG.business.name}</strong> has grown to serve over {SITE_CONFIG.stats.students} students across the globe, offering courses in art, chess, piano, phonics, public speaking, abacus, computers, and more.
+                Since our founding, <strong>{SITE_CONFIG.business.name}</strong> has grown to serve over {SITE_CONFIG.stats.students} students from India, USA, UK, UAE, Singapore, Australia, and beyond—offering courses in Phonics, Public Speaking, Grammar, Art, and more.
               </p>
               <p className="text-lg text-gray-700 leading-relaxed">
-                We're not just teaching subjects—we're building confidence, creativity, and character in the next generation.
+                We're not just teaching subjects—we're building confidence, creativity, and character in the next generation of global citizens.
               </p>
             </div>
             <div className="space-y-6">
@@ -87,9 +87,9 @@ export default function AboutPage() {
               <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center mb-6">
                 <Globe className="w-8 h-8 text-white" />
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-4">Live Interactive Classes</h3>
+              <h3 className="text-xl font-bold text-gray-900 mb-4">🌍 Available Worldwide</h3>
               <p className="text-gray-700 leading-relaxed">
-                <strong>PlayFit</strong> offers real-time, interactive sessions with expert instructors, ensuring personalized attention and immediate feedback for every student.
+                <strong>PlayFit</strong> offers 100% online classes accessible from anywhere in the world. Students from India, USA, UK, UAE, Singapore, and beyond learn together in our global classrooms.
               </p>
             </div>
 
@@ -97,9 +97,9 @@ export default function AboutPage() {
               <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl flex items-center justify-center mb-6">
                 <Target className="w-8 h-8 text-white" />
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-4">Skill-Based Learning</h3>
+              <h3 className="text-xl font-bold text-gray-900 mb-4">Expert Indian Instructors</h3>
               <p className="text-gray-700 leading-relaxed">
-                Our curriculum at <strong>PlayFit</strong> focuses on practical skills that prepare children for future success, from creative arts to logical thinking.
+                Our team of experienced instructors from India brings world-class teaching expertise to students globally. Live, interactive sessions ensure personalized attention and immediate feedback.
               </p>
             </div>
 
@@ -107,9 +107,9 @@ export default function AboutPage() {
               <div className="w-16 h-16 bg-gradient-to-br from-pink-500 to-pink-600 rounded-xl flex items-center justify-center mb-6">
                 <Heart className="w-8 h-8 text-white" />
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-4">Trusted by Parents</h3>
+              <h3 className="text-xl font-bold text-gray-900 mb-4">Trusted Globally</h3>
               <p className="text-gray-700 leading-relaxed">
-                With a 4.9/5 rating and thousands of satisfied families, <strong>PlayFit Classes</strong> is the trusted choice for children's online education.
+                With a 4.9/5 rating and students from 15+ countries, <strong>PlayFit Classes</strong> is the trusted choice for parents worldwide seeking quality online education for their children.
               </p>
             </div>
           </div>

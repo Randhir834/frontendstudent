@@ -189,11 +189,15 @@ export default function Footer() {
                 <li>
                   <div className="text-gray-400 text-sm flex items-start gap-3">
                     <MapPin className="w-5 h-5 text-purple-500 flex-shrink-0 mt-0.5" />
-                    <span>
-                      {SITE_CONFIG.address.street},<br />
-                      {SITE_CONFIG.address.street2},<br />
-                      {SITE_CONFIG.address.city}, {SITE_CONFIG.address.state} {SITE_CONFIG.address.postalCode}
-                    </span>
+                    <div>
+                      <div className="font-semibold text-white mb-1">🌍 Serving Students Worldwide</div>
+                      <div>
+                        <strong>Headquarters:</strong><br />
+                        {SITE_CONFIG.address.street},<br />
+                        {SITE_CONFIG.address.street2},<br />
+                        {SITE_CONFIG.address.city}, {SITE_CONFIG.address.state} {SITE_CONFIG.address.postalCode}, India
+                      </div>
+                    </div>
                   </div>
                 </li>
               </ul>
